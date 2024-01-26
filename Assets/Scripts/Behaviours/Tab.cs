@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-//This controls the bahaviour of the monitor tab in the clinic scene
+//This allows the current object to act like a tab that controls the showing and hiding of another UI object
 public class Tab : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField]

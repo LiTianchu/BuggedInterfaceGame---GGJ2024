@@ -3,9 +3,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 //This is a class controls the dragging behaviour of UI object
+//Attach this to a UI object and assign the UI's canvas to the canvas field
 public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
+
     [SerializeField]
+    [Tooltip("The canvas that this UI component belongs to")]
     private Canvas canvas;
     private RectTransform _rectTransform;
     private void Awake()

@@ -1,5 +1,7 @@
 using UnityEngine;
 
+//Attach this to a UI element that you want to resize in vertical direction
+//Need to manually set the top and bottom padding, item size and item spacing
 public class VerticalResize : MonoBehaviour
 {
     [SerializeField]

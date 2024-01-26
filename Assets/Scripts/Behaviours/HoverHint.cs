@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+//This is a script for the hint that shown when hovering over a UI element
+//Need to attach a HoverHintOrigin.cs to the UI element that you want to show the hint
 public class HoverHint : Singleton<HoverHint>
 {
     [SerializeField]
@@ -77,7 +79,9 @@ public class HoverHint : Singleton<HoverHint>
     public void Activate()
     {
         gameObject.SetActive(true);
-        AudioManager.Instance.PlaySFX(hoverSound);
+        if(hoverSound != null){
+            AudioManager.Instance.PlaySFX(hoverSound);
+        }
     }
 
     public void HideHint()
