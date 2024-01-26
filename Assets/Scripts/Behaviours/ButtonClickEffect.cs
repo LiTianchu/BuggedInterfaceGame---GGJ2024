@@ -21,4 +21,21 @@ public class ButtonClickEffect : MonoBehaviour
     {
         Application.OpenURL(url);
     }
+
+    public void QuitGame()
+    {
+        StartCoroutine(GameManager.Instance.QuitGame(0));
+    }
+
+    public void RestartScene()
+    {
+        GameManager.Instance.RestartScene();
+    }
+    public void BackToMenu()
+    {
+        GameManager.Instance.BackToMenu();
+    }
+
+
+
 }
