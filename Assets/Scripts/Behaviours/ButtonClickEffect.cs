@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Attach this to a button and assign the need functions to the OnClick() event of the button
 [RequireComponent(typeof(Button))]
 public class ButtonClickEffect : MonoBehaviour
 {
     [SerializeField]
     private AudioClip buttonClickSound;
-    // Start is called before the first frame update
-    void Start()
+
+    public void PlaySound()
     {
-        GetComponent<Button>().onClick.AddListener(() => AudioManager.Instance.PlaySFX(buttonClickSound));
+        if(buttonClickSound != null){
+            AudioManager.Instance.PlaySFX(buttonClickSound);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OpenURL(string url)
     {
-        
+        Application.OpenURL(url);
     }
 }

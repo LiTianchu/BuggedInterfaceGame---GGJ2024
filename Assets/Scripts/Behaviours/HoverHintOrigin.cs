@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+//attach this to a UI element that you want to show a hover hint
 public class HoverHintOrigin : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [TextArea(5, 10)]

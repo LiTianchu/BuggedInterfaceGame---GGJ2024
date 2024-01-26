@@ -5,10 +5,16 @@ using UnityEngine;
 [RequireComponent(typeof(CanvasGroup))]
 public class FadeIn : MonoBehaviour
 {
+    private Vector2 _originalPos;
+    private RectTransform _rectTransform;
+    private CanvasGroup _canvasGroup;
     // Start is called before the first frame update
     void Start()
     {
-        UIManager.Instance.UIFadeIn(GetComponent<CanvasGroup>(), 2f, new Vector3(0, 0, 0), new Vector3(0, 0, 0));
+        _rectTransform = GetComponent<RectTransform>();
+        _canvasGroup = GetComponent<CanvasGroup>();
+        _originalPos = _rectTransform.anchoredPosition;
+        UIManager.Instance.UIFadeIn(GetComponent<CanvasGroup>(), 2f, _originalPos, _originalPos);
     }
 
 

@@ -1,6 +1,9 @@
 using TMPro;
 using UnityEngine;
 
+
+//Attach this to a UI element that you want to show as a toast
+//Only one toast object can exist in the scene
 [RequireComponent(typeof(CanvasGroup))]
 public class Toast : Singleton<Toast>
 {
@@ -40,7 +43,9 @@ public class Toast : Singleton<Toast>
         _timeToHide = GameManager.Instance.TimePassed + showDuration;
         _text.text = content;
         _isShowing = true;
-        AudioManager.Instance.PlaySFX(warningSound);
+        if(warningSound != null){
+            AudioManager.Instance.PlaySFX(warningSound);
+        }
     }
 
     public void HideToast()

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Attach this to a UI element that you want to resize horizontally based on the children
+//Need to manually set the left and right padding, item size and item spacing
 public class HorizontalResize : MonoBehaviour
 {
     [SerializeField]

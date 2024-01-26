@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+//Attach this to a UI element that you want to enlarge when hovered over
 public class HoverEnlarge : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]
@@ -22,7 +24,9 @@ public class HoverEnlarge : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         //enlarge this 
         this.transform.localScale = _originalScale * multipier;
-        AudioManager.Instance.PlaySFX(hoverSound);
+        if(hoverSound != null){
+            AudioManager.Instance.PlaySFX(hoverSound);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
