@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(CanvasGroup))]
 public class FadeIn : MonoBehaviour
 {
+    [SerializeField]
+    private float fadeDuration = 2.0f;
     private Vector2 _originalPos;
     private RectTransform _rectTransform;
     private CanvasGroup _canvasGroup;
@@ -14,7 +16,7 @@ public class FadeIn : MonoBehaviour
         _rectTransform = GetComponent<RectTransform>();
         _canvasGroup = GetComponent<CanvasGroup>();
         _originalPos = _rectTransform.anchoredPosition;
-        UIManager.Instance.UIFadeIn(GetComponent<CanvasGroup>(), 2f, _originalPos, _originalPos);
+        UIManager.Instance.UIFadeIn(_canvasGroup, fadeDuration, _originalPos, _originalPos);
     }
 
 
