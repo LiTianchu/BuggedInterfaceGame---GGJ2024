@@ -24,9 +24,11 @@ public class PuzzlePiece : Draggable
         GetRectTransform().rotation = Quaternion.identity;
         _canvasGroup.blocksRaycasts = false;
         _gravityController.DisableSimulation();
-        if (_puzzleSlot != null)
+        if (_puzzleSlot != null) //puzzle piece is leaving the slot
         {
+            _puzzleSlot.OnPuzzleLeave();
             _puzzleSlot.SetPuzzlePiece(null);
+
         }
     }
 
