@@ -8,13 +8,15 @@ using UnityEngine.UI;
 public class Tab : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField]
-    private GameObject window;
+    private List<GameObject> windowList;
     [SerializeField]
     private bool windowOpenedByDefault = true;
     [SerializeField]
     private Color windowOpenedColor;
     [SerializeField] 
     private Color windowClosedColor;
+    [SerializeField]
+    private bool isToggle = false;
 
     private Image _img;
 
@@ -22,12 +24,20 @@ public class Tab : MonoBehaviour, IPointerDownHandler
     {
         _img = GetComponent<Image>();
         if (windowOpenedByDefault) {
-            UIManager.Instance.ShowUI(window);
-            _img.color = windowOpenedColor;
+            ShowAllWindows();
         }
         else
         {
-            UIManager.Instance.HideUI(window);
+            HideAllWindows();
+        }
+    }
+    private void Update()
+    {
+        if (windowList[0].activeSelf)
+        {
+            _img.color = windowOpenedColor;
+        }else
+        {
             _img.color = windowClosedColor;
         }
     }
@@ -37,13 +47,41 @@ public class Tab : MonoBehaviour, IPointerDownHandler
         {
             _img = GetComponent<Image>();   
         }
-        UIManager.Instance.ToggleUI(window);
-        if (window.activeSelf)
+        if(isToggle){
+            ToggleAllWindows();
+        }else
+        {
+            ShowAllWindows();
+        }
+        if (windowList[0].activeSelf)
         {
             _img.color = windowOpenedColor;
         }else
         {
             _img.color = windowClosedColor;
+        }
+    }
+
+    private void ShowAllWindows(){
+        foreach (GameObject window in windowList)
+        {
+            if(!window.activeSelf){
+                UIManager.Instance.ShowUI(window);
+                UIManager.Instance.BringToFront(window);
+            }
+        }
+    }
+    private void HideAllWindows(){
+        foreach (GameObject window in windowList)
+        {
+            UIManager.Instance.HideUI(window);
+        }
+    }
+    private void ToggleAllWindows(){
+        foreach (GameObject window in windowList)
+        {
+            UIManager.Instance.ToggleUI(window);
+            UIManager.Instance.BringToFront(window);
         }
     }
 

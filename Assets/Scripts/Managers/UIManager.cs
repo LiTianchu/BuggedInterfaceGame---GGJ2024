@@ -30,6 +30,10 @@ public class UIManager : GlobalSingleton<UIManager>
         component.SetActive(false);
     }
 
+    public void BringToFront(GameObject component){
+        component.transform.SetAsLastSibling();
+    }
+
      public void UIFadeIn(CanvasGroup uiCanvasGroup, float fadeTime, Vector3 originAnchorPos, Vector3 targetAnchorPos)
     {
         RectTransform uiRect = uiCanvasGroup.gameObject.GetComponent<RectTransform>();
