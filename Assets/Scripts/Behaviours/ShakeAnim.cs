@@ -10,6 +10,8 @@ public class ShakeAnim : MonoBehaviour
     private float shakeAmount = 1f;
     [SerializeField]
     private bool isShaking = false;
+    [SerializeField]
+    private AudioClip shakeSound;
 
     private float _nextShakeTime;   
     private Vector3 _originalPos;
@@ -43,6 +45,9 @@ public class ShakeAnim : MonoBehaviour
     public void StartShake()
     {
         isShaking = true;
+        if(shakeSound != null){
+            AudioManager.Instance.PlaySFX(shakeSound);
+        }
     }
 
     public void StopShake()

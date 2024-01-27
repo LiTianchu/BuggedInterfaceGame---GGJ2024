@@ -6,15 +6,13 @@ using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(GravityController2D))]
 [RequireComponent(typeof(ShakeAnim))]
-public class BreakingObject : MonoBehaviour, IPointerClickHandler
+public class BrokenObject : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField]
     private float gravityScale = 100f;
     [Range(0, 10)]
     [SerializeField]
     private int numOfClicksBeforeDrop = 3;
-    [SerializeField]
-    private float shakeDuration = 1f;
     [SerializeField]
     private AudioClip breakSound;
     [SerializeField]
@@ -50,11 +48,13 @@ public class BreakingObject : MonoBehaviour, IPointerClickHandler
                     _gravityController2D.UseGravity();
                     break;
                 case BreakType.DetachHinge:
+                    _gravityController2D.SetGravity(gravityScale);
+                    _gravityController2D.UseGravity();
                     Rigidbody2D[] rigidbodies = GetComponentsInChildren<Rigidbody2D>();
                     foreach (Rigidbody2D rb in rigidbodies)
                     {
                         rb.simulated = true;
-                        //rb.AddForce(1000*Vector2.up, ForceMode2D.Impulse);
+                        rb.AddForce(500*Vector2.down, ForceMode2D.Impulse);
                     }
                     break;
             }
@@ -65,7 +65,7 @@ public class BreakingObject : MonoBehaviour, IPointerClickHandler
             }
 
         }else{ //if num of click not reached, shake the object
-            _shakeAnim.PlayOneShot(shakeDuration);
+            _shakeAnim.PlayOneShot(1f);
         }
     }
 
