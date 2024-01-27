@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5079670352462259286}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: 6345642539749775071}
   - component: {fileID: 3659377379036562820}
   - component: {fileID: 5970478646165553240}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: InvisibleWall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 8499771951620459880}
   - component: {fileID: 7646557060004359231}
   - component: {fileID: 6590565102692070337}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: InvisibleWall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 1150833836904491771}
   - component: {fileID: 5360772870881103516}
   - component: {fileID: 5292496137526256661}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: InvisibleWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,7 +320,7 @@ GameObject:
   - component: {fileID: 1493163688500503771}
   - component: {fileID: 7426444769245649268}
   - component: {fileID: 8996027823569932184}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: InvisibleWall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

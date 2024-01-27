@@ -8,13 +8,15 @@ public class ShakeAnim : MonoBehaviour
     private float shakeRate = 0.1f;
     [SerializeField]
     private float shakeAmount = 1f;
+    [SerializeField]
+    private bool isShaking = false;
 
     private float _nextShakeTime;   
     private Vector3 _originalPos;
     private float _additionalShakeAmount = 0f;
     public float ShakeRate { get => shakeRate; set => shakeRate = value; }
     public float ShakeAmount { get => shakeAmount; set => shakeAmount = value; }
-    public float AdditionalShakeAmount { get => _additionalShakeAmount; set => _additionalShakeAmount = value; }
+    public float AdditionalShakeAmount { get => _additionalShakeAmount; set => _additionalShakeAmount = value; } //controlled by other scripts
 
     // Update is called once per frame
     private void Start()
@@ -24,11 +26,28 @@ public class ShakeAnim : MonoBehaviour
     }
     void Update()
     {
-        if (GameManager.Instance.TimePassed >= _nextShakeTime)
+        if (isShaking && GameManager.Instance.TimePassed >= _nextShakeTime)
         {
             float finalShakeAmount = shakeAmount + _additionalShakeAmount;
             _nextShakeTime = GameManager.Instance.TimePassed + shakeRate;
             transform.localPosition = _originalPos + new Vector3(Random.Range(-finalShakeAmount, finalShakeAmount), Random.Range(-finalShakeAmount, finalShakeAmount));
         }
+    }
+
+    public void PlayOneShot(float duration)
+    {
+        StartShake();
+        Invoke(nameof(StopShake), duration);
+    }
+
+    public void StartShake()
+    {
+        isShaking = true;
+    }
+
+    public void StopShake()
+    {
+        isShaking = false;
+        //transform.localPosition = _originalPos;
     }
 }
