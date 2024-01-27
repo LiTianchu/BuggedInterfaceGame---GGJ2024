@@ -855,7 +855,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8836091601905784608, guid: e4f6c27da9278df4b9d18797e10fabfc, type: 3}
       propertyPath: m_text
-      value: 'You did not grab the discount on time!
+      value: 'You failed to get the discount!
 
 
         Try again?'
