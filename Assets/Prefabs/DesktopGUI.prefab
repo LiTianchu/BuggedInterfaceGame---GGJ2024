@@ -461,6 +461,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5193073a283b7f4eb935f7badf6655c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  username: 
+  password: 
+  usernameField: {fileID: 0}
+  passwordField: {fileID: 0}
   deactivated: {fileID: 1850254277724158455}
   activated: {fileID: 8328294926079212108}
 --- !u!1 &1850254277724158455
