@@ -5,16 +5,17 @@ using UnityEngine.UI;
 
 public class BrokenButton : BrokenObject
 {
-    private Button _button;
+    [SerializeField]
+    private MonoBehaviour lockedComponent;
 
     protected override void Initialize()
     {
-        _button = GetComponent<Button>();
-        _button.enabled = false;
+        
+        lockedComponent.enabled = false;
     }
 
     protected override void HandleBroken()
     {
-        _button.enabled = true;
+        lockedComponent.enabled = true;
     }
 }
