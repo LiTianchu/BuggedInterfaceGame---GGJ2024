@@ -16,22 +16,23 @@ public class CrumblingPieces : MonoBehaviour
     private AudioClip crumbleSound;
 
     private float _individualCrumbleDelay;
+    private Dictionary<PuzzlePiece,bool> _rightPlaceMap; //maps puzzle pieces to whether or not they are in the right place
     // Start is called before the first frame update
     void Start()
     {
         _individualCrumbleDelay = crumbleTime / pieces.Count;
         StartCoroutine(Crumble());
-        int xDirection = Random.Range(0, 2);
-        int yDirection = Random.Range(0, 2);
-        Random.InitState((int)Time.time);
-        Vector2 force = new Vector2
-        {
-            x = Random.Range(-1000f, 1000f) * (xDirection == 0 ? -1 : 1),
-            y = Random.Range(-1000f, 1000f) * (yDirection == 0 ? -1 : 1)
-        };
-        
+        Random.InitState((int)Time.time); //set the random seed to the current time
 
-        
+        _rightPlaceMap = new Dictionary<PuzzlePiece, bool>();
+        foreach (GravityController2D p in pieces)
+        {
+            PuzzlePiece puzzlePiece = p.GetComponent<PuzzlePiece>();
+            if (puzzlePiece != null)
+            {
+                _rightPlaceMap.Add(puzzlePiece, false);
+            }
+        }
     }
 
     public IEnumerator Crumble()
@@ -63,6 +64,32 @@ public class CrumblingPieces : MonoBehaviour
 
         return force;
 
+    }
+
+    public void SetRightPlaceFlag(PuzzlePiece puzzlePiece, bool isRightPlace)
+    {
+        if (_rightPlaceMap.ContainsKey(puzzlePiece))
+        {
+            _rightPlaceMap[puzzlePiece] = isRightPlace;
+        }
+
+        if(isRightPlace)
+        {
+            CheckForRightPlace();
+        }
+    }
+
+    private void CheckForRightPlace()
+    {
+        foreach (KeyValuePair<PuzzlePiece, bool> entry in _rightPlaceMap)
+        {
+            if (!entry.Value)
+            {
+                return;
+            }
+        }
+        //all pieces are in the right place
+        Debug.Log("All pieces are in the right place");
     }
 
     private Vector3 GetRandomRotation()
