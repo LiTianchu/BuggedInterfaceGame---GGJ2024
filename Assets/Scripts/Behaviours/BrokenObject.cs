@@ -32,14 +32,14 @@ public class BrokenObject : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(_isDropped) return;
+        if (_isDropped) return;
         numOfClicksBeforeDrop--;
         Debug.Log("Clicked once, " + numOfClicksBeforeDrop + " more clicks to go");
 
         if (numOfClicksBeforeDrop <= 0) //drop the object
         {
             _shakeAnim.StopShake();
-            _gravityController2D.EnableSimulation();
+            _gravityController2D.Unfreeze();
 
             switch (breakType)
             {
@@ -50,28 +50,32 @@ public class BrokenObject : MonoBehaviour, IPointerClickHandler
                 case BreakType.DetachHinge:
                     _gravityController2D.SetGravity(gravityScale);
                     _gravityController2D.UseGravity();
-                    Rigidbody2D[] rigidbodies = GetComponentsInChildren<Rigidbody2D>();
-                    foreach (Rigidbody2D rb in rigidbodies)
-                    {
-                        rb.simulated = true;
-                        rb.AddForce(500*Vector2.down, ForceMode2D.Impulse);
-                    }
+                    Rigidbody2D rb = GetComponent<Rigidbody2D>();
+
+                    rb.GetComponentInChildren<HingeJoint2D>()
+                    .GetComponent<Rigidbody2D>()
+                    .AddForce(500 * Vector2.down, ForceMode2D.Impulse);
+
                     break;
             }
-            
+
             _isDropped = true;
-            if(breakSound != null){
+            if (breakSound != null)
+            {
                 AudioManager.Instance.PlaySFX(breakSound);
             }
 
-        }else{ //if num of click not reached, shake the object
+        }
+        else
+        { //if num of click not reached, shake the object
             _shakeAnim.PlayOneShot(1f);
         }
     }
 
-private enum BreakType{
-    Drop, DetachHinge
-}
+    private enum BreakType
+    {
+        Drop, DetachHinge
+    }
 
 
 }

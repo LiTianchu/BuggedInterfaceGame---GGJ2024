@@ -36,6 +36,16 @@ public class GravityController2D : MonoBehaviour
         _rigidbody.simulated = true;
     }
 
+    public void Freeze()
+    {
+        _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+    }
+
+    public void Unfreeze()
+    {
+        _rigidbody.constraints = RigidbodyConstraints2D.None;
+    }
+
     public void Push(Vector2 force)
     {
         //Debug.Log("Applying force: " + force);
