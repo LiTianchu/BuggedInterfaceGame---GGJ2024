@@ -51,11 +51,8 @@ public class BrokenObject : MonoBehaviour, IPointerClickHandler
                     _gravityController2D.SetGravity(gravityScale);
                     _gravityController2D.UseGravity();
                     Rigidbody2D rb = GetComponent<Rigidbody2D>();
-
-                    rb.GetComponentInChildren<HingeJoint2D>()
-                    .GetComponent<Rigidbody2D>()
-                    .AddForce(500 * Vector2.down, ForceMode2D.Impulse);
-
+                    
+                    rb.GetComponentInChildren<HingeJoint2D>().enabled = false;
                     break;
             }
 
