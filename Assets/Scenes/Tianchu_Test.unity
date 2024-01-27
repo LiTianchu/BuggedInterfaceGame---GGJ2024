@@ -128,6 +128,23 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4990765301252234565, guid: c862cedc9c3138c43948599a653277dd, type: 3}
   m_PrefabInstance: {fileID: 6600531119683425970}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &150492679 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1324126112313892505, guid: 8fdeafa6313182547bf2cae3abc6e12e, type: 3}
+  m_PrefabInstance: {fileID: 1767984299753204655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &150492683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150492679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de016890eb68d9b40b101aef80fb7554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &311497769 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4858729681341344051, guid: 2a6f62dae304dd940bfbb63832266ab6, type: 3}
@@ -138,6 +155,23 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2589351370760347208, guid: b5fbebb4ec0f85143b68ded5b9e3cd2d, type: 3}
   m_PrefabInstance: {fileID: 5362281685875555531}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &550597225 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6196021161086118614, guid: 8fdeafa6313182547bf2cae3abc6e12e, type: 3}
+  m_PrefabInstance: {fileID: 1767984299753204655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &550597229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550597225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de016890eb68d9b40b101aef80fb7554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &604356717 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5078673403920493842, guid: 1d71eff238e42bb40b84f8a70479288c, type: 3}
@@ -841,6 +875,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: HingedObject
       objectReference: {fileID: 0}
+    - target: {fileID: 1390849605961770059, guid: 8fdeafa6313182547bf2cae3abc6e12e, type: 3}
+      propertyPath: m_GravityScale
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3089875628666699048, guid: 8fdeafa6313182547bf2cae3abc6e12e, type: 3}
+      propertyPath: intialGravityScale
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4291439228738602563, guid: 8fdeafa6313182547bf2cae3abc6e12e, type: 3}
+      propertyPath: m_BreakForce
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4291439228738602563, guid: 8fdeafa6313182547bf2cae3abc6e12e, type: 3}
+      propertyPath: m_BreakAction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4291439228738602563, guid: 8fdeafa6313182547bf2cae3abc6e12e, type: 3}
+      propertyPath: m_BreakTorque
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5780488318087767469, guid: 8fdeafa6313182547bf2cae3abc6e12e, type: 3}
+      propertyPath: breakType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5780488318087767469, guid: 8fdeafa6313182547bf2cae3abc6e12e, type: 3}
+      propertyPath: gravityScale
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7961522993758568456, guid: 8fdeafa6313182547bf2cae3abc6e12e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -924,7 +986,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1324126112313892505, guid: 8fdeafa6313182547bf2cae3abc6e12e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 150492683}
+    - targetCorrespondingSourceObject: {fileID: 6196021161086118614, guid: 8fdeafa6313182547bf2cae3abc6e12e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 550597229}
   m_SourcePrefab: {fileID: 100100000, guid: 8fdeafa6313182547bf2cae3abc6e12e, type: 3}
 --- !u!1001 &1899535315828654344
 PrefabInstance:
