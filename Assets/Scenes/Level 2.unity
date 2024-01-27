@@ -4383,11 +4383,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5265071374072896211, guid: c862cedc9c3138c43948599a653277dd, type: 3}
       propertyPath: password
-      value: moveforthesakeofmygoal
+      value: proud
       objectReference: {fileID: 0}
     - target: {fileID: 5265071374072896211, guid: c862cedc9c3138c43948599a653277dd, type: 3}
       propertyPath: username
-      value: egoiststriker
+      value: stand
       objectReference: {fileID: 0}
     - target: {fileID: 5265071374072896211, guid: c862cedc9c3138c43948599a653277dd, type: 3}
       propertyPath: activated
@@ -4403,10 +4403,10 @@ PrefabInstance:
       objectReference: {fileID: 364292455}
     - target: {fileID: 5279050619171954154, guid: c862cedc9c3138c43948599a653277dd, type: 3}
       propertyPath: m_text
-      value: 'Username: egoiststriker
+      value: 'Username: stand
 
 
-        Password: moveforthesakeofmygoal'
+        Password: proud'
       objectReference: {fileID: 0}
     - target: {fileID: 7996457970897409533, guid: c862cedc9c3138c43948599a653277dd, type: 3}
       propertyPath: m_Name
