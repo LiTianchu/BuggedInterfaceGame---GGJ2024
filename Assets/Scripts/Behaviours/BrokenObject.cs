@@ -28,6 +28,7 @@ public class BrokenObject : MonoBehaviour, IPointerClickHandler
     {
         _gravityController2D = GetComponent<GravityController2D>();
         _shakeAnim = GetComponent<ShakeAnim>();
+        Initialize();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -55,6 +56,7 @@ public class BrokenObject : MonoBehaviour, IPointerClickHandler
                     rb.GetComponentInChildren<HingeJoint2D>().enabled = false;
                     break;
             }
+            HandleBroken();
 
             _isDropped = true;
             if (breakSound != null)
@@ -72,6 +74,13 @@ public class BrokenObject : MonoBehaviour, IPointerClickHandler
     private enum BreakType
     {
         Drop, DetachHinge
+    }
+
+    protected virtual void HandleBroken(){
+
+    }
+    protected virtual void Initialize(){
+
     }
 
 
