@@ -36,6 +36,11 @@ public class ButtonClickEffect : MonoBehaviour
         GameManager.Instance.BackToMenu();
     }
 
+    public void LoadScene(string sceneName)
+    {
+        StartCoroutine(GameManager.Instance.LoadScene(sceneName,0));
+    }
+
 
 
 }
