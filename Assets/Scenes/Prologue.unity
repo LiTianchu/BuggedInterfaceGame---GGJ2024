@@ -821,6 +821,7 @@ MonoBehaviour:
   numOfClicksBeforeDrop: 3
   breakSound: {fileID: 0}
   breakType: 0
+  lockedComponent: {fileID: 1859826123}
 --- !u!61 &1859826131
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -67,8 +67,8 @@ public class Tab : MonoBehaviour, IPointerDownHandler
         {
             if(!window.activeSelf){
                 UIManager.Instance.ShowUI(window);
-                UIManager.Instance.BringToFront(window);
             }
+            UIManager.Instance.BringToFront(window);
         }
     }
     private void HideAllWindows(){
