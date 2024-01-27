@@ -15,11 +15,19 @@ public class Change : MonoBehaviour
 
     public void Replace()
     {
-        if (usernameField.text == username && passwordField.text == password)
+        if (usernameField != null && passwordField != null)
+        {
+            if (usernameField.text == username && passwordField.text == password)
+            {
+                deactivated.SetActive(false);
+                activated.SetActive(true);
+            }
+        }
+        else
         {
             deactivated.SetActive(false);
             activated.SetActive(true);
-        }        
+        }       
     }
 
     // Start is called before the first frame update
