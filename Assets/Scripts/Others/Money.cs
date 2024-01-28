@@ -7,11 +7,12 @@ public class Money : MonoBehaviour
 {
     int amount = 0;
     int stock = 0;
-    int price = 232;
+    int price = 240;
 
     [SerializeField] TextMeshProUGUI amt;
+    [SerializeField] TextMeshProUGUI stk;
 
-    float timer = 60f;
+    float timer = 0f;
 
     public void CheckAmount()
     {
@@ -27,7 +28,8 @@ public class Money : MonoBehaviour
 
     void ChangeStock()
     {
-        stock = Random.Range(1, 20);
+        stock = Random.Range(2, 12);
+        while (stock == 7 || stock == 9 || stock == 11) stock = Random.Range(2, 12);
     }
 
     // Start is called before the first frame update
@@ -48,5 +50,6 @@ public class Money : MonoBehaviour
         }
 
         amt.text = amount.ToString();
+        stk.text = stock.ToString();
     }
 }
