@@ -11,16 +11,21 @@ public class Money : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI amt;
     [SerializeField] TextMeshProUGUI stk;
+    [SerializeField] GameObject win;
+    
     public TextMeshProUGUI success;
-
     public GameObject qr;
 
     float timer = 0f;
 
     public void CheckAmount()
     {
-        if (price / stock == amount) Debug.Log("WIN");
-        else success.text = "Incorrect amount of MOGCOIN";
+        if (price / stock == amount)
+        {
+            win.SetActive(true);
+            StartCoroutine(EndGame());
+        }
+        else if (success != null) success.text = "Incorrect amount of MOGCOIN";
     }
 
     public void IncreaseAmount(bool increase)
@@ -33,6 +38,12 @@ public class Money : MonoBehaviour
     {
         stock = Random.Range(2, 12);
         while (stock == 7 || stock == 9 || stock == 11) stock = Random.Range(2, 12);
+    }
+
+    IEnumerator EndGame()
+    {
+        yield return new WaitForSeconds(7f);
+        Application.Quit();
     }
 
     // Start is called before the first frame update
