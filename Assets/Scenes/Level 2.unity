@@ -787,7 +787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amt: {fileID: 1685853477}
   stk: {fileID: 1870246880}
-  win: {fileID: 0}
+  win: {fileID: 429115674}
   success: {fileID: 0}
   qr: {fileID: 0}
 --- !u!4 &190051984
@@ -1778,6 +1778,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 8f067718d315c1d46b8fa9972d98147b, type: 3}
+--- !u!1 &429115674 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3721001821467284387, guid: e4f6c27da9278df4b9d18797e10fabfc, type: 3}
+  m_PrefabInstance: {fileID: 981731851}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &514293469
 GameObject:
   m_ObjectHideFlags: 0
