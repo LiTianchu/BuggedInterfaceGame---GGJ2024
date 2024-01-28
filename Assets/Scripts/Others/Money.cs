@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Money : MonoBehaviour
 {
     int amount = 0;
     int stock = 0;
     int price = 232;
+
+    [SerializeField] TextMeshProUGUI amt;
 
     float timer = 60f;
 
@@ -18,8 +21,8 @@ public class Money : MonoBehaviour
 
     public void IncreaseAmount(bool increase)
     {
-        if (increase) amount += 1;
-        else amount -= 1;
+        if (increase) amount = Mathf.Clamp(amount + 1, 0, 999);
+        else amount = Mathf.Clamp(amount - 1, 0, 999);
     }
 
     void ChangeStock()
@@ -43,5 +46,7 @@ public class Money : MonoBehaviour
             ChangeStock();
             timer = 60f;
         }
+
+        amt.text = amount.ToString();
     }
 }

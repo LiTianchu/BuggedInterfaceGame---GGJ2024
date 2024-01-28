@@ -434,7 +434,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 143169839}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 190051983}
+        m_TargetAssemblyTypeName: Money, Assembly-CSharp
+        m_MethodName: IncreaseAmount
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &143169839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -607,6 +619,51 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8918643102256944233, guid: 4198006c68abb9b44a90feaaedb03ce9, type: 3}
   m_PrefabInstance: {fileID: 174934951}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &190051982
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 190051984}
+  - component: {fileID: 190051983}
+  m_Layer: 0
+  m_Name: MoneyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &190051983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190051982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8938fe49f77f6224ea1d2d95f4b7489b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amt: {fileID: 1685853477}
+--- !u!4 &190051984
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190051982}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 390, y: 219.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &226165011
 GameObject:
   m_ObjectHideFlags: 0
@@ -4003,6 +4060,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2223386837237910519}
+  - {fileID: 2101902912}
   - {fileID: 1156961227}
   - {fileID: 1882280198}
   - {fileID: 636656551}
@@ -4539,7 +4597,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1842929554}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 190051983}
+        m_TargetAssemblyTypeName: Money, Assembly-CSharp
+        m_MethodName: IncreaseAmount
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1842929554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6078,7 +6148,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2101902910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6135,7 +6205,7 @@ RectTransform:
   - {fileID: 1452449312}
   - {fileID: 1848918460}
   - {fileID: 1507704850}
-  m_Father: {fileID: 2223386837237910519}
+  m_Father: {fileID: 1626518843}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6964,7 +7034,6 @@ RectTransform:
   - {fileID: 1988105977}
   - {fileID: 1140002003006526249}
   - {fileID: 1073729214}
-  - {fileID: 2101902912}
   m_Father: {fileID: 1626518843}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -7806,7 +7875,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 100, y: -20}
-  m_ConnectedAnchor: {x: 100.000015, y: -20}
+  m_ConnectedAnchor: {x: 100, y: -19.999998}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -9000,7 +9069,7 @@ HingeJoint2D:
   m_BreakAction: 2
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -100, y: -20}
-  m_ConnectedAnchor: {x: -100, y: -20}
+  m_ConnectedAnchor: {x: -100, y: -19.999998}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -10092,3 +10161,4 @@ SceneRoots:
   - {fileID: 1482645017}
   - {fileID: 1626518843}
   - {fileID: 1951247038}
+  - {fileID: 190051984}
