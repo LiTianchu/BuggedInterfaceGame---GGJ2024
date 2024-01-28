@@ -51,6 +51,6 @@ public class Money : MonoBehaviour
         }
 
         amt.text = amount.ToString();
-        stk.text = stock.ToString();
+        stk.text = "$" + stock.ToString();
     }
 }
