@@ -12,6 +12,8 @@ public class Change : MonoBehaviour
     [SerializeField] HackedInputField passwordField;
     [SerializeField] GameObject deactivated;
     [SerializeField] GameObject activated;
+    [SerializeField] GameObject spawnable;
+    [SerializeField] GameObject spawnableParent;
 
     public void Replace()
     {
@@ -19,15 +21,27 @@ public class Change : MonoBehaviour
         {
             if (usernameField.text == username && passwordField.text == password)
             {
-                deactivated.SetActive(false);
-                activated.SetActive(true);
+                if (deactivated != null) deactivated.SetActive(false);
+                if (activated != null) activated.SetActive(true);
             }
         }
         else
         {
-            deactivated.SetActive(false);
-            activated.SetActive(true);
+            if (deactivated != null) deactivated.SetActive(false);
+            if (activated != null) activated.SetActive(true);
         }       
+    }
+
+    public void qrCode(bool respawn)
+    {
+        if (respawn)
+        {
+            Instantiate(spawnable, spawnableParent.transform);
+        }
+        else
+        {
+            Destroy(GameObject.Find("CrumblingPieces"));
+        }
     }
 
     // Start is called before the first frame update
