@@ -41,6 +41,11 @@ public class ButtonClickEffect : MonoBehaviour
         StartCoroutine(GameManager.Instance.LoadScene(sceneName,0));
     }
 
+    public void PlayVideo(VideoPlayer videoPlayer)
+    {
+        videoPlayer.Play();
+    }
+
 
 
 }
