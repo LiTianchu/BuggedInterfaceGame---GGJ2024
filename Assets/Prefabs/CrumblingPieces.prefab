@@ -264,7 +264,7 @@ MonoBehaviour:
   - {fileID: 3160802637032711764}
   crumbleGravityScale: 100
   crumbleTime: 1
-  crumbleSound: {fileID: 0}
+  crumbleSound: {fileID: 8300000, guid: 647bbda710c831143a83718fd2bbf49c, type: 3}
 --- !u!1 &603009412266314608
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,7 +626,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   correctPiece: {fileID: 2535129643455291969}
-  snapSound: {fileID: 0}
+  snapSound: {fileID: 8300000, guid: 8f067718d315c1d46b8fa9972d98147b, type: 3}
 --- !u!1 &1262772488515335504
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182,7 +1182,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   correctPiece: {fileID: 8139758714108382685}
-  snapSound: {fileID: 0}
+  snapSound: {fileID: 8300000, guid: 8f067718d315c1d46b8fa9972d98147b, type: 3}
 --- !u!1 &1692772817703096243
 GameObject:
   m_ObjectHideFlags: 0
@@ -1618,7 +1618,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   correctPiece: {fileID: 2056183784772159074}
-  snapSound: {fileID: 0}
+  snapSound: {fileID: 8300000, guid: 8f067718d315c1d46b8fa9972d98147b, type: 3}
 --- !u!1 &2061428517843701516
 GameObject:
   m_ObjectHideFlags: 0
@@ -1980,7 +1980,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   correctPiece: {fileID: 5547560853135054655}
-  snapSound: {fileID: 0}
+  snapSound: {fileID: 8300000, guid: 8f067718d315c1d46b8fa9972d98147b, type: 3}
 --- !u!1 &3666742387566607356
 GameObject:
   m_ObjectHideFlags: 0
@@ -2282,7 +2282,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   correctPiece: {fileID: 7660574492368437180}
-  snapSound: {fileID: 0}
+  snapSound: {fileID: 8300000, guid: 8f067718d315c1d46b8fa9972d98147b, type: 3}
 --- !u!1 &4119310300409424847
 GameObject:
   m_ObjectHideFlags: 0
@@ -2450,7 +2450,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   correctPiece: {fileID: 6525366196601715338}
-  snapSound: {fileID: 0}
+  snapSound: {fileID: 8300000, guid: 8f067718d315c1d46b8fa9972d98147b, type: 3}
 --- !u!1 &4446713321643948754
 GameObject:
   m_ObjectHideFlags: 0
@@ -3080,7 +3080,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   correctPiece: {fileID: 7965800186702886683}
-  snapSound: {fileID: 0}
+  snapSound: {fileID: 8300000, guid: 8f067718d315c1d46b8fa9972d98147b, type: 3}
 --- !u!1 &5556263782979100088
 GameObject:
   m_ObjectHideFlags: 0
@@ -3770,7 +3770,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   correctPiece: {fileID: 5543756011230253547}
-  snapSound: {fileID: 0}
+  snapSound: {fileID: 8300000, guid: 8f067718d315c1d46b8fa9972d98147b, type: 3}
 --- !u!1 &5910560583019535491
 GameObject:
   m_ObjectHideFlags: 0
@@ -4072,7 +4072,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   correctPiece: {fileID: 104080557076173367}
-  snapSound: {fileID: 0}
+  snapSound: {fileID: 8300000, guid: 8f067718d315c1d46b8fa9972d98147b, type: 3}
 --- !u!1 &7005829551301005111
 GameObject:
   m_ObjectHideFlags: 0
