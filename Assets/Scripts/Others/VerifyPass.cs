@@ -15,6 +15,8 @@ public class VerifyPass : MonoBehaviour
         string password = inputField.text;
         if (password == "PASSWORD")
         {
+            inputField.text = "";
+            resultText.text = "";
             popup.HidePopup();
         }
         else
