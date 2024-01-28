@@ -167,6 +167,7 @@ MonoBehaviour:
   shakeRate: 0.03
   shakeAmount: 3
   isShaking: 0
+  shakeSound: {fileID: 0}
 --- !u!114 &7739029768421197269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,4 +195,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gravityScale: 1000
   numOfClicksBeforeDrop: 3
-  dropSound: {fileID: 0}
+  breakSound: {fileID: 8300000, guid: 647bbda710c831143a83718fd2bbf49c, type: 3}
+  breakType: 0
