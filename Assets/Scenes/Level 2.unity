@@ -238,6 +238,10 @@ PrefabInstance:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 1626518842}
+    - target: {fileID: 3278238801922002352, guid: 28e03acc96836ac498ff70ecedd5af31, type: 3}
+      propertyPath: m_Name
+      value: Notification
+      objectReference: {fileID: 0}
     - target: {fileID: 4516473634630072876, guid: 28e03acc96836ac498ff70ecedd5af31, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -776,7 +780,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amt: {fileID: 1685853477}
   stk: {fileID: 1870246880}
-  success: {fileID: 932673988}
+  success: {fileID: 0}
   qr: {fileID: 0}
 --- !u!4 &190051984
 Transform:
@@ -2578,17 +2582,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 912986015}
   m_CullTransparentMesh: 1
---- !u!114 &932673988 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8193279776375164508, guid: 28e03acc96836ac498ff70ecedd5af31, type: 3}
-  m_PrefabInstance: {fileID: 117609803}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1073729213
 GameObject:
   m_ObjectHideFlags: 0

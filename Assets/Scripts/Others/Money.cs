@@ -11,7 +11,7 @@ public class Money : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI amt;
     [SerializeField] TextMeshProUGUI stk;
-    [SerializeField] TextMeshProUGUI success;
+    public TextMeshProUGUI success;
 
     public GameObject qr;
 

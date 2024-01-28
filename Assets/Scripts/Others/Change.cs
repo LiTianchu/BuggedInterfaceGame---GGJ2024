@@ -39,6 +39,7 @@ public class Change : MonoBehaviour
             GameObject qr = Instantiate(spawnable, spawnableParent.transform);
             qr.SetActive(true);
             FindObjectOfType<Money>().qr = qr;
+            FindObjectOfType<Money>().success = qr.transform.Find("Notification").GetComponent<TextMeshProUGUI>();
         }
         else
         {
