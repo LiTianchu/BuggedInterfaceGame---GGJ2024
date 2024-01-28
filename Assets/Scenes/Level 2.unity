@@ -2231,9 +2231,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 1626518843}
     m_Modifications:
     - target: {fileID: 1510001021501985101, guid: 8042bb0ce10460042bcce1fc118c71e6, type: 3}
+      propertyPath: filename
+      value: Senator
+      objectReference: {fileID: 0}
+    - target: {fileID: 1510001021501985101, guid: 8042bb0ce10460042bcce1fc118c71e6, type: 3}
       propertyPath: videoURL
       value: https://www.youtube.com/watch?v=5HbvdsbI_so
       objectReference: {fileID: 0}
+    - target: {fileID: 1510001021501985101, guid: 8042bb0ce10460042bcce1fc118c71e6, type: 3}
+      propertyPath: videoPlayer
+      value: 
+      objectReference: {fileID: 636656553}
     - target: {fileID: 2262476347922110830, guid: 8042bb0ce10460042bcce1fc118c71e6, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2347,6 +2355,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d692da876637241affdce89508451c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!328 &636656553 stripped
+VideoPlayer:
+  m_CorrespondingSourceObject: {fileID: 7697208040671636304, guid: 8042bb0ce10460042bcce1fc118c71e6, type: 3}
+  m_PrefabInstance: {fileID: 636656550}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &764259737
 GameObject:
   m_ObjectHideFlags: 0
@@ -6315,9 +6328,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 1626518843}
     m_Modifications:
     - target: {fileID: 1510001021501985101, guid: 8042bb0ce10460042bcce1fc118c71e6, type: 3}
+      propertyPath: filename
+      value: Vergil
+      objectReference: {fileID: 0}
+    - target: {fileID: 1510001021501985101, guid: 8042bb0ce10460042bcce1fc118c71e6, type: 3}
       propertyPath: videoURL
       value: https://www.youtube.com/watch?v=u82cEP6idso
       objectReference: {fileID: 0}
+    - target: {fileID: 1510001021501985101, guid: 8042bb0ce10460042bcce1fc118c71e6, type: 3}
+      propertyPath: videoPlayer
+      value: 
+      objectReference: {fileID: 1882280200}
     - target: {fileID: 2262476347922110830, guid: 8042bb0ce10460042bcce1fc118c71e6, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6431,6 +6452,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d692da876637241affdce89508451c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!328 &1882280200 stripped
+VideoPlayer:
+  m_CorrespondingSourceObject: {fileID: 7697208040671636304, guid: 8042bb0ce10460042bcce1fc118c71e6, type: 3}
+  m_PrefabInstance: {fileID: 1882280197}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1882606334
 GameObject:
   m_ObjectHideFlags: 0
