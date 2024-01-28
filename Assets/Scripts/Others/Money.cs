@@ -11,13 +11,14 @@ public class Money : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI amt;
     [SerializeField] TextMeshProUGUI stk;
+    [SerializeField] TextMeshProUGUI success;
 
     float timer = 0f;
 
     public void CheckAmount()
     {
-        if (price / stock == amount) Debug.Log("Yes");
-        else Debug.Log("no");
+        if (price / stock == amount) Debug.Log("WIN");
+        else success.text = "Incorrect amount of MOGCOIN";
     }
 
     public void IncreaseAmount(bool increase)
