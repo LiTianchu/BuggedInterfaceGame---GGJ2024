@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5874,18 +5874,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 190051983}
-        m_TargetAssemblyTypeName: Money, Assembly-CSharp
-        m_MethodName: CheckAmount
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1882606338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7339,8 +7327,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "<b>Plan for the day:</b> \n9:30am - Go out and take my custom keyboard
-    ordered online.\n11:30am - Buy my favourite game from <i>Steam</i> before the
-    sale ends.\n12:30am - Lunch.\n\n<b>Side note:</b>\nSteam Username: stand\nPassword:
+    ordered online.\n11:30am - Buy my favourite game from <i>Steaming</i> before
+    the sale ends.\n12:30am - Lunch.\n\n<b>Side note:</b>\nSteam Username: stand\nPassword:
     proud"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cafecd7aa1d7a354b804e9d7d57390a9, type: 2}
@@ -10659,8 +10647,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -14.1, y: 79}
-  m_SizeDelta: {x: 200, y: 80}
+  m_AnchoredPosition: {x: 78, y: -118}
+  m_SizeDelta: {x: 116.5672, y: 46.627}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8929967014778060988
 MonoBehaviour:
