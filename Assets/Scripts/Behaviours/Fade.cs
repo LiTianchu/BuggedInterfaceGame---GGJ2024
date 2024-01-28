@@ -17,9 +17,18 @@ public class Fade : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(fadeMode == FadeMode.In)
+        {
+            GetComponent<CanvasGroup>().alpha = 0;
+        }
+        else
+        {
+            GetComponent<CanvasGroup>().alpha = 1;
+        }
         _rectTransform = GetComponent<RectTransform>();
         _canvasGroup = GetComponent<CanvasGroup>();
         _originalPos = _rectTransform.anchoredPosition;
+        
 
         if(!fadeOnStart)
         {
