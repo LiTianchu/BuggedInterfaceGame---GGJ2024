@@ -498,6 +498,8 @@ RectTransform:
   - {fileID: 4858729683118730183}
   - {fileID: 1859826122}
   - {fileID: 5079670353541825327}
+  - {fileID: 632398312}
+  - {fileID: 1116450871}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -505,6 +507,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!224 &632398312 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5425416890253290688, guid: 8ae39a71a2e2c0e439634ee2affc260d, type: 3}
+  m_PrefabInstance: {fileID: 5586681277166715346}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1022103863
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,6 +619,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: MainMenu
+  fadeOverlay: {fileID: 1116450872}
+  fadeDuration: 1
 --- !u!114 &1022103868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -625,6 +634,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 8f8b90b56da42ba4eb9876aaa5d1f70a, type: 3}
+--- !u!224 &1116450871 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 548872103155752122, guid: 87ccd08bb70b1f94a844c1a8e19e57ba, type: 3}
+  m_PrefabInstance: {fileID: 2857964777308001553}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1116450872 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4850131281240141293, guid: 87ccd08bb70b1f94a844c1a8e19e57ba, type: 3}
+  m_PrefabInstance: {fileID: 2857964777308001553}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 488acc178cf55634fbcb8f86415e7a26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1428052863
 GameObject:
   m_ObjectHideFlags: 0
@@ -1265,6 +1290,103 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &2857964777308001553
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 603674161}
+    m_Modifications:
+    - target: {fileID: 548872103155752122, guid: 87ccd08bb70b1f94a844c1a8e19e57ba, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 548872103155752122, guid: 87ccd08bb70b1f94a844c1a8e19e57ba, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 548872103155752122, guid: 87ccd08bb70b1f94a844c1a8e19e57ba, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 548872103155752122, guid: 87ccd08bb70b1f94a844c1a8e19e57ba, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 548872103155752122, guid: 87ccd08bb70b1f94a844c1a8e19e57ba, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 548872103155752122, guid: 87ccd08bb70b1f94a844c1a8e19e57ba, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 548872103155752122, guid: 87ccd08bb70b1f94a844c1a8e19e57ba, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 548872103155752122, guid: 87ccd08bb70b1f94a844c1a8e19e57ba, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 548872103155752122, guid: 87ccd08bb70b1f94a844c1a8e19e57ba, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 548872103155752122, guid: 87ccd08bb70b1f94a844c1a8e19e57ba, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 548872103155752122, guid: 87ccd08bb70b1f94a844c1a8e19e57ba, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 548872103155752122, guid: 87ccd08bb70b1f94a844c1a8e19e57ba, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 548872103155752122, guid: 87ccd08bb70b1f94a844c1a8e19e57ba, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 548872103155752122, guid: 87ccd08bb70b1f94a844c1a8e19e57ba, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 548872103155752122, guid: 87ccd08bb70b1f94a844c1a8e19e57ba, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 548872103155752122, guid: 87ccd08bb70b1f94a844c1a8e19e57ba, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 548872103155752122, guid: 87ccd08bb70b1f94a844c1a8e19e57ba, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 548872103155752122, guid: 87ccd08bb70b1f94a844c1a8e19e57ba, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 548872103155752122, guid: 87ccd08bb70b1f94a844c1a8e19e57ba, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 548872103155752122, guid: 87ccd08bb70b1f94a844c1a8e19e57ba, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3905896892065739036, guid: 87ccd08bb70b1f94a844c1a8e19e57ba, type: 3}
+      propertyPath: m_Name
+      value: FadeInOverlay
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 87ccd08bb70b1f94a844c1a8e19e57ba, type: 3}
 --- !u!114 &3208708367641229972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1466,6 +1588,107 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8901836796321039460}
   m_CullTransparentMesh: 1
+--- !u!1001 &5586681277166715346
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 603674161}
+    m_Modifications:
+    - target: {fileID: 2029398563308937744, guid: 8ae39a71a2e2c0e439634ee2affc260d, type: 3}
+      propertyPath: m_Name
+      value: FadeOutOverlay
+      objectReference: {fileID: 0}
+    - target: {fileID: 3080998059586588957, guid: 8ae39a71a2e2c0e439634ee2affc260d, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425416890253290688, guid: 8ae39a71a2e2c0e439634ee2affc260d, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425416890253290688, guid: 8ae39a71a2e2c0e439634ee2affc260d, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425416890253290688, guid: 8ae39a71a2e2c0e439634ee2affc260d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425416890253290688, guid: 8ae39a71a2e2c0e439634ee2affc260d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425416890253290688, guid: 8ae39a71a2e2c0e439634ee2affc260d, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425416890253290688, guid: 8ae39a71a2e2c0e439634ee2affc260d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425416890253290688, guid: 8ae39a71a2e2c0e439634ee2affc260d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425416890253290688, guid: 8ae39a71a2e2c0e439634ee2affc260d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425416890253290688, guid: 8ae39a71a2e2c0e439634ee2affc260d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425416890253290688, guid: 8ae39a71a2e2c0e439634ee2affc260d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425416890253290688, guid: 8ae39a71a2e2c0e439634ee2affc260d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425416890253290688, guid: 8ae39a71a2e2c0e439634ee2affc260d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425416890253290688, guid: 8ae39a71a2e2c0e439634ee2affc260d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425416890253290688, guid: 8ae39a71a2e2c0e439634ee2affc260d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425416890253290688, guid: 8ae39a71a2e2c0e439634ee2affc260d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425416890253290688, guid: 8ae39a71a2e2c0e439634ee2affc260d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425416890253290688, guid: 8ae39a71a2e2c0e439634ee2affc260d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425416890253290688, guid: 8ae39a71a2e2c0e439634ee2affc260d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425416890253290688, guid: 8ae39a71a2e2c0e439634ee2affc260d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425416890253290688, guid: 8ae39a71a2e2c0e439634ee2affc260d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8ae39a71a2e2c0e439634ee2affc260d, type: 3}
 --- !u!114 &5650792253932749334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1486,20 +1709,21 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "In the mystical land of Lobotia, where UI elements float seamlessly through
-    the air and interactive buttons respond to the touch of skilled adventurers,
-    a looming usability issue threatens the very fabric of reality. \n\nThe ancient
-    prophecy, poorly conveyed by cOnFuSinG ToOltipS and obscured byclutteredinterfaces,
-    foretells a time when user experience shall deteriorate, challenging the very
-    foundation of player engagement. \n\nThe five Elemental Assets, once easy to
-    locate on the user interface, were entrusted to the Guardians to maintain a user-friendly
-    environment. However, a malevolent UI designer named Sukunaur, driven by a desire
-    for an <mark=#ffff00aa><i><u><b>overly complex and visually overwhelming interface</b></u></i></mark>,
-    sought to disrupt the harmony and <rotate=\"45\">frustrate the users</rotate>,
-    stealing the Assets and locking them behind bad UX design. \n\nPanic and fear
-    struck the hearts of all in the lands, and world leaders sought otherworldly
-    aid. Now you embark on your quest to revamp the user interface and thwart Sukunaur's
-    confusing designs, The fate of Lobotia\u2019s ease of use rests in your hands."
+  m_text: "\n\n\n\n\n\nPrologue\n\n\nIn the mystical land of Lobotia, where UI elements
+    float seamlessly through the air and interactive buttons respond to the touch
+    of skilled adventurers, a looming usability issue threatens the very fabric of
+    reality. \n\nThe ancient prophecy, poorly conveyed by cOnFuSinG ToOltipS and
+    obscured byclutteredinterfaces, foretells a time when user experience shall deteriorate,
+    challenging the very foundation of player engagement. \n\nThe five Elemental
+    Assets, once easy to locate on the user interface, were entrusted to the Guardians
+    to maintain a user-friendly environment. However, a malevolent UI designer named
+    Sukunaur, driven by a desire for an <mark=#ffff00aa><i><u><b>overly complex and
+    visually overwhelming interface</b></u></i></mark>, sought to disrupt the harmony
+    and <rotate=\"45\">frustrate the users</rotate>, stealing the Assets and locking
+    them behind bad UX design. \n\nPanic and fear struck the hearts of all in the
+    lands, and world leaders sought otherworldly aid. Now you embark on your quest
+    to revamp the user interface and thwart Sukunaur's confusing designs, The fate
+    of Lobotia\u2019s ease of use rests in your hands."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cafecd7aa1d7a354b804e9d7d57390a9, type: 2}
   m_sharedMaterial: {fileID: 5978649724226890248, guid: cafecd7aa1d7a354b804e9d7d57390a9, type: 2}
