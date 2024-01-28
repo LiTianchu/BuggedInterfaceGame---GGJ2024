@@ -517,6 +517,7 @@ GameObject:
   - component: {fileID: 1022103865}
   - component: {fileID: 1022103864}
   - component: {fileID: 1022103867}
+  - component: {fileID: 1022103868}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -611,6 +612,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: MainMenu
+--- !u!114 &1022103868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022103863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d778bc4c52efc4fa1682352c4e1397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 8f8b90b56da42ba4eb9876aaa5d1f70a, type: 3}
 --- !u!1 &1428052863
 GameObject:
   m_ObjectHideFlags: 0
@@ -1046,9 +1060,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86bf615988cca2478c82f2f0362d70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityScale: 500
+  gravityScale: 1000
   numOfClicksBeforeDrop: 3
-  breakSound: {fileID: 0}
+  breakSound: {fileID: 8300000, guid: 647bbda710c831143a83718fd2bbf49c, type: 3}
   breakType: 0
   lockedComponent: {fileID: 1859826123}
 --- !u!61 &1859826131
