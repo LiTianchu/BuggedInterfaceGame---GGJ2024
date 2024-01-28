@@ -89,7 +89,7 @@ public class CrumblingPieces : MonoBehaviour
             }
         }
         //all pieces are in the right place
-        Debug.Log("All pieces are in the right place");
+        FindObjectOfType<Money>().CheckAmount();
     }
 
     private Vector3 GetRandomRotation()
