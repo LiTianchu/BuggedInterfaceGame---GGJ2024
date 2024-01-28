@@ -7206,6 +7206,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1626518843}
     m_Modifications:
+    - target: {fileID: 1489611181669950548, guid: e4f6c27da9278df4b9d18797e10fabfc, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cafecd7aa1d7a354b804e9d7d57390a9, type: 2}
+    - target: {fileID: 1489611181669950548, guid: e4f6c27da9278df4b9d18797e10fabfc, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 5978649724226890248, guid: cafecd7aa1d7a354b804e9d7d57390a9, type: 2}
+    - target: {fileID: 1489611181669950548, guid: e4f6c27da9278df4b9d18797e10fabfc, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3721001821467284387, guid: e4f6c27da9278df4b9d18797e10fabfc, type: 3}
       propertyPath: m_Name
       value: ExitToMenu
@@ -7214,12 +7226,36 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8656364602794446227, guid: e4f6c27da9278df4b9d18797e10fabfc, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cafecd7aa1d7a354b804e9d7d57390a9, type: 2}
+    - target: {fileID: 8656364602794446227, guid: e4f6c27da9278df4b9d18797e10fabfc, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 5978649724226890248, guid: cafecd7aa1d7a354b804e9d7d57390a9, type: 2}
+    - target: {fileID: 8656364602794446227, guid: e4f6c27da9278df4b9d18797e10fabfc, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8836091601905784608, guid: e4f6c27da9278df4b9d18797e10fabfc, type: 3}
       propertyPath: m_text
       value: 'You failed to get the discount!
 
 
         Try again?'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8836091601905784608, guid: e4f6c27da9278df4b9d18797e10fabfc, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cafecd7aa1d7a354b804e9d7d57390a9, type: 2}
+    - target: {fileID: 8836091601905784608, guid: e4f6c27da9278df4b9d18797e10fabfc, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 5978649724226890248, guid: cafecd7aa1d7a354b804e9d7d57390a9, type: 2}
+    - target: {fileID: 8836091601905784608, guid: e4f6c27da9278df4b9d18797e10fabfc, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9119984590097497268, guid: e4f6c27da9278df4b9d18797e10fabfc, type: 3}
       propertyPath: m_Pivot.x
@@ -9023,7 +9059,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &6728878715096843554
 CanvasRenderer:
   m_ObjectHideFlags: 0
