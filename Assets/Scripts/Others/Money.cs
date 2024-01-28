@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class Money : MonoBehaviour
@@ -43,7 +44,7 @@ public class Money : MonoBehaviour
     IEnumerator EndGame()
     {
         yield return new WaitForSeconds(7f);
-        Application.Quit();
+        SceneManager.LoadScene("Credits");
     }
 
     // Start is called before the first frame update
