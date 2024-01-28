@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2262476347922110830}
   - component: {fileID: 8839920837385564600}
   - component: {fileID: 6545776763142845141}
+  - component: {fileID: 1510001021501985101}
   m_Layer: 5
   m_Name: VideoPlayer
   m_TagString: Untagged
@@ -74,6 +75,18 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &1510001021501985101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3193063057273736833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39d692da876637241affdce89508451c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7278687593078641738
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,7 +255,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7115306052742354864}
   - component: {fileID: 7697208040671636304}
-  - component: {fileID: 4825656558657313100}
   m_Layer: 5
   m_Name: Video Player
   m_TagString: Untagged
@@ -305,15 +317,3 @@ VideoPlayer:
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
---- !u!114 &4825656558657313100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7868153990647864625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39d692da876637241affdce89508451c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
