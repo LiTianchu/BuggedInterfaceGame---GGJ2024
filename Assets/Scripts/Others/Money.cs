@@ -13,6 +13,8 @@ public class Money : MonoBehaviour
     [SerializeField] TextMeshProUGUI stk;
     [SerializeField] TextMeshProUGUI success;
 
+    public GameObject qr;
+
     float timer = 0f;
 
     public void CheckAmount()

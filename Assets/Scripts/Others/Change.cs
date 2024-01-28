@@ -36,11 +36,13 @@ public class Change : MonoBehaviour
     {
         if (respawn)
         {
-            Instantiate(spawnable, spawnableParent.transform);
+            GameObject qr = Instantiate(spawnable, spawnableParent.transform);
+            qr.SetActive(true);
+            FindObjectOfType<Money>().qr = qr;
         }
         else
         {
-            Destroy(GameObject.Find("CrumblingPieces"));
+            Destroy(FindObjectOfType<Money>().qr);
         }
     }
 
