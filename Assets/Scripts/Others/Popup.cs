@@ -8,15 +8,12 @@ public class Popup : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("Timer: " + timer + ", Popup Active: " + popupPanel.activeInHierarchy);
-
         if (!popupPanel.activeInHierarchy)
         {
             timer -= Time.deltaTime;
 
             if (timer <= 0f)
             {
-                Debug.Log("Showing popup");
                 ShowPopup();
                 timer = 60f;
             }
