@@ -30,6 +30,18 @@ public class AudioManager : GlobalSingleton<AudioManager>
         _audioSource.Stop();
     }
 
+    public void PauseBGM()
+    {
+        InitAudioSource();
+        _audioSource.Pause();
+    }
+
+    public void ResumeBGM()
+    {
+        InitAudioSource();
+        _audioSource.UnPause();
+    }
+
 
     public void SetBGMPlayRate(float rate)
     {
