@@ -33,13 +33,19 @@ public class AudioManager : GlobalSingleton<AudioManager>
     public void PauseBGM()
     {
         InitAudioSource();
-        _audioSource.Pause();
+        if(_audioSource.isPlaying){
+            Debug.Log("Pause BGM");
+            _audioSource.enabled = false;
+        }
     }
 
     public void ResumeBGM()
     {
         InitAudioSource();
-        _audioSource.UnPause();
+        if(!_audioSource.isPlaying){
+            Debug.Log("Resume BGM");
+            _audioSource.enabled = true;
+        }
     }
 
 
