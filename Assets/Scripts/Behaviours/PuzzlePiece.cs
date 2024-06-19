@@ -28,6 +28,7 @@ public class PuzzlePiece : Draggable
         {
             _puzzleSlot.OnPuzzleLeave();
             _puzzleSlot.SetPuzzlePiece(null);
+            _puzzleSlot = null;
 
         }
     }

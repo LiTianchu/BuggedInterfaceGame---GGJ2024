@@ -1,21 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class PuzzleSlot : MonoBehaviour, IDropHandler
 {
     [SerializeField]
-    private CrumblingPieces crumblingPieces;
-    [SerializeField]
     private LayerMask puzzlePieceLayer;
     [SerializeField]
     private PuzzlePiece correctPiece;
     [SerializeField]
     private AudioClip snapSound;
+    [SerializeField]
+    private bool acceptWrongPiece = true;
 
     private PuzzlePiece _puzzlePiece;
+
+    public event Action<PuzzlePiece> OnPuzzlePieceRight;
+    public event Action<PuzzlePiece> OnPuzzlePieceLeave;
+
     public void OnDrop(PointerEventData eventData)
     {
 
@@ -32,11 +34,24 @@ public class PuzzleSlot : MonoBehaviour, IDropHandler
             }
             _puzzlePiece.PuzzleSlot = this;
             _puzzlePiece.GravityController.DisableSimulation();
-            _puzzlePiece.GetRectTransform().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+            _puzzlePiece.GetRectTransform().anchoredPosition = GetComponent<RectTransform>().localPosition;
             if (_puzzlePiece.Equals(correctPiece))
             {
                 Debug.Log("Puzzle piece is in the right place");
-                crumblingPieces.SetRightPlaceFlag(_puzzlePiece, true);
+
+                OnPuzzlePieceRight?.Invoke(_puzzlePiece);
+                //crumblingPieces.SetRightPlaceFlag(_puzzlePiece, true);
+            }
+            else
+            {
+                Debug.Log("Puzzle piece is not in the right place");
+                if (!acceptWrongPiece)
+                {
+                    _puzzlePiece.GravityController.EnableSimulation();
+                    _puzzlePiece.PuzzleSlot = null;
+                    _puzzlePiece = null;
+                    return;
+                }
             }
             if (snapSound != null)
             {
@@ -54,11 +69,16 @@ public class PuzzleSlot : MonoBehaviour, IDropHandler
 
     public void OnPuzzleLeave()
     {
-        if(_puzzlePiece == null)
+        if (_puzzlePiece == null)
         {
             return;
         }
-        crumblingPieces.SetRightPlaceFlag(_puzzlePiece, false);
+
+        OnPuzzlePieceLeave?.Invoke(_puzzlePiece);
+        //_puzzlePiece.GravityController.EnableSimulation();
+        //_puzzlePiece.PuzzleSlot = null;
+       // _puzzlePiece = null;
+        //crumblingPieces.SetRightPlaceFlag(_puzzlePiece, false);
     }
 
     public void SetPuzzlePiece(PuzzlePiece puzzlePiece)

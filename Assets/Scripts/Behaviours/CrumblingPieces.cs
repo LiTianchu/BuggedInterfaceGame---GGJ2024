@@ -9,6 +9,8 @@ public class CrumblingPieces : MonoBehaviour
     [SerializeField]
     private List<GravityController2D> pieces;
     [SerializeField]
+    private List<PuzzleSlot> puzzleSlots;
+    [SerializeField]
     private float crumbleGravityScale = 100f;
     [SerializeField]
     private float crumbleTime = 2f;
@@ -32,6 +34,19 @@ public class CrumblingPieces : MonoBehaviour
             {
                 _rightPlaceMap.Add(puzzlePiece, false);
             }
+        }
+
+        foreach (PuzzleSlot puzzleSlot in puzzleSlots)
+        {
+            puzzleSlot.OnPuzzlePieceRight += (puzzlePiece) =>
+            {
+                SetRightPlaceFlag(puzzlePiece, true);
+            };
+
+            puzzleSlot.OnPuzzlePieceLeave += (puzzlePiece) =>
+            {
+                SetRightPlaceFlag(puzzlePiece, false);
+            };
         }
     }
 
@@ -68,6 +83,11 @@ public class CrumblingPieces : MonoBehaviour
 
     public void SetRightPlaceFlag(PuzzlePiece puzzlePiece, bool isRightPlace)
     {
+        if(puzzlePiece == null)
+        {
+            return;
+        }
+        
         if (_rightPlaceMap.ContainsKey(puzzlePiece))
         {
             _rightPlaceMap[puzzlePiece] = isRightPlace;
