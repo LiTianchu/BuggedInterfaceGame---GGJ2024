@@ -574,7 +574,7 @@ RectTransform:
   m_GameObject: {fileID: 312472070}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1437950519}
@@ -1457,7 +1457,7 @@ RectTransform:
   m_GameObject: {fileID: 682685383}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1363325134}
@@ -1465,7 +1465,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -110.8, y: 79.2}
+  m_AnchoredPosition: {x: -109, y: 83}
   m_SizeDelta: {x: 32.7823, y: 32.7823}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &682685385
@@ -1568,8 +1568,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: afb2ac212290a184db5260fceddcdc03, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2237,7 +2237,7 @@ RectTransform:
   m_GameObject: {fileID: 924237369}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 1.2, z: 1}
+  m_LocalScale: {x: 0.9, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 78935053}
@@ -3317,7 +3317,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 4, y: 58}
+  m_AnchoredPosition: {x: 37, y: 58}
   m_SizeDelta: {x: 184.06, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1074515130
@@ -3340,7 +3340,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Options
+  m_text: ptions
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 96a0025670e2cca4fbd56ca62e1f9b5f, type: 2}
   m_sharedMaterial: {fileID: 9164671881169971875, guid: 96a0025670e2cca4fbd56ca62e1f9b5f, type: 2}
@@ -4765,7 +4765,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: O
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 96a0025670e2cca4fbd56ca62e1f9b5f, type: 2}
   m_sharedMaterial: {fileID: 9164671881169971875, guid: 96a0025670e2cca4fbd56ca62e1f9b5f, type: 2}
