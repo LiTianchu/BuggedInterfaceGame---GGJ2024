@@ -25,7 +25,7 @@ public class VerifyPass : MonoBehaviour
             }
             else
             {
-                resultText.text = "Instructions not followed. Request rejected :D";
+                resultText.text = "Simple instructions not followed. Request rejected :D";
                 resultText.color = Color.red;
             }
         }
