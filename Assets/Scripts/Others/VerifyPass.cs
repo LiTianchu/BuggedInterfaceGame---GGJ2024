@@ -25,13 +25,20 @@ public class VerifyPass : MonoBehaviour
             }
             else
             {
-                resultText.text = "Simple instructions not followed. Request rejected :D";
-                resultText.color = Color.red;
+                StartCoroutine(Wrong());                
             }
         }
         else
         {
             hintText.text = "not this one";
         }
+    }
+
+    IEnumerator Wrong()
+    {
+        resultText.text = "That is not the PASSWORD";
+        resultText.color = Color.red;
+        yield return new WaitForSeconds(2);
+        resultText.text = "";
     }
 }
