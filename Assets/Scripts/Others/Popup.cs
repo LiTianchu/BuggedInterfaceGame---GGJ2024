@@ -4,7 +4,12 @@ using UnityEngine.UI;
 public class Popup : MonoBehaviour
 {
     public GameObject popupPanel; // The Panel
-    private float timer = 90f; // 60 seconds timer
+    public float time = Mathf.Infinity; // Timer to show the popup
+    private float timer;
+
+    void Start() {
+        timer = time;
+    }
 
     void Update()
     {
@@ -15,7 +20,7 @@ public class Popup : MonoBehaviour
             if (timer <= 0f)
             {
                 ShowPopup();
-                timer = 90f;
+                timer = time;
             }
         }
     }
