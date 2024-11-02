@@ -145,7 +145,7 @@ public class Stickman : MonoBehaviour
     IEnumerator MoveProjectile(RectTransform projectileRect, Vector2 direction)
     {
         float speed = 600f; // Increased speed
-        float homingStrength = 0.05f;
+        float homingStrength = 0.1f;
         float lifetime = 4.0f;
         float elapsedTime = 0;
 

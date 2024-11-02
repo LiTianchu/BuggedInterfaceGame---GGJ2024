@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Tianchu_Test.unity
     guid: a37947f6cce073643b359020bf592e02
+  - enabled: 1
+    path: Assets/Scenes/Paint Boss.unity
+    guid: de0040c7429048446b439e64f2d78412
   m_configObjects: {}
