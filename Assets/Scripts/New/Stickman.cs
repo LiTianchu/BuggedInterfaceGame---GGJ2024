@@ -149,13 +149,20 @@ public class Stickman : MonoBehaviour
         float lifetime = 4.0f;
         float elapsedTime = 0;
 
+        Canvas canvas = GetComponentInParent<Canvas>();
+        Camera camera = null;
+        if (canvas.renderMode != RenderMode.ScreenSpaceOverlay)
+        {
+            camera = canvas.worldCamera;
+        }
+
         while (elapsedTime < lifetime)
         {
             Vector2 cursorPosition = Input.mousePosition;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                rectTransform,
+                canvas.GetComponent<RectTransform>(),
                 cursorPosition,
-                null,
+                camera,
                 out Vector2 localCursorPosition
             );
 
