@@ -787,7 +787,6 @@ GameObject:
   - component: {fileID: 1093270100}
   - component: {fileID: 1093270103}
   - component: {fileID: 1093270102}
-  - component: {fileID: 1093270101}
   - component: {fileID: 1093270104}
   m_Layer: 5
   m_Name: PaintWindow
@@ -817,19 +816,6 @@ RectTransform:
   m_AnchoredPosition: {x: 64, y: 32.125}
   m_SizeDelta: {x: 534.6702, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1093270101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1093270099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcb16be71d10a57498ade31004d7145d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 1626518842}
 --- !u!114 &1093270102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1273,7 +1259,7 @@ Canvas:
   m_GameObject: {fileID: 1626518839}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 2102641449}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -1706,7 +1692,6 @@ GameObject:
   - component: {fileID: 2102641449}
   - component: {fileID: 2102641448}
   - component: {fileID: 2102641451}
-  - component: {fileID: 2102641452}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1801,21 +1786,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 559c232a43caebe41870ce54786f604e, type: 3}
---- !u!114 &2102641452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2102641447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73b141a0058860b4699f0e0f95bcf2a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: Credits
-  fadeOverlay: {fileID: 0}
-  fadeDuration: 1
 --- !u!222 &531654396030174767
 CanvasRenderer:
   m_ObjectHideFlags: 0
