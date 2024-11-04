@@ -2,15 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Stickman : MonoBehaviour
 {
     public GameObject brush;
+    public GameObject heartPrefab; // Heart prefab
+    public GameObject warningLinePrefab; // Warning line prefab
 
     private RectTransform rectTransform;
     private Vector2 minBounds, maxBounds;
+    private float halfHeight, halfWidth;
     private Vector2 stickmanSize;
 
+    public int health = 10;
     public float attackInterval = 5.0f; // Time between attacks
     private float attackTimer;
 
@@ -30,6 +35,10 @@ public class Stickman : MonoBehaviour
         }
 
         attackTimer = attackInterval;
+
+        // Start the coroutine to spawn hearts
+        StartCoroutine(SpawnHeart());
+        StartCoroutine(RicochetEffect());
     }
 
     void Update()
@@ -56,6 +65,7 @@ public class Stickman : MonoBehaviour
         // Check for cursor collision
         if (IsCursorColliding())
         {
+            Debug.Log("Stickman");
             GameOver();
         }
     }
@@ -63,16 +73,17 @@ public class Stickman : MonoBehaviour
     void PerformAttack()
     {
         // Example attacks
-        int attackType = Random.Range(0, 2);
+        int attackType = Random.Range(1, 3);
+        
         switch (attackType)
         {
-            case 0:
-                // Attack 2: Ricochet randomly around the screen
-                StartCoroutine(RicochetEffect());
-                break;
             case 1:
                 // Attack 3: Throw pencils and brushes like a machine gun
                 StartCoroutine(MachineGunEffect());
+                break;
+            case 2:
+                // Attack 4: Vergil Judgment Cut
+                StartCoroutine(JudgmentCutEffect());
                 break;
         }
     }
@@ -80,8 +91,8 @@ public class Stickman : MonoBehaviour
     IEnumerator RicochetEffect()
     {
         Vector2 direction = Random.insideUnitCircle.normalized;
-        float speed = 800f;
-        float ricochetDuration = 4.0f;
+        float speed = 500f;
+        float ricochetDuration = Mathf.Infinity; // Infinite duration
         float elapsedTime = 0;
 
         while (elapsedTime < ricochetDuration)
@@ -144,7 +155,7 @@ public class Stickman : MonoBehaviour
 
     IEnumerator MoveProjectile(RectTransform projectileRect, Vector2 direction)
     {
-        float speed = 600f; // Increased speed
+        float speed = 200f; // Increased speed
         float homingStrength = 0.1f;
         float lifetime = 4.0f;
         float elapsedTime = 0;
@@ -178,9 +189,61 @@ public class Stickman : MonoBehaviour
         Destroy(projectileRect.gameObject);
     }
 
+    IEnumerator JudgmentCutEffect()
+    {
+        int numberOfCuts = 11;
+        float warningDuration = 1f;
+        float harmfulDuration = 1f;
+
+        List<GameObject> warningLines = new List<GameObject>();
+
+        // Spawn warning lines
+        for (int i = 0; i < numberOfCuts; i++)
+        {
+            float randomX = Random.Range(minBounds.x + stickmanSize.x / 2, maxBounds.x - stickmanSize.x / 2);
+            Vector2 startPosition = new Vector2(randomX, minBounds.y);
+            Vector2 endPosition = new Vector2(randomX, maxBounds.y);
+
+            GameObject warningLine = Instantiate(warningLinePrefab, startPosition, Quaternion.identity, transform.parent);
+            RectTransform warningLineRect = warningLine.GetComponent<RectTransform>();
+            warningLineRect.anchoredPosition = startPosition;
+
+            // Apply random rotation
+            float randomAngle = Random.Range(0f, 360f);
+            warningLineRect.rotation = Quaternion.Euler(0, 0, randomAngle);
+
+            warningLines.Add(warningLine);
+        }
+
+        // Wait for warning duration
+        yield return new WaitForSeconds(warningDuration);
+
+        // Make lines harmful
+        foreach (GameObject warningLine in warningLines)
+        {
+            warningLine.GetComponent<Boolet>().IsHarmful(true); // Assuming the warning line has an IsHarmful property
+            warningLine.GetComponent<Image>().color = Color.red; // Assuming the warning line has an Image component
+        }
+
+        // Wait for harmful duration
+        float elapsedTime = 0;
+        while (elapsedTime < harmfulDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Destroy lines
+        foreach (GameObject warningLine in warningLines)
+        {
+            Destroy(warningLine);
+        }
+    }
+
     bool IsCursorColliding()
     {
         Vector2 cursorPosition = Input.mousePosition;
+
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             rectTransform,
             cursorPosition,
@@ -189,6 +252,36 @@ public class Stickman : MonoBehaviour
         );
 
         return rectTransform.rect.Contains(localCursorPosition);
+    }
+
+    IEnumerator SpawnHeart()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(Random.Range(5.0f, 10.0f)); // Wait for a random time between 5 and 10 seconds
+
+            if (heartPrefab != null)
+            {
+                // Calculate a random position within the bounds
+                float randomX = Random.Range(minBounds.x + stickmanSize.x / 2, maxBounds.x - stickmanSize.x / 2);
+                float randomY = Random.Range(minBounds.y + stickmanSize.y / 2, maxBounds.y - stickmanSize.y / 2);
+                Vector2 randomPosition = new Vector2(randomX, randomY);
+
+                // Instantiate the heart
+                GameObject heart = Instantiate(heartPrefab, randomPosition, Quaternion.identity, transform.parent);
+                RectTransform heartRect = heart.GetComponent<RectTransform>();
+                heartRect.anchoredPosition = randomPosition;
+            }
+        }
+    }
+
+    public void ReduceHealth(int amount)
+    {
+        health -= amount;
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void GameOver()

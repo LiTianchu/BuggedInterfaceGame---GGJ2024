@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Boolet : MonoBehaviour
 {
     private RectTransform rectTransform;
+    public bool harmful = true;
 
     void Start()
     {
@@ -15,8 +16,9 @@ public class Boolet : MonoBehaviour
     void Update()
     {
         // Check for cursor collision
-        if (IsCursorColliding())
+        if (IsCursorColliding() && harmful)
         {
+            Debug.Log("Bullet");            
             GameOver();
         }
     }
@@ -36,8 +38,12 @@ public class Boolet : MonoBehaviour
 
     void GameOver()
     {
-        Debug.Log("Game Over!");
         // Reload the scene or handle game over logic
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void IsHarmful(bool harm)
+    {
+        harmful = harm;
     }
 }
