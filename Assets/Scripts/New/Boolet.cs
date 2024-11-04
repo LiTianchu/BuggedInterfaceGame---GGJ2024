@@ -6,17 +6,19 @@ using UnityEngine.SceneManagement;
 public class Boolet : MonoBehaviour
 {
     private RectTransform rectTransform;
+    private Stickman stickman;
     public bool harmful = true;
 
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
+        stickman = FindObjectOfType<Stickman>();
     }
 
     void Update()
     {
         // Check for cursor collision
-        if (IsCursorColliding() && harmful)
+        if (IsCursorColliding() && harmful && !stickman.IsImmune())
         {
             Debug.Log("Bullet");            
             GameOver();

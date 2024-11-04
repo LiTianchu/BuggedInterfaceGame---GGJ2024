@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1572265919626377310
+--- !u!1 &3238695360924647456
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,25 +8,25 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2246633039955514953}
-  - component: {fileID: 2630686946086913424}
-  - component: {fileID: 1890939221404183588}
-  - component: {fileID: 3679110653364807761}
-  - component: {fileID: 746459370713804532}
+  - component: {fileID: 1719516080485956877}
+  - component: {fileID: 8602530689422873945}
+  - component: {fileID: 597002372886718959}
+  - component: {fileID: 9030332839087049897}
+  - component: {fileID: 768796428396285114}
   m_Layer: 5
-  m_Name: Stickman
+  m_Name: Selection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &2246633039955514953
+--- !u!224 &1719516080485956877
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1572265919626377310}
+  m_GameObject: {fileID: 3238695360924647456}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -37,23 +37,23 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 40, y: 100}
+  m_SizeDelta: {x: 30, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &2630686946086913424
+--- !u!222 &8602530689422873945
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1572265919626377310}
+  m_GameObject: {fileID: 3238695360924647456}
   m_CullTransparentMesh: 1
---- !u!114 &1890939221404183588
+--- !u!114 &597002372886718959
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1572265919626377310}
+  m_GameObject: {fileID: 3238695360924647456}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 644fc41786dad4e479bc4c77d6ebb5d9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6dd23b164a7bdda4da5aff9de4aed582, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -77,50 +77,31 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!50 &3679110653364807761
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1572265919626377310}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 0.0001
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
---- !u!114 &746459370713804532
+--- !u!114 &9030332839087049897
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1572265919626377310}
+  m_GameObject: {fileID: 3238695360924647456}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef5a381b43a06fa459ab1790a2a1076a, type: 3}
+  m_Script: {fileID: 11500000, guid: 869d0bf3c08f2e14cb1484b8d0cf150d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brush: {fileID: 3238695360924647456, guid: 8ed0b0791b616644dacefaeedc43fc47, type: 3}
-  itemPrefabs:
-  - {fileID: 3238695360924647456, guid: 95878df5a999f68478a85af317a1b938, type: 3}
-  - {fileID: 3238695360924647456, guid: 3b71b46584f00ab4c9fb4d22e71cc438, type: 3}
-  warningLinePrefab: {fileID: 3238695360924647456, guid: 8aa154047a494cc41b749726e8dbb82d, type: 3}
-  immunityImagePrefab: {fileID: 3238695360924647456, guid: ae55b9a9a75d8204aa7b670d1912e1ca, type: 3}
-  health: 10
-  attackInterval: 5
+  clip: {fileID: 8300000, guid: 287714c74120797488f2baa3f148324a, type: 3}
+--- !u!114 &768796428396285114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3238695360924647456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b75ae6cb2083f78439e1ed818defd5b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToLive: 5
+  wallPrefab: {fileID: 3238695360924647456, guid: 0900e0649bc8ff544842b94131d07ef4, type: 3}
+  immunityDuration: 5

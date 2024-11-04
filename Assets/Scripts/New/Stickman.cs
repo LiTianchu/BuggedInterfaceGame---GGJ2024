@@ -7,8 +7,9 @@ using UnityEngine.UI;
 public class Stickman : MonoBehaviour
 {
     public GameObject brush;
-    public GameObject heartPrefab; // Heart prefab
+    public GameObject[] itemPrefabs; // Item prefabs
     public GameObject warningLinePrefab; // Warning line prefab
+    public GameObject immunityImagePrefab; // Immunity image prefab
 
     private RectTransform rectTransform;
     private Vector2 minBounds, maxBounds;
@@ -18,6 +19,7 @@ public class Stickman : MonoBehaviour
     public int health = 10;
     public float attackInterval = 5.0f; // Time between attacks
     private float attackTimer;
+    private bool isImmune = false;
 
     void Start()
     {
@@ -63,7 +65,7 @@ public class Stickman : MonoBehaviour
         }
 
         // Check for cursor collision
-        if (IsCursorColliding())
+        if (IsCursorColliding() && !isImmune)
         {
             Debug.Log("Stickman");
             GameOver();
@@ -90,7 +92,7 @@ public class Stickman : MonoBehaviour
 
     IEnumerator RicochetEffect()
     {
-        Vector2 direction = Random.insideUnitCircle.normalized;
+        Vector2 direction = new Vector2(60, 60).normalized;
         float speed = 500f;
         float ricochetDuration = Mathf.Infinity; // Infinite duration
         float elapsedTime = 0;
@@ -260,8 +262,11 @@ public class Stickman : MonoBehaviour
         {
             yield return new WaitForSeconds(Random.Range(5.0f, 10.0f)); // Wait for a random time between 5 and 10 seconds
 
-            if (heartPrefab != null)
+            if (itemPrefabs != null)
             {
+                // Get a random item prefab
+                GameObject heartPrefab = itemPrefabs[1]; // Random.Range(0, itemPrefabs.Length)
+
                 // Calculate a random position within the bounds
                 float randomX = Random.Range(minBounds.x + stickmanSize.x / 2, maxBounds.x - stickmanSize.x / 2);
                 float randomY = Random.Range(minBounds.y + stickmanSize.y / 2, maxBounds.y - stickmanSize.y / 2);
@@ -277,11 +282,44 @@ public class Stickman : MonoBehaviour
 
     public void ReduceHealth(int amount)
     {
-        health -= amount;
-        if (health <= 0)
+        if (!isImmune)
         {
-            Destroy(gameObject);
+            health -= amount;
+            if (health <= 0)
+            {
+                GameOver();
+            }
         }
+    }
+
+    public void SetImmunity(float duration)
+    {
+        StartCoroutine(ImmunityCoroutine(duration));
+    }
+
+    private IEnumerator ImmunityCoroutine(float duration)
+    {
+        isImmune = true;
+        GameObject immunityImage = Instantiate(immunityImagePrefab, transform.parent);
+        RectTransform immunityImageRect = immunityImage.GetComponent<RectTransform>();
+
+        float elapsedTime = 0;
+        while (elapsedTime < duration)
+        {
+            Vector2 cursorPosition = Input.mousePosition;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                immunityImageRect.parent as RectTransform,
+                cursorPosition,
+                null,
+                out Vector2 localCursorPosition
+            );
+            immunityImageRect.anchoredPosition = localCursorPosition;
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        Destroy(immunityImage);
+        isImmune = false;
     }
 
     void GameOver()
@@ -289,5 +327,20 @@ public class Stickman : MonoBehaviour
         Debug.Log("Game Over!");
         // Reload the scene or handle game over logic
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public bool IsImmune()
+    {
+        return isImmune;
+    }
+
+    public Vector2 GetMinBounds()
+    {
+        return minBounds;
+    }
+
+    public Vector2 GetMaxBounds()
+    {
+        return maxBounds;
     }
 }
