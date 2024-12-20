@@ -7,23 +7,23 @@ using UnityEngine.SceneManagement;
 public class Mineplanter1 : MonoBehaviour
 {
     [Header("Grids")]
-    [SerializeField] private GridLayoutGroup puzzleGrid;
+    [SerializeField] protected GridLayoutGroup puzzleGrid;
 
     [Header("Prefabs")]
-    [SerializeField] private MinePuzzleGrid1 minePuzzleGridPrefab;
+    [SerializeField] protected MinePuzzleGrid1 minePuzzleGridPrefab;
 
     [Header("UI")]
-    [SerializeField] private GameObject levelClearPrompt;
+    [SerializeField] protected GameObject levelClearPrompt;
 
 
-    private List<List<bool>> mines;
-    private List<List<int>> currentMineNums;
-    private List<List<int>> neighborMineCounts;
-    private static readonly float PUZZLE_GRID_SPACING = 5f;
-    private static readonly float REFERENCE_GRID_SPACING = 5f;
+    protected List<List<bool>> mines;
+    protected List<List<int>> currentMineNums;
+    protected List<List<int>> neighborMineCounts;
+    protected static readonly float PUZZLE_GRID_SPACING = 5f;
+    protected static readonly float REFERENCE_GRID_SPACING = 5f;
 
 
-    private static List<List<int>> MINES = new()
+    protected static List<List<int>> MINES = new()
     {
         new() {0,0,0,0},
         new() {0,1,2,0},
@@ -42,7 +42,7 @@ public class Mineplanter1 : MonoBehaviour
     public List<List<int>> CurrentMineNums { get => currentMineNums; set => currentMineNums = value; }
 
     // Start is called before the first frame update
-    public void Start()
+    public virtual void Start()
     {
         mines = new();
         currentMineNums = new();
@@ -50,7 +50,7 @@ public class Mineplanter1 : MonoBehaviour
         SetupLevel();
     }
 
-    public void SetupLevel()
+    public virtual void SetupLevel()
     {
         int rows = MINES.Count;
         int cols = MINES[0].Count;
@@ -82,12 +82,12 @@ public class Mineplanter1 : MonoBehaviour
         }   
     }
 
-    public void NextLevel() {
+    public virtual void NextLevel() {
         SceneManager.LoadScene("MineplanterLevel4");
     }
 
     // Method to check if inputted numbers match the MINES list
-    private bool CheckIfInputMatchesMines(List<List<int>> input)
+    public virtual bool CheckIfInputMatchesMines(List<List<int>> input)
     {
         Debug.Log(input);
         if (input.Count != MINES.Count)
@@ -109,7 +109,7 @@ public class Mineplanter1 : MonoBehaviour
     }
 
     // Example usage of the CheckIfInputMatchesMines method
-    public void ValidateInput(List<List<int>> input)
+    public virtual void ValidateInput(List<List<int>> input)
     {
         if (CheckIfInputMatchesMines(input))
         {
