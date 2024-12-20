@@ -83,7 +83,7 @@ public class Mineplanter1 : MonoBehaviour
     }
 
     public void NextLevel() {
-        SceneManager.LoadScene("MineplanterLevel3");
+        SceneManager.LoadScene("MineplanterLevel4");
     }
 
     // Method to check if inputted numbers match the MINES list

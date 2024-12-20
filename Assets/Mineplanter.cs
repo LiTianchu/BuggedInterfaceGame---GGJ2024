@@ -7,27 +7,27 @@ using UnityEngine.SceneManagement;
 public class Mineplanter : MonoBehaviour
 {
     [Header("Grids")]
-    [SerializeField] private GridLayoutGroup puzzleGrid;
-    [SerializeField] private GridLayoutGroup referenceGrid;
+    [SerializeField] protected GridLayoutGroup puzzleGrid;
+    [SerializeField] protected GridLayoutGroup referenceGrid;
 
     [Header("Prefabs")]
-    [SerializeField] private GameObject minePrefab;
-    [SerializeField] private MinePuzzleGrid minePuzzleGridPrefab;
+    [SerializeField] protected GameObject minePrefab;
+    [SerializeField] protected MinePuzzleGrid minePuzzleGridPrefab;
 
     [Header("UI")]
-    [SerializeField] private GameObject levelClearPrompt;
-    [SerializeField] private GameObject levelClearPrompt1;
+    [SerializeField] protected GameObject levelClearPrompt;
+    [SerializeField] protected GameObject levelClearPrompt1;
 
 
-    private List<List<bool>> mines;
-    private List<List<int>> currentMineNums;
-    private List<List<int>> neighborMineCounts;
-    private static readonly float PUZZLE_GRID_SPACING = 5f;
-    private static readonly float REFERENCE_GRID_SPACING = 5f;
+    protected List<List<bool>> mines;
+    protected List<List<int>> currentMineNums;
+    protected List<List<int>> neighborMineCounts;
+    protected static readonly float PUZZLE_GRID_SPACING = 5f;
+    protected static readonly float REFERENCE_GRID_SPACING = 5f;
 
-    private int level = 1;
+    protected int level = 1;
 
-    private static List<List<bool>> MINES = new()
+    protected static List<List<bool>> MINES = new()
     {
         new() {true,false,true},
         new() {false,true,false},
@@ -46,7 +46,7 @@ public class Mineplanter : MonoBehaviour
     public List<List<int>> CurrentMineNums { get => currentMineNums; set => currentMineNums = value; }
 
     // Start is called before the first frame update
-    public void Start()
+    public virtual void Start()
     {
         mines = new();
         currentMineNums = new();
@@ -54,7 +54,7 @@ public class Mineplanter : MonoBehaviour
         SetupLevel();
     }
 
-    public void SetupLevel()
+    public virtual void SetupLevel()
     {
         int rows = MINES.Count;
         int cols = MINES[0].Count;
@@ -105,7 +105,7 @@ public class Mineplanter : MonoBehaviour
         }
     }
 
-    public bool CheckLevelClear()
+    public virtual bool CheckLevelClear()
     {
         int rows = MINES.Count;
         int cols = MINES[0].Count;
@@ -140,7 +140,7 @@ public class Mineplanter : MonoBehaviour
         return true;
     }
 
-    public int GetNeighborMineCount(int x, int y)
+    public virtual int GetNeighborMineCount(int x, int y)
     {
         int count = 0;
         int rows = MINES.Count;
@@ -164,7 +164,7 @@ public class Mineplanter : MonoBehaviour
         return count;
     }
 
-    public void NextPuzzle()
+    public virtual void NextPuzzle()
     {
         MINES = new List<List<bool>>()
         {
@@ -190,7 +190,7 @@ public class Mineplanter : MonoBehaviour
         SetupLevel();
     }
 
-    public void NextLevel() {
+    public virtual void NextLevel() {
         SceneManager.LoadScene("MineplanterLevel2");
     }
 }
