@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class MinePuzzleGrid : MonoBehaviour,IPointerDownHandler
+public class MinePuzzleGrid1 : MonoBehaviour,IPointerDownHandler
 {
     [Range(MIN_NUM, MAX_NUM)]
     [SerializeField] private int mineNum = 0;
@@ -15,7 +15,7 @@ public class MinePuzzleGrid : MonoBehaviour,IPointerDownHandler
     private const int MIN_NUM = 0;
     private const int MAX_NUM = 3;
     private TMP_Text _numText;
-    public Mineplanter Mineplanter { get; set; }
+    public Mineplanter1 Mineplanter { get; set; }
     public int X { get; set; }
     public int Y { get; set; }
 
@@ -40,9 +40,7 @@ public class MinePuzzleGrid : MonoBehaviour,IPointerDownHandler
         mineNum = Mathf.Clamp(mineNum, MIN_NUM, MAX_NUM);
         Mineplanter.CurrentMineNums[X][Y] = mineNum;
         UpdateNumView();
-        if(Mineplanter.CheckLevelClear()){
-            Debug.Log("Level Clear");
-        }
+        Mineplanter.ValidateInput(Mineplanter.CurrentMineNums);
     }
 
     private void UpdateNumView()

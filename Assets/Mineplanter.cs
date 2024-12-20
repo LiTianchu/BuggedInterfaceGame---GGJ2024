@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Mineplanter : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class Mineplanter : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private GameObject levelClearPrompt;
+    [SerializeField] private GameObject levelClearPrompt1;
 
 
     private List<List<bool>> mines;
@@ -23,7 +25,9 @@ public class Mineplanter : MonoBehaviour
     private static readonly float PUZZLE_GRID_SPACING = 5f;
     private static readonly float REFERENCE_GRID_SPACING = 5f;
 
-    private static readonly List<List<bool>> MINES = new()
+    private int level = 1;
+
+    private static List<List<bool>> MINES = new()
     {
         new() {true,false,true},
         new() {false,true,false},
@@ -124,7 +128,15 @@ public class Mineplanter : MonoBehaviour
                 }
             }
         }
-        levelClearPrompt.SetActive(true);
+        if (level == 1)
+        {
+            levelClearPrompt.SetActive(true);
+        }
+        else
+        {
+            levelClearPrompt1.SetActive(true);
+        }
+        
         return true;
     }
 
@@ -150,5 +162,35 @@ public class Mineplanter : MonoBehaviour
             }
         }
         return count;
+    }
+
+    public void NextPuzzle()
+    {
+        MINES = new List<List<bool>>()
+        {
+            new() {true,false,true},
+            new() {false,true,false},
+            new() {false,true,false},
+            new() {true,false,true},
+        };
+
+        foreach (Transform child in puzzleGrid.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in referenceGrid.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        level += 1;
+        mines.Clear();
+        currentMineNums.Clear();
+        neighborMineCounts.Clear();
+        levelClearPrompt.SetActive(false);
+        SetupLevel();
+    }
+
+    public void NextLevel() {
+        SceneManager.LoadScene("MineplanterLevel2");
     }
 }
