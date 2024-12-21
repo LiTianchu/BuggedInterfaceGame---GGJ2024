@@ -8,25 +8,24 @@ using UnityEngine.UI;
 
 public class MinePuzzleGrid1 : MonoBehaviour,IPointerDownHandler
 {
-    [Range(MIN_NUM, MAX_NUM)]
-    [SerializeField] private int mineNum = 0;
-    [SerializeField] private AudioClip incrementSound;
-    [SerializeField] private AudioClip decrementSound;
-    private const int MIN_NUM = 0;
-    private const int MAX_NUM = 3;
-    private TMP_Text _numText;
+    [SerializeField] protected int mineNum = 0;
+    [SerializeField] protected AudioClip incrementSound;
+    [SerializeField] protected AudioClip decrementSound;
+    protected virtual int MIN_NUM => 0;
+    protected virtual int MAX_NUM => 3;
+    protected TMP_Text _numText;
     public Mineplanter1 Mineplanter { get; set; }
     public int X { get; set; }
     public int Y { get; set; }
 
 
-    public void Start()
+    public virtual void Start()
     {
         _numText = GetComponentInChildren<TMP_Text>();
         UpdateNumView();
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public virtual void OnPointerDown(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
@@ -43,7 +42,7 @@ public class MinePuzzleGrid1 : MonoBehaviour,IPointerDownHandler
         Mineplanter.ValidateInput(Mineplanter.CurrentMineNums);
     }
 
-    private void UpdateNumView()
+    public virtual void UpdateNumView()
     {
         if(mineNum == MIN_NUM){
             _numText.text = "";
