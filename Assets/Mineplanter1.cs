@@ -50,6 +50,14 @@ public class Mineplanter1 : MonoBehaviour
         SetupLevel();
     }
 
+    public virtual void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
+
     public virtual void SetupLevel()
     {
         int rows = MINES.Count;

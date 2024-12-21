@@ -594,7 +594,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 31}
   m_SizeDelta: {x: 668.8492, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &878101493
@@ -617,9 +617,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Assign each tile with a number (0-3) based on how many red squares/mines
-    are surrounding each tile (0 if the tile itself is a mine). There will be twists
-    along the way though that will make you think outside the box, have fun exploring!
+  m_text: 'Control scheme: Left/right click, ESC to quit
+
+    Assign each tile with
+    a number (0-3) based on how many red squares/mines are surrounding each tile
+    (0 if the tile itself is a mine). There will be twists along the way though that
+    will make you think outside the box, have fun exploring!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2ff157666e4e2fd4196ecf958cb05974, type: 2}
   m_sharedMaterial: {fileID: 1566153623828171845, guid: 2ff157666e4e2fd4196ecf958cb05974, type: 2}
