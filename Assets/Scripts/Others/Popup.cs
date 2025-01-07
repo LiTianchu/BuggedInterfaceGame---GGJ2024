@@ -3,17 +3,21 @@ using UnityEngine.UI;
 
 public class Popup : MonoBehaviour
 {
-    public GameObject popupPanel; // The Panel
-    public float time = Mathf.Infinity; // Timer to show the popup
-    private float timer;
+    [SerializeField] public GameObject popupPanel; // The Panel
+    [SerializeField] public float time = Mathf.Infinity; // Timer to show the popup
+    [SerializeField] private bool oneTime = true; // Show the popup only once
 
-    void Start() {
+    private float timer;
+    private bool shown = false;
+
+    void Start()
+    {
         timer = time;
     }
 
     void Update()
     {
-        if (!popupPanel.activeInHierarchy)
+        if ((!oneTime || !shown) && !popupPanel.activeInHierarchy)
         {
             timer -= Time.deltaTime;
 
@@ -21,6 +25,7 @@ public class Popup : MonoBehaviour
             {
                 ShowPopup();
                 timer = time;
+                shown = true;
             }
         }
     }

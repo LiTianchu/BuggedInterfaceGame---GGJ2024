@@ -2768,7 +2768,7 @@ MonoBehaviour:
   actual: 0
   resultText: {fileID: 1507704851}
   hintText: {fileID: 381503116}
-  popup: {fileID: 1626518844}
+  popup: {fileID: 1275772332}
 --- !u!114 &756991095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4751,6 +4751,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1270150540}
   m_CullTransparentMesh: 1
+--- !u!1 &1275772329
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1275772330}
+  - component: {fileID: 1275772331}
+  - component: {fileID: 1275772332}
+  m_Layer: 5
+  m_Name: PopupController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1275772330
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275772329}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2101902912}
+  m_Father: {fileID: 1626518843}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1275772331
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275772329}
+  m_CullTransparentMesh: 1
+--- !u!114 &1275772332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275772329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 782c125f4a170fe43a5e955e0df904a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupPanel: {fileID: 2101902909}
+  time: 5
+  oneTime: 1
 --- !u!224 &1279984973 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4564194552785571622, guid: 962430e86e223c04c80dc243a221a6ce, type: 3}
@@ -4812,7 +4873,7 @@ MonoBehaviour:
   actual: 1
   resultText: {fileID: 1507704851}
   hintText: {fileID: 381503116}
-  popup: {fileID: 1626518844}
+  popup: {fileID: 1275772332}
 --- !u!114 &1306172503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6305,7 +6366,6 @@ GameObject:
   - component: {fileID: 1626518842}
   - component: {fileID: 1626518841}
   - component: {fileID: 1626518840}
-  - component: {fileID: 1626518844}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -6391,7 +6451,7 @@ RectTransform:
   - {fileID: 2223386837237910519}
   - {fileID: 5817691164343764817}
   - {fileID: 1073729214}
-  - {fileID: 2101902912}
+  - {fileID: 1275772330}
   - {fileID: 1156961227}
   - {fileID: 981731852}
   - {fileID: 1882280198}
@@ -6405,20 +6465,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1626518844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1626518839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 782c125f4a170fe43a5e955e0df904a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  popupPanel: {fileID: 2101902909}
-  time: Infinity
 --- !u!1 &1635258772
 GameObject:
   m_ObjectHideFlags: 0
@@ -9255,12 +9301,12 @@ RectTransform:
   - {fileID: 1452449312}
   - {fileID: 1507704850}
   - {fileID: 381503115}
-  m_Father: {fileID: 1626518843}
+  m_Father: {fileID: 1275772330}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 800, y: 449.73856}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2101902913
 MonoBehaviour:
@@ -10314,6 +10360,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1626518843}
     m_Modifications:
+    - target: {fileID: 491771234123197616, guid: e4f6c27da9278df4b9d18797e10fabfc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 82.2
+      objectReference: {fileID: 0}
     - target: {fileID: 1489611181669950548, guid: e4f6c27da9278df4b9d18797e10fabfc, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -13228,7 +13278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563807809952944460, guid: 962430e86e223c04c80dc243a221a6ce, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -17.0115
+      value: -17.011505
       objectReference: {fileID: 0}
     - target: {fileID: 3563807809952944460, guid: 962430e86e223c04c80dc243a221a6ce, type: 3}
       propertyPath: m_AnchoredPosition.y
