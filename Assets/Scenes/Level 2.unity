@@ -4810,7 +4810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popupPanel: {fileID: 2101902909}
-  time: 5
+  time: 180
   oneTime: 1
 --- !u!224 &1279984973 stripped
 RectTransform:
