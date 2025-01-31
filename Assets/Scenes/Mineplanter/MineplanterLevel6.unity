@@ -849,7 +849,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: YOU WON!
+  m_text: Play cutscene to go back to desktop - minesweeper app now displays key
+    part
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2ff157666e4e2fd4196ecf958cb05974, type: 2}
   m_sharedMaterial: {fileID: 1566153623828171845, guid: 2ff157666e4e2fd4196ecf958cb05974, type: 2}

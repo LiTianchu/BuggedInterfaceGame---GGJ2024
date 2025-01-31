@@ -69,6 +69,7 @@ public class Mineplanter4 : Mineplanter1
             else
             {
                 levelClearPrompt.SetActive(true);
+                StartCoroutine(GoBackLevel());
             }
             Debug.Log("Input matches the MINES list!");
             // Add logic for when the input matches the MINES list
@@ -78,5 +79,11 @@ public class Mineplanter4 : Mineplanter1
             Debug.Log("Input does not match the MINES list.");
             // Add logic for when the input does not match the MINES list
         }
+    }
+
+    public IEnumerator GoBackLevel()
+    {
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene("Level 2");
     }
 }

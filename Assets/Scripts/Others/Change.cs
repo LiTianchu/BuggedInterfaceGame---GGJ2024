@@ -8,8 +8,8 @@ public class Change : MonoBehaviour
 {
     [SerializeField] string username;
     [SerializeField] string password;
-    [SerializeField] HackedInputField usernameField; 
-    [SerializeField] HackedInputField passwordField;
+    [SerializeField] TMP_InputField usernameField; 
+    [SerializeField] TMP_InputField passwordField;
     [SerializeField] GameObject deactivated;
     [SerializeField] GameObject activated;
     [SerializeField] GameObject spawnable;
@@ -36,6 +36,8 @@ public class Change : MonoBehaviour
     {
         if (respawn)
         {
+            //GameObject qrtemp = FindObjectOfType<CrumblingPieces>().gameObject;
+            //if (qrtemp != null) Destroy(qrtemp);
             GameObject qr = Instantiate(spawnable, spawnableParent.transform);
             qr.SetActive(true);
             FindObjectOfType<Money>().qr = qr;

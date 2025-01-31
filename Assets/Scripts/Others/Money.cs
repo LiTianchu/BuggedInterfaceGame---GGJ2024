@@ -13,6 +13,7 @@ public class Money : MonoBehaviour
     [SerializeField] TextMeshProUGUI amt;
     [SerializeField] TextMeshProUGUI stk;
     [SerializeField] GameObject win;
+    [SerializeField] GameObject win1;
     
     public TextMeshProUGUI success;
     public GameObject qr;
@@ -24,7 +25,8 @@ public class Money : MonoBehaviour
         if (price / stock == amount)
         {
             win.SetActive(true);
-            StartCoroutine(EndGame());
+            win.transform.SetAsLastSibling();
+            win1.SetActive(true);
         }
         else if (success != null) success.text = "Incorrect amount of MOGCOIN";
     }

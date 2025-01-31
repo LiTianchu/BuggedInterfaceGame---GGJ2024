@@ -5,16 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Prologue.unity
     guid: 7fff70c5e44062543afc51d8c3310552
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 4dc4bbc9e026f7f44aaff0394ceeb391
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Level 1.unity
     guid: e9b82951f89fa3c498b0864b8ea84c63
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Level 2.unity
     guid: ad76ba1b496c5da4eb783e56ddbb82b5
   - enabled: 0
@@ -23,7 +23,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Tianchu_Test.unity
     guid: a37947f6cce073643b359020bf592e02
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Paint Boss.unity
     guid: de0040c7429048446b439e64f2d78412
   - enabled: 1
