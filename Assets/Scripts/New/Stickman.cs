@@ -314,14 +314,12 @@ public class Stickman : MonoBehaviour
 
     public void ReduceHealth(int amount)
     {
-        if (!isImmune)
+        health -= amount;
+        if (health <= 0)
         {
-            health -= amount;
-            if (health <= 0)
-            {
-                GameOver();
-            }
+            Debug.Log("KEY GET!");
         }
+      
     }
 
     public void SetImmunity(float duration)
