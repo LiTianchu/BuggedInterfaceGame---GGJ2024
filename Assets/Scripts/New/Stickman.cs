@@ -265,7 +265,7 @@ public class Stickman : MonoBehaviour
             if (itemPrefabs != null)
             {
                 // Get a random item prefab
-                GameObject heartPrefab = itemPrefabs[1]; // Random.Range(0, itemPrefabs.Length)
+                GameObject heartPrefab = itemPrefabs[Random.Range(0, itemPrefabs.Length)]; 
 
                 // Calculate a random position within the bounds
                 float randomX = Random.Range(minBounds.x + stickmanSize.x / 2, maxBounds.x - stickmanSize.x / 2);
@@ -318,6 +318,11 @@ public class Stickman : MonoBehaviour
             yield return null;
         }
 
+        if (isImmune) DestroyImmunity();
+    }
+
+    public void DestroyImmunity() {
+        GameObject immunityImage = GameObject.Find("BarrierImage(Clone)");
         Destroy(immunityImage);
         isImmune = false;
     }
