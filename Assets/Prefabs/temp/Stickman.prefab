@@ -123,5 +123,14 @@ MonoBehaviour:
   - {fileID: 3238695360924647456, guid: 8efc6c5379346ce44b3cf0a4a0a8d7ba, type: 3}
   warningLinePrefab: {fileID: 3238695360924647456, guid: 8aa154047a494cc41b749726e8dbb82d, type: 3}
   immunityImagePrefab: {fileID: 3238695360924647456, guid: ae55b9a9a75d8204aa7b670d1912e1ca, type: 3}
+  cards:
+  - {fileID: 3238695360924647456, guid: 1714a2ca5ce2cfd4e90cd47b14c9ea65, type: 3}
+  - {fileID: 3238695360924647456, guid: 92ec70d27fd448743ad3124192bc641a, type: 3}
+  - {fileID: 3238695360924647456, guid: f2a836ed2ccf69b4f8cd23435c91ceb9, type: 3}
+  - {fileID: 3238695360924647456, guid: 26add40937ccc394cb3bd1a6c3471e1d, type: 3}
+  - {fileID: 3238695360924647456, guid: 26add40937ccc394cb3bd1a6c3471e1d, type: 3}
+  - {fileID: 3238695360924647456, guid: f2a836ed2ccf69b4f8cd23435c91ceb9, type: 3}
+  - {fileID: 3238695360924647456, guid: 92ec70d27fd448743ad3124192bc641a, type: 3}
+  - {fileID: 3238695360924647456, guid: 92ec70d27fd448743ad3124192bc641a, type: 3}
   health: 10
   attackInterval: 5

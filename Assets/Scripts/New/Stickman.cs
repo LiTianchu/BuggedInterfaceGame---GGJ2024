@@ -10,6 +10,7 @@ public class Stickman : MonoBehaviour
     public GameObject[] itemPrefabs; // Item prefabs
     public GameObject warningLinePrefab; // Warning line prefab
     public GameObject immunityImagePrefab; // Immunity image prefab
+    public GameObject[] cards;
 
     private RectTransform rectTransform;
     private Vector2 minBounds, maxBounds;
@@ -75,7 +76,7 @@ public class Stickman : MonoBehaviour
     void PerformAttack()
     {
         // Example attacks
-        int attackType = Random.Range(1, 3);
+        int attackType = Random.Range(1, 4);
         
         switch (attackType)
         {
@@ -86,6 +87,10 @@ public class Stickman : MonoBehaviour
             case 2:
                 // Attack 4: Vergil Judgment Cut
                 StartCoroutine(JudgmentCutEffect());
+                break;
+            case 3:
+                // Attack 5: Summon cards
+                StartCoroutine(SummonCards());
                 break;
         }
     }
@@ -239,6 +244,33 @@ public class Stickman : MonoBehaviour
         foreach (GameObject warningLine in warningLines)
         {
             Destroy(warningLine);
+        }
+    }
+
+    IEnumerator SummonCards()
+    {
+        float cardDuration = 3.0f;
+        float elapsedTime = 0;
+
+        while (elapsedTime < cardDuration)
+        {
+            // Get a random card prefab
+            GameObject cardPrefab = cards[Random.Range(0, cards.Length)];
+
+            // Calculate a random position within the bounds
+            float randomX = Random.Range(minBounds.x + stickmanSize.x / 2, maxBounds.x - stickmanSize.x / 2);
+            float notrandomY = maxBounds.y - stickmanSize.y / 2;
+            Vector2 randomPosition = new Vector2(randomX, notrandomY);
+            // convert random position to screen position
+            Vector2 screenPosition = Camera.main.WorldToScreenPoint(randomPosition);
+
+            // Instantiate the card
+            GameObject card = Instantiate(cardPrefab, screenPosition, Quaternion.identity, transform.parent);
+            RectTransform cardRect = card.GetComponent<RectTransform>();
+            cardRect.anchoredPosition = randomPosition;
+
+            elapsedTime += 0.2f;
+            yield return new WaitForSeconds(0.2f);
         }
     }
 

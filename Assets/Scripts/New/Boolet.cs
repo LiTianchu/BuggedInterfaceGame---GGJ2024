@@ -5,17 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class Boolet : MonoBehaviour
 {
-    private RectTransform rectTransform;
-    private Stickman stickman;
+    protected RectTransform rectTransform;
+    protected Stickman stickman;
     public bool harmful = true;
 
-    void Start()
+    protected virtual void Start()
     {
         rectTransform = GetComponent<RectTransform>();
         stickman = FindObjectOfType<Stickman>();
     }
 
-    void Update()
+    protected virtual void Update()
     {
         // Check for cursor collision
         if (IsCursorColliding() && harmful && !stickman.IsImmune())
@@ -25,7 +25,7 @@ public class Boolet : MonoBehaviour
         }
     }
 
-    bool IsCursorColliding()
+    protected virtual bool IsCursorColliding()
     {
         Vector2 cursorPosition = Input.mousePosition;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
@@ -38,7 +38,7 @@ public class Boolet : MonoBehaviour
         return rectTransform.rect.Contains(localCursorPosition);
     }
 
-    void GameOver()
+    protected virtual void GameOver()
     {
         // Reload the scene or handle game over logic
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
