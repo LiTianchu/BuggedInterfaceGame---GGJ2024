@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class Zerg : MonoBehaviour
 {
+    [SerializeField] private SpriteRenderer zergSpriteRenderer;
     [ShowInInspector, PropertyRange(0, 100)]
     [SerializeField] private int zergHp = 5;
     [ShowInInspector, PropertyRange(0, 100)]
@@ -22,6 +24,8 @@ public class Zerg : MonoBehaviour
     void Start()
     {
         _timeElapsed = zergAttackRate;
+        zergSpriteRenderer.sortingOrder = 1;
+        FileSystemLevelManager.Instance.OnFileSystemLayoutChanged += ResetTarget;
     }
 
     // Update is called once per frame
@@ -36,6 +40,10 @@ public class Zerg : MonoBehaviour
         {
             ChaseAndAttack();
         }
+    }
+
+    public void ResetTarget(){
+        _targetFile = null;
     }
 
     public void FindTarget()
@@ -79,7 +87,25 @@ public class Zerg : MonoBehaviour
 
     }
 
-    private void OnMouseDown() {
-        Debug.Log("Zerg Clicked");
+    public void TakeDamage(int damage)
+    {
+        zergHp -= damage;
+
+        //flash color
+        DOTween.Sequence()
+         .Append(zergSpriteRenderer.material.DOColor(Color.red, 0.05f))
+         .Append(zergSpriteRenderer.material.DOColor(Color.black, 0.05f))
+         .Append(zergSpriteRenderer.material.DOColor(Color.white, 0.01f));
+
+         //shake
+        this.transform.DOShakePosition(0.1f, 0.1f, 10, 90, false, true);
+
+
+        if (zergHp <= 0)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
+
+  
 }

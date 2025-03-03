@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -14,9 +13,13 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
     [ShowInInspector, PropertyRange(0.1, 10)]
     [SerializeField] private float zergSpawnRate = 1.0f;
     [SerializeField] private Zerg zergPrefab;
+    [SerializeField] private Transform zergParent;
+    [SerializeField] private LayerMask zergLayer;
 
-    private float _timeElapsed ;
+    private float _timeElapsed;
     private int _zergCount;
+    private Camera _mainCamera;
+
 
     public List<FileSystemFile> Files { get => files; set => files = value; }
     public List<FileSystemFile> ActiveFiles
@@ -35,11 +38,22 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
         }
     }
 
+    public event System.Action OnFileSystemLayoutChanged;
+
 
     // Start is called before the first frame update
     void Start()
     {
         _timeElapsed = zergSpawnRate;
+        _mainCamera = Camera.main;
+
+        foreach (FileSystemFile file in files)
+        {
+            file.GetComponent<DraggableWorldSpace>().OnDropped += () =>
+            {
+                OnFileSystemLayoutChanged?.Invoke(); // propagate the event when file changed position
+            };
+        }
     }
 
     // Update is called once per frame
@@ -51,6 +65,18 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
             SpawnZerg();
             _timeElapsed = 0.0f;
         }
+
+        if (Input.GetMouseButtonDown(0)) // left mouse button
+        {
+            Vector2 mousePosition = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, Mathf.Infinity, zergLayer);
+
+            if (hit.collider != null)
+            {
+                //Debug.Log("Clicked on: " + hit.collider.gameObject.name);
+                hit.collider.gameObject.GetComponent<Zerg>().TakeDamage(1);
+            }
+        }
     }
 
 
@@ -59,6 +85,7 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
         // get a random point outside the grid
         Vector2 spawnPoint = GetRandomPointOutsideBox(gridSystem.GridLowerLeft, gridSystem.GridUpperRight, 5.0f);
         Zerg zerg = Instantiate(zergPrefab, spawnPoint, Quaternion.identity);
+        zerg.transform.SetParent(zergParent);
         _zergCount++;
     }
 
