@@ -42,12 +42,12 @@ public class DraggableWorldSpace : MonoBehaviour
         {
             DropObject();
         }
-        //Debug.Log(CurrentDropArea?.CurrentDraggable == null);
+        
         if (_currentDropArea == null)
         {
             Collider2D[] hitInfo = GetSurroundingDropArea();
             Collider2D nearestDropArea = DetectNearestDropArea(hitInfo);
-            DropArea nearestDropAreaComponent = null;
+            DropArea nearestDropAreaComponent;
             if (nearestDropArea != null)
             {
                 nearestDropAreaComponent = nearestDropArea.GetComponent<DropArea>();
