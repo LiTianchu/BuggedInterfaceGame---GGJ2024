@@ -1,3 +1,4 @@
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -19,6 +20,8 @@ public class DraggableWorldSpace : MonoBehaviour
 
     public DropArea CurrentDropArea { get => _currentDropArea; }
     public GridSystem DraggableAreaObj { get => draggableAreaObj; }
+
+    public event Action OnDropped;
     void Awake()
     {
         _collider2d = GetComponent<Collider2D>();
@@ -36,18 +39,19 @@ public class DraggableWorldSpace : MonoBehaviour
         }
         
     }
+
     private void Update()
     {
         if(!_isInitialized)
         {
             DropObject();
         }
-        //Debug.Log(CurrentDropArea?.CurrentDraggable == null);
+
         if (_currentDropArea == null)
         {
             Collider2D[] hitInfo = GetSurroundingDropArea();
             Collider2D nearestDropArea = DetectNearestDropArea(hitInfo);
-            DropArea nearestDropAreaComponent = null;
+            DropArea nearestDropAreaComponent;
             if (nearestDropArea != null)
             {
                 nearestDropAreaComponent = nearestDropArea.GetComponent<DropArea>();
@@ -58,6 +62,7 @@ public class DraggableWorldSpace : MonoBehaviour
             }
         }
     }
+
     private void OnMouseDown()
     {
         if (!isDraggable)
@@ -89,6 +94,7 @@ public class DraggableWorldSpace : MonoBehaviour
         }
         transform.position = newPos;
     }
+
     private void OnMouseUp()
     {
         if (!isDraggable)
@@ -97,6 +103,7 @@ public class DraggableWorldSpace : MonoBehaviour
         }
         GetComponent<SpriteRenderer>().sortingOrder = 1;
         DropObject();   
+        OnDropped?.Invoke();
     }
 
     public void DropObject(){
@@ -157,7 +164,6 @@ public class DraggableWorldSpace : MonoBehaviour
         Collider2D[] hitInfo = Physics2D.OverlapBoxAll(transform.position, _collider2d.bounds.size, 0f, dropAreaLayer.value);
 
         return hitInfo;
-
     }
 
     private void BindDropArea(DropArea dropArea)

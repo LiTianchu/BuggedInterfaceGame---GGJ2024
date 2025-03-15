@@ -31,8 +31,10 @@ public class GridSystem : MonoBehaviour, IDraggableArea
     [SerializeField] private Material gridBoundariesMaterial;
     // Start is called before the first frame update
 
-    public int HSize{get; set;}
-    public int VSize{get; set;}
+    public Vector2 GridLowerLeft { get => gridLowerLeft; set => gridLowerLeft = value; }
+    public Vector2 GridUpperRight { get => gridUpperRight; set => gridUpperRight = value; }
+    public int HSize{get; set;} // num of grids in horizontal direction
+    public int VSize{get; set;} // num of grids in vertical direction
     public List<Grid> Grids { get; set; } = new List<Grid>();
 
     void Start()
