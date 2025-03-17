@@ -1501,7 +1501,7 @@ MonoBehaviour:
   amt: {fileID: 1685853477}
   stk: {fileID: 1870246880}
   win: {fileID: 429115674}
-  win1: {fileID: 1585091863}
+  win1: {fileID: 421330238}
   success: {fileID: 0}
   qr: {fileID: 0}
 --- !u!4 &190051984
@@ -2726,7 +2726,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &421330239
 RectTransform:
   m_ObjectHideFlags: 0
