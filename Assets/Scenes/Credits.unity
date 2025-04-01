@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -590,7 +589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b141a0058860b4699f0e0f95bcf2a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: MainMenu
+  sceneName: StartMenu
   fadeOverlay: {fileID: 647234566}
   fadeDuration: 1
 --- !u!1001 &1067702771
@@ -734,7 +733,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2039
 --- !u!114 &1493847718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1583,7 +1582,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 7692537243821546795}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.32142857
+  m_Size: 0.3211761
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
