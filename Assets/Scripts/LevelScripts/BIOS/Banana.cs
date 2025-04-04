@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Banana : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class Banana : MonoBehaviour
     public float timeInterval = 0.5f;
     public GameObject steamAchievement;
     public GameObject optionsMenu;
+    public GameObject graphics;
+    public GameObject coinPrefab;
     public AudioClip bananaSound;
     public AudioClip bananaSound2;
     public AudioSource audioSource;
@@ -66,5 +69,20 @@ public class Banana : MonoBehaviour
     public void ActivateOptions()
     {
         optionsMenu.SetActive(true);
+    }
+
+    public void ActivateGraphics()
+    {
+        graphics.SetActive(true);
+        coinPrefab.SetActive(true);
+    }
+
+    public void GoBackToMainMenu()
+    {
+        SceneManager.LoadScene("StartMenu");
+    }
+
+    public void GetCoin() {
+        Debug.Log("Coin collected!");
     }
 }
