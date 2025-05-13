@@ -259,7 +259,7 @@ public class Stickman : MonoBehaviour
 
             // Calculate a random position within the bounds
             float randomX = Random.Range(minBounds.x + stickmanSize.x / 2, maxBounds.x - stickmanSize.x / 2);
-            float notrandomY = maxBounds.y - stickmanSize.y / 2;
+            float notrandomY = maxBounds.y + stickmanSize.y;
             Vector2 randomPosition = new Vector2(randomX, notrandomY);
             // convert random position to screen position
             Vector2 screenPosition = Camera.main.WorldToScreenPoint(randomPosition);

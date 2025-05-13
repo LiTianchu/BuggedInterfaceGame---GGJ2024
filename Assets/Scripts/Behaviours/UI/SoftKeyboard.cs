@@ -123,7 +123,7 @@ public class SoftKeyboard : Singleton<SoftKeyboard>
         _targetedInputField.AppendCharacter(v.ToLower());
 
         hiddenInput += v;
-        if (hiddenInput == printScreen)
+        if (hiddenInput.ToLower() == printScreen.ToLower())
         {
             Debug.Log("Print Screen");
             StartCoroutine(FlashEffect());

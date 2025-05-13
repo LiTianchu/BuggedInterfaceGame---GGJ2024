@@ -4414,6 +4414,10 @@ PrefabInstance:
       propertyPath: windowList.Array.data[1]
       value: 
       objectReference: {fileID: 144136558}
+    - target: {fileID: 1596446439750000721, guid: c862cedc9c3138c43948599a653277dd, type: 3}
+      propertyPath: m_text
+      value: Paint without the T
+      objectReference: {fileID: 0}
     - target: {fileID: 1766674125794934239, guid: c862cedc9c3138c43948599a653277dd, type: 3}
       propertyPath: canvas
       value: 
