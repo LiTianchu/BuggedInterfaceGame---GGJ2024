@@ -41,4 +41,16 @@ public class GameManager : GlobalSingleton<GameManager>
         Application.Quit();
     }
 
+    public string GenerateCode()
+    {
+        string code = string.Empty;
+        //generate a random code of 10 characters
+        for (int i = 0; i < 10; i++)
+        {
+            int randomNumber = Random.Range(10, 36);
+            code += ((char)(randomNumber + 87)).ToString(); // a=10, b=11, ..., z=35
+        }
+        return code;
+    }
+
 }
