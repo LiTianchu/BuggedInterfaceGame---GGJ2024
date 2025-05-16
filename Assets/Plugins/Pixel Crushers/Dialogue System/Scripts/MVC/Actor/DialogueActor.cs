@@ -28,7 +28,7 @@ namespace PixelCrushers.DialogueSystem
         /// If blank, uses the override name.
         /// </summary>
         [Tooltip("Name used when saving persistent data. If blank, use actor name.")]
-        [UnityEngine.Serialization.FormerlySerializedAs("internalName")]        
+        [UnityEngine.Serialization.FormerlySerializedAs("internalName")]
         public string persistentDataName;
 
         [Tooltip("Optional portrait. If unassigned, will use portrait of actor in database. This field allows you to assign a Texture.")]
@@ -117,8 +117,19 @@ namespace PixelCrushers.DialogueSystem
                 // Instantiate bark UI from prefab:
                 var go = Instantiate(barkUISettings.barkUI.gameObject) as GameObject;
                 go.transform.SetParent(transform);
-                go.transform.localPosition = barkUISettings.barkUIOffset;
-                go.transform.localRotation = Quaternion.identity;
+
+                // if (barkUISettings.screenSpaceBarkUI)
+                // {
+                //     go.GetComponent<RectTransform>().anchoredPosition += new Vector2(barkUISettings.barkUIOffset.x, barkUISettings.barkUIOffset.y);
+                //     go.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0.5f);
+                //     go.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 0.5f);
+                //     go.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
+                // }
+                // else
+                // {
+                    go.transform.localPosition = barkUISettings.barkUIOffset;
+                    go.transform.localRotation = Quaternion.identity;
+                //}
                 barkUISettings.barkUI = go.GetComponent<AbstractBarkUI>();
             }
         }
