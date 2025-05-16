@@ -1,0 +1,47 @@
+Textline Release Notes
+
+2022-05-08:
+- TextlineDialogueUI now uses Dialogue System's built-in SMSDialogueUI.
+- Added option when resuming to play last entry's sequence but without audio.
+- Updated Lobby example.
+
+2019-10-09:
+- Changed the configuration of the Start Conversation GameObject in "3 Gameplay" to
+  prevent conversation's first entry from playing its sequence when resuming game.
+  See Editor Note component on Start Conversation GameObject for details.
+- TextlineDialogueUI now sends sequencer messages Received and Sent.
+- Enhanced Scroller: Bug fixes to allow different-sized cells and other corrections.
+
+2019-01-30:
+- Clarified instructions on Multiple Conversations.
+
+2019-01-14:
+- Textline clears records when conversation closes to better support multiple conversations.
+
+2018-12-28:
+- Added MenuUtility.SaveAndStopConversation.
+
+2018-10-16:
+- Added smooth scroll.
+- Added optional pre-delay icon (e.g., '...' typing icon).
+
+2018-07-29:
+- Allows return to final node even when its sequence is not exactly "WaitForMessage(Forever)".
+- Supports multiple conversations (e.g., lobby or conversation-selection menu).
+- Fixed: Now uses correct localization when resuming conversation.
+
+2018-07-20:
+- Updated to use Standard Dialogue UI, which adds TextMesh Pro support.
+
+2018-07-15:
+- Updated for Dialogue System for Unity 2.x.
+
+2018-02-26:
+- When reloading/changing scenes, no longer replays last entry’s sequence.
+- Made AutoSaveLoad compatible with Pre Delay.
+
+2018-02-20:
+- Added optional pre-delay for NPC & PC subtitles.
+
+2017-11-11:
+- Fixed: UI now auto-scrolls as new lines appear.
