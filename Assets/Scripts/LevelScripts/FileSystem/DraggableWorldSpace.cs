@@ -111,7 +111,7 @@ public class DraggableWorldSpace : MonoBehaviour
         if (nearestDropArea != null)
         {
             _isInitialized = true;
-            transform.position = nearestDropArea.transform.position + new Vector3(0, 0, -1f);
+            transform.position = nearestDropArea.transform.position + new Vector3(0, 0, 0);
             BindDropArea(nearestDropArea.GetComponent<DropArea>());
         }
     }

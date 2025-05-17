@@ -431,8 +431,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 199.39871, y: -44.03929}
-  m_SizeDelta: {x: 398.79742, y: 0}
+  m_AnchoredPosition: {x: 198.99002, y: -46.183098}
+  m_SizeDelta: {x: 397.98004, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &369401767
 MonoBehaviour:
@@ -2088,7 +2088,6 @@ MonoBehaviour:
   barkUISettings:
     barkUI: {fileID: 11426712, guid: 21b4828b943afef4896267f31f98ee1a, type: 3}
     barkUIOffset: {x: 0, y: 0, z: 0}
-    screenSpaceBarkUI: 0
   standardDialogueUISettings:
     subtitlePanelNumber: 0
     customSubtitlePanel: {fileID: 0}
@@ -2953,8 +2952,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 199.39871, y: 0}
-  m_SizeDelta: {x: 398.79742, y: 0}
+  m_AnchoredPosition: {x: 198.99002, y: 0}
+  m_SizeDelta: {x: 397.98004, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1561462343
 MonoBehaviour:
@@ -3113,7 +3112,7 @@ GameObject:
   - component: {fileID: 1664719175}
   - component: {fileID: 1664719174}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3652,7 +3651,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 125852, guid: 58ac37417e60e534f91138088a3e6f70, type: 3}
       propertyPath: m_Name
-      value: Dialogue Manager
+      value: LLMDialogueManager
       objectReference: {fileID: 0}
     - target: {fileID: 425660, guid: 58ac37417e60e534f91138088a3e6f70, type: 3}
       propertyPath: m_LocalPosition.x

@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
 {
     [TitleGroup("Level Settings")]
     [SerializeField] private GridSystem gridSystem;
     [SerializeField] private List<FileSystemFile> files;
+
     [TitleGroup("Zerg Settings")]
     [ShowInInspector, PropertyRange(0, 100)]
     [SerializeField] private int maxZergCount = 50;
@@ -15,13 +17,20 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
     [SerializeField] private Zerg zergPrefab;
     [SerializeField] private Transform zergParent;
     [SerializeField] private LayerMask zergLayer;
+    [SerializeField] private BulletSpawner bulletSpawner;
+
+
 
     private float _timeElapsed;
     private int _zergCount;
     private Camera _mainCamera;
 
 
-    public List<FileSystemFile> Files { get => files; set => files = value; }
+
+
+    public List<FileSystemFile> Files { get => files;}
+    public BulletSpawner BulletSpawner { get => bulletSpawner;}
+    public int ZergCount { get => _zergCount;}
     public List<FileSystemFile> ActiveFiles
     {
         get
@@ -120,4 +129,7 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
     }
 
 
+    // object pools
+    private ObjectPool<Zerg> _smallZergPool;
+    private ObjectPool<Zerg> _bigZergPool;
 }
