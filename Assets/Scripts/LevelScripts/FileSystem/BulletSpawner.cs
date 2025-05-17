@@ -44,6 +44,7 @@ public class BulletSpawner : MonoBehaviour
         bullet.transform.position = position;
         bullet.transform.rotation = rotation;
         bullet.Initialize(damage, speed, target, _turretBulletPool);
+        bullet.transform.SetParent(transform);
         return bullet;
     }
 
