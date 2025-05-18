@@ -1785,7 +1785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  fireRate: 1
+  fireRate: 0.01
   range: 5
   bulletSpeed: 10
   firePoint: {fileID: 1492987691}
@@ -2199,8 +2199,8 @@ MonoBehaviour:
   - {fileID: 730649090}
   - {fileID: 1754906834}
   - {fileID: 1316699582}
-  maxZergCount: 50
-  zergSpawnRate: 1
+  maxZergCount: 1000
+  zergSpawnRate: 0.01
   zergPrefab: {fileID: 5300704090005743820, guid: 3e14f770b1791b94e9693ccab9054bfa, type: 3}
   zergParent: {fileID: 95669137}
   zergLayer:

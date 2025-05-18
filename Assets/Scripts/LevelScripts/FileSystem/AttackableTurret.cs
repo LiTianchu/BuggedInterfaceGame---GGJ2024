@@ -9,12 +9,12 @@ public class AttackableTurret : TurretFile
     [SerializeField] private float bulletSpeed = 10f;
     [SerializeField] private Transform firePoint;
     [SerializeField] private LayerMask targetLayer;
-    
+
 
     private float nextFireTime = 0f;
     private void Update()
     {
-        Fire();   
+        Fire();
     }
 
     public override void Fire()
@@ -34,19 +34,22 @@ public class AttackableTurret : TurretFile
         FileSystemLevelManager.Instance.BulletSpawner.SpawnNormalBullet(firePoint.position, Quaternion.identity,
             damage, bulletSpeed, target);
     }
-    
+
     private Transform GetTarget()
     {
         // find the closest target within range
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, range, targetLayer);
         foreach (Collider2D hitCollider in hitColliders)
         {
-            return hitCollider.transform;
+            if (hitCollider.GetComponent<Zerg>().IsAlive())
+            {
+                return hitCollider.transform;
+            }
         }
         return null;
     }
 
     public override void OnDeploy() { }
 
-    public override void OnDestroy(){}
+    public override void OnDestroy() { }
 }
