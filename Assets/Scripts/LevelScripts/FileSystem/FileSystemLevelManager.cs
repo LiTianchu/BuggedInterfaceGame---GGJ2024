@@ -10,9 +10,7 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
     [SerializeField] private List<FileSystemFile> files;
 
     [TitleGroup("Zerg Settings")]
-    [ShowInInspector, PropertyRange(0, 100)]
     [SerializeField] private int maxZergCount = 50;
-    [ShowInInspector, PropertyRange(0.1, 10)]
     [SerializeField] private float zergSpawnRate = 1.0f;
     [SerializeField] private Zerg zergPrefab;
     [SerializeField] private Transform zergParent;
@@ -28,9 +26,9 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
 
 
 
-    public List<FileSystemFile> Files { get => files;}
-    public BulletSpawner BulletSpawner { get => bulletSpawner;}
-    public int ZergCount { get => _zergCount;}
+    public List<FileSystemFile> Files { get => files; }
+    public BulletSpawner BulletSpawner { get => bulletSpawner; }
+    public int ZergCount { get => _zergCount; }
     public List<FileSystemFile> ActiveFiles
     {
         get
@@ -63,6 +61,8 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
                 OnFileSystemLayoutChanged?.Invoke(); // propagate the event when file changed position
             };
         }
+
+        CreateZergPools();
     }
 
     // Update is called once per frame
@@ -92,16 +92,19 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
     public void SpawnZerg()
     {
         // get a random point outside the grid
-        Vector2 spawnPoint = GetRandomPointOutsideBox(gridSystem.GridLowerLeft, gridSystem.GridUpperRight, 5.0f);
-        Zerg zerg = Instantiate(zergPrefab, spawnPoint, Quaternion.identity);
+        Vector2 spawnPoint = GetRandomPointOutsideBox(gridSystem.GridLowerLeft, gridSystem.GridUpperRight, 5f,10f);
+        Zerg zerg = _smallZergPool.Get();
+        zerg.transform.position = spawnPoint;
+        zerg.transform.rotation = Quaternion.identity;
         zerg.transform.SetParent(zergParent);
+        zerg.Initialize(_smallZergPool);
         _zergCount++;
     }
 
-    public Vector2 GetRandomPointOutsideBox(Vector2 lowerLeft, Vector2 upperRight, float minOffset)
+    public Vector2 GetRandomPointOutsideBox(Vector2 lowerLeft, Vector2 upperRight, float minOffset,float maxOffset)
     {
         float randNum = Random.Range(0, 1.0f);
-        float randomOffset = Random.Range(0, minOffset);
+        float randomOffset = Random.Range( minOffset,maxOffset);
         float x;
         float y;
         if (randNum < 0.25f)
@@ -132,4 +135,38 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
     // object pools
     private ObjectPool<Zerg> _smallZergPool;
     private ObjectPool<Zerg> _bigZergPool;
+
+    private void CreateZergPools()
+    {
+        _smallZergPool = new ObjectPool<Zerg>(
+            CreateSmallZerg,
+            OnTakeSmallZergFromPool,
+            OnReturnSmallZergToPool,
+            OnDestroySmallZerg,
+            false,
+            10, // initial size
+            1000 // max size
+        );
+    }
+
+    private Zerg CreateSmallZerg()
+    {
+        Zerg zerg = Instantiate(zergPrefab);
+        return zerg;
+    }
+
+    private void OnTakeSmallZergFromPool(Zerg zerg)
+    {
+        zerg.gameObject.SetActive(true);
+    }
+
+    private void OnReturnSmallZergToPool(Zerg zerg)
+    {
+        zerg.gameObject.SetActive(false);
+    }
+
+    private void OnDestroySmallZerg(Zerg zerg)
+    {
+        Destroy(zerg.gameObject);
+    }
 }

@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using PixelCrushers.DialogueSystem;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Zerg : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer zergSpriteRenderer;
     [ShowInInspector, PropertyRange(0, 100)]
-    [SerializeField] private int zergHp = 5;
+    [SerializeField] private int zergMaxHp = 5;
     [ShowInInspector, PropertyRange(0, 100)]
     [SerializeField] private int zergDamage = 1;
     [ShowInInspector, PropertyRange(0, 100)]
@@ -18,8 +20,10 @@ public class Zerg : MonoBehaviour
     [ShowInInspector, PropertyRange(0, 10)]
     [SerializeField] private float zergAttackRate = 1.0f;
 
+    private int _zergHp;
     private FileSystemFile _targetFile;
     private float _timeElapsed = 0.0f;
+    private ObjectPool<Zerg> _pool;
 
     void Start()
     {
@@ -42,7 +46,15 @@ public class Zerg : MonoBehaviour
         }
     }
 
-    public void ResetTarget(){
+    public void Initialize(ObjectPool<Zerg> pool)
+    {
+        _pool = pool;
+        _zergHp = zergMaxHp;
+        zergSpriteRenderer.color = Color.white;
+    }
+
+    public void ResetTarget()
+    {
         _targetFile = null;
     }
 
@@ -89,7 +101,12 @@ public class Zerg : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        zergHp -= damage;
+        if (_zergHp <= 0)
+        {
+            return;
+        }
+
+        _zergHp -= damage;
 
         //flash color
         DOTween.Sequence()
@@ -97,14 +114,25 @@ public class Zerg : MonoBehaviour
          .Append(zergSpriteRenderer.material.DOColor(Color.black, 0.05f))
          .Append(zergSpriteRenderer.material.DOColor(Color.white, 0.01f));
 
-         //shake
+        //shake
         this.transform.DOShakePosition(0.1f, 0.1f, 10, 90, false, true);
 
 
-        if (zergHp <= 0)
+        if (_zergHp <= 0)
         {
-            this.gameObject.SetActive(false);
+            //play death animation
+            zergSpriteRenderer.DOFade(0.0f, 0.3f).OnComplete(() =>
+            {
+                _pool.Release(this);
+               Debug.Log("Zerg is dead");
+            
+            });
         }
+    }
+    
+    public bool IsAlive()
+    {
+        return _zergHp > 0;
     }
 
   
