@@ -19,6 +19,10 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
     [SerializeField] private LayerMask zergLayer;
     [SerializeField] private BulletSpawner bulletSpawner;
 
+    [TitleGroup("Containers")]
+    [SerializeField] private Transform fileContainer;
+    [SerializeField] private Transform zergContainer;
+
 
 
     private float _smallZergSpawnTimeElapsed;
@@ -153,6 +157,13 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
         }
 
         return new Vector2(x, y);
+    }
+
+    public void AddFile(FileSystemFile file)
+    {
+        files.Add(file);
+        file.gameObject.SetActive(true);
+        file.transform.SetParent(fileContainer);
     }
 
 

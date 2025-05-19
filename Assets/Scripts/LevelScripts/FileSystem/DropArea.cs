@@ -14,18 +14,32 @@ public class DropArea : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private Color _defaultColor;
     private DraggableWorldSpace _currentDraggable;
-    public DraggableWorldSpace CurrentDraggable { get => _currentDraggable; set => _currentDraggable = value;}
-    private void Awake() {
+    public DraggableWorldSpace CurrentDraggable { get => _currentDraggable; set => _currentDraggable = value; }
+    private void Awake()
+    {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _defaultColor = _spriteRenderer.color;
     }
 
-    public void Highlight(){
-        _spriteRenderer.color = highlightColor;
+    public void Highlight(Color? customColor = null)
+    {
+        if (customColor.HasValue)
+        {
+            _spriteRenderer.color = customColor.Value;
+        }
+        else
+        {
+            _spriteRenderer.color = highlightColor;
+        }
     }
 
     internal void NormalColor()
     {
         _spriteRenderer.color = _defaultColor;
+    }
+
+    public override string ToString()
+    {
+        return $"DropArea: {gameObject.name}";
     }
 }
