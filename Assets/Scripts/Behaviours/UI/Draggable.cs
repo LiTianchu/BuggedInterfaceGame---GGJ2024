@@ -20,6 +20,8 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
 
     public event Action OnDragBegin;
     public event Action OnDragEnd;
+    public event Action OnDragUpdate;
+
     public void Awake()
     {
         _mainCamera = Camera.main;
@@ -55,6 +57,8 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
                 newPos.y = 0;
             _rectTransform.DOAnchorPos(newPos, 0.5f);
         }
+        HandleDrag();
+        OnDragUpdate?.Invoke();
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -88,4 +92,5 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
     //to be used by children objects to define extra operations when dragging
     protected virtual void HandleBeginDrag() { }
     protected virtual void HandleEndDrag() { }
+    protected virtual void HandleDrag() { }
 }
