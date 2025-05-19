@@ -1,21 +1,26 @@
 using System;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 //This is a class controls the dragging behaviour of UI object
 //Attach this to a UI object and assign the UI's canvas to the canvas field
+//Need to set the canvas to world space overlay
 public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
 
-    [SerializeField]
+    [Required]
     [Tooltip("The canvas that this UI component belongs to")]
+    [SerializeField]
     private Canvas canvas;
     private RectTransform _rectTransform;
     private Camera _mainCamera;
     private RectTransform _canvasRect;
-    //private Transform _parent;
-    private void Awake()
+
+    public event Action OnDragBegin;
+    public event Action OnDragEnd;
+    public void Awake()
     {
         _mainCamera = Camera.main;
         _rectTransform = GetComponent<RectTransform>();
@@ -26,6 +31,7 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
     {
         //call begin drag procedure
         HandleBeginDrag();
+        OnDragBegin?.Invoke();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -39,7 +45,7 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
             Vector2 pos = _rectTransform.anchoredPosition;
             Vector2 canvasSize = _canvasRect.sizeDelta;
             Vector2 newPos = new(pos.x, pos.y);
-            if (pos.x <  - canvasSize.x / 2) // if object at left
+            if (pos.x < -canvasSize.x / 2) // if object at left
                 newPos.x = 0;
             if (pos.x > canvasSize.x / 2) // if object at right
                 newPos.x = 0;
@@ -55,6 +61,7 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
     {
         //call end drag procedure
         HandleEndDrag();
+        OnDragEnd?.Invoke();
     }
 
     public void OnPointerDown(PointerEventData eventData)

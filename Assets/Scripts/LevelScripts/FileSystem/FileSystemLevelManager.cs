@@ -11,15 +11,18 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
 
     [TitleGroup("Zerg Settings")]
     [SerializeField] private int maxZergCount = 50;
-    [SerializeField] private float zergSpawnRate = 1.0f;
-    [SerializeField] private Zerg zergPrefab;
+    [SerializeField] private float smallZergSpawnRate = 1.0f;
+    [SerializeField] private float bigZergSpawnRate = 5.0f;
+    [SerializeField] private Zerg smallZergPrefab;
+    [SerializeField] private Zerg bigZergPrefab;
     [SerializeField] private Transform zergParent;
     [SerializeField] private LayerMask zergLayer;
     [SerializeField] private BulletSpawner bulletSpawner;
 
 
 
-    private float _timeElapsed;
+    private float _smallZergSpawnTimeElapsed;
+    private float _bigZergSpawnTimeElapsed;
     private int _zergCount;
     private Camera _mainCamera;
 
@@ -51,7 +54,8 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
     // Start is called before the first frame update
     void Start()
     {
-        _timeElapsed = zergSpawnRate;
+        _smallZergSpawnTimeElapsed = smallZergSpawnRate;
+        _bigZergSpawnTimeElapsed = bigZergSpawnRate;
         _mainCamera = Camera.main;
 
         foreach (FileSystemFile file in files)
@@ -68,11 +72,21 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
     // Update is called once per frame
     void Update()
     {
-        _timeElapsed += Time.deltaTime;
-        if (_timeElapsed >= zergSpawnRate && _zergCount < maxZergCount)
+        _smallZergSpawnTimeElapsed += Time.deltaTime;
+        _bigZergSpawnTimeElapsed += Time.deltaTime;
+
+        // spawn small zergs
+        if (_smallZergSpawnTimeElapsed >= smallZergSpawnRate && _zergCount < maxZergCount)
         {
             SpawnZerg();
-            _timeElapsed = 0.0f;
+            _smallZergSpawnTimeElapsed = 0.0f;
+        }
+
+        // spawn big zergs
+        if (_bigZergSpawnTimeElapsed >= bigZergSpawnRate && _zergCount < maxZergCount)
+        {
+            SpawnZerg(ZergTypeEnum.Big);
+            _bigZergSpawnTimeElapsed = 0.0f;
         }
 
         if (Input.GetMouseButtonDown(0)) // left mouse button
@@ -89,22 +103,32 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
     }
 
 
-    public void SpawnZerg()
+    public void SpawnZerg(ZergTypeEnum zergType = ZergTypeEnum.Small)
     {
         // get a random point outside the grid
-        Vector2 spawnPoint = GetRandomPointOutsideBox(gridSystem.GridLowerLeft, gridSystem.GridUpperRight, 5f,10f);
-        Zerg zerg = _smallZergPool.Get();
-        zerg.transform.position = spawnPoint;
-        zerg.transform.rotation = Quaternion.identity;
+        Vector2 spawnPoint = GetRandomPointOutsideBox(gridSystem.GridLowerLeft, gridSystem.GridUpperRight, 5f, 10f);
+        Zerg zerg = null;
+        switch (zergType)
+        {
+            case ZergTypeEnum.Small:
+                zerg = _smallZergPool.Get();
+                zerg.Initialize(_smallZergPool);
+                break;
+            case ZergTypeEnum.Big:
+                zerg = _bigZergPool.Get();
+                zerg.Initialize(_bigZergPool);
+                break;
+        }
+
+        zerg.transform.SetPositionAndRotation(spawnPoint, Quaternion.identity);
         zerg.transform.SetParent(zergParent);
-        zerg.Initialize(_smallZergPool);
         _zergCount++;
     }
 
-    public Vector2 GetRandomPointOutsideBox(Vector2 lowerLeft, Vector2 upperRight, float minOffset,float maxOffset)
+    public Vector2 GetRandomPointOutsideBox(Vector2 lowerLeft, Vector2 upperRight, float minOffset, float maxOffset)
     {
         float randNum = Random.Range(0, 1.0f);
-        float randomOffset = Random.Range( minOffset,maxOffset);
+        float randomOffset = Random.Range(minOffset, maxOffset);
         float x;
         float y;
         if (randNum < 0.25f)
@@ -140,9 +164,19 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
     {
         _smallZergPool = new ObjectPool<Zerg>(
             CreateSmallZerg,
-            OnTakeSmallZergFromPool,
-            OnReturnSmallZergToPool,
-            OnDestroySmallZerg,
+            OnTakeZergFromPool,
+            OnReturnZergToPool,
+            OnDestroyZerg,
+            false,
+            10, // initial size
+            1000 // max size
+        );
+
+        _bigZergPool = new ObjectPool<Zerg>(
+            CreateBigZerg,
+            OnTakeZergFromPool,
+            OnReturnZergToPool,
+            OnDestroyZerg,
             false,
             10, // initial size
             1000 // max size
@@ -151,22 +185,34 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
 
     private Zerg CreateSmallZerg()
     {
-        Zerg zerg = Instantiate(zergPrefab);
+        Zerg zerg = Instantiate(smallZergPrefab);
         return zerg;
     }
 
-    private void OnTakeSmallZergFromPool(Zerg zerg)
+    private Zerg CreateBigZerg()
+    {
+        Zerg zerg = Instantiate(bigZergPrefab);
+        return zerg;
+    }
+
+    private void OnTakeZergFromPool(Zerg zerg)
     {
         zerg.gameObject.SetActive(true);
     }
 
-    private void OnReturnSmallZergToPool(Zerg zerg)
+    private void OnReturnZergToPool(Zerg zerg)
     {
         zerg.gameObject.SetActive(false);
     }
 
-    private void OnDestroySmallZerg(Zerg zerg)
+    private void OnDestroyZerg(Zerg zerg)
     {
         Destroy(zerg.gameObject);
     }
+}
+
+public enum ZergTypeEnum
+{
+    Small,
+    Big
 }

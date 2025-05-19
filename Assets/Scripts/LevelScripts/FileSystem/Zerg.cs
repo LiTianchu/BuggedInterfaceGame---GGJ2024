@@ -64,7 +64,7 @@ public class Zerg : MonoBehaviour
         float closestDistance = float.MaxValue;
         foreach (FileSystemFile file in FileSystemLevelManager.Instance.ActiveFiles)
         {
-            float dist = Vector2.Distance(this.transform.position, file.transform.position);
+            float dist = Vector2.Distance(transform.position, file.transform.position);
             if (dist < closestDistance)
             {
                 closestDistance = dist;
@@ -92,9 +92,9 @@ public class Zerg : MonoBehaviour
         }
         else // move towards the target
         {
-            Vector2 direction = _targetFile.transform.position - this.transform.position;
+            Vector2 direction = _targetFile.transform.position - transform.position;
             direction.Normalize();
-            this.transform.position += (Vector3)direction * zergMoveSpeed * Time.deltaTime;
+            transform.position += Time.deltaTime * zergMoveSpeed * (Vector3)direction;
         }
 
     }
@@ -115,7 +115,7 @@ public class Zerg : MonoBehaviour
          .Append(zergSpriteRenderer.material.DOColor(Color.white, 0.01f));
 
         //shake
-        this.transform.DOShakePosition(0.1f, 0.1f, 10, 90, false, true);
+        transform.DOShakePosition(0.1f, 0.1f, 10, 90, false, true);
 
 
         if (_zergHp <= 0)
@@ -124,16 +124,15 @@ public class Zerg : MonoBehaviour
             zergSpriteRenderer.DOFade(0.0f, 0.3f).OnComplete(() =>
             {
                 _pool.Release(this);
-               Debug.Log("Zerg is dead");
-            
+                Debug.Log("Zerg is dead");
             });
         }
     }
-    
+
     public bool IsAlive()
     {
         return _zergHp > 0;
     }
 
-  
+
 }

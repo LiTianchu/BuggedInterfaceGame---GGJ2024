@@ -35,7 +35,7 @@ public class DraggableWorldSpace : MonoBehaviour
         _dropAreas = draggableAreaObj.GetComponentsInChildren<DropArea>();
         if (_draggableArea == null)
         {
-            throw new System.Exception("DraggableAreaObj must have a component that implements IDraggableArea interface");
+            throw new Exception("DraggableAreaObj must have a component that implements IDraggableArea interface");
         }
         
     }
