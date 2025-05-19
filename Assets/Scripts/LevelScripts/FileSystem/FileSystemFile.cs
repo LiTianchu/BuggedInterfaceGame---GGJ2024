@@ -17,17 +17,11 @@ public class FileSystemFile : MonoBehaviour
         hpBar.value = fileHp;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void TakeDamage(int damage){
         fileHp -= damage;
         hpBar.value = fileHp;
         if(fileHp <= 0){
-           this.gameObject.SetActive(false);
+           gameObject.SetActive(false);
         }
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2776478955026769396}
   - component: {fileID: 274127360875598023}
   - component: {fileID: 5054434495503136796}
+  - component: {fileID: 7907550226859135684}
   m_Layer: 10
   m_Name: BigZerg
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 7347088609673857171}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.838, y: -0.157, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -148,3 +149,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7907550226859135684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7347088609673857171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d01f9b8a4bdb0f94cb3e6c3ffa2848c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zergSpriteRenderer: {fileID: 2776478955026769396}
+  zergMaxHp: 16
+  zergDamage: 8
+  zergMoveSpeed: 2.9
+  zergAttackRange: 0.6
+  zergAttackRate: 0.82
