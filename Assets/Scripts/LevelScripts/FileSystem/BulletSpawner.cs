@@ -37,10 +37,11 @@ public class BulletSpawner : MonoBehaviour
         Destroy(bullet.gameObject);
     }
 
-    public TurretBullet SpawnNormalBullet(Vector3 position, Quaternion rotation,
+    public TurretBullet SpawnNormalBullet(Sprite bulletSprite, Vector3 position, Quaternion rotation,
                                         int damage, float speed, Transform target)
     {
         TurretBullet bullet = _turretBulletPool.Get();
+        bullet.GetComponent<SpriteRenderer>().sprite = bulletSprite;
         bullet.transform.position = position;
         bullet.transform.rotation = rotation;
         bullet.Initialize(damage, speed, target, _turretBulletPool);

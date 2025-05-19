@@ -25,6 +25,13 @@ public class Zerg : MonoBehaviour
     private float _timeElapsed = 0.0f;
     private ObjectPool<Zerg> _pool;
 
+    public int ZergHp { get => _zergHp; }
+    public int ZergDamage { get => zergDamage; }
+    public float ZergMoveSpeed { get => zergMoveSpeed; }
+    public float ZergAttackRange { get => zergAttackRange; }
+    public float ZergAttackRate { get => zergAttackRate; }
+    public int ZergMaxHp { get => zergMaxHp; }
+    
     void Start()
     {
         _timeElapsed = zergAttackRate;

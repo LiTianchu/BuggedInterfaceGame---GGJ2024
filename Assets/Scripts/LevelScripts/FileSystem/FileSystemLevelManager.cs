@@ -8,6 +8,7 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
     [TitleGroup("Level Settings")]
     [SerializeField] private GridSystem gridSystem;
     [SerializeField] private List<FileSystemFile> files;
+    [SerializeField] private FileSystemFile keyFile;
 
     [TitleGroup("Zerg Settings")]
     [SerializeField] private int maxZergCount = 50;
@@ -71,6 +72,7 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
         }
 
         CreateZergPools();
+        keyFile.OnFileDestroyed += HandleKeyFileDestroyed;
     }
 
     // Update is called once per frame
@@ -219,6 +221,13 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
     private void OnDestroyZerg(Zerg zerg)
     {
         Destroy(zerg.gameObject);
+    }
+
+    private void HandleKeyFileDestroyed()
+    {
+        // handle key file destroyed
+        // for example, show game over screen or restart level
+        Debug.Log("Key file destroyed!");
     }
 }
 
