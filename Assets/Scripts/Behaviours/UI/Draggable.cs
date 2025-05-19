@@ -12,12 +12,14 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
 
     [Required]
     [Tooltip("The canvas that this UI component belongs to")]
-    [SerializeField]
-    private Canvas canvas;
+    [SerializeField] private Canvas canvas;
+    [SerializeField] protected bool stayInView = true;
+    [SerializeField] private bool isDraggable = true;
     private RectTransform _rectTransform;
     private Camera _mainCamera;
     private RectTransform _canvasRect;
 
+    public bool IsDraggable { get => isDraggable; set => isDraggable = value; }
     public event Action OnDragBegin;
     public event Action OnDragEnd;
     public event Action OnDragUpdate;
@@ -31,6 +33,7 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!isDraggable) { return; }
         //call begin drag procedure
         HandleBeginDrag();
         OnDragBegin?.Invoke();
@@ -38,10 +41,11 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!isDraggable) { return; }
         // check if pointer is in the viewport
         if (RectTransformUtility.RectangleContainsScreenPoint(_canvasRect, Input.mousePosition, _mainCamera))
             _rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
-        else
+        else if (stayInView)
         {
             // if pointer is not in the viewport, animate the object to the nearest edge
             Vector2 pos = _rectTransform.anchoredPosition;
@@ -63,6 +67,7 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!isDraggable) { return; }
         //call end drag procedure
         HandleEndDrag();
         OnDragEnd?.Invoke();
@@ -70,6 +75,7 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (!isDraggable) { return; }
         //set the order in the hierarchy to the highest
         transform.SetSiblingIndex(transform.parent.childCount - 1);
     }

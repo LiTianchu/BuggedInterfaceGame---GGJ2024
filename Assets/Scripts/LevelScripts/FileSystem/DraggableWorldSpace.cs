@@ -20,6 +20,7 @@ public class DraggableWorldSpace : MonoBehaviour
 
     public DropArea CurrentDropArea { get => _currentDropArea; }
     public GridSystem DraggableAreaObj { get => draggableAreaObj; }
+    public bool IsDraggable { get => isDraggable; set => isDraggable = value; }
 
     public event Action OnDropped;
     void Awake()
@@ -31,6 +32,11 @@ public class DraggableWorldSpace : MonoBehaviour
 
     private void Start()
     {
+        if (draggableAreaObj == null)
+        {
+            draggableAreaObj = FindObjectOfType<GridSystem>();
+        }
+
         _draggableArea = draggableAreaObj.GetComponent<IDraggableArea>();
         _dropAreas = draggableAreaObj.GetComponentsInChildren<DropArea>();
         if (_draggableArea == null)
@@ -111,7 +117,7 @@ public class DraggableWorldSpace : MonoBehaviour
         if (nearestDropArea != null)
         {
             _isInitialized = true;
-            transform.position = nearestDropArea.transform.position + new Vector3(0, 0, 0);
+            transform.position = nearestDropArea.transform.position;
             BindDropArea(nearestDropArea.GetComponent<DropArea>());
         }
     }

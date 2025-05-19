@@ -1456,8 +1456,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 2073459662}
+  stayInView: 1
+  isDraggable: 1
   turretFilePrefab: {fileID: 8371454221926710184, guid: 4c02fca9bdd4d92418e24f978a92496e, type: 3}
   turretFileName: {fileID: 1321757552}
+  fileSystemGridLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  usedColor: {r: 1, g: 0, b: 0, a: 0.2}
 --- !u!4 &730649087 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3144683001953871056, guid: 4c02fca9bdd4d92418e24f978a92496e, type: 3}
@@ -1855,6 +1861,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   bulletSpawner: {fileID: 1438138013}
+  fileContainer: {fileID: 1964413535}
+  zergContainer: {fileID: 95669137}
 --- !u!4 &1080008825
 Transform:
   m_ObjectHideFlags: 0
@@ -2560,8 +2568,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -311.6, y: 17.5}
-  m_SizeDelta: {x: -623.19, y: -35}
+  m_AnchoredPosition: {x: -295.55994, y: 17.5}
+  m_SizeDelta: {x: -591.1, y: -35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1331755651
 MonoBehaviour:
@@ -2576,7 +2584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.38364768, g: 0.38364768, b: 0.38364768, a: 0.49411765}
+  m_Color: {r: 0.15586793, g: 0.17382747, b: 0.23270428, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4220,7 +4228,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!224 &2073459663
 RectTransform:
