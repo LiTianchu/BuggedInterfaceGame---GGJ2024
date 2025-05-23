@@ -12,6 +12,9 @@ public class StartMenu : MonoBehaviour
     [Required]
     [SerializeField] private CanvasGroup canvasGroup;
 
+    [Required]
+    [SerializeField] private bool show = false;
+
 
     List<StartMenuTurretFile> _turretFiles = new List<StartMenuTurretFile>();
 
@@ -31,7 +34,59 @@ public class StartMenu : MonoBehaviour
                 turretFile.Initialize(this);
             }
         }
+
+        gameObject.SetActive(show);
     }
+
+
+    public void ToggleMenu()
+    {
+        show = !show;
+        gameObject.SetActive(show);
+        if (show)
+        {
+            canvasGroup.alpha = 1;
+            canvasGroup.interactable = true;
+            canvasGroup.blocksRaycasts = true;
+
+            CheckTurretFiles();
+
+        }
+        else
+        {
+            canvasGroup.alpha = 0;
+            canvasGroup.interactable = false;
+            canvasGroup.blocksRaycasts = false;
+        }
+    }
+
+    public void CheckTurretFiles()
+    {
+
+        foreach (StartMenuTurretFile turretFile in _turretFiles)
+        {
+
+            if (InventoryManager.Instance.TurretFiles.ContainsKey(turretFile.TurretFile))
+            {
+                TurretStateEnum state = InventoryManager.Instance.TurretFiles[turretFile.TurretFile];
+                if (state == TurretStateEnum.Locked)
+                {
+                    turretFile.gameObject.SetActive(false);
+                }
+                else
+                {
+                    turretFile.gameObject.SetActive(true);
+                   
+                }
+            }
+            else
+            {
+                turretFile.gameObject.SetActive(false);
+            }
+
+        }
+    }
+
 
 
 }

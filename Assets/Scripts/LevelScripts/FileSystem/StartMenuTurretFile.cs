@@ -19,24 +19,24 @@ public class StartMenuTurretFile : Draggable
     private RectTransform _rectTransform;
     private StartMenu _startMenu;
     private Color _originalMenuColor;
-    private Color _originalColor;
     private Vector3 _originalAnchorPos = new Vector3(999, 999, 999);
-    private Camera _mainCamera;
     private Grid _gridBelow;
     private Image _image;
     private bool _isDeployed = false;
 
+    public TurretFile TurretFile { get { return turretFilePrefab; } }
 
     public new void Awake()
     {
         base.Awake();
         turretFileName.text = turretFilePrefab.ToString();
         _rectTransform = GetComponent<RectTransform>();
-        _mainCamera = Camera.main;
         stayInView = false; // deactivate stay in view to use custom logic
         _image = GetComponent<Image>();
-        _originalColor = _image.color;
+
     }
+
+   
 
     public void Initialize(StartMenu startMenu)
     {
@@ -46,7 +46,7 @@ public class StartMenuTurretFile : Draggable
 
     public void DeployTurret()
     {
-        if(_isDeployed)
+        if (_isDeployed)
         {
             Debug.Log($"Turret file {turretFilePrefab} already deployed");
             return;
@@ -92,7 +92,7 @@ public class StartMenuTurretFile : Draggable
 
             DeployTurret();
         }
-        
+
         _rectTransform.anchoredPosition = _originalAnchorPos;
     }
 
@@ -112,11 +112,11 @@ public class StartMenuTurretFile : Draggable
                     _gridBelow.NormalColor();
                 }
 
-                if(grid.CurrentDraggable != null && grid.CurrentDraggable != this) // if the grid is already occupied, do nothing
+                if (grid.CurrentDraggable != null && grid.CurrentDraggable != this) // if the grid is already occupied, do nothing
                 {
                     grid.NormalColor();
                     _gridBelow = null;
-                    return; 
+                    return;
                 }
 
                 Debug.Log($"Dragging over {grid}");
