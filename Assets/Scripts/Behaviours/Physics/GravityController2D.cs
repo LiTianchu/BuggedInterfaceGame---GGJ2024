@@ -7,7 +7,7 @@ using UnityEngine;
 public class GravityController2D : MonoBehaviour
 {
     [SerializeField]
-    private float intialGravityScale;
+    private float intialGravityScale = 1;
     private Rigidbody2D _rigidbody;
     private float _gravityScale;
     private void OnEnable() {

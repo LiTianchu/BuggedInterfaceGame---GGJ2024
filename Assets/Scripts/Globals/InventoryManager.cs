@@ -17,16 +17,21 @@ public class InventoryManager : GlobalSingleton<InventoryManager>
     public event Action<int> OnCoinCountChanged;
     public event Action<Dictionary<TurretFile, TurretStateEnum>> OnTurretInventoryChanged;
 
-    public void AddKey()
+
+    public void AddKey(int amount = 1)
     {
-        _keyCount++;
+        _keyCount += amount;
         OnKeyCountChanged?.Invoke(_keyCount);
+        Debug.Log("Added key");
+        Debug.Log($"Keys: {_keyCount}");
     }
 
-    public void AddCoin()
+    public void AddCoin(int amount = 1)
     {
-        _coinCount++;
+        _coinCount += amount;
         OnCoinCountChanged?.Invoke(_coinCount);
+        Debug.Log("Added coin");    
+        Debug.Log($"Coins: {_coinCount}");
     }
 
     /// <summary>
@@ -39,6 +44,8 @@ public class InventoryManager : GlobalSingleton<InventoryManager>
         {
             _coinCount -= amount;
             OnCoinCountChanged?.Invoke(_coinCount);
+            Debug.Log($"Used {amount} coins");
+            Debug.Log($"Coins: {_coinCount}");
             return true;
         }
         else

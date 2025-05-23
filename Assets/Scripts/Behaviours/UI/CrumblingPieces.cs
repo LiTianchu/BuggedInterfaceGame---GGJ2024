@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,8 @@ public class CrumblingPieces : MonoBehaviour
 
     private float _individualCrumbleDelay;
     private Dictionary<PuzzlePiece,bool> _rightPlaceMap; //maps puzzle pieces to whether or not they are in the right place
+
+    public event System.Action OnPuzzlePieceRight;
     // Start is called before the first frame update
     void Start()
     {
@@ -99,17 +102,21 @@ public class CrumblingPieces : MonoBehaviour
         }
     }
 
-    private void CheckForRightPlace()
+    private bool CheckForRightPlace()
     {
         foreach (KeyValuePair<PuzzlePiece, bool> entry in _rightPlaceMap)
         {
             if (!entry.Value)
             {
-                return;
+                return false;
             }
         }
+
+        OnPuzzlePieceRight?.Invoke();
+        return true;
+
         //all pieces are in the right place
-        FindObjectOfType<Money>().CheckAmount();
+        //FindObjectOfType<Money>().CheckAmount();
     }
 
     private Vector3 GetRandomRotation()

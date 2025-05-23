@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class Money : MonoBehaviour
+public class Money : GlobalSingleton<Money>
 {
     int amount = 0;
     int stock = 0;
@@ -12,7 +12,7 @@ public class Money : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI amt;
     [SerializeField] TextMeshProUGUI stk;
-    [SerializeField] GameObject win;
+    // [SerializeField] GameObject win;
     [SerializeField] GameObject win1;
     
     public TextMeshProUGUI success;
@@ -20,16 +20,18 @@ public class Money : MonoBehaviour
 
     float timer = 0f;
 
-    public void CheckAmount()
-    {
-        if (price / stock == amount)
-        {
-            win.SetActive(true);
-            win.transform.SetAsLastSibling();
-            win1.SetActive(true);
-        }
-        else if (success != null) success.text = "Incorrect amount of MOGCOIN";
-    }
+    // public void CheckAmount()
+    // {
+    //     if (price / stock == amount)
+    //     {
+    //         win.SetActive(true);
+    //         win.transform.SetAsLastSibling();
+    //         win1.SetActive(true);
+    //     }
+    //     else if (success != null) success.text = "Incorrect amount of MOGCOIN";
+    // }
+
+
 
     public void IncreaseAmount(bool increase)
     {
@@ -43,17 +45,17 @@ public class Money : MonoBehaviour
         while (stock == 7 || stock == 9 || stock == 11) stock = Random.Range(2, 12);
     }
 
-    IEnumerator EndGame()
-    {
-        yield return new WaitForSeconds(7f);
-        SceneManager.LoadScene("Credits");
-    }
+    // IEnumerator EndGame()
+    // {
+    //     yield return new WaitForSeconds(7f);
+    //     SceneManager.LoadScene("Credits");
+    // }
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    // // Start is called before the first frame update
+    // void Start()
+    // {
         
-    }
+    // }
 
     // Update is called once per frame
     void Update()
@@ -69,6 +71,6 @@ public class Money : MonoBehaviour
         amt.text = amount.ToString();
         stk.text = "$" + stock.ToString();
 
-        if (success != null && !success.gameObject.active) success.text = "";
+        if (success != null && !success.gameObject.activeSelf) success.text = "";
     }
 }
