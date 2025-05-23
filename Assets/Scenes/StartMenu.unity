@@ -713,10 +713,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: StartMenuBoundary
       objectReference: {fileID: 0}
-    - target: {fileID: 5134459408546648202, guid: eac756e93d8bb934faa0d310f65614e0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6642924233447428817, guid: eac756e93d8bb934faa0d310f65614e0, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -896,6 +892,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1768231960}
+  stayInView: 1
+  isDraggable: 1
   puzzleGridLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1169,6 +1167,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1768231960}
+  stayInView: 1
+  isDraggable: 1
   puzzleGridLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1403,6 +1403,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1768231960}
+  stayInView: 1
+  isDraggable: 1
   puzzleGridLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1767,6 +1769,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1768231960}
+  stayInView: 1
+  isDraggable: 1
   puzzleGridLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -2173,6 +2177,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1768231960}
+  stayInView: 1
+  isDraggable: 1
   puzzleGridLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -5185,6 +5191,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1768231960}
+  stayInView: 1
+  isDraggable: 1
   puzzleGridLayer:
     serializedVersion: 2
     m_Bits: 64
