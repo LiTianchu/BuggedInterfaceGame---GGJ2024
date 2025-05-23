@@ -17,6 +17,10 @@ public class CrumblingPieces : MonoBehaviour
     private float crumbleTime = 2f;
     [SerializeField]
     private AudioClip crumbleSound;
+    [SerializeField]
+    private float minForce = -100f;
+    [SerializeField]
+    private float maxForce = 100f;
 
     private float _individualCrumbleDelay;
     private Dictionary<PuzzlePiece,bool> _rightPlaceMap; //maps puzzle pieces to whether or not they are in the right place
@@ -76,8 +80,8 @@ public class CrumblingPieces : MonoBehaviour
         int yDirection = Random.Range(0, 2);
         Vector2 force = new Vector2
         {
-            x = Random.Range(-1000f, 1000f) * (xDirection == 0 ? -1 : 1),
-            y = Random.Range(-1000f, 1000f) * (yDirection == 0 ? -1 : 1)
+            x = Random.Range(minForce, maxForce) * (xDirection == 0 ? -1 : 1),
+            y = Random.Range(minForce, maxForce) * (yDirection == 0 ? -1 : 1)
         };
 
         return force;
