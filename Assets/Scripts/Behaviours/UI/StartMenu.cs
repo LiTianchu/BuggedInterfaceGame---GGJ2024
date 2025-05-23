@@ -35,14 +35,14 @@ public class StartMenu : MonoBehaviour
             }
         }
 
-        gameObject.SetActive(show);
+        itemGrid.gameObject.SetActive(show);
     }
 
 
     public void ToggleMenu()
     {
         show = !show;
-        gameObject.SetActive(show);
+        itemGrid.gameObject.SetActive(show);
         if (show)
         {
             canvasGroup.alpha = 1;
@@ -76,7 +76,6 @@ public class StartMenu : MonoBehaviour
                 else
                 {
                     turretFile.gameObject.SetActive(true);
-                   
                 }
             }
             else
