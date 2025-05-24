@@ -16,7 +16,6 @@ public class StartMenuTurretFile : Draggable
     [SerializeField] private LayerMask fileSystemGridLayer;
     [SerializeField] private Color usedColor = new Color(1, 1, 1, 0.0f);
 
-    private RectTransform _rectTransform;
     private StartMenu _startMenu;
     private Color _originalMenuColor;
     private Vector3 _originalAnchorPos = new Vector3(999, 999, 999);
