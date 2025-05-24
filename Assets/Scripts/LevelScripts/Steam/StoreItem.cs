@@ -21,17 +21,36 @@ public class StoreItem : MonoBehaviour
     [SerializeField] private TMP_Text gameNameLabel;
     [Required]
     [SerializeField] private TMP_Text gamePriceLabel;
+    [Required]
+    [SerializeField] private Button purchaseButton;
 
 
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         // Set the game name and price labels
         gameNameLabel.text = gameName;
         gamePriceLabel.text = gamePrice.ToString();
 
         storePuzzleWinScreen.Initialize(gamePrice, awardedGameFile);
+
+        InventoryManager.Instance.OnCoinCountChanged += CheckIfCanPurchase;
     }
-    
+
+    private void OnEnable()
+    {
+        CheckIfCanPurchase(InventoryManager.Instance.CoinCount);
+    }
+
+    private void OnDestroy()
+    {
+        InventoryManager.Instance.OnCoinCountChanged -= CheckIfCanPurchase;
+    }
+
+    private void CheckIfCanPurchase(int coinCount)
+    {
+        purchaseButton.interactable = coinCount >= gamePrice;
+    }
+
 }

@@ -26,8 +26,25 @@ public class CrumblingPieces : MonoBehaviour
     private Dictionary<PuzzlePiece,bool> _rightPlaceMap; //maps puzzle pieces to whether or not they are in the right place
 
     public event System.Action OnPuzzlePieceRight;
+    
     // Start is called before the first frame update
     void Start()
+    {
+          foreach (PuzzleSlot puzzleSlot in puzzleSlots)
+        {
+            puzzleSlot.OnPuzzlePieceRight += (puzzlePiece) =>
+            {
+                SetRightPlaceFlag(puzzlePiece, true);
+            };
+
+            puzzleSlot.OnPuzzlePieceLeave += (puzzlePiece) =>
+            {
+                SetRightPlaceFlag(puzzlePiece, false);
+            };
+        }
+    }
+
+    void OnEnable()
     {
         _individualCrumbleDelay = crumbleTime / pieces.Count;
         StartCoroutine(Crumble());
@@ -39,21 +56,8 @@ public class CrumblingPieces : MonoBehaviour
             PuzzlePiece puzzlePiece = p.GetComponent<PuzzlePiece>();
             if (puzzlePiece != null)
             {
-                _rightPlaceMap.Add(puzzlePiece, false);
+                _rightPlaceMap[puzzlePiece]= false;
             }
-        }
-
-        foreach (PuzzleSlot puzzleSlot in puzzleSlots)
-        {
-            puzzleSlot.OnPuzzlePieceRight += (puzzlePiece) =>
-            {
-                SetRightPlaceFlag(puzzlePiece, true);
-            };
-
-            puzzleSlot.OnPuzzlePieceLeave += (puzzlePiece) =>
-            {
-                SetRightPlaceFlag(puzzlePiece, false);
-            };
         }
     }
 

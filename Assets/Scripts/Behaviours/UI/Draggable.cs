@@ -15,7 +15,7 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
     [SerializeField] private Canvas canvas;
     [SerializeField] protected bool stayInView = true;
     [SerializeField] private bool isDraggable = true;
-    private RectTransform _rectTransform;
+    protected RectTransform _rectTransform;
     private Camera _mainCamera;
     private RectTransform _canvasRect;
 

@@ -27,6 +27,9 @@ public class PuzzleSlot : MonoBehaviour, IDropHandler
             Debug.Log("Puzzle slot is empty, snapping");
             //snap the puzzle to the grid
             _puzzlePiece = eventData.pointerDrag.GetComponent<PuzzlePiece>();
+
+            if(_puzzlePiece == null){ return; }
+            
             if (((1 << _puzzlePiece.gameObject.layer) & puzzlePieceLayer.value) == 0)
             {
                 Debug.Log("Object is not on the puzzle piece layer");
