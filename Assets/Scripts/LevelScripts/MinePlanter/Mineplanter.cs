@@ -18,6 +18,9 @@ public class Mineplanter : MonoBehaviour
     [SerializeField] protected GameObject levelClearPrompt;
     [SerializeField] protected GameObject levelClearPrompt1;
 
+    [Header("Other")]
+    [SerializeField] protected RectTransform nextLevel;
+
 
     protected List<List<bool>> mines;
     protected List<List<int>> currentMineNums;
@@ -198,7 +201,9 @@ public class Mineplanter : MonoBehaviour
         SetupLevel();
     }
 
-    public virtual void NextLevel() {
-        SceneManager.LoadScene("MineplanterLevel2");
+    public virtual void NextLevel()
+    {
+        nextLevel.gameObject.SetActive(true);
+        gameObject.SetActive(false);
     }
 }
