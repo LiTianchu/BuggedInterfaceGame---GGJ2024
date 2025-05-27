@@ -68,8 +68,8 @@ public class CrumblingPieces : MonoBehaviour
             yield return new WaitForSeconds(_individualCrumbleDelay);
             piece.SetGravity(crumbleGravityScale);
             piece.UseGravity();
-            piece.Push(GetRandomForce());
-            piece.GetComponent<RectTransform>().Rotate(GetRandomRotation());
+            piece.Push(VectorUtils.GetRandomForce2D(minForce, maxForce));
+            piece.GetComponent<RectTransform>().Rotate(VectorUtils.GetRandomRotationAlongZ());
 
             if (crumbleSound != null)
             {
@@ -78,19 +78,7 @@ public class CrumblingPieces : MonoBehaviour
         }
     }
 
-    private Vector2 GetRandomForce()
-    {
-        int xDirection = Random.Range(0, 2);
-        int yDirection = Random.Range(0, 2);
-        Vector2 force = new Vector2
-        {
-            x = Random.Range(minForce, maxForce) * (xDirection == 0 ? -1 : 1),
-            y = Random.Range(minForce, maxForce) * (yDirection == 0 ? -1 : 1)
-        };
 
-        return force;
-
-    }
 
     public void SetRightPlaceFlag(PuzzlePiece puzzlePiece, bool isRightPlace)
     {
@@ -122,13 +110,5 @@ public class CrumblingPieces : MonoBehaviour
 
         OnPuzzlePieceRight?.Invoke();
         return true;
-
-        //all pieces are in the right place
-        //FindObjectOfType<Money>().CheckAmount();
-    }
-
-    private Vector3 GetRandomRotation()
-    {
-        return new Vector3(0, 0, Random.Range(-360f, 360f));
     }
 }
