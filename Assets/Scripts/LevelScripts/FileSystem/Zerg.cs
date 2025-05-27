@@ -20,10 +20,12 @@ public class Zerg : MonoBehaviour
     [SerializeField] private float zergAttackRange = 0.5f;
     [ShowInInspector, PropertyRange(0, 10)]
     [SerializeField] private float zergAttackRate = 1.0f;
+    [SerializeField] private float refreshTargetInterval = 0.5f;
 
     private int _zergHp;
     private FileSystemFile _targetFile;
-    private float _timeElapsed = 0.0f;
+    private float _timeSinceLastAttack = 0.0f;
+    private float _timeSinceLastTargetRefresh = 0.0f;
     private ObjectPool<Zerg> _pool;
 
     public int ZergHp { get => _zergHp; }
@@ -35,7 +37,8 @@ public class Zerg : MonoBehaviour
     
     void Start()
     {
-        _timeElapsed = zergAttackRate;
+        _timeSinceLastAttack = zergAttackRate;
+        _timeSinceLastTargetRefresh = refreshTargetInterval;
         zergSpriteRenderer.sortingOrder = 1;
         FileSystemLevelManager.Instance.OnFileSystemLayoutChanged += ResetTarget;
     }
@@ -43,9 +46,11 @@ public class Zerg : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _timeElapsed += Time.deltaTime;
-        if (_targetFile == null || !_targetFile.gameObject.activeSelf)
+        _timeSinceLastAttack += Time.deltaTime;
+        _timeSinceLastTargetRefresh += Time.deltaTime;
+        if (_targetFile == null || !_targetFile.gameObject.activeSelf || _timeSinceLastTargetRefresh >= refreshTargetInterval)
         {
+            _timeSinceLastTargetRefresh = 0.0f;
             FindTarget();
         }
         else
@@ -92,9 +97,9 @@ public class Zerg : MonoBehaviour
         }
         if (Vector2.Distance(this.transform.position, _targetFile.transform.position) < zergAttackRange) // attack
         {
-            if (_timeElapsed >= zergAttackRate)
+            if (_timeSinceLastAttack >= zergAttackRate)
             {
-                _timeElapsed = 0.0f;
+                _timeSinceLastAttack = 0.0f;
                 _targetFile.TakeDamage(zergDamage);
             }
         }
