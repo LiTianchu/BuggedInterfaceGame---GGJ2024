@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using DG.Tweening;
 using PixelCrushers.DialogueSystem;
 using Sirenix.OdinInspector;
@@ -130,8 +131,9 @@ public class Zerg : MonoBehaviour
             //play death animation
             zergSpriteRenderer.DOFade(0.0f, 0.3f).OnComplete(() =>
             {
-                _pool.Release(this);
-                Debug.Log("Zerg is dead");
+                FileSystemLevelManager.Instance.ZergDestroyedCount++;
+                _pool.Release(this);         
+                Debug.Log($"Zerg {gameObject.name} destroyed, {FileSystemLevelManager.Instance.ZergDestroyedCount} destroyed in total.");       
             });
         }
     }

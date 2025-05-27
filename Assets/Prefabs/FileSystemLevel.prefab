@@ -70,7 +70,7 @@ RectTransform:
   m_Father: {fileID: 1701433066991024308}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3155ecbd987286440bc2c5676225f435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalBulletPrefab: {fileID: 6917668351482985511, guid: 12c855cf2d8128447bd27cc10c3695c4, type: 3}
+  bulletPrefab: {fileID: 6917668351482985511, guid: 12c855cf2d8128447bd27cc10c3695c4, type: 3}
 --- !u!1 &1149644504632143384
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,9 +445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSystem: {fileID: 6056426456065375661}
-  files:
-  - {fileID: 1113904354120854028}
-  keyFile: {fileID: 1113904354120854028}
+  keyFile: {fileID: 0}
   maxZergCount: 300
   smallZergSpawnRate: 0.4
   bigZergSpawnRate: 2
@@ -836,8 +834,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 428307819455821494}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -981,7 +979,7 @@ GameObject:
   - component: {fileID: 1134242550361183537}
   - component: {fileID: 3244751903640343685}
   - component: {fileID: 6522031472277712813}
-  - component: {fileID: 1113904354120854028}
+  - component: {fileID: 1572960867059542007}
   m_Layer: 0
   m_Name: Key
   m_TagString: Untagged
@@ -1119,7 +1117,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1113904354120854028
+--- !u!114 &1572960867059542007
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1128,8 +1126,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8807397494197564274}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7828d5fb5cabab14aa7129385e8a7f63, type: 3}
+  m_Script: {fileID: 11500000, guid: 971edf9a370cf5945846ad2299643ebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileHp: 20
+  fileHp: 80
   hpBar: {fileID: 4307648389357676676}
+  locked: 1
