@@ -708,7 +708,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.64, y: 0.64}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -745,16 +745,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turretName: Normal Turret
   damage: 1
-  fireRate: 0.1
-  range: 5
+  fireRate: 0.065
+  range: 6
   bulletSpeed: 10
   firePoint: {fileID: 2059329110390756377}
   targetLayer:
     serializedVersion: 2
     m_Bits: 1024
-  turretModel: {fileID: 0}
   targetPreference: 1
   bulletSprite: {fileID: 21300000, guid: 105aa01b1530a1e48ba3df5d4a1cae8b, type: 3}
+  hasBlastEffect: 0
+  blastAnimator: {fileID: 0}
+  blastRadius: 1
 --- !u!1 &9202182159239253992
 GameObject:
   m_ObjectHideFlags: 0

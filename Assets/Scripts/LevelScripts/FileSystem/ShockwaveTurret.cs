@@ -17,7 +17,7 @@ public class ShockwaveTurret : TurretFile
     [SerializeField] private Animator shockwaveAnimator;
     
     private float _nextFireTime = 0f;
-    private Animator _animator;
+
     private void Update()
     {
         Fire();
@@ -38,7 +38,7 @@ public class ShockwaveTurret : TurretFile
         if (targets.Count == 0) { return; }
 
         // Play shockwave animation
-        StartCoroutine(PlayShockwaveAnimation());
+        Instantiate(shockwaveAnimator, firePoint.position, Quaternion.identity);
 
 
         foreach (Zerg target in targets)
@@ -66,21 +66,7 @@ public class ShockwaveTurret : TurretFile
         return targets;
     }
 
-    private IEnumerator PlayShockwaveAnimation()
-    {
-        if (_animator == null)
-        {
-            _animator = Instantiate(shockwaveAnimator, firePoint.position, Quaternion.identity);
-        }
-
-        _animator.SetTrigger("LaunchShockwave");
-
-        // Wait for the animation to finish
-        yield return new WaitWhile(() => { return AnimationUtils.AnimatorIsPlaying(_animator); });
-
-        Destroy(_animator.gameObject);
-        _animator = null;
-    }
+   
 
 
 

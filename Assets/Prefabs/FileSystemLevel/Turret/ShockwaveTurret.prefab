@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 6287747295205346564}
   - component: {fileID: 1885107681468602498}
   m_Layer: 0
-  m_Name: ZipFolder
+  m_Name: ShockwaveTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7828d5fb5cabab14aa7129385e8a7f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileHp: 50
+  fileHp: 100
   hpBar: {fileID: 4083835929467221259}
 --- !u!114 &1885107681468602498
 MonoBehaviour:
@@ -439,7 +439,6 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 1024
-  targetPreference: 0
   shockwaveAnimator: {fileID: 4981921782803182765, guid: fceb536dde97cff4c912689de8ac396b, type: 3}
 --- !u!1 &3747582199146320405
 GameObject:

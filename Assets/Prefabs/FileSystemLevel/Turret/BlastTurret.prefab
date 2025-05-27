@@ -350,7 +350,7 @@ GameObject:
   - component: {fileID: 2111740731403077913}
   - component: {fileID: 2893697297869875386}
   m_Layer: 0
-  m_Name: Folder
+  m_Name: BlastTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -478,7 +478,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.64, y: 0.64}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -499,7 +499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7828d5fb5cabab14aa7129385e8a7f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileHp: 50
+  fileHp: 100
   hpBar: {fileID: 2289306950571551924}
 --- !u!114 &2893697297869875386
 MonoBehaviour:
@@ -513,16 +513,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eba3c15a4570ce44a75187f08c5c3b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretName: Turret
-  damage: 1
-  fireRate: 1
-  range: 5
-  bulletSpeed: 10
+  turretName: Blast Turret
+  damage: 5
+  fireRate: 1.5
+  range: 4
+  bulletSpeed: 5.5
   firePoint: {fileID: 1917775844259617917}
   targetLayer:
     serializedVersion: 2
     m_Bits: 1024
-  bulletSprite: {fileID: 21300000, guid: 75638f9c99066be4d85d19761f7a1810, type: 3}
+  targetPreference: 1
+  bulletSprite: {fileID: 21300000, guid: b510deb155efddf49bc1d00839a57356, type: 3}
+  hasBlastEffect: 1
+  blastAnimator: {fileID: 9099908701676326250, guid: 4e65328018bf5aa49aee00a1c2e6b69f, type: 3}
+  blastRadius: 0.6
 --- !u!1 &5732297784264915561
 GameObject:
   m_ObjectHideFlags: 0

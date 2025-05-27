@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class FileSystemFile : MonoBehaviour
 {
-    [ShowInInspector, PropertyRange(0,100)]
+    [ShowInInspector, PropertyRange(0,1000)]
     [SerializeField] private int fileHp = 10;
     [SerializeField] private Slider hpBar;
 
