@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class AttackableTurret : TurretFile
+public class ShootingTurret : TurretFile
 {
     [Header("Turret Settings")]
     [SerializeField] private int damage = 1;

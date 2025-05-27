@@ -15,6 +15,7 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
     [SerializeField] private Canvas canvas;
     [SerializeField] protected bool stayInView = true;
     [SerializeField] private bool isDraggable = true;
+    [SerializeField] private bool moveToFrontOnDrag = true;
     protected RectTransform _rectTransform;
     private Camera _mainCamera;
     private RectTransform _canvasRect;
@@ -76,8 +77,11 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
     public void OnPointerDown(PointerEventData eventData)
     {
         if (!isDraggable) { return; }
-        //set the order in the hierarchy to the highest
-        transform.SetSiblingIndex(transform.parent.childCount - 1);
+        if (moveToFrontOnDrag)
+        {
+            //set the order in the hierarchy to the highest
+            transform.SetSiblingIndex(transform.parent.childCount - 1);
+        }
     }
 
     public void SetCanvas(Canvas canvas)

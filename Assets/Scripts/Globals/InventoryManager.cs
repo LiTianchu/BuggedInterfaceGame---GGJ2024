@@ -17,6 +17,7 @@ public class InventoryManager : GlobalSingleton<InventoryManager>
     public event Action<int> OnCoinCountChanged;
     public event Action<Dictionary<TurretFile, TurretStateEnum>> OnTurretInventoryChanged;
 
+   
 
     public void AddKey(int amount = 1)
     {
