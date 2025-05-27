@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -9,14 +10,35 @@ public class TurretBullet : MonoBehaviour
     private Transform _target;
     private ObjectPool<TurretBullet> _pool;
 
+    private bool _hasBlastingEffect = false;
+    private float _blastingRadius = 0f;
+    private Animator _blastAnimatorPrefab;
+
+
+
     public void Initialize(int damage, float speed, Transform target, ObjectPool<TurretBullet> pool)
     {
         _pool = pool;
         _damage = damage;
         _speed = speed;
         _target = target;
+        _hasBlastingEffect = false;
+        _blastAnimatorPrefab = null;
+        _blastingRadius = 0;
     }
-    
+
+    public void InitializeBlasting(int damage, float speed, Transform target, ObjectPool<TurretBullet> pool,
+                                   Animator blastAnimatorPrefab, float blastingRadius)
+    {
+        _pool = pool;
+        _damage = damage;
+        _speed = speed;
+        _target = target;
+        _hasBlastingEffect = true;
+        _blastAnimatorPrefab = blastAnimatorPrefab;
+        _blastingRadius = blastingRadius;
+    }
+
     private void Update()
     {
         if (_target != null)
@@ -28,8 +50,26 @@ public class TurretBullet : MonoBehaviour
 
             if (Vector3.Distance(transform.position, _target.position) < 0.1f)
             {
-                _target.GetComponent<Zerg>().TakeDamage(_damage);
-                DestroyBullet();
+                if (_hasBlastingEffect)
+                {
+                    // Apply damage to all targets in the blast radius
+                    Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, _blastingRadius);
+                    foreach (Collider2D hitCollider in hitColliders)
+                    {
+                        Zerg zerg = hitCollider.GetComponent<Zerg>();
+                        if (zerg != null && zerg.IsAlive())
+                        {
+                            zerg.TakeDamage(_damage);
+                        }
+                    }
+                    Instantiate(_blastAnimatorPrefab, transform.position, Quaternion.identity);
+                    DestroyBullet();
+                }
+                else
+                {
+                    _target.GetComponent<Zerg>().TakeDamage(_damage);
+                    DestroyBullet();
+                }
             }
         }
         else
@@ -37,10 +77,13 @@ public class TurretBullet : MonoBehaviour
             DestroyBullet();
         }
     }
-    
+
+
+
+
     private void DestroyBullet()
     {
-        if(_pool != null)
+        if (_pool != null)
         {
             _pool.Release(this);
         }

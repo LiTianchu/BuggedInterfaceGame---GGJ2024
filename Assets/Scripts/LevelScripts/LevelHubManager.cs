@@ -6,6 +6,8 @@ public class LevelHubManager : Singleton<LevelHubManager>
 {
     [SerializeField] private List<GameObject> levels;
 
+    [SerializeField] private List<GameObject> crumbleObjects;
+
 
     public void ShowLevelHubScreen()
     {
@@ -41,6 +43,14 @@ public class LevelHubManager : Singleton<LevelHubManager>
             {
                 level.SetActive(false);
             }
+        }
+    }
+
+    public void LoadBios()
+    {
+        for (int i = 0; i < crumbleObjects.Count; i++)
+        {
+            
         }
     }
 

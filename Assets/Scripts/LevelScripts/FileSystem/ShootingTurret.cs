@@ -1,19 +1,28 @@
 using System;
+using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class AttackableTurret : TurretFile
+public class ShootingTurret : TurretFile
 {
-    [Header("Turret Settings")]
+    [TitleGroup("Turret Settings")]
     [SerializeField] private int damage = 1;
     [SerializeField] private float fireRate = 1f;
     [SerializeField] private float range = 5f;
     [SerializeField] private float bulletSpeed = 10f;
+
     [SerializeField] private Transform firePoint;
     [SerializeField] private LayerMask targetLayer;
     [SerializeField] private TargetPreferenceEnum targetPreference = TargetPreferenceEnum.FirstOrDefault;
 
-    [Header("Bullet Settings")]
+    [TitleGroup("Bullet Settings")]
+    [Required]
     [SerializeField] private Sprite bulletSprite;
+
+    [TitleGroup("Blast Effect")]
+    [SerializeField] private bool hasBlastEffect = false;
+    [SerializeField] private Animator blastAnimator;
+    [SerializeField] private float blastRadius = 1f;
 
 
     private float nextFireTime = 0f;
@@ -34,10 +43,19 @@ public class AttackableTurret : TurretFile
     private void Shoot()
     {
         Transform target = GetTarget();
+
         if (target == null) { return; }
 
-        FileSystemLevelManager.Instance.BulletSpawner.SpawnNormalBullet(bulletSprite, firePoint.position, Quaternion.identity,
-            damage, bulletSpeed, target);
+        if (hasBlastEffect)
+        {
+            FileSystemLevelManager.Instance.BulletSpawner.SpawnBlastingBullet(bulletSprite, blastAnimator, firePoint.position, Quaternion.identity,
+                damage, bulletSpeed, blastRadius, target);
+        }
+        else
+        {
+            FileSystemLevelManager.Instance.BulletSpawner.SpawnNormalBullet(bulletSprite, firePoint.position, Quaternion.identity,
+                damage, bulletSpeed, target);
+        }
     }
 
     private Transform GetTarget()

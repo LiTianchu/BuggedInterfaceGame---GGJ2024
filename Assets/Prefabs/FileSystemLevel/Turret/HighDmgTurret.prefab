@@ -254,7 +254,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.64, y: 0.64}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -275,7 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7828d5fb5cabab14aa7129385e8a7f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileHp: 70
+  fileHp: 100
   hpBar: {fileID: 4283881424511737008}
 --- !u!114 &-4399770004067366755
 MonoBehaviour:
@@ -298,9 +298,11 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 1024
-  turretModel: {fileID: 0}
   targetPreference: 2
   bulletSprite: {fileID: 21300000, guid: 75638f9c99066be4d85d19761f7a1810, type: 3}
+  hasBlastEffect: 0
+  blastAnimator: {fileID: 0}
+  blastRadius: 1
 --- !u!1 &5114442275841902333
 GameObject:
   m_ObjectHideFlags: 0

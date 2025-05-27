@@ -7,8 +7,8 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
 {
     [TitleGroup("Level Settings")]
     [SerializeField] private GridSystem gridSystem;
-    [SerializeField] private List<FileSystemFile> files;
-    [SerializeField] private FileSystemFile keyFile;
+    [SerializeField] private KeyFile keyFile;
+
 
     [TitleGroup("Zerg Settings")]
     [SerializeField] private int maxZergCount = 50;
@@ -25,18 +25,35 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
     [SerializeField] private Transform zergContainer;
 
 
+    public static int ZERGS_TO_DESTROY = 50;
 
+    private List<FileSystemFile> _files;
     private float _smallZergSpawnTimeElapsed;
     private float _bigZergSpawnTimeElapsed;
     private int _zergCount;
     private Camera _mainCamera;
+    private bool _hasWon = false;
+    private int _zergDestroyedCount = 0;
 
 
 
-
-    public List<FileSystemFile> Files { get => files; }
+    public List<FileSystemFile> Files { get => _files; }
     public BulletSpawner BulletSpawner { get => bulletSpawner; }
     public int ZergCount { get => _zergCount; }
+    public int ZergDestroyedCount
+    {
+        get => _zergDestroyedCount;
+        set
+        {
+            _zergDestroyedCount = value;
+            if (_zergDestroyedCount >= ZERGS_TO_DESTROY)
+            {
+                _hasWon = true;
+                OnAllZergDestroyed?.Invoke(); // Notify that all zergs are destroyed
+            }
+        }
+    }
+
     public List<FileSystemFile> ActiveFiles
     {
         get
@@ -53,6 +70,7 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
         }
     }
 
+    public event System.Action OnAllZergDestroyed;
     public event System.Action OnFileSystemLayoutChanged;
 
 
@@ -63,7 +81,13 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
         _bigZergSpawnTimeElapsed = bigZergSpawnRate;
         _mainCamera = Camera.main;
 
-        foreach (FileSystemFile file in files)
+        _files = new List<FileSystemFile>();
+        foreach (FileSystemFile file in fileContainer.GetComponentsInChildren<FileSystemFile>())
+        {
+            _files.Add(file);
+        }
+
+        foreach (FileSystemFile file in _files)
         {
             file.GetComponent<DraggableWorldSpace>().OnDropped += () =>
             {
@@ -78,21 +102,24 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
     // Update is called once per frame
     void Update()
     {
-        _smallZergSpawnTimeElapsed += Time.deltaTime;
-        _bigZergSpawnTimeElapsed += Time.deltaTime;
-
-        // spawn small zergs
-        if (_smallZergSpawnTimeElapsed >= smallZergSpawnRate && _zergCount < maxZergCount)
+        if (!_hasWon)
         {
-            SpawnZerg();
-            _smallZergSpawnTimeElapsed = 0.0f;
-        }
+            _smallZergSpawnTimeElapsed += Time.deltaTime;
+            _bigZergSpawnTimeElapsed += Time.deltaTime;
 
-        // spawn big zergs
-        if (_bigZergSpawnTimeElapsed >= bigZergSpawnRate && _zergCount < maxZergCount)
-        {
-            SpawnZerg(ZergTypeEnum.Big);
-            _bigZergSpawnTimeElapsed = 0.0f;
+            // spawn small zergs
+            if (_smallZergSpawnTimeElapsed >= smallZergSpawnRate && _zergCount < maxZergCount)
+            {
+                SpawnZerg();
+                _smallZergSpawnTimeElapsed = 0.0f;
+            }
+
+            // spawn big zergs
+            if (_bigZergSpawnTimeElapsed >= bigZergSpawnRate && _zergCount < maxZergCount)
+            {
+                SpawnZerg(ZergTypeEnum.Big);
+                _bigZergSpawnTimeElapsed = 0.0f;
+            }
         }
 
         if (Input.GetMouseButtonDown(0)) // left mouse button
@@ -129,6 +156,8 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
         zerg.transform.SetPositionAndRotation(spawnPoint, Quaternion.identity);
         zerg.transform.SetParent(zergParent);
         _zergCount++;
+        zerg.gameObject.name = $"{zergType}-{_zergCount}";
+        Debug.Log($"Spawned {zergType} zerg with index {_zergCount}");
     }
 
     public Vector2 GetRandomPointOutsideBox(Vector2 lowerLeft, Vector2 upperRight, float minOffset, float maxOffset)
@@ -163,7 +192,7 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
 
     public void AddFile(FileSystemFile file)
     {
-        files.Add(file);
+        _files.Add(file);
         file.gameObject.SetActive(true);
         file.transform.SetParent(fileContainer);
     }

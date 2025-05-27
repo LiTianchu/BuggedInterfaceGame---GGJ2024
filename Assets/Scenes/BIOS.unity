@@ -4499,6 +4499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16da2c4c26dd7e649bd117ef1a1875b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputField: {fileID: 0}
   correctOrder: 01000000020000000300000004000000
   secretOrder: 0800000032000000160000000600000007000000270000002b000000110000002e000000
   nextbutton: {fileID: 0}

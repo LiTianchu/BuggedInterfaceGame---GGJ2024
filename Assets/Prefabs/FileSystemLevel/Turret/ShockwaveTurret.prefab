@@ -266,9 +266,9 @@ GameObject:
   - component: {fileID: 3923321808427397540}
   - component: {fileID: 5473948896702375862}
   - component: {fileID: 6287747295205346564}
-  - component: {fileID: 1250072135073860593}
+  - component: {fileID: 1885107681468602498}
   m_Layer: 0
-  m_Name: ZipFolder
+  m_Name: ShockwaveTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -396,7 +396,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.64, y: 0.64}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -417,9 +417,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7828d5fb5cabab14aa7129385e8a7f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileHp: 50
+  fileHp: 100
   hpBar: {fileID: 4083835929467221259}
---- !u!114 &1250072135073860593
+--- !u!114 &1885107681468602498
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -428,19 +428,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 3005879401678344829}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eba3c15a4570ce44a75187f08c5c3b5, type: 3}
+  m_Script: {fileID: 11500000, guid: 41dd76024c3ee6a4da39dc6d0c222975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretName: Turret
-  damage: 1
-  fireRate: 1
-  range: 5
-  bulletSpeed: 10
+  turretName: ShockwaveTurret
+  damage: 3
+  fireRate: 3
+  range: 2.5
   firePoint: {fileID: 3192217911115843779}
   targetLayer:
     serializedVersion: 2
     m_Bits: 1024
-  bulletSprite: {fileID: 21300000, guid: 055c897c77c9d2048b8e5c45e64100a8, type: 3}
+  shockwaveAnimator: {fileID: 4981921782803182765, guid: fceb536dde97cff4c912689de8ac396b, type: 3}
 --- !u!1 &3747582199146320405
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,7 +836,7 @@ Transform:
   m_GameObject: {fileID: 9169806069370589588}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.255, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

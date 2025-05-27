@@ -11,6 +11,7 @@ public class StartMenuTurretFile : Draggable
     [SerializeField] private TurretFile turretFilePrefab;
     [Required]
     [SerializeField] private TMP_Text turretFileName;
+    
 
     [Header("Other Settings")]
     [SerializeField] private LayerMask fileSystemGridLayer;
