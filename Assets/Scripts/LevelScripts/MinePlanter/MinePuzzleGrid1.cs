@@ -14,7 +14,7 @@ public class MinePuzzleGrid1 : MonoBehaviour,IPointerDownHandler
     protected virtual int MIN_NUM => 0;
     protected virtual int MAX_NUM => 3;
     protected TMP_Text _numText;
-    public Mineplanter2 Mineplanter { get; set; }
+    public MineplanterLevel3 Mineplanter { get; set; }
     public int X { get; set; }
     public int Y { get; set; }
 

@@ -15,7 +15,7 @@ public class MinePuzzleGrid : MonoBehaviour,IPointerDownHandler
     private const int MIN_NUM = 0;
     private const int MAX_NUM = 3;
     private TMP_Text _numText;
-    public Mineplanter Mineplanter { get; set; }
+    public MineplanterLevel1 Mineplanter { get; set; }
     public int X { get; set; }
     public int Y { get; set; }
 
