@@ -25,7 +25,8 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
     [SerializeField] private Transform zergContainer;
 
 
-    public static int ZERGS_TO_DESTROY = 50;
+    public static readonly int ZERGS_TO_DESTROY = 50;
+
 
     private List<FileSystemFile> _files;
     private float _smallZergSpawnTimeElapsed;
