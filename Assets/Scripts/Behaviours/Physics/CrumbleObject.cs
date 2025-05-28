@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class CrumbleObject : MonoBehaviour
 {
     [SerializeField] private float crumbleForce = 1f;
@@ -21,10 +20,6 @@ public class CrumbleObject : MonoBehaviour
         if (crumbleOnStart)
         {
             Crumble();
-        }
-        else
-        {
-            _rb.simulated = false;
         }
     }
     

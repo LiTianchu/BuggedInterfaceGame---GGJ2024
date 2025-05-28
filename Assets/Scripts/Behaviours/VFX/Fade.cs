@@ -17,20 +17,14 @@ public class Fade : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(fadeMode == FadeMode.In)
-        {
-            GetComponent<CanvasGroup>().alpha = 0;
-        }
-        else
-        {
-            GetComponent<CanvasGroup>().alpha = 1;
-        }
+        
         _rectTransform = GetComponent<RectTransform>();
         _canvasGroup = GetComponent<CanvasGroup>();
         _originalPos = _rectTransform.anchoredPosition;
-        
 
-        if(!fadeOnStart)
+        ResetOpacity();
+
+        if (!fadeOnStart)
         {
             return;
         }
@@ -50,6 +44,23 @@ public class Fade : MonoBehaviour
     public void SetFadeTime(float time)
     {
         fadeDuration = time;
+    }
+
+    protected void ResetOpacity()
+    {
+        if(_canvasGroup == null)
+        {
+            _canvasGroup = GetComponent<CanvasGroup>();
+        }
+        
+        if (fadeMode == FadeMode.In)
+        {
+            _canvasGroup.alpha = 0;
+        }
+        else
+        {
+            _canvasGroup.alpha = 1;
+        }
     }
 
     private enum FadeMode

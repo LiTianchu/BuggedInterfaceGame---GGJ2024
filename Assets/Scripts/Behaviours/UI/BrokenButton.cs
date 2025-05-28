@@ -11,7 +11,7 @@ public class BrokenButton : BrokenObject
     protected override void Initialize()
     {
         
-        lockedComponent.enabled = false;
+        //lockedComponent.enabled = false;
     }
 
     protected override void HandleBroken()
