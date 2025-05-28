@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Mineplanter2 : MonoBehaviour
+public class MineplanterLevel3: MonoBehaviour
 {
     [Header("Grids")]
     [SerializeField] protected GridLayoutGroup puzzleGrid;

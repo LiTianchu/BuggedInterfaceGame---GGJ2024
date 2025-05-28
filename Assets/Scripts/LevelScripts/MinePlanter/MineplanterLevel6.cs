@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class Mineplanter5 : Mineplanter2
+public class MineplanterLevel6: MineplanterLevel3
 {
     public GameObject refImage;
     protected int progress = 0;

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Mineplanter1 : Mineplanter
+public class MineplanterLevel2: MineplanterLevel1
 {
     public override void Start() {
          MINES = new()
