@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
@@ -10,7 +8,8 @@ public class StoreItem : MonoBehaviour
     [Header("Store Item Data")]
     [SerializeField] private string gameName = "Game Name";
     [SerializeField] private int gamePrice = 1;
-    [SerializeField] private TurretFile awardedGameFile;
+    [SerializeField] private bool isKey = false;
+    [SerializeField] private GameObject award;
     [SerializeField] private StorePuzzleWinScreen storePuzzleWinScreen;
 
 
@@ -33,7 +32,14 @@ public class StoreItem : MonoBehaviour
         gameNameLabel.text = gameName;
         gamePriceLabel.text = gamePrice.ToString();
 
-        storePuzzleWinScreen.Initialize(gamePrice, awardedGameFile);
+        if (isKey)
+        {
+            storePuzzleWinScreen.Initialize(gamePrice, true);
+        }
+        else
+        {
+            storePuzzleWinScreen.Initialize(gamePrice, award);
+        }
 
         InventoryManager.Instance.OnCoinCountChanged += CheckIfCanPurchase;
     }
