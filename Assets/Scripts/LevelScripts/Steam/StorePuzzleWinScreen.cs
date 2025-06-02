@@ -14,12 +14,33 @@ public class StorePuzzleWinScreen : MonoBehaviour
     [SerializeField] private Image image;
 
     private int _cost;
+    private bool _isKey = false;
     private TurretFile _turretFile;
+
+    public bool IsKey
+    {
+        get => _isKey;
+        set => _isKey = value;
+    }
 
 
     void OnEnable()
     {
         Purchase();
+    }
+
+    public void Initialize(int cost, bool isKey)
+    {
+        _isKey = isKey;
+        _cost = cost;
+    }
+
+    public void Initialize(int cost, GameObject award)
+    {
+        if (award.TryGetComponent(out TurretFile turretFile))
+        {
+            Initialize(cost, turretFile);
+        }
     }
 
     public void Initialize(int cost, TurretFile turretFile)
@@ -28,24 +49,30 @@ public class StorePuzzleWinScreen : MonoBehaviour
         _turretFile = turretFile;
     }
 
-
     private void Purchase()
     {
         // Implement purchase logic here
         bool enoughCoin = InventoryManager.Instance.UseCoin(_cost);
 
-        if(enoughCoin == false)
+        if (enoughCoin == false)
         {
             Debug.Log("Not enough coins");
             successText.text = "Not enough coins";
             return;
         }
 
-        
-        Debug.Log($"Purchased {_turretFile}");
-        InventoryManager.Instance.UpdateTurretFile(_turretFile, TurretStateEnum.Unlocked);
-        Debug.Log($"Turret {_turretFile} unlocked");
-        successText.text = $"You have downloaded {_turretFile}!";
+        if (_isKey)
+        {
+            Debug.Log($"Purchased key for {_cost} coins");
+            InventoryManager.Instance.AddKey(1);
+        }
+        else
+        {
+            Debug.Log($"Purchased {_turretFile}");
+            InventoryManager.Instance.UpdateTurretFile(_turretFile, TurretStateEnum.Unlocked);
+            Debug.Log($"Turret {_turretFile} unlocked");
+            successText.text = $"You have downloaded {_turretFile}!";
+        }
 
 
     }

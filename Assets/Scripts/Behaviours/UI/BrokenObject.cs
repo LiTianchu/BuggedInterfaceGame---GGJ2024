@@ -8,20 +8,19 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(ShakeAnim))]
 public class BrokenObject : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField]
-    private float gravityScale = 100f;
+    [SerializeField] private float gravityScale = 100f;
     [Range(0, 10)]
-    [SerializeField]
-    private int numOfClicksBeforeDrop = 3;
-    [SerializeField]
-    private AudioClip breakSound;
-    [SerializeField]
-    private BreakType breakType;
+    [SerializeField] private int numOfClicksBeforeDrop = 3;
+    [SerializeField] private AudioClip breakSound;
+    [SerializeField] private BreakType breakType;
+    [SerializeField] private Transform parentWhenBroken;
 
     private bool _isDropped = false;
 
     private GravityController2D _gravityController2D;
     private ShakeAnim _shakeAnim;
+
+    public event System.Action OnBroken;
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +55,12 @@ public class BrokenObject : MonoBehaviour, IPointerClickHandler
                     rb.GetComponentInChildren<HingeJoint2D>().enabled = false;
                     break;
             }
+
+            if (parentWhenBroken != null)
+            {
+                transform.SetParent(parentWhenBroken);
+            }
+            OnBroken?.Invoke();
             HandleBroken();
 
             _isDropped = true;

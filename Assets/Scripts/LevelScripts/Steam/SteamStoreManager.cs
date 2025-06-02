@@ -7,6 +7,10 @@ using UnityEngine.UI;
 
 public class SteamStoreManager : MonoBehaviour
 {
+    [Header("Store List Puzzle")]
+    [SerializeField] private BrokenObject not;
+    [SerializeField] private List<StoreItem> hiddenStoreItems;
+
     [Header("Store A QR Puzzle")]
     [SerializeField] private CrumblingPieces storeAPuzzle;
     [SerializeField] private StorePuzzleWinScreen storeAPuzzleWinScreen;
@@ -26,12 +30,23 @@ public class SteamStoreManager : MonoBehaviour
     void Start()
     {
         storeAPuzzle.OnPuzzlePieceRight += HandleStoreAPuzzleWin;
+        not.OnBroken += ShowAllStoreItems;
         continueButton.onClick.AddListener(CheckBirthday);
     }
+
 
     void OnDestroy()
     {
         storeAPuzzle.OnPuzzlePieceRight -= HandleStoreAPuzzleWin;
+        not.OnBroken -= ShowAllStoreItems;
+    }
+
+    private void ShowAllStoreItems()
+    {
+        foreach (StoreItem item in hiddenStoreItems)
+        {
+            item.gameObject.SetActive(true);
+        }
     }
 
     private void HandleStoreAPuzzleWin()
