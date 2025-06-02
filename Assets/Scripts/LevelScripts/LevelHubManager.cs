@@ -12,6 +12,7 @@ public class LevelHubManager : Singleton<LevelHubManager>
     [SerializeField] private List<CrumbleObject> crumbleObjects;
 
     private int _numOfCrumbleObjects;
+    private bool _biosLoaded = false;
     public event System.Action OnStartLoadingBios;
 
     private void Start()
@@ -21,10 +22,15 @@ public class LevelHubManager : Singleton<LevelHubManager>
 
     private void Update()
     {
-        if(Keyboard.current.oKey.wasPressedThisFrame)
+        if (!_biosLoaded && InventoryManager.Instance.KeyCount >= 3)
         {
+            _biosLoaded = true;
             StartCoroutine(LoadBios());
         }
+        // if(Keyboard.current.oKey.wasPressedThisFrame)
+        // {
+        //     StartCoroutine(LoadBios());
+        // }
     }
 
     public void ShowLevelHubScreen()

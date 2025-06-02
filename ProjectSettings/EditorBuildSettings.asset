@@ -33,7 +33,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Mineplanter/MenuMineplanter.unity
     guid: f69ef560e040ee94d98715860b0162dc
   - enabled: 1
-    path: Assets/Scenes/Mineplanter/Mineplanter.unity
+    path: Assets/Scenes/Mineplanter.unity
     guid: 8bb836434f4acbc4e85e114b6390a0a5
   - enabled: 1
     path: Assets/Scenes/Mineplanter/MineplanterLevel2.unity
