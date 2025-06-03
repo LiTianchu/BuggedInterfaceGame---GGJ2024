@@ -17,7 +17,7 @@ namespace PixelCrushers.DialogueSystem.Extras
         [SerializeField] private bool showMultipleAlertsInSequence = true;
         [SerializeField] private float closeDelay = 5f;
 
-        private Queue<UIPanel> _alertPanelQueue = new();
+        private List<UIPanel> _alertPanelQueue = new();
         public override void ShowAlert(string message, float duration)
         {
             if (!showMultipleAlertsInSequence)
@@ -40,10 +40,12 @@ namespace PixelCrushers.DialogueSystem.Extras
             }
 
             UIPanel newAlertPanel = Instantiate(alertUIElements.panel, transform);
+
+            newAlertPanel.transform.SetAsFirstSibling(); // prevent blocking the main panel
             TMP_Text txt = Instantiate(alertUIElements.alertText.textMeshProUGUI, newAlertPanel.transform);
             txt.text = FormattedText.Parse(message).text;
 
-            _alertPanelQueue.Enqueue(newAlertPanel);
+            _alertPanelQueue.Add(newAlertPanel);
 
             newAlertPanel.SetOpen(true);
             txt.gameObject.SetActive(true);
@@ -51,39 +53,42 @@ namespace PixelCrushers.DialogueSystem.Extras
             StartCoroutine(CloseAlertAfterDelay(newAlertPanel));
 
         }
-        
+
+        protected override void AddMessage(Subtitle subtitle)
+        {
+            // check if the subtitle is from NPC
+            if (subtitle.speakerInfo.isNPC)
+            {
+                DialogueManager.ShowAlert(subtitle.formattedText.text);
+            }
+            
+            base.AddMessage(subtitle);
+        }
+
         private IEnumerator CloseAlertAfterDelay(UIPanel alertPanel)
         {
             yield return new WaitForSeconds(closeDelay);
             alertPanel.SetOpen(false);
+
+            // remove the alert panel from the queue
+            if (_alertPanelQueue[_alertPanelQueue.Count - 1] == alertPanel)
+            {
+                _alertPanelQueue.RemoveAt(_alertPanelQueue.Count - 1);
+            }
+            else
+            {
+                foreach (UIPanel queuedPanel in _alertPanelQueue)
+                {
+                    if (queuedPanel == alertPanel)
+                    {
+                        _alertPanelQueue.Remove(queuedPanel);
+                        break;
+                    }
+                }
+            }
+            
             yield return new WaitForSeconds(2f); // Wait for the close animation to finish
             Destroy(alertPanel.gameObject);
         }
-
-
-
-        
-
     }
-
-
-        // public override void SetActive(bool value)
-        // {
-        //     if (panel != null)
-        //     {
-        //         if (!m_initializedAnimator && value == false)
-        //         {
-        //             if (panel.deactivateOnHidden)
-        //             {
-        //                 panel.gameObject.SetActive(false);
-        //             }
-        //         }
-        //         else
-        //         {
-        //             panel.SetOpen(value);
-        //         }
-        //     }
-        //     m_initializedAnimator = true;
-        //     if (value == true || panel == null) alertText.SetActive(true);
-        // }
 }
