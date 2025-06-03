@@ -21,7 +21,7 @@ public class SteamStoreManager : MonoBehaviour
     [SerializeField] private TMP_Text storeBPuzzleNumText2;
     [SerializeField] private TMP_Text storeBPuzzleNumText3;
     [SerializeField] private TMP_Text storeBPuzzleNumText4;
-    [SerializeField] private FadingText wrongAgeText;
+    [SerializeField] private FadeAfterShowTime wrongAgeText;
     [SerializeField] private Button continueButton;
     [SerializeField] private string correctBirthday = "2000";
     [SerializeField] private StorePuzzleWinScreen storeBPuzzleWinScreen;
@@ -70,7 +70,7 @@ public class SteamStoreManager : MonoBehaviour
             // Incorrect birthday, show error message
             Debug.Log("Incorrect birthday entered: " + inputBirthday);
             wrongAgeText.gameObject.SetActive(true);
-            wrongAgeText.ResetFadingText();
+            wrongAgeText.Reshow();
         }
     }
     

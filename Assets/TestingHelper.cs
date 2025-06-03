@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using PixelCrushers.DialogueSystem;
 using UnityEngine;
 
 public class TestingHelper : MonoBehaviour
@@ -19,5 +20,15 @@ public class TestingHelper : MonoBehaviour
                 InventoryManager.Instance.UpdateTurretFile(file, TurretStateEnum.Unlocked);
             }
         }
+
+        //StartCoroutine(TestAlertCoroutine());
+    }
+
+    public IEnumerator TestAlertCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+        DialogueManager.ShowAlert("This is an alert message for testing purposes.");
+        yield return new WaitForSeconds(1f);
+        DialogueManager.ShowAlert("This is another alert message for testing purposes.");
     }
 }
