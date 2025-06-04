@@ -419,6 +419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fileHp: 100
   hpBar: {fileID: 4083835929467221259}
+  locked: 0
 --- !u!114 &1885107681468602498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -431,7 +432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41dd76024c3ee6a4da39dc6d0c222975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretName: ShockwaveTurret
+  turretName: Shockwave Turret
   damage: 3
   fireRate: 3
   range: 2.5
@@ -505,7 +506,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Archive.zip
+  m_text: Shockwave Turret
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
