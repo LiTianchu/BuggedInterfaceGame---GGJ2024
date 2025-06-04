@@ -91,7 +91,6 @@ public class SteamStoreManager : MonoBehaviour
         storeDPuzzle.gameObject.SetActive(false);
     }
 
-
     private void CheckBirthday()
     {
         string inputBirthday = storeBPuzzleNumText1.text + storeBPuzzleNumText2.text + storeBPuzzleNumText3.text + storeBPuzzleNumText4.text;
@@ -109,6 +108,7 @@ public class SteamStoreManager : MonoBehaviour
             wrongAgeText.Reshow();
         }
     }
+
     private void CheckTnC()
     {
         bool allCorrect = true;
@@ -152,8 +152,4 @@ public class SteamStoreManager : MonoBehaviour
             Debug.Log("Some image selections are incorrect.");
         }
     }
-
-
-
-
 }

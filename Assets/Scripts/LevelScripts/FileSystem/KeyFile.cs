@@ -5,17 +5,24 @@ using UnityEngine;
 
 public class KeyFile : FileSystemFile
 {
+    
     protected new void Start()
     {
         base.Start();
-        FileSystemLevelManager.Instance.OnAllZergDestroyed += UnlockKey;
+        FileSystemLevelManager.Instance.OnLevelCleared += UnlockKey;
     }
 
-    private void UnlockKey()
+    private void UnlockKey(FileSystemLevel level)
     {
+        if (level is not FileSystemLevelLast)
+        {
+            return;
+        }
+
+
         if (Locked)
         {
-            FileSystemLevelManager.Instance.OnAllZergDestroyed -= UnlockKey;
+            FileSystemLevelManager.Instance.OnLevelCleared -= UnlockKey;
 
             Locked = false;
             Debug.Log("Key unlocked");

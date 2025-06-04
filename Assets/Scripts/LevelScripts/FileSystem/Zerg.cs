@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -34,13 +35,13 @@ public class Zerg : MonoBehaviour
     public float ZergAttackRange { get => zergAttackRange; }
     public float ZergAttackRate { get => zergAttackRate; }
     public int ZergMaxHp { get => zergMaxHp; }
-    
+
     void Start()
     {
         _timeSinceLastAttack = zergAttackRate;
         _timeSinceLastTargetRefresh = refreshTargetInterval;
         zergSpriteRenderer.sortingOrder = 1;
-        FileSystemLevelManager.Instance.OnFileSystemLayoutChanged += ResetTarget;
+        FileSystemLevelManager.Instance.CurrentLevel.OnFileSystemLayoutChanged += ResetTarget;
     }
 
     // Update is called once per frame
@@ -75,7 +76,7 @@ public class Zerg : MonoBehaviour
     {
         FileSystemFile closestFile = null;
         float closestDistance = float.MaxValue;
-        foreach (FileSystemFile file in FileSystemLevelManager.Instance.ActiveFiles)
+        foreach (FileSystemFile file in FileSystemLevelManager.Instance.CurrentLevel.ActiveFiles)
         {
             float dist = Vector2.Distance(transform.position, file.transform.position);
             if (dist < closestDistance)
@@ -136,9 +137,9 @@ public class Zerg : MonoBehaviour
             //play death animation
             zergSpriteRenderer.DOFade(0.0f, 0.3f).OnComplete(() =>
             {
-                FileSystemLevelManager.Instance.ZergDestroyedCount++;
-                _pool.Release(this);         
-                Debug.Log($"Zerg {gameObject.name} destroyed, {FileSystemLevelManager.Instance.ZergDestroyedCount} destroyed in total.");       
+                FileSystemLevelManager.Instance.CurrentLevel.ZergDestroyedCount++;
+                _pool.Release(this);
+                Debug.Log($"Zerg {gameObject.name} destroyed, {FileSystemLevelManager.Instance.CurrentLevel.ZergDestroyedCount} destroyed in total.");
             });
         }
     }
@@ -147,6 +148,20 @@ public class Zerg : MonoBehaviour
     {
         return _zergHp > 0;
     }
+    
+    public void StallSeconds(float seconds)
+    {
+        // This method can be used to stall the zerg for a certain amount of time
+        // For example, if you want to pause the zerg's movement or actions
+        StartCoroutine(StallCoroutine(seconds));
+    }
 
+    private IEnumerator StallCoroutine(float seconds)
+    {
+        float originalSpeed = zergMoveSpeed;
+        zergMoveSpeed = 0; // stop moving
+        yield return new WaitForSeconds(seconds);
+        zergMoveSpeed = originalSpeed; // resume moving
 
+    }
 }

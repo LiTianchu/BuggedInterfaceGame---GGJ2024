@@ -445,8 +445,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSystem: {fileID: 6056426456065375661}
-  keyFile: {fileID: 0}
-  maxZergCount: 300
+  keyFile: {fileID: 1572960867059542007}
+  maxZergCount: 50
   smallZergSpawnRate: 0.4
   bigZergSpawnRate: 2
   smallZergPrefab: {fileID: 5300704090005743820, guid: 3e14f770b1791b94e9693ccab9054bfa, type: 3}
