@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.WSA;
 
 public class FileSystemLevel : MonoBehaviour
 {
     [TitleGroup("Level Settings")]
     [SerializeField] protected GridSystem gridSystem;
-    [SerializeField] protected KeyFile keyFile;
+    [SerializeField] protected FileSystemFile criticalFile;
     [SerializeField] private LayerMask zergLayer;
+    [SerializeField] private FileSystemLevel previousLevel;
 
     [TitleGroup("Containers")]
     [SerializeField] protected Transform fileContainer;
@@ -23,8 +25,19 @@ public class FileSystemLevel : MonoBehaviour
 
 
     public event System.Action OnFileSystemLayoutChanged;
+    public event System.Action<FileSystemLevel> OnNewFileSystemLevelEntered;
     
     public int ZergCount { get => _zergCount; }
+    protected int _zergDestroyedCount = 0;
+      public virtual int ZergDestroyedCount
+    {
+        get => _zergDestroyedCount;
+        set
+        {
+            _zergDestroyedCount = value;
+       
+        }
+    }
 
 
     public List<FileSystemFile> ActiveFiles
@@ -52,6 +65,10 @@ public class FileSystemLevel : MonoBehaviour
         foreach (FileSystemFile file in fileContainer.GetComponentsInChildren<FileSystemFile>())
         {
             _files.Add(file);
+            if(file is FolderFile folderFile)
+            {
+                folderFile.CurrentLevel = this;
+            }
         }
 
         foreach (FileSystemFile file in _files)
@@ -62,7 +79,7 @@ public class FileSystemLevel : MonoBehaviour
             };
         }
 
-        keyFile.OnFileDestroyed += HandleKeyFileDestroyed;
+        criticalFile.OnFileDestroyed += HandleCriticalFileDestroyed;
     }
 
     // Update is called once per frame
@@ -81,6 +98,7 @@ public class FileSystemLevel : MonoBehaviour
         }
     }
 
+
     public void AddFile(FileSystemFile file)
     {
         _files.Add(file);
@@ -88,10 +106,8 @@ public class FileSystemLevel : MonoBehaviour
         file.transform.SetParent(fileContainer);
     }
 
-    private void HandleKeyFileDestroyed()
+    private void HandleCriticalFileDestroyed()
     {
-        // handle key file destroyed
-        // for example, show game over screen or restart level
-        Debug.Log("Key file destroyed!");
+        FileSystemLevelManager.Instance.CurrentLevel = previousLevel;
     }
 }

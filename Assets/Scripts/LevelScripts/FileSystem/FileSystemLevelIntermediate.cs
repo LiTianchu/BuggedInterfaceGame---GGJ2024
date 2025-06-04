@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FileSystemLevelSecond : FileSystemLevel
+public class FileSystemLevelIntermediate : FileSystemLevel
 {
     // Start is called before the first frame update
     public new void Start()

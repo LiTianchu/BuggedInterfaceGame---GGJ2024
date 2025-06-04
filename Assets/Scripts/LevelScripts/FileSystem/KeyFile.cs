@@ -19,7 +19,7 @@ public class KeyFile : FileSystemFile
             return;
         }
 
-        
+
         if (Locked)
         {
             FileSystemLevelManager.Instance.OnLevelCleared -= UnlockKey;
@@ -27,10 +27,6 @@ public class KeyFile : FileSystemFile
             Locked = false;
             Debug.Log("Key unlocked");
         }
-    }
-
-    private void UnlockKey()
-    {
     }
 
     private void OnMouseDown()

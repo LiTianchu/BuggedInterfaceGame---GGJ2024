@@ -44,11 +44,13 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
     }
 
     public event System.Action<FileSystemLevel> OnLevelCleared;
-    
+    public event System.Action<FileSystemLevel> OnNewFileSystemLevelEntered;
+
 
     public void StartLevel(FileSystemLevel level)
     {
         CurrentLevel = level;
+        OnNewFileSystemLevelEntered?.Invoke(CurrentLevel);
     }
 
     public void Start()
@@ -57,7 +59,12 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
         {
             CurrentLevel = level1; // Default to level1 if no level is set
         }
-          
+
+    }
+    
+    public void PublishCurrentLevelCleared()
+    {
+        OnLevelCleared?.Invoke(CurrentLevel);
     }
 }
 

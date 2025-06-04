@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Sirenix.OdinInspector;
 using TMPro;
@@ -11,7 +12,7 @@ public class StartMenuTurretFile : Draggable
     [SerializeField] private TurretFile turretFilePrefab;
     [Required]
     [SerializeField] private TMP_Text turretFileName;
-    
+
 
     [Header("Other Settings")]
     [SerializeField] private LayerMask fileSystemGridLayer;
@@ -35,8 +36,15 @@ public class StartMenuTurretFile : Draggable
         _image = GetComponent<Image>();
 
     }
+    public void Start()
+    {
+        FileSystemLevelManager.Instance.OnNewFileSystemLevelEntered += HandleNewFileSystemLevelEntered;
+    }
 
-   
+    public void OnDestroy()
+    {
+        FileSystemLevelManager.Instance.OnNewFileSystemLevelEntered -= HandleNewFileSystemLevelEntered;
+    }
 
     public void Initialize(StartMenu startMenu)
     {
@@ -58,10 +66,10 @@ public class StartMenuTurretFile : Draggable
             turretFile.gameObject.SetActive(true);
             DraggableWorldSpace draggableWorldSpace = turretFile.GetComponent<DraggableWorldSpace>();
             draggableWorldSpace.DropObject();
-            _isDeployed = true;
-            IsDraggable = false;
 
-            FileSystemLevelManager.Instance.AddFile(turretFile.GetComponent<FileSystemFile>());
+            SetDeployed();
+
+            FileSystemLevelManager.Instance.CurrentLevel.AddFile(turretFile.GetComponent<FileSystemFile>());
         }
     }
 
@@ -88,7 +96,7 @@ public class StartMenuTurretFile : Draggable
         if (_gridBelow != null) // drop the turret file and mark as used
         {
             _gridBelow.NormalColor();
-            _image.color = usedColor;
+
 
             DeployTurret();
         }
@@ -132,6 +140,29 @@ public class StartMenuTurretFile : Draggable
                 _gridBelow = null;
             }
         }
+    }
 
+    private void HandleNewFileSystemLevelEntered(FileSystemLevel level)
+    {
+        SetAsNotDeployed();
+    }
+    private void SetDeployed()
+    {
+        _isDeployed = true;
+        IsDraggable = false;
+        _image.color = usedColor;
+    }
+
+    private void SetAsNotDeployed()
+    {
+        if (_originalAnchorPos == new Vector3(999, 999, 999))
+        {
+            _originalAnchorPos = _rectTransform.anchoredPosition;
+        }
+        _image.color = Color.white;
+        _isDeployed = false;
+        IsDraggable = true;
+        _gridBelow = null;
+        _rectTransform.anchoredPosition = _originalAnchorPos;
     }
 }

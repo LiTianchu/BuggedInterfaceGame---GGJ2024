@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -13,14 +14,14 @@ public class FileSystemLevelIntro : FileSystemLevel
     [SerializeField] private float bigZergSpawnRate = 5.0f;
     [SerializeField] private Zerg smallZergPrefab;
     [SerializeField] private Zerg bigZergPrefab;
-    [SerializeField] private Transform zergParent;
+   // [SerializeField] private Transform zergParent;
 
 
     public static readonly int ZERGS_TO_DESTROY = 50;
     private float _smallZergSpawnTimeElapsed;
     private float _bigZergSpawnTimeElapsed;
-    private int _zergDestroyedCount = 0;
-    public int ZergDestroyedCount
+
+    public override int ZergDestroyedCount
     {
         get => _zergDestroyedCount;
         set
@@ -29,24 +30,32 @@ public class FileSystemLevelIntro : FileSystemLevel
             if (_zergDestroyedCount >= ZERGS_TO_DESTROY)
             {
                 _hasWon = true;
-                OnAllZergDestroyed?.Invoke(); // Notify that all zergs are destroyed
+                FileSystemLevelManager.Instance.PublishCurrentLevelCleared();
+                //OnAllZergDestroyed?.Invoke(); // Notify that all zergs are destroyed
             }
         }
     }
-    public event System.Action OnAllZergDestroyed;
+    //public event System.Action OnAllZergDestroyed;
     // Start is called before the first frame update
     public new void Start()
     {
-        _smallZergSpawnTimeElapsed = smallZergSpawnRate;
-        _bigZergSpawnTimeElapsed = bigZergSpawnRate;
         CreateZergPools();
         base.Start();
+    }
+
+    public void OnEnable()
+    {
+        if (!_hasWon)
+        {
+            _smallZergSpawnTimeElapsed = smallZergSpawnRate;
+            _bigZergSpawnTimeElapsed = bigZergSpawnRate;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-    if (!_hasWon)
+        if (!_hasWon)
         {
             _smallZergSpawnTimeElapsed += Time.deltaTime;
             _bigZergSpawnTimeElapsed += Time.deltaTime;
@@ -67,7 +76,7 @@ public class FileSystemLevelIntro : FileSystemLevel
         }
     }
 
-     public void SpawnZerg(ZergTypeEnum zergType = ZergTypeEnum.Small)
+    public void SpawnZerg(ZergTypeEnum zergType = ZergTypeEnum.Small)
     {
         // get a random point outside the grid
         Vector2 spawnPoint = VectorUtils.GetRandomPointOutsideBox(gridSystem.GridLowerLeft, gridSystem.GridUpperRight, 5f, 10f);
@@ -85,12 +94,12 @@ public class FileSystemLevelIntro : FileSystemLevel
         }
 
         zerg.transform.SetPositionAndRotation(spawnPoint, Quaternion.identity);
-        zerg.transform.SetParent(zergParent);
+        zerg.transform.SetParent(zergContainer);
         _zergCount++;
         zerg.gameObject.name = $"{zergType}-{_zergCount}";
         Debug.Log($"Spawned {zergType} zerg with index {_zergCount}");
     }
-    
+
     // object pools
     private ObjectPool<Zerg> _smallZergPool;
     private ObjectPool<Zerg> _bigZergPool;

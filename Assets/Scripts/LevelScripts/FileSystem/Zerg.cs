@@ -40,7 +40,7 @@ public class Zerg : MonoBehaviour
         _timeSinceLastAttack = zergAttackRate;
         _timeSinceLastTargetRefresh = refreshTargetInterval;
         zergSpriteRenderer.sortingOrder = 1;
-        FileSystemLevelManager.Instance.OnFileSystemLayoutChanged += ResetTarget;
+        FileSystemLevelManager.Instance.CurrentLevel.OnFileSystemLayoutChanged += ResetTarget;
     }
 
     // Update is called once per frame
@@ -75,7 +75,7 @@ public class Zerg : MonoBehaviour
     {
         FileSystemFile closestFile = null;
         float closestDistance = float.MaxValue;
-        foreach (FileSystemFile file in FileSystemLevelManager.Instance.ActiveFiles)
+        foreach (FileSystemFile file in FileSystemLevelManager.Instance.CurrentLevel.ActiveFiles)
         {
             float dist = Vector2.Distance(transform.position, file.transform.position);
             if (dist < closestDistance)
@@ -136,9 +136,9 @@ public class Zerg : MonoBehaviour
             //play death animation
             zergSpriteRenderer.DOFade(0.0f, 0.3f).OnComplete(() =>
             {
-                FileSystemLevelManager.Instance.ZergDestroyedCount++;
+                FileSystemLevelManager.Instance.CurrentLevel.ZergDestroyedCount++;
                 _pool.Release(this);         
-                Debug.Log($"Zerg {gameObject.name} destroyed, {FileSystemLevelManager.Instance.ZergDestroyedCount} destroyed in total.");       
+                Debug.Log($"Zerg {gameObject.name} destroyed, {FileSystemLevelManager.Instance.CurrentLevel.ZergDestroyedCount} destroyed in total.");       
             });
         }
     }
