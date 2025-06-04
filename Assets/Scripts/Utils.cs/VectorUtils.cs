@@ -21,4 +21,35 @@ public class VectorUtils
 
         return force;
     }
+
+
+    public static Vector2 GetRandomPointOutsideBox(Vector2 lowerLeft, Vector2 upperRight, float minOffset, float maxOffset)
+    {
+        float randNum = Random.Range(0, 1.0f);
+        float randomOffset = Random.Range(minOffset, maxOffset);
+        float x;
+        float y;
+        if (randNum < 0.25f)
+        { // top
+            x = Random.Range(lowerLeft.x, upperRight.x);
+            y = upperRight.y + randomOffset;
+        }
+        else if (randNum < 0.5f)
+        { // bottom
+            x = Random.Range(lowerLeft.x, upperRight.x);
+            y = lowerLeft.y - randomOffset;
+        }
+        else if (randNum < 0.75f)
+        { // left
+            y = Random.Range(lowerLeft.y, upperRight.y);
+            x = lowerLeft.x - randomOffset;
+        }
+        else
+        { // right
+            y = Random.Range(lowerLeft.y, upperRight.y);
+            x = upperRight.x + randomOffset;
+        }
+
+        return new Vector2(x, y);
+    }
 }
