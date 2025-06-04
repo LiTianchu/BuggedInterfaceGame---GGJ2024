@@ -7,10 +7,13 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
 {
     [SerializeField] private BulletSpawner bulletSpawner;
     [TitleGroup("Levels")]
+    [SerializeField] private FileSystemLevel level0;
     [SerializeField] private FileSystemLevel level1;
     [SerializeField] private FileSystemLevel level2;
     [SerializeField] private FileSystemLevel level3;
-    [SerializeField] private FileSystemLevel level4;
+    [TitleGroup("Zergs")]
+        [SerializeField] private Zerg smallZergPrefab;
+    [SerializeField] private Zerg bigZergPrefab;
 
     public BulletSpawner BulletSpawner { get => bulletSpawner; }
 
@@ -35,10 +38,10 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
         {
             return new List<FileSystemLevel>
             {
+                level0,
                 level1,
                 level2,
-                level3,
-                level4
+                level3
             };
         }
     }
@@ -57,14 +60,71 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
     {
         if (CurrentLevel == null)
         {
-            CurrentLevel = level1; // Default to level1 if no level is set
+            CurrentLevel = level2; // Default to level1 if no level is set
         }
+        CreateZergPools();
 
     }
-    
+
     public void PublishCurrentLevelCleared()
     {
         OnLevelCleared?.Invoke(CurrentLevel);
+    }
+    
+       // object pools
+    private ObjectPool<Zerg> _smallZergPool;
+    private ObjectPool<Zerg> _bigZergPool;
+    public ObjectPool<Zerg> SmallZergPool { get => _smallZergPool; }
+    public ObjectPool<Zerg> BigZergPool { get => _bigZergPool; }
+
+    private void CreateZergPools()
+    {
+        _smallZergPool = new ObjectPool<Zerg>(
+            CreateSmallZerg,
+            OnTakeZergFromPool,
+            OnReturnZergToPool,
+            OnDestroyZerg,
+            false,
+            10, // initial size
+            1000 // max size
+        );
+
+        _bigZergPool = new ObjectPool<Zerg>(
+            CreateBigZerg,
+            OnTakeZergFromPool,
+            OnReturnZergToPool,
+            OnDestroyZerg,
+            false,
+            10, // initial size
+            1000 // max size
+        );
+    }
+
+    private Zerg CreateSmallZerg()
+    {
+        Zerg zerg = Instantiate(smallZergPrefab);
+        return zerg;
+    }
+
+    private Zerg CreateBigZerg()
+    {
+        Zerg zerg = Instantiate(bigZergPrefab);
+        return zerg;
+    }
+
+    private void OnTakeZergFromPool(Zerg zerg)
+    {
+        zerg.gameObject.SetActive(true);
+    }
+
+    private void OnReturnZergToPool(Zerg zerg)
+    {
+        zerg.gameObject.SetActive(false);
+    }
+
+    private void OnDestroyZerg(Zerg zerg)
+    {
+        Destroy(zerg.gameObject);
     }
 }
 

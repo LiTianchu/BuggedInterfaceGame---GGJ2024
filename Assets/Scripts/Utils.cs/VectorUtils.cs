@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using UnityEngine;
 
 public class VectorUtils
@@ -51,5 +52,41 @@ public class VectorUtils
         }
 
         return new Vector2(x, y);
+    }
+
+       /// <summary>
+    /// Generates a list of positions evenly distributed around a ring
+    /// </summary>
+    /// <param name="centerPosition">Center of the ring</param>
+    /// <param name="radius">Radius of the ring</param>
+    /// <param name="pointDistance">Distance between points on the ring</param>
+    /// <returns>List of positions around the ring</returns>
+    public static List<Vector3> GetRingSamplePositions(Vector3 centerPosition, float radius, float pointDistance)
+    {
+        List<Vector3> positions = new();
+
+        // Calculate how many points can fit around the ring based on distance between points
+        float circumference = 2 * Mathf.PI * radius;
+        int numberOfPoints = Mathf.FloorToInt(circumference / pointDistance);
+
+        // Calculate the angle between each point
+        float angleStep = 360f / numberOfPoints;
+
+        for (int i = 0; i < numberOfPoints; i++)
+        {
+            // Calculate the angle for this point
+            float angle = i * angleStep * Mathf.Deg2Rad;
+
+            // Calculate the position on the ring
+            Vector3 position = new Vector3(
+                centerPosition.x + radius * Mathf.Cos(angle),
+                centerPosition.y + radius * Mathf.Sin(angle),
+                centerPosition.z
+            );
+
+            positions.Add(position);
+        }
+
+        return positions;
     }
 }

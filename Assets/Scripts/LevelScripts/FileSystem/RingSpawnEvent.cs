@@ -1,0 +1,112 @@
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.Pool;
+using DG.Tweening;
+
+public class RingSpawnEvent : AbstractSpawnEvent
+{
+    [SerializeField] private float ringRadius = 5.0f;
+    [SerializeField] private float spawnPointDistance = 2;
+    [SerializeField] private float spawnDelay = 0.1f;
+    [SerializeField] private float spawnAnimationDuration = 0.3f;
+    [SerializeField] private Transform spawnCenter; // if null, uses this transform as center
+
+    public float RingRadius { get => ringRadius; set => ringRadius = value; }
+    public float SpawnPointDistance { get => spawnPointDistance; set => spawnPointDistance = value; }
+    public float SpawnDelay { get => spawnDelay; set => spawnDelay = value; }
+    public float SpawnAnimationDuration { get => spawnAnimationDuration; set => spawnAnimationDuration = value; }
+    public Transform SpawnCenter { get => spawnCenter; set => spawnCenter = value; }
+
+
+    public ObjectPool<Zerg> ZergPool { get; private set; }
+    public Transform ZergContainer { get; private set; }
+    public FileSystemLevel CurrentLevel { get; private set; }
+
+    public override void Initialize(FileSystemLevel currentLevel, ObjectPool<Zerg> zergPool, Transform zergContainer)
+    {
+        ZergPool = zergPool;
+        ZergContainer = zergContainer;
+        CurrentLevel = currentLevel;
+    }
+
+    public override void Spawn()
+    {
+        if (ZergPool == null || ZergContainer == null || CurrentLevel == null)
+        {
+            throw new System.Exception("RingSpawnEvent is not properly initialized. Please call Initialize() before spawning.");
+        }
+
+        StartCoroutine(SpawnAnimated());
+    }
+
+    private IEnumerator SpawnAnimated()
+    {
+        Vector3 centerPosition = spawnCenter != null ? spawnCenter.position : transform.position;
+        List<Vector3> spawnPositions = VectorUtils.GetRingSamplePositions(centerPosition, ringRadius, spawnPointDistance);
+
+        foreach (Vector3 position in spawnPositions)
+        {
+            SpawnZergAtPosition(position);
+            yield return new WaitForSeconds(spawnDelay);
+        }
+
+        // Wait for the last spawn animation to complete before destroying
+        yield return new WaitForSeconds(spawnAnimationDuration);
+
+        // Destroy this spawn event object
+        Destroy(gameObject);
+    }
+
+
+
+    private void SpawnZergAtPosition(Vector3 position)
+    {
+        if (ZergPool == null)
+        {
+            throw new System.Exception("ZergPool is not set. Please assign a ZergPool to the RingSpawnEvent.");
+        }
+        else
+        {
+            Zerg zerg = ZergPool.Get();
+            zerg.Initialize(ZergPool);
+
+            zerg.transform.SetPositionAndRotation(position, Quaternion.identity);
+            zerg.transform.SetParent(ZergContainer);
+
+            zerg.gameObject.name = $"zerg-{CurrentLevel.ZergCount}";
+            Debug.Log($"Spawned zerg with index {CurrentLevel.ZergCount}");
+            CurrentLevel.ZergCount++;
+
+            if (zerg != null)
+            {
+                AnimationUtils.AnimateZergSpawn(zerg, spawnAnimationDuration);
+            }
+        }
+    }
+
+
+
+    // Optional: Visualize the ring in the editor
+    private void OnDrawGizmosSelected()
+    {
+        Vector3 centerPosition = spawnCenter != null ? spawnCenter.position : transform.position;
+        List<Vector3> positions = VectorUtils.GetRingSamplePositions(centerPosition, ringRadius, spawnPointDistance);
+
+        // Draw the ring
+        Gizmos.color = Color.yellow;
+        for (int i = 0; i < positions.Count; i++)
+        {
+            Vector3 currentPoint = positions[i];
+            Vector3 nextPoint = positions[(i + 1) % positions.Count];
+            Gizmos.DrawLine(currentPoint, nextPoint);
+        }
+
+        // Draw spawn points
+        Gizmos.color = Color.red;
+        foreach (Vector3 position in positions)
+        {
+            Gizmos.DrawWireSphere(position, 0.2f);
+        }
+    }
+}

@@ -27,7 +27,7 @@ public class FileSystemLevel : MonoBehaviour
     public event System.Action OnFileSystemLayoutChanged;
     public event System.Action<FileSystemLevel> OnNewFileSystemLevelEntered;
     
-    public int ZergCount { get => _zergCount; }
+    public int ZergCount { get => _zergCount; set => _zergCount = value; }
     protected int _zergDestroyedCount = 0;
       public virtual int ZergDestroyedCount
     {

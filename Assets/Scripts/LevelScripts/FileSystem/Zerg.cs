@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -34,7 +35,7 @@ public class Zerg : MonoBehaviour
     public float ZergAttackRange { get => zergAttackRange; }
     public float ZergAttackRate { get => zergAttackRate; }
     public int ZergMaxHp { get => zergMaxHp; }
-    
+
     void Start()
     {
         _timeSinceLastAttack = zergAttackRate;
@@ -137,8 +138,8 @@ public class Zerg : MonoBehaviour
             zergSpriteRenderer.DOFade(0.0f, 0.3f).OnComplete(() =>
             {
                 FileSystemLevelManager.Instance.CurrentLevel.ZergDestroyedCount++;
-                _pool.Release(this);         
-                Debug.Log($"Zerg {gameObject.name} destroyed, {FileSystemLevelManager.Instance.CurrentLevel.ZergDestroyedCount} destroyed in total.");       
+                _pool.Release(this);
+                Debug.Log($"Zerg {gameObject.name} destroyed, {FileSystemLevelManager.Instance.CurrentLevel.ZergDestroyedCount} destroyed in total.");
             });
         }
     }
@@ -147,6 +148,20 @@ public class Zerg : MonoBehaviour
     {
         return _zergHp > 0;
     }
+    
+    public void StallSeconds(float seconds)
+    {
+        // This method can be used to stall the zerg for a certain amount of time
+        // For example, if you want to pause the zerg's movement or actions
+        StartCoroutine(StallCoroutine(seconds));
+    }
 
+    private IEnumerator StallCoroutine(float seconds)
+    {
+        float originalSpeed = zergMoveSpeed;
+        zergMoveSpeed = 0; // stop moving
+        yield return new WaitForSeconds(seconds);
+        zergMoveSpeed = originalSpeed; // resume moving
 
+    }
 }

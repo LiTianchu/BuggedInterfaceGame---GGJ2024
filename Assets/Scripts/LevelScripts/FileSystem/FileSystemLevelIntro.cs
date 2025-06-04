@@ -12,8 +12,7 @@ public class FileSystemLevelIntro : FileSystemLevel
     [SerializeField] private int maxZergCount = 50;
     [SerializeField] private float smallZergSpawnRate = 1.0f;
     [SerializeField] private float bigZergSpawnRate = 5.0f;
-    [SerializeField] private Zerg smallZergPrefab;
-    [SerializeField] private Zerg bigZergPrefab;
+
    // [SerializeField] private Transform zergParent;
 
 
@@ -39,7 +38,6 @@ public class FileSystemLevelIntro : FileSystemLevel
     // Start is called before the first frame update
     public new void Start()
     {
-        CreateZergPools();
         base.Start();
     }
 
@@ -84,12 +82,12 @@ public class FileSystemLevelIntro : FileSystemLevel
         switch (zergType)
         {
             case ZergTypeEnum.Small:
-                zerg = _smallZergPool.Get();
-                zerg.Initialize(_smallZergPool);
+                zerg = FileSystemLevelManager.Instance.SmallZergPool.Get();
+                zerg.Initialize(FileSystemLevelManager.Instance.SmallZergPool);
                 break;
             case ZergTypeEnum.Big:
-                zerg = _bigZergPool.Get();
-                zerg.Initialize(_bigZergPool);
+                zerg = FileSystemLevelManager.Instance.BigZergPool.Get();
+                zerg.Initialize(FileSystemLevelManager.Instance.BigZergPool);
                 break;
         }
 
@@ -100,57 +98,5 @@ public class FileSystemLevelIntro : FileSystemLevel
         Debug.Log($"Spawned {zergType} zerg with index {_zergCount}");
     }
 
-    // object pools
-    private ObjectPool<Zerg> _smallZergPool;
-    private ObjectPool<Zerg> _bigZergPool;
-
-    private void CreateZergPools()
-    {
-        _smallZergPool = new ObjectPool<Zerg>(
-            CreateSmallZerg,
-            OnTakeZergFromPool,
-            OnReturnZergToPool,
-            OnDestroyZerg,
-            false,
-            10, // initial size
-            1000 // max size
-        );
-
-        _bigZergPool = new ObjectPool<Zerg>(
-            CreateBigZerg,
-            OnTakeZergFromPool,
-            OnReturnZergToPool,
-            OnDestroyZerg,
-            false,
-            10, // initial size
-            1000 // max size
-        );
-    }
-
-    private Zerg CreateSmallZerg()
-    {
-        Zerg zerg = Instantiate(smallZergPrefab);
-        return zerg;
-    }
-
-    private Zerg CreateBigZerg()
-    {
-        Zerg zerg = Instantiate(bigZergPrefab);
-        return zerg;
-    }
-
-    private void OnTakeZergFromPool(Zerg zerg)
-    {
-        zerg.gameObject.SetActive(true);
-    }
-
-    private void OnReturnZergToPool(Zerg zerg)
-    {
-        zerg.gameObject.SetActive(false);
-    }
-
-    private void OnDestroyZerg(Zerg zerg)
-    {
-        Destroy(zerg.gameObject);
-    }
+ 
 }
