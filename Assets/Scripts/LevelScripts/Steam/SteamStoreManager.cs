@@ -22,17 +22,35 @@ public class SteamStoreManager : MonoBehaviour
     [SerializeField] private TMP_Text storeBPuzzleNumText3;
     [SerializeField] private TMP_Text storeBPuzzleNumText4;
     [SerializeField] private FadeAfterShowTime wrongAgeText;
-    [SerializeField] private Button continueButton;
+    [SerializeField] private Button continueButtonB;
     [SerializeField] private string correctBirthday = "2000";
     [SerializeField] private StorePuzzleWinScreen storeBPuzzleWinScreen;
+
+    [Header("Store C TnC Puzzle")]
+    [SerializeField] private RectTransform storeCPuzzle;
+    [SerializeField] private List<Toggle> storeCToggleButtons;
+    [SerializeField] private List<bool> correctAnswersC;
+    [SerializeField] private Button continueButtonC;
+    [SerializeField] private StorePuzzleWinScreen storeCPuzzleWinScreen;
+
+
+    [Header("Store D Select All Images Puzzle")]
+    [SerializeField] private RectTransform storeDPuzzle;
+    [SerializeField] private List<Toggle> storeDToggleButtons;
+    [SerializeField] private List<bool> correctAnswersD;
+    [SerializeField] private Button continueButtonD;
+    [SerializeField] private StorePuzzleWinScreen storeDPuzzleWinScreen;
 
     // Start is called before the first frame update
     void Start()
     {
         storeAPuzzle.OnPuzzlePieceRight += HandleStoreAPuzzleWin;
         not.OnBroken += ShowAllStoreItems;
-        continueButton.onClick.AddListener(CheckBirthday);
+        continueButtonB.onClick.AddListener(CheckBirthday);
+        continueButtonC.onClick.AddListener(CheckTnC);
+        continueButtonD.onClick.AddListener(CheckSelectAllImages);
     }
+
 
 
     void OnDestroy()
@@ -55,6 +73,24 @@ public class SteamStoreManager : MonoBehaviour
         storeAPuzzle.gameObject.SetActive(false);
         storeAPuzzle.OnPuzzlePieceRight -= HandleStoreAPuzzleWin;
     }
+    private void HandleStoreBPuzzleWin()
+    {
+        storeBPuzzleWinScreen.gameObject.SetActive(true);
+        storeBPuzzle.gameObject.SetActive(false);
+    }
+
+    private void HandleStoreCPuzzleWin()
+    {
+        storeCPuzzleWinScreen.gameObject.SetActive(true);
+        storeCPuzzle.gameObject.SetActive(false);
+    }
+
+    private void HandleStoreDPuzzleWin()
+    {
+        storeDPuzzleWinScreen.gameObject.SetActive(true);
+        storeDPuzzle.gameObject.SetActive(false);
+    }
+
 
     private void CheckBirthday()
     {
@@ -73,12 +109,51 @@ public class SteamStoreManager : MonoBehaviour
             wrongAgeText.Reshow();
         }
     }
-    
-    private void HandleStoreBPuzzleWin()
+    private void CheckTnC()
     {
-        storeBPuzzleWinScreen.gameObject.SetActive(true);
-        storeBPuzzle.gameObject.SetActive(false);
+        bool allCorrect = true;
+        for (int i = 0; i < storeCToggleButtons.Count; i++)
+        {
+            if (storeCToggleButtons[i].isOn != correctAnswersC[i])
+            {
+                allCorrect = false;
+                break;
+            }
+        }
+
+        if (allCorrect)
+        {
+            HandleStoreCPuzzleWin();
+        }
+        else
+        {
+            Debug.Log("Some TnC answers are incorrect.");
+        }
     }
 
- 
+    private void CheckSelectAllImages()
+    {
+        bool allCorrect = true;
+        for (int i = 0; i < storeDToggleButtons.Count; i++)
+        {
+            if (storeDToggleButtons[i].isOn != correctAnswersD[i])
+            {
+                allCorrect = false;
+                break;
+            }
+        }
+
+        if (allCorrect)
+        {
+            HandleStoreDPuzzleWin();
+        }
+        else
+        {
+            Debug.Log("Some image selections are incorrect.");
+        }
+    }
+
+
+
+
 }
