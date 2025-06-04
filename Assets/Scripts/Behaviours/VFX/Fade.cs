@@ -42,8 +42,13 @@ public class Fade : MonoBehaviour
         set => destroyAfterFadeOut = value;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public event System.Action OnFadeOutStarted;
+    public event System.Action OnFadeInStarted;
+    public event System.Action OnFadeOutCompleted;
+    public event System.Action OnFadeInCompleted;
+
+
+    void Awake()
     {
 
         _rectTransform = GetComponent<RectTransform>();
@@ -71,10 +76,27 @@ public class Fade : MonoBehaviour
         }
     }
 
-    public void FadeIn()
+    public void FadeIn(Vector2 startPosOffset = default)
     {
+        StartCoroutine(FadeInCoroutine(startPosOffset));
+    }
+
+    private IEnumerator FadeInCoroutine(Vector2 startPosOffset = default)
+    {
+        if (_canvasGroup == null)
+        {
+            _canvasGroup = GetComponent<CanvasGroup>();
+        }
+        if (_rectTransform == null)
+        {
+            _rectTransform = GetComponent<RectTransform>();
+        }
+
         _originalPos = _rectTransform.anchoredPosition;
-        UIManager.Instance.UIFadeIn(_canvasGroup, fadeDuration, _originalPos, _originalPos);
+        UIManager.Instance.UIFadeIn(_canvasGroup, fadeDuration, _originalPos + startPosOffset, _originalPos);
+        OnFadeInStarted?.Invoke();
+        yield return new WaitForSeconds(fadeDuration);
+        OnFadeInCompleted?.Invoke();
     }
 
     public void FadeOut(Vector2 targetPosOffset = default)
@@ -84,11 +106,22 @@ public class Fade : MonoBehaviour
 
     private IEnumerator FadeOutCoroutine(Vector2 targetPosOffset = default)
     {
+         if (_canvasGroup == null)
+        {
+            _canvasGroup = GetComponent<CanvasGroup>();
+        }
+        if (_rectTransform == null)
+        {
+            _rectTransform = GetComponent<RectTransform>();
+        }
+
         _originalPos = _rectTransform.anchoredPosition;
-        UIManager.Instance.UIFadeOut(_canvasGroup, fadeDuration, _originalPos, _originalPos+targetPosOffset);
+        UIManager.Instance.UIFadeOut(_canvasGroup, fadeDuration, _originalPos, _originalPos + targetPosOffset);
+        OnFadeOutStarted?.Invoke();
+        yield return new WaitForSeconds(fadeDuration);
+        OnFadeOutCompleted?.Invoke();
         if (destroyAfterFadeOut)
         {
-            yield return new WaitForSeconds(fadeDuration);
             Destroy(gameObject);
         }
     }
@@ -113,6 +146,15 @@ public class Fade : MonoBehaviour
         {
             _canvasGroup.alpha = 1;
         }
+    }
+
+    protected void SetOpacity(float opacity)
+    {
+        if (_canvasGroup == null)
+        {
+            _canvasGroup = GetComponent<CanvasGroup>();
+        }
+        _canvasGroup.alpha = opacity;
     }
 
     public enum FadeModeEnum

@@ -14,13 +14,14 @@ namespace PixelCrushers.DialogueSystem.Extras
     /// </summary>
     public class TextlineDialogueUI : SMSDialogueUI
     {
-        [SerializeField] private bool showMultipleAlertsInSequence = true;
-        [SerializeField] private float closeDelay = 5f;
+        [SerializeField] private bool showDialogueAsNotificationSequence = true;
+        [SerializeField] private FadeAfterShowTime notificationUI;
+        [SerializeField] private TMP_Text notificationTextLabel;
 
-        private List<UIPanel> _alertPanelQueue = new();
+        private List<FadeAfterShowTime> _notificationList = new();
         public override void ShowAlert(string message, float duration)
         {
-            if (!showMultipleAlertsInSequence)
+            if (!showDialogueAsNotificationSequence)
             {
                 base.ShowAlert(message, duration);
                 return;
@@ -28,30 +29,33 @@ namespace PixelCrushers.DialogueSystem.Extras
 
             if (string.IsNullOrEmpty(message)) { return; }
 
-            foreach (UIPanel alertPanel in _alertPanelQueue)
+            foreach (FadeAfterShowTime notification in _notificationList)
             {
-                RectTransform rect = alertPanel.GetComponent<RectTransform>();
+                RectTransform rect = notification.GetComponent<RectTransform>();
                 float rectHeight = rect.rect.height;
                 float newY = rect.anchoredPosition.y + rectHeight;
-                alertPanel.GetComponent<RectTransform>().DOAnchorPosY(
+                notification.GetComponent<RectTransform>().DOAnchorPosY(
                     newY,
                     0.5f
                 ).SetEase(Ease.OutBack);
             }
 
-            UIPanel newAlertPanel = Instantiate(alertUIElements.panel, transform);
+            FadeAfterShowTime newNotification = Instantiate(notificationUI, transform);
 
-            newAlertPanel.transform.SetAsFirstSibling(); // prevent blocking the main panel
-            TMP_Text txt = Instantiate(alertUIElements.alertText.textMeshProUGUI, newAlertPanel.transform);
+            newNotification.transform.SetAsFirstSibling(); // prevent blocking the main panel
+            TMP_Text txt = Instantiate(notificationTextLabel, newNotification.transform);
             txt.text = FormattedText.Parse(message).text;
 
-            _alertPanelQueue.Add(newAlertPanel);
+            _notificationList.Add(newNotification);
 
-            newAlertPanel.SetOpen(true);
+            newNotification.gameObject.SetActive(true);
             txt.gameObject.SetActive(true);
 
-            StartCoroutine(CloseAlertAfterDelay(newAlertPanel));
-
+            newNotification.OnFadeOutCompleted += () =>
+            {
+                _notificationList.Remove(newNotification);
+            };
+            
         }
 
         protected override void AddMessage(Subtitle subtitle)
@@ -65,30 +69,5 @@ namespace PixelCrushers.DialogueSystem.Extras
             base.AddMessage(subtitle);
         }
 
-        private IEnumerator CloseAlertAfterDelay(UIPanel alertPanel)
-        {
-            yield return new WaitForSeconds(closeDelay);
-            alertPanel.SetOpen(false);
-
-            // remove the alert panel from the queue
-            if (_alertPanelQueue[_alertPanelQueue.Count - 1] == alertPanel)
-            {
-                _alertPanelQueue.RemoveAt(_alertPanelQueue.Count - 1);
-            }
-            else
-            {
-                foreach (UIPanel queuedPanel in _alertPanelQueue)
-                {
-                    if (queuedPanel == alertPanel)
-                    {
-                        _alertPanelQueue.Remove(queuedPanel);
-                        break;
-                    }
-                }
-            }
-            
-            yield return new WaitForSeconds(2f); // Wait for the close animation to finish
-            Destroy(alertPanel.gameObject);
-        }
     }
 }
