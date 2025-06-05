@@ -27,7 +27,6 @@ public class FolderFile : FileSystemFile
             return;
         }
 
-
         if (Locked)
         {
             FileSystemLevelManager.Instance.OnLevelCleared -= UnlockFolder;
