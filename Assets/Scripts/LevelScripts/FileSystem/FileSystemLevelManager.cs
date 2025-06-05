@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -23,10 +24,12 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
         get => _currentLevel;
         set
         {
-            if (_currentLevel != null)
+            if (_currentLevel != null) // unload the new level
             {
                 _currentLevel.gameObject.SetActive(false);
             }
+
+            // load new level
             _currentLevel = value;
             _currentLevel.gameObject.SetActive(true);
         }
@@ -60,7 +63,7 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
     {
         if (CurrentLevel == null)
         {
-            CurrentLevel = level2; // Default to level1 if no level is set
+            CurrentLevel = level0; // Default to level1 if no level is set
         }
         CreateZergPools();
 

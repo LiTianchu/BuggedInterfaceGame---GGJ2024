@@ -22,20 +22,24 @@ public class FileSystemLevel : MonoBehaviour
     protected bool _hasWon = false;
 
     public List<FileSystemFile> Files { get => _files; }
+    public GridSystem GridSystem { get => gridSystem; }
+    public FileSystemFile CriticalFile { get => criticalFile; }
+    public Transform FileContainer { get => fileContainer; }
+    public Transform ZergContainer { get => zergContainer; }
 
 
     public event System.Action OnFileSystemLayoutChanged;
-    public event System.Action<FileSystemLevel> OnNewFileSystemLevelEntered;
-    
+    public event System.Action OnLevelWon;
+
     public int ZergCount { get => _zergCount; set => _zergCount = value; }
     protected int _zergDestroyedCount = 0;
-      public virtual int ZergDestroyedCount
+    public virtual int ZergDestroyedCount
     {
         get => _zergDestroyedCount;
         set
         {
             _zergDestroyedCount = value;
-       
+
         }
     }
 
@@ -65,7 +69,7 @@ public class FileSystemLevel : MonoBehaviour
         foreach (FileSystemFile file in fileContainer.GetComponentsInChildren<FileSystemFile>())
         {
             _files.Add(file);
-            if(file is FolderFile folderFile)
+            if (file is FolderFile folderFile)
             {
                 folderFile.CurrentLevel = this;
             }
@@ -110,4 +114,16 @@ public class FileSystemLevel : MonoBehaviour
     {
         FileSystemLevelManager.Instance.CurrentLevel = previousLevel;
     }
+
+    public void PublishWin()
+    {
+        if (_hasWon) return; // prevent multiple wins
+
+        _hasWon = true;
+        OnLevelWon?.Invoke();
+        FileSystemLevelManager.Instance.PublishCurrentLevelCleared();
+        Debug.Log($"Level {gameObject.name} won!");
+    }
+    
+    public virtual void CreateSpawnEvent(AbstractSpawnEvent spawnEvent, Vector3 position = default) { }
 }

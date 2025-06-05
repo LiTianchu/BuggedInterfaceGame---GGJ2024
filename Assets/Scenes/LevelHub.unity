@@ -247,7 +247,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -26.440186, y: 4.5050354}
+  m_AnchoredPosition: {x: -26.440186, y: 4.505005}
   m_SizeDelta: {x: 180, y: 36.11}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &101035315
@@ -2089,12 +2089,64 @@ MonoBehaviour:
   zergLayer:
     serializedVersion: 2
     m_Bits: 1024
-  previousLevel: {fileID: 1452945047}
+  previousLevel: {fileID: 0}
   fileContainer: {fileID: 1299024046}
   zergContainer: {fileID: 701110466}
-  smallZergClusterSpawnEvent: {fileID: 0}
-  smallZergRingSpawnEvent: {fileID: 0}
-  zergRingSpawnInterval: 20
+  spawnStates:
+  - rid: 7143099454520819714
+  - rid: 7143099454520819712
+  - rid: 7143099454520819713
+  - rid: 7143099454520819715
+  - rid: 7143099454520819716
+  currentStateIndex: 3
+  references:
+    version: 2
+    RefIds:
+    - rid: 7143099454520819712
+      type: {class: ClusterSpawnState, ns: , asm: Assembly-CSharp}
+      data:
+        stateName: Cluster
+        duration: 10
+        nextStateIndex: 2
+        clusterSpawnPrefab: {fileID: 8811102552544551414, guid: b1890b4063b4a1946ad596c54d50d33b, type: 3}
+        spawnInterval: 2
+        maxSpawns: 3
+    - rid: 7143099454520819713
+      type: {class: RingSpawnState, ns: , asm: Assembly-CSharp}
+      data:
+        stateName: Ring
+        duration: 10
+        nextStateIndex: 4
+        onlySpawnAtCenter: 1
+        ringSpawnPrefab: {fileID: 4989470156774353067, guid: e64b7f99ca7fdaf4fb299745fb7a7192, type: 3}
+        spawnInterval: 4
+    - rid: 7143099454520819714
+      type: {class: MixedSpawnState, ns: , asm: Assembly-CSharp}
+      data:
+        stateName: Mix
+        duration: 20
+        nextStateIndex: 1
+        clusterSpawnPrefab: {fileID: 8811102552544551414, guid: b1890b4063b4a1946ad596c54d50d33b, type: 3}
+        ringSpawnPrefab: {fileID: 4989470156774353067, guid: e64b7f99ca7fdaf4fb299745fb7a7192, type: 3}
+        ringOnlySpawnAtCenter: 1
+        clusterSpawnInterval: 3
+        ringSpawnInterval: 6
+    - rid: 7143099454520819715
+      type: {class: ScatterSpawnState, ns: , asm: Assembly-CSharp}
+      data:
+        stateName: Scatter
+        duration: -1
+        nextStateIndex: 0
+        maxZergCount: 50
+        smallZergSpawnRate: 0.3
+        bigZergSpawnRate: 3
+        transitOnAllZergKilled: 1
+    - rid: 7143099454520819716
+      type: {class: WinState, ns: , asm: Assembly-CSharp}
+      data:
+        stateName: Win
+        duration: -1
+        nextStateIndex: 0
 --- !u!1 &356564007
 GameObject:
   m_ObjectHideFlags: 0
@@ -2902,7 +2954,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 558857851}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c21eae25f7034754486d1c633976e0fb, type: 3}
+  m_Script: {fileID: 11500000, guid: 954bf09510c63cd49a7299d4d52e1a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gridSystem: {fileID: 452751961}
@@ -2913,6 +2965,11 @@ MonoBehaviour:
   previousLevel: {fileID: 345571308}
   fileContainer: {fileID: 907692797}
   zergContainer: {fileID: 2076563473}
+  spawnStates: []
+  currentStateIndex: 0
+  references:
+    version: 2
+    RefIds: []
 --- !u!1001 &636656550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4378,7 +4435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c92dab9a96c5c714dac9dbe1070a712f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileHp: 100
+  fileHp: 1000
   hpBar: {fileID: 1076768989}
   locked: 1
   levelToLoad: {fileID: 558857853}
@@ -4861,6 +4918,10 @@ PrefabInstance:
     - target: {fileID: 1071254076231095292, guid: e8d52e189fe6bfb40a138de7e411333a, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1071254076231095292, guid: e8d52e189fe6bfb40a138de7e411333a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 4.505005
       objectReference: {fileID: 0}
     - target: {fileID: 2037132709888881160, guid: e8d52e189fe6bfb40a138de7e411333a, type: 3}
       propertyPath: onOpen.m_PersistentCalls.m_Calls.Array.size
@@ -6304,7 +6365,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1452945045}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 253c0e5552e0d46478bc200d83c59ec3, type: 3}
+  m_Script: {fileID: 11500000, guid: 954bf09510c63cd49a7299d4d52e1a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gridSystem: {fileID: 504033020}
@@ -6315,9 +6376,29 @@ MonoBehaviour:
   previousLevel: {fileID: 1905670826}
   fileContainer: {fileID: 1284511302}
   zergContainer: {fileID: 1934703411}
-  maxZergCount: 50
-  smallZergSpawnRate: 0.4
-  bigZergSpawnRate: 3
+  spawnStates:
+  - rid: 7143099454520819717
+  - rid: 7143099454520819718
+  currentStateIndex: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 7143099454520819717
+      type: {class: ScatterSpawnState, ns: , asm: Assembly-CSharp}
+      data:
+        stateName: Default State
+        duration: -1
+        nextStateIndex: 0
+        maxZergCount: 50
+        smallZergSpawnRate: 0.3
+        bigZergSpawnRate: 3
+        transitOnAllZergKilled: 1
+    - rid: 7143099454520819718
+      type: {class: WinState, ns: , asm: Assembly-CSharp}
+      data:
+        stateName: Win
+        duration: -1
+        nextStateIndex: 0
 --- !u!1 &1467116843
 GameObject:
   m_ObjectHideFlags: 0
@@ -7416,56 +7497,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &1611732522
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1611732523}
-  - component: {fileID: 1611732524}
-  m_Layer: 0
-  m_Name: SmallZergClusterSpawnEvent
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1611732523
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1611732522}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.9058704, y: 3.6535728, z: -0.6933334}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1611732524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1611732522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13b121633a868a041bec00783032036e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clusterRadius: 5
-  spawnPointDistance: 2
-  spawnDelay: 0.1
-  spawnAnimationDuration: 0.3
-  spawnCenter: {fileID: 0}
-  numberOfZergs: 10
 --- !u!1 &1626518839
 GameObject:
   m_ObjectHideFlags: 0
@@ -12150,9 +12181,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpawner: {fileID: 5630572435800264841}
   level0: {fileID: 1905670826}
-  level1: {fileID: 1452945047}
+  level1: {fileID: 0}
   level2: {fileID: 345571308}
-  level3: {fileID: 558857853}
+  level3: {fileID: 0}
   smallZergPrefab: {fileID: 5300704090005743820, guid: 3e14f770b1791b94e9693ccab9054bfa, type: 3}
   bigZergPrefab: {fileID: 7907550226859135684, guid: 7760d806c4128d242b39f3c08fea638a, type: 3}
 --- !u!224 &7383098341494324784
@@ -12565,4 +12596,3 @@ SceneRoots:
   - {fileID: 1951247038}
   - {fileID: 2109726173}
   - {fileID: 1109428965}
-  - {fileID: 1611732523}
