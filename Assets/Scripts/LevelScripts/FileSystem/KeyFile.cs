@@ -9,17 +9,16 @@ public class KeyFile : FileSystemFile
     protected new void Start()
     {
         base.Start();
-        FileSystemLevelManager.Instance.OnLevelCleared += UnlockKey;
+        //FileSystemLevelManager.Instance.OnLevelCleared += UnlockKey;
     }
 
     private void UnlockKey(FileSystemLevel level)
     {
-        if (level is not FileSystemLevelLast)
-        {
-            return;
-        }
-
-
+        //if (level is not FileSystemLevelLast)
+        //{
+        //   return;
+        //}
+        
         if (Locked)
         {
             FileSystemLevelManager.Instance.OnLevelCleared -= UnlockKey;

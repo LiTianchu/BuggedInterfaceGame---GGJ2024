@@ -43,25 +43,11 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
     public void OnDrag(PointerEventData eventData)
     {
         if (!isDraggable) { return; }
-        // check if pointer is in the viewport
-        if (RectTransformUtility.RectangleContainsScreenPoint(_canvasRect, Input.mousePosition, _mainCamera))
-            _rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
-        else if (stayInView)
-        {
-            // if pointer is not in the viewport, animate the object to the nearest edge
-            Vector2 pos = _rectTransform.anchoredPosition;
-            Vector2 canvasSize = _canvasRect.sizeDelta;
-            Vector2 newPos = new(pos.x, pos.y);
-            if (pos.x < -canvasSize.x / 2) // if object at left
-                newPos.x = 0;
-            if (pos.x > canvasSize.x / 2) // if object at right
-                newPos.x = 0;
-            if (pos.y < -canvasSize.y / 2) // if object at bottom
-                newPos.y = 0;
-            if (pos.y > canvasSize.y / 2) // if object at top
-                newPos.y = 0;
-            _rectTransform.DOAnchorPos(newPos, 0.5f);
-        }
+
+        _rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+
+
+
         HandleDrag();
         OnDragUpdate?.Invoke();
     }
@@ -69,6 +55,20 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
     public void OnEndDrag(PointerEventData eventData)
     {
         if (!isDraggable) { return; }
+
+        if (stayInView && IsRectTransformCenterOffCanvas())
+        {
+            Vector2 pos = _rectTransform.anchoredPosition;
+            Vector2 canvasSize = _canvasRect.sizeDelta;
+
+            Vector2 clampedPos = new Vector2(
+                Mathf.Clamp(pos.x, -canvasSize.x / 2f, canvasSize.x / 2f),
+                Mathf.Clamp(pos.y, -canvasSize.y / 2f, canvasSize.y / 2f)
+            );
+
+            _rectTransform.DOAnchorPos(clampedPos, 0.25f).SetEase(Ease.OutBack);
+        }
+
         //call end drag procedure
         HandleEndDrag();
         OnDragEnd?.Invoke();
@@ -92,6 +92,21 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
     public Canvas GetCanvas()
     {
         return this.canvas;
+    }
+
+    private bool IsRectTransformCenterOffCanvas()
+    {
+        // Get the center position of the RectTransform relative to the canvas
+        Vector2 localCenter = _rectTransform.anchoredPosition;
+
+        // Get canvas bounds (assuming canvas is anchored at center)
+        Vector2 canvasSize = _canvasRect.sizeDelta;
+        float halfWidth = canvasSize.x / 2f;
+        float halfHeight = canvasSize.y / 2f;
+
+        // Check if center is outside canvas bounds
+        return localCenter.x < -halfWidth || localCenter.x > halfWidth ||
+               localCenter.y < -halfHeight || localCenter.y > halfHeight;
     }
 
     public RectTransform GetRectTransform()

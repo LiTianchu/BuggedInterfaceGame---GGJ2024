@@ -48,7 +48,7 @@ public class BulletSpawner : MonoBehaviour
     }
 
     public TurretBullet SpawnNormalBullet(Sprite bulletSprite, Vector3 position, Quaternion rotation,
-                                        int damage, float speed, Transform target)
+                                        int damage, float speed,  Zerg target)
     {
         TurretBullet bullet = _normalBulletPool.Get();
         bullet.GetComponent<SpriteRenderer>().sprite = bulletSprite;
@@ -60,7 +60,7 @@ public class BulletSpawner : MonoBehaviour
     }
 
     public TurretBullet SpawnBlastingBullet(Sprite bulletSprite, Animator blastAnimatorPrefab, Vector3 position, Quaternion rotation,
-                                            int damage, float speed, float blastRadius, Transform target)
+                                            int damage, float speed, float blastRadius, Zerg target)
     {
         TurretBullet bullet = _blastingBulletPool.Get();
         bullet.GetComponent<SpriteRenderer>().sprite = bulletSprite;

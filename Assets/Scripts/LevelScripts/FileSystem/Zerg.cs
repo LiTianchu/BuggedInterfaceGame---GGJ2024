@@ -36,6 +36,8 @@ public class Zerg : MonoBehaviour
     public float ZergAttackRate { get => zergAttackRate; }
     public int ZergMaxHp { get => zergMaxHp; }
 
+    public event Action OnZergDestroyed;
+
     void Start()
     {
         _timeSinceLastAttack = zergAttackRate;
@@ -139,7 +141,8 @@ public class Zerg : MonoBehaviour
             {
                 FileSystemLevelManager.Instance.CurrentLevel.ZergDestroyedCount++;
                 _pool.Release(this);
-                Debug.Log($"Zerg {gameObject.name} destroyed, {FileSystemLevelManager.Instance.CurrentLevel.ZergDestroyedCount} destroyed in total.");
+                OnZergDestroyed?.Invoke();
+               // Debug.Log($"Zerg {gameObject.name} destroyed, {FileSystemLevelManager.Instance.CurrentLevel.ZergDestroyedCount} destroyed in total.");
             });
         }
     }

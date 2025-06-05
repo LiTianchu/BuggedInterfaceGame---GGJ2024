@@ -8,12 +8,13 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
 {
     [SerializeField] private BulletSpawner bulletSpawner;
     [TitleGroup("Levels")]
+    [SerializeField] private FileSystemLevel entryLevel; 
     [SerializeField] private FileSystemLevel level0;
     [SerializeField] private FileSystemLevel level1;
     [SerializeField] private FileSystemLevel level2;
     [SerializeField] private FileSystemLevel level3;
     [TitleGroup("Zergs")]
-        [SerializeField] private Zerg smallZergPrefab;
+    [SerializeField] private Zerg smallZergPrefab;
     [SerializeField] private Zerg bigZergPrefab;
 
     public BulletSpawner BulletSpawner { get => bulletSpawner; }
@@ -49,8 +50,8 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
         }
     }
 
-    public event System.Action<FileSystemLevel> OnLevelCleared;
-    public event System.Action<FileSystemLevel> OnNewFileSystemLevelEntered;
+    public event Action<FileSystemLevel> OnLevelCleared;
+    public event Action<FileSystemLevel> OnNewFileSystemLevelEntered;
 
 
     public void StartLevel(FileSystemLevel level)
@@ -63,7 +64,7 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
     {
         if (CurrentLevel == null)
         {
-            CurrentLevel = level0; // Default to level1 if no level is set
+            CurrentLevel = entryLevel; // Default to level1 if no level is set
         }
         CreateZergPools();
 

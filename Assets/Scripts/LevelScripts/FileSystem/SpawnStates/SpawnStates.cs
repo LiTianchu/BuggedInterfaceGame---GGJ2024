@@ -65,7 +65,7 @@ public class ScatterSpawnState : AbstractSpawnState
         zerg.transform.SetParent(level.ZergContainer);
         level.ZergCount++;
         zerg.gameObject.name = $"{zergType}-{level.ZergCount}";
-        Debug.Log($"Spawned {zergType} zerg with index {level.ZergCount}");
+        //Debug.Log($"Spawned {zergType} zerg with index {level.ZergCount}");
     }
 }
 
@@ -113,7 +113,6 @@ public class ClusterSpawnState : AbstractSpawnState
     }
 }
 
-// filepath: e:\Projects\Unity\GGJ2024\Assets\Scripts\LevelScripts\FileSystem\SpawnStates\RingSpawnState.cs
 [System.Serializable]
 public class RingSpawnState : AbstractSpawnState
 {
@@ -154,7 +153,6 @@ public class RingSpawnState : AbstractSpawnState
     }
 }
 
-// filepath: e:\Projects\Unity\GGJ2024\Assets\Scripts\LevelScripts\FileSystem\SpawnStates\IdleSpawnState.cs
 [System.Serializable]
 public class WinState : AbstractSpawnState
 {
@@ -165,7 +163,6 @@ public class WinState : AbstractSpawnState
     }
 }
 
-// filepath: e:\Projects\Unity\GGJ2024\Assets\Scripts\LevelScripts\FileSystem\SpawnStates\MixedSpawnState.cs
 [System.Serializable]
 public class MixedSpawnState : AbstractSpawnState
 {

@@ -22,7 +22,7 @@ public class CrumbleObject : MonoBehaviour
             Crumble();
         }
     }
-    
+
 
     public void Crumble()
     {
@@ -31,21 +31,31 @@ public class CrumbleObject : MonoBehaviour
             return;
         }
 
-        if(turnOffCollisionWhenCrumbling && _collider != null)
+        if (turnOffCollisionWhenCrumbling && _collider != null)
         {
             _collider.enabled = false;
         }
-       
+
         transform.DOShakePosition(0.5f, 30f, 40, 90, false, true).OnComplete(() =>
         {
 
-            if (_rb != null)
+            if (_rb == null)
             {
-                _rb.simulated = true;
-                Vector2 force = VectorUtils.GetRandomForce2D(-crumbleForce, crumbleForce);
-                _rb.gravityScale = gravityScale;
-                _rb.AddForce(force, ForceMode2D.Impulse);
+                AddTempRigidbody();
             }
+
+            _rb.simulated = true;
+            Vector2 force = VectorUtils.GetRandomForce2D(-crumbleForce, crumbleForce);
+            _rb.gravityScale = gravityScale;
+            _rb.AddForce(force, ForceMode2D.Impulse);
         });
+    }
+
+    public void AddTempRigidbody()
+    {
+        if (_rb == null)
+        {
+            _rb = gameObject.AddComponent<Rigidbody2D>();
+        }
     }
 }

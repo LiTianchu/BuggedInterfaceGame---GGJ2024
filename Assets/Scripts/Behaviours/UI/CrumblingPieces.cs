@@ -7,6 +7,7 @@ public class CrumblingPieces : MonoBehaviour
 {
 
     [Tooltip("The list of pieces that will be crumbled")]
+
     [SerializeField]
     private List<GravityController2D> pieces;
     [SerializeField]
@@ -23,14 +24,14 @@ public class CrumblingPieces : MonoBehaviour
     private float maxForce = 100f;
 
     private float _individualCrumbleDelay;
-    private Dictionary<PuzzlePiece,bool> _rightPlaceMap; //maps puzzle pieces to whether or not they are in the right place
+    private Dictionary<PuzzlePiece, bool> _rightPlaceMap; //maps puzzle pieces to whether or not they are in the right place
 
     public event System.Action OnPuzzlePieceRight;
-    
+
     // Start is called before the first frame update
     void Start()
     {
-          foreach (PuzzleSlot puzzleSlot in puzzleSlots)
+        foreach (PuzzleSlot puzzleSlot in puzzleSlots)
         {
             puzzleSlot.OnPuzzlePieceRight += (puzzlePiece) =>
             {
@@ -42,6 +43,8 @@ public class CrumblingPieces : MonoBehaviour
                 SetRightPlaceFlag(puzzlePiece, false);
             };
         }
+
+
     }
 
     void OnEnable()
@@ -54,9 +57,11 @@ public class CrumblingPieces : MonoBehaviour
         foreach (GravityController2D p in pieces)
         {
             PuzzlePiece puzzlePiece = p.GetComponent<PuzzlePiece>();
+
             if (puzzlePiece != null)
             {
-                _rightPlaceMap[puzzlePiece]= false;
+                puzzlePiece.gameObject.SetActive(true); //ensure the puzzle piece is active
+                _rightPlaceMap[puzzlePiece] = false;
             }
         }
     }
@@ -65,6 +70,7 @@ public class CrumblingPieces : MonoBehaviour
     {
         foreach (GravityController2D piece in pieces)
         {
+            
             yield return new WaitForSeconds(_individualCrumbleDelay);
             piece.SetGravity(crumbleGravityScale);
             piece.UseGravity();
@@ -82,17 +88,17 @@ public class CrumblingPieces : MonoBehaviour
 
     public void SetRightPlaceFlag(PuzzlePiece puzzlePiece, bool isRightPlace)
     {
-        if(puzzlePiece == null)
+        if (puzzlePiece == null)
         {
             return;
         }
-        
+
         if (_rightPlaceMap.ContainsKey(puzzlePiece))
         {
             _rightPlaceMap[puzzlePiece] = isRightPlace;
         }
 
-        if(isRightPlace)
+        if (isRightPlace)
         {
             CheckForRightPlace();
         }

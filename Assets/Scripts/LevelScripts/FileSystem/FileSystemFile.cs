@@ -10,7 +10,7 @@ public class FileSystemFile : MonoBehaviour
     [SerializeField] private int fileHp = 10;
     [SerializeField] private Slider hpBar;
     [SerializeField] private bool locked = false;
-
+    private DraggableWorldSpace _draggableWorldSpace;
     public int FileHp { get => fileHp; }
     public bool Locked
     {
@@ -26,6 +26,7 @@ public class FileSystemFile : MonoBehaviour
     {
         hpBar.maxValue = fileHp;
         hpBar.value = fileHp;
+        _draggableWorldSpace = GetComponent<DraggableWorldSpace>();
     }
 
     public void TakeDamage(int damage)
@@ -36,6 +37,10 @@ public class FileSystemFile : MonoBehaviour
         {
             gameObject.SetActive(false);
             OnFileDestroyed?.Invoke();
+            if(_draggableWorldSpace != null)
+            {
+                _draggableWorldSpace.UnbindDropArea();
+            }
         }
     }
 
