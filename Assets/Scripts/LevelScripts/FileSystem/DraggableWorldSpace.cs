@@ -117,7 +117,9 @@ public class DraggableWorldSpace : MonoBehaviour
         if (nearestDropArea != null)
         {
             _isInitialized = true;
-            transform.position = nearestDropArea.transform.position;
+            transform.position = new Vector3(nearestDropArea.transform.position.x,
+                                            nearestDropArea.transform.position.y,
+                                            -0.1f); // ensure the z position is slightly above the 2D plane to avoid OnMouseDown conflict
             BindDropArea(nearestDropArea.GetComponent<DropArea>());
         }
     }
@@ -172,14 +174,15 @@ public class DraggableWorldSpace : MonoBehaviour
         return hitInfo;
     }
 
-    private void BindDropArea(DropArea dropArea)
+    public void BindDropArea(DropArea dropArea)
     {
         _currentDropArea = dropArea;
         _currentDropArea.CurrentDraggable = this;
+        _currentDropArea.NormalColor();
 
     }
 
-    private void UnbindDropArea()
+    public void UnbindDropArea()
     {
         if (_currentDropArea != null)
         {

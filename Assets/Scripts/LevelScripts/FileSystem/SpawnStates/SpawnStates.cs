@@ -65,7 +65,7 @@ public class ScatterSpawnState : AbstractSpawnState
         zerg.transform.SetParent(level.ZergContainer);
         level.ZergCount++;
         zerg.gameObject.name = $"{zergType}-{level.ZergCount}";
-        Debug.Log($"Spawned {zergType} zerg with index {level.ZergCount}");
+        //Debug.Log($"Spawned {zergType} zerg with index {level.ZergCount}");
     }
 }
 

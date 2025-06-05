@@ -42,7 +42,7 @@ public class ShootingTurret : TurretFile
 
     private void Shoot()
     {
-        Transform target = GetTarget();
+        Zerg target = GetTarget();
 
         if (target == null) { return; }
 
@@ -58,7 +58,7 @@ public class ShootingTurret : TurretFile
         }
     }
 
-    private Transform GetTarget()
+    private Zerg GetTarget()
     {
         // find the closest target within range
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, range, targetLayer);
@@ -70,43 +70,43 @@ public class ShootingTurret : TurretFile
             switch (targetPreference)
             {
                 case TargetPreferenceEnum.FirstOrDefault:
-                    return hitCollider.transform;
+                    return hitCollider.GetComponent<Zerg>();
                 case TargetPreferenceEnum.Closest:
                     float closestDistance = Mathf.Infinity;
-                    Transform closestTarget = null;
+                    Zerg closestTarget = null;
                     foreach (Collider2D collider in hitColliders)
                     {
                         float distance = Vector2.Distance(transform.position, collider.transform.position);
                         if (distance < closestDistance)
                         {
                             closestDistance = distance;
-                            closestTarget = collider.transform;
+                            closestTarget = collider.GetComponent<Zerg>();
                         }
                     }
                     return closestTarget;
                 case TargetPreferenceEnum.HighestHealth:
                     float highestHealth = 0;
-                    Transform highestHealthTarget = null;
+                    Zerg highestHealthTarget = null;
                     foreach (Collider2D collider in hitColliders)
                     {
                         Zerg zerg = collider.GetComponent<Zerg>();
                         if (zerg.ZergMaxHp > highestHealth)
                         {
                             highestHealth = zerg.ZergMaxHp;
-                            highestHealthTarget = collider.transform;
+                            highestHealthTarget = zerg;
                         }
                     }
                     return highestHealthTarget;
                 case TargetPreferenceEnum.LowestHealth:
                     float lowestHealth = Mathf.Infinity;
-                    Transform lowestHealthTarget = null;
+                    Zerg lowestHealthTarget = null;
                     foreach (Collider2D collider in hitColliders)
                     {
                         Zerg zerg = collider.GetComponent<Zerg>();
                         if (zerg.ZergMaxHp < lowestHealth)
                         {
                             lowestHealth = zerg.ZergMaxHp;
-                            lowestHealthTarget = collider.transform;
+                            lowestHealthTarget = zerg;
                         }
                     }
                     return lowestHealthTarget;
