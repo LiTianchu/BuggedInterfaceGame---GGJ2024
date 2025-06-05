@@ -87,7 +87,6 @@ public class RingSpawnEvent : AbstractSpawnEvent
 
 
 
-    // Optional: Visualize the ring in the editor
     private void OnDrawGizmosSelected()
     {
         Vector3 centerPosition = spawnCenter != null ? spawnCenter.position : transform.position;

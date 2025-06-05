@@ -135,7 +135,6 @@ public class ClusterSpawnEvent : AbstractSpawnEvent
         }
     }
 
-    // Optional: Visualize the cluster in the editor
     private void OnDrawGizmosSelected()
     {
         Vector3 centerPosition = spawnCenter != null ? spawnCenter.position : transform.position;
