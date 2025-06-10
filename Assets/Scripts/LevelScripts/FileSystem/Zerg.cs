@@ -11,7 +11,7 @@ using UnityEngine.Pool;
 public class Zerg : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer zergSpriteRenderer;
-    [ShowInInspector, PropertyRange(0, 100)]
+    [ShowInInspector, PropertyRange(0, 1000)]
     [SerializeField] private int zergMaxHp = 5;
     [ShowInInspector, PropertyRange(0, 100)]
     [SerializeField] private int zergDamage = 1;
@@ -38,7 +38,7 @@ public class Zerg : MonoBehaviour
 
     public event Action OnZergDestroyed;
 
-    void Start()
+    protected void Start()
     {
         _timeSinceLastAttack = zergAttackRate;
         _timeSinceLastTargetRefresh = refreshTargetInterval;
@@ -47,7 +47,7 @@ public class Zerg : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
         _timeSinceLastAttack += Time.deltaTime;
         _timeSinceLastTargetRefresh += Time.deltaTime;
@@ -98,7 +98,9 @@ public class Zerg : MonoBehaviour
             Debug.Log("Target file is null or inactive");
             return;
         }
-        if (Vector2.Distance(this.transform.position, _targetFile.transform.position) < zergAttackRange) // attack
+        
+        // check if can attack the target
+        if (zergDamage > 0 && Vector2.Distance(this.transform.position, _targetFile.transform.position) < zergAttackRange) // attack
         {
             if (_timeSinceLastAttack >= zergAttackRate)
             {
@@ -106,13 +108,12 @@ public class Zerg : MonoBehaviour
                 _targetFile.TakeDamage(zergDamage);
             }
         }
-        else // move towards the target
+        else if (zergMoveSpeed > 0) // move towards the target if can move
         {
             Vector2 direction = _targetFile.transform.position - transform.position;
             direction.Normalize();
             transform.position += Time.deltaTime * zergMoveSpeed * (Vector3)direction;
         }
-
     }
 
     public void TakeDamage(int damage)

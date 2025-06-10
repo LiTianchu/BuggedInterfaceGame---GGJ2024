@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Pool;
 using UnityEngine.WSA;
 
 public class FileSystemLevel : MonoBehaviour
@@ -26,6 +27,7 @@ public class FileSystemLevel : MonoBehaviour
     public FileSystemFile CriticalFile { get => criticalFile; }
     public Transform FileContainer { get => fileContainer; }
     public Transform ZergContainer { get => zergContainer; }
+    public bool HasWon { get => _hasWon; }
 
 
     public event System.Action OnFileSystemLayoutChanged;
@@ -125,5 +127,5 @@ public class FileSystemLevel : MonoBehaviour
         Debug.Log($"Level {gameObject.name} won!");
     }
     
-    public virtual void CreateSpawnEvent(AbstractSpawnEvent spawnEvent, Vector3 position = default) { }
+    public virtual void CreateSpawnEvent(AbstractSpawnEvent spawnEvent,ObjectPool<Zerg> zergPool, Vector3 position = default) { }
 }

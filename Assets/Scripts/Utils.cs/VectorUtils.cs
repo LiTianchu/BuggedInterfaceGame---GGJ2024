@@ -54,7 +54,7 @@ public class VectorUtils
         return new Vector2(x, y);
     }
 
-       /// <summary>
+    /// <summary>
     /// Generates a list of positions evenly distributed around a ring
     /// </summary>
     /// <param name="centerPosition">Center of the ring</param>
@@ -88,5 +88,13 @@ public class VectorUtils
         }
 
         return positions;
+    }
+
+
+    public static Vector2 GetRandomPointInBox(Vector2 lowerLeft, Vector2 upperRight)
+    {
+        float x = Random.Range(lowerLeft.x, upperRight.x);
+        float y = Random.Range(lowerLeft.y, upperRight.y);
+        return new Vector2(x, y);
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.Pool;
 
 public class FileSystemLevelBattle : FileSystemLevel
 {
@@ -67,13 +68,13 @@ public class FileSystemLevelBattle : FileSystemLevel
         }
     }
     
-    public override void CreateSpawnEvent(AbstractSpawnEvent spawnEvent, Vector3 position = default)
+    public override void CreateSpawnEvent(AbstractSpawnEvent spawnEvent,ObjectPool<Zerg> zergPool, Vector3 position = default)
     {
         if(_hasWon) { return; }
 
         AbstractSpawnEvent se = Instantiate(spawnEvent, transform);
         se.transform.position = position;
-        se.Initialize(this, FileSystemLevelManager.Instance.SmallZergPool, zergContainer);
+        se.Initialize(this, zergPool, zergContainer);
         se.Spawn();
     }
     

@@ -105,6 +105,7 @@ MonoBehaviour:
   zergMoveSpeed: 2.5
   zergAttackRange: 0.5
   zergAttackRate: 1
+  refreshTargetInterval: 0.5
 --- !u!58 &8538976459781835670
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -8,14 +8,11 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
 {
     [SerializeField] private BulletSpawner bulletSpawner;
     [TitleGroup("Levels")]
-    [SerializeField] private FileSystemLevel entryLevel; 
-    [SerializeField] private FileSystemLevel level0;
-    [SerializeField] private FileSystemLevel level1;
-    [SerializeField] private FileSystemLevel level2;
-    [SerializeField] private FileSystemLevel level3;
+    [SerializeField] private FileSystemLevel entryLevel;
     [TitleGroup("Zergs")]
     [SerializeField] private Zerg smallZergPrefab;
     [SerializeField] private Zerg bigZergPrefab;
+    [SerializeField] private BossZerg bossZergPrefab;
 
     public BulletSpawner BulletSpawner { get => bulletSpawner; }
 
@@ -36,19 +33,6 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
         }
     }
 
-    public List<FileSystemLevel> Levels
-    {
-        get
-        {
-            return new List<FileSystemLevel>
-            {
-                level0,
-                level1,
-                level2,
-                level3
-            };
-        }
-    }
 
     public event Action<FileSystemLevel> OnLevelCleared;
     public event Action<FileSystemLevel> OnNewFileSystemLevelEntered;
@@ -74,8 +58,8 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
     {
         OnLevelCleared?.Invoke(CurrentLevel);
     }
-    
-       // object pools
+
+    // object pools
     private ObjectPool<Zerg> _smallZergPool;
     private ObjectPool<Zerg> _bigZergPool;
     public ObjectPool<Zerg> SmallZergPool { get => _smallZergPool; }
@@ -129,6 +113,14 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
     private void OnDestroyZerg(Zerg zerg)
     {
         Destroy(zerg.gameObject);
+    }
+    
+    public BossZerg GetBossZergInstance()
+    {
+        BossZerg bossZerg = Instantiate(bossZergPrefab);
+        bossZerg.transform.SetParent(CurrentLevel.ZergContainer);
+        bossZerg.gameObject.name = "BossZerg";
+        return bossZerg;
     }
 }
 
