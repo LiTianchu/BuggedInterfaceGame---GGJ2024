@@ -417,9 +417,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7828d5fb5cabab14aa7129385e8a7f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileHp: 100
+  fileHp: 200
   hpBar: {fileID: 4083835929467221259}
   locked: 0
+  destroyWhenDied: 1
 --- !u!114 &1885107681468602498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,7 +434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretName: Shockwave Turret
-  damage: 5
+  damage: 3
   fireRate: 3
   range: 2
   firePoint: {fileID: 3192217911115843779}

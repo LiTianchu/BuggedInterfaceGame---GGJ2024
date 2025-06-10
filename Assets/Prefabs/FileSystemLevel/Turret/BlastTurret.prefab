@@ -502,6 +502,7 @@ MonoBehaviour:
   fileHp: 100
   hpBar: {fileID: 2289306950571551924}
   locked: 0
+  destroyWhenDied: 1
 --- !u!114 &2893697297869875386
 MonoBehaviour:
   m_ObjectHideFlags: 0

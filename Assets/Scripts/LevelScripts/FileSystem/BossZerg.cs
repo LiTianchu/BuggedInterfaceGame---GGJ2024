@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BossZerg : Zerg
@@ -15,10 +14,15 @@ public class BossZerg : Zerg
     [SerializeField] private float minTeleportDistance = 3f;
     [SerializeField] private float minDistanceFromCenter = 2f;
 
-    [Header("Zerg Summon Interval Settings")]
-    [SerializeField] private float smallZergSpawnInterval = 5f;
-    [SerializeField] private float bigZergSpawnInterval = 10f;
+    [Header("Stage A Zerg Summon Interval Settings")]
+    [SerializeField] private float smallZergSpawnIntervalStageA = 2f;
+    [SerializeField] private float bigZergSpawnIntervalStageA = 15f;
 
+    [Header("Stage B Zerg Summon Interval Settings")]
+    [SerializeField] private float smallZergSpawnIntervalStageB = 1.5f;
+    [SerializeField] private float bigZergSpawnIntervalStageB = 12.5f;
+    [SerializeField] private float stageBHPThresholdFraction = 0.5f;
+    [SerializeField] private float laserInterval = 20f;
 
     [Header("Spawn Event Settings")]
     [SerializeField] private ClusterSpawnEvent clusterSpawnEventMany;
@@ -29,6 +33,7 @@ public class BossZerg : Zerg
     private float _timeSinceLastTeleport = 0f;
     private float _timeSinceLastSmallZergSpawn = 0f;
     private float _timeSinceLastbigZergSpawn = 0f;
+    private float _timeSinceLastLaser = 0f;
     private bool _isTeleporting = false;
     private bool _isBossReady = false;
     public bool IsBossReady { get => _isBossReady; set => _isBossReady = value; }
@@ -36,7 +41,8 @@ public class BossZerg : Zerg
     protected new void Start()
     {
         base.Start();
-        _timeSinceLastSmallZergSpawn = smallZergSpawnInterval;
+        _timeSinceLastSmallZergSpawn = smallZergSpawnIntervalStageA;
+        _timeSinceLastLaser = laserInterval;
     }
 
     // Update is called once per frame
@@ -44,6 +50,15 @@ public class BossZerg : Zerg
     {
         base.Update();
         if (!_isBossReady) { return; }
+
+        bool isInStageB = IsInStageB();
+        float smallZergSpawnInterval = isInStageB ?
+        smallZergSpawnIntervalStageA :
+        smallZergSpawnIntervalStageB;
+
+        float bigZergSpawnInterval = isInStageB ?
+        bigZergSpawnIntervalStageB :
+        bigZergSpawnIntervalStageB;
 
         // spawn small zergs
         _timeSinceLastSmallZergSpawn += Time.deltaTime;
@@ -118,7 +133,29 @@ public class BossZerg : Zerg
         {
             _timeSinceLastTeleport += Time.deltaTime;
         }
+
+        if (isInStageB)
+        {
+            // laser attack logic
+            _timeSinceLastLaser += Time.deltaTime;
+            if (_timeSinceLastLaser >= laserInterval)
+            {
+                _timeSinceLastLaser = 0f;
+                SpawnLaserAttack();
+            }
+        }
+
     }
 
+    public bool IsInStageB()
+    {
+        return (float)ZergHp / ZergMaxHp > stageBHPThresholdFraction;
+    }
+    
+    public void SpawnLaserAttack()
+    {
+        if (!IsInStageB()) { return; }
 
+        Debug.Log("Boss Zerg is attacking with laser!");
+    }
 }

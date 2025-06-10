@@ -278,6 +278,7 @@ MonoBehaviour:
   fileHp: 100
   hpBar: {fileID: 4283881424511737008}
   locked: 0
+  destroyWhenDied: 1
 --- !u!114 &-4399770004067366755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,7 +293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turretName: Enhanced Turret
   damage: 10
-  fireRate: 0.5
+  fireRate: 0.6
   range: 3.5
   bulletSpeed: 15
   targetCountPerShot: 1

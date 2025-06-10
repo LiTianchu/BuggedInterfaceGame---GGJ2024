@@ -460,6 +460,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6056426456065375661, guid: 77863fcae7460854495909b47f68f217, type: 3}
+      propertyPath: renderGridWireframe
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6056426456065375661, guid: 77863fcae7460854495909b47f68f217, type: 3}
+      propertyPath: renderGridBoundaries
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6764552033100772064, guid: 77863fcae7460854495909b47f68f217, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

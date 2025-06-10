@@ -112,6 +112,11 @@ public class FileSystemLevel : MonoBehaviour
         file.transform.SetParent(fileContainer);
     }
 
+    public bool RemoveFile(FileSystemFile file)
+    {
+        return _files.Remove(file);
+    }
+
     private void HandleCriticalFileDestroyed()
     {
         FileSystemLevelManager.Instance.CurrentLevel = previousLevel;
@@ -127,5 +132,6 @@ public class FileSystemLevel : MonoBehaviour
         Debug.Log($"Level {gameObject.name} won!");
     }
     
-    public virtual void CreateSpawnEvent(AbstractSpawnEvent spawnEvent,ObjectPool<Zerg> zergPool, Vector3 position = default) { }
+    
+    public virtual void CreateSpawnEvent(AbstractSpawnEvent spawnEvent, ObjectPool<Zerg> zergPool, Vector3 position = default) { }
 }

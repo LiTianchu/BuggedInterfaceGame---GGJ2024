@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,11 +14,13 @@ public class StartMenuTurretFile : Draggable
     [SerializeField] private TurretFile turretFilePrefab;
     [Required]
     [SerializeField] private TMP_Text turretFileName;
+    [SerializeField] private float deployCooldown = 5f;
 
 
     [Header("Other Settings")]
     [SerializeField] private LayerMask fileSystemGridLayer;
     [SerializeField] private Color usedColor = new Color(1, 1, 1, 0.0f);
+    [SerializeField] private Image deployCDProgressImage;
 
     private StartMenu _startMenu;
     private Color _originalMenuColor;
@@ -24,7 +28,9 @@ public class StartMenuTurretFile : Draggable
     private Grid _gridBelow;
     private Image _image;
     private bool _isDeployed = false;
-
+    private TurretFile _deployedTurretFile;
+    private float _deployCooldownTimer = 0f;
+    private Material _deployCooldownMaterialInstance;
     public TurretFile TurretFile { get { return turretFilePrefab; } }
 
     public new void Awake()
@@ -35,6 +41,11 @@ public class StartMenuTurretFile : Draggable
         stayInView = false; // deactivate stay in view to use custom logic
         _image = GetComponent<Image>();
 
+        // create material instance
+        _deployCooldownMaterialInstance = new Material(deployCDProgressImage.material);
+        deployCDProgressImage.material = _deployCooldownMaterialInstance;
+        _deployCooldownMaterialInstance.SetFloat("_Progress", 0.0f);
+        deployCDProgressImage.gameObject.SetActive(false);
     }
     public void Start()
     {
@@ -44,6 +55,7 @@ public class StartMenuTurretFile : Draggable
     public void OnDestroy()
     {
         FileSystemLevelManager.Instance.OnNewFileSystemLevelEntered -= HandleNewFileSystemLevelEntered;
+
     }
 
     public void Initialize(StartMenu startMenu)
@@ -62,15 +74,21 @@ public class StartMenuTurretFile : Draggable
 
         if (_gridBelow != null)
         {
-            TurretFile turretFile = Instantiate(turretFilePrefab, _gridBelow.transform.position, Quaternion.identity);
-            turretFile.gameObject.SetActive(true);
-            DraggableWorldSpace draggableWorldSpace = turretFile.GetComponent<DraggableWorldSpace>();
+            _deployedTurretFile = Instantiate(turretFilePrefab, _gridBelow.transform.position, Quaternion.identity);
+            _deployedTurretFile.gameObject.SetActive(true);
+            DraggableWorldSpace draggableWorldSpace = _deployedTurretFile.GetComponent<DraggableWorldSpace>();
             draggableWorldSpace.DropObject();
-
+            _deployedTurretFile.GetComponent<FileSystemFile>().OnFileDestroyed += HandleTurretFileDestoryed;
             SetDeployed();
 
-            FileSystemLevelManager.Instance.CurrentLevel.AddFile(turretFile.GetComponent<FileSystemFile>());
+            FileSystemLevelManager.Instance.CurrentLevel.AddFile(_deployedTurretFile.GetComponent<FileSystemFile>());
         }
+    }
+
+    private void HandleTurretFileDestoryed()
+    {
+        _deployedTurretFile.GetComponent<FileSystemFile>().OnFileDestroyed -= HandleTurretFileDestoryed;
+        SetAsNotDeployed(true);
     }
 
     protected override void HandleBeginDrag()
@@ -144,7 +162,7 @@ public class StartMenuTurretFile : Draggable
 
     private void HandleNewFileSystemLevelEntered(FileSystemLevel level)
     {
-        SetAsNotDeployed();
+        SetAsNotDeployed(false);
     }
     private void SetDeployed()
     {
@@ -153,7 +171,7 @@ public class StartMenuTurretFile : Draggable
         _image.color = usedColor;
     }
 
-    private void SetAsNotDeployed()
+    private void SetAsNotDeployed(bool withCooldown = false)
     {
         if (_originalAnchorPos == new Vector3(999, 999, 999))
         {
@@ -164,5 +182,34 @@ public class StartMenuTurretFile : Draggable
         IsDraggable = true;
         _gridBelow = null;
         _rectTransform.anchoredPosition = _originalAnchorPos;
+        _deployedTurretFile = null;
+
+        if (withCooldown)
+        {
+            //_deployCooldownTimer = deployCooldown;
+            StartDeployCooldownCountdown();
+        }
+        else
+        {
+            deployCDProgressImage.gameObject.SetActive(false);
+            _deployCooldownMaterialInstance.SetFloat("_Progress", 0.0f);
+        }
+    }
+
+    private void StartDeployCooldownCountdown()
+    {
+        deployCDProgressImage.gameObject.SetActive(true);
+        IsDraggable = false;
+        _image.color = usedColor;
+        _deployCooldownMaterialInstance.SetFloat("_Progress", 1.0f);
+        
+        DOTween.Sequence()
+            .Append(_deployCooldownMaterialInstance.DOFloat(0f, "_Progress", deployCooldown).SetEase(Ease.Linear))
+            .OnComplete(() =>
+            {
+                IsDraggable = true;
+                _image.color = Color.white;
+                deployCDProgressImage.gameObject.SetActive(false);
+            });
     }
 }

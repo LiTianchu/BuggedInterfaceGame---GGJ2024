@@ -74,7 +74,7 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
             OnDestroyZerg,
             false,
             10, // initial size
-            1000 // max size
+            5000 // max size
         );
 
         _bigZergPool = new ObjectPool<Zerg>(
@@ -84,7 +84,7 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
             OnDestroyZerg,
             false,
             10, // initial size
-            1000 // max size
+            5000 // max size
         );
     }
 
