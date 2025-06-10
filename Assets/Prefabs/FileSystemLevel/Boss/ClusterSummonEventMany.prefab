@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9104198483111493444}
   - component: {fileID: 8811102552544551414}
   m_Layer: 0
-  m_Name: SmallZergClusterSpawnEvent
+  m_Name: ClusterSummonEventMany
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b121633a868a041bec00783032036e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clusterRadius: 2
-  spawnPointDistance: 0.3
+  clusterRadius: 1.5
+  spawnPointDistance: 0.08
   spawnDelay: 0.1
   spawnAnimationDuration: 0.3
   spawnCenter: {fileID: 0}
-  numberOfZergs: 10
+  numberOfZergs: 12

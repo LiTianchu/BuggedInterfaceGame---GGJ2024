@@ -236,7 +236,7 @@ public class BossSpawnState : AbstractSpawnState
     [SerializeField] private bool transitOnBossDefeated = true;
 
     [Header("Minion Spawn Settings")]
-    
+
 
     private float timeSinceStart = 0f;
     private bool _hasSpawnedBoss = false;
@@ -273,10 +273,13 @@ public class BossSpawnState : AbstractSpawnState
         _bossZerg.transform.SetParent(level.ZergContainer);
 
         _bossZerg.transform.localScale = Vector3.zero;
+        _bossZerg.CanBeTargeted = false;
         _bossZerg.transform.DOScale(Vector3.one, spawnDelay).OnComplete(() =>
         {
             _bossZerg.IsBossReady = true;
+            _bossZerg.CanBeTargeted = true;
             _bossZerg.OnZergDestroyed += HandleBossDefeated;
+            _bossZerg.Initialize();
             // After the boss zerg is spawned, wait for a while before transitioning to the next state
             DOVirtual.DelayedCall(delayBeforeMinion, () =>
             {

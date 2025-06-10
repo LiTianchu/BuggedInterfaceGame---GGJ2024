@@ -57,7 +57,7 @@ public class ShockwaveTurret : TurretFile
         foreach (Collider2D hitCollider in hitColliders)
         {
             Zerg zerg = hitCollider.GetComponent<Zerg>();
-            if (zerg != null && zerg.IsAlive())
+            if (zerg != null && zerg.IsAlive() && zerg.CanBeTargeted)
             {
                 targets.Add(zerg);
             }

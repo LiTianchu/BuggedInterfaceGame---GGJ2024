@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6164440156650820953}
   - component: {fileID: 4989470156774353067}
   m_Layer: 0
-  m_Name: SmallZergRingSpawnEvent
+  m_Name: ZergRingSpawnEvent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

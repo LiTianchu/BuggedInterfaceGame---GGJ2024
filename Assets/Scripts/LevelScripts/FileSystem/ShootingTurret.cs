@@ -64,7 +64,7 @@ public class ShootingTurret : TurretFile
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, range, targetLayer);
         foreach (Collider2D hitCollider in hitColliders)
         {
-            if (!hitCollider.GetComponent<Zerg>().IsAlive())
+            if (!hitCollider.GetComponent<Zerg>().IsAlive() || !hitCollider.GetComponent<Zerg>().CanBeTargeted)
             { continue; }
 
             switch (targetPreference)

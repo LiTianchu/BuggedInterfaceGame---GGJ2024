@@ -102,6 +102,7 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
 
     private void OnTakeZergFromPool(Zerg zerg)
     {
+        zerg.CurrentLevel = CurrentLevel;
         zerg.gameObject.SetActive(true);
     }
 

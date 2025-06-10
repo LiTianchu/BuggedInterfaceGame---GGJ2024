@@ -89,7 +89,57 @@ public class VectorUtils
 
         return positions;
     }
+    
+    /// <summary>
+    /// Generates a list of positions randomly distributed within a cluster area
+    /// </summary>
+    /// <param name="centerPosition">Center of the cluster</param>
+    /// <param name="radius">Maximum radius of the cluster</param>
+    /// <param name="count">Number of positions to generate</param>
+    /// <param name="minDistance">Minimum distance between positions</param>
+    /// <returns>List of positions within the cluster</returns>
+    public static List<Vector3> GetClusterSamplePositions(Vector3 centerPosition, float radius, int count, float minDistance)
+    {
+        List<Vector3> positions = new List<Vector3>();
+        int maxAttempts = count * 30; // Prevent infinite loops
+        int attempts = 0;
 
+        while (positions.Count < count && attempts < maxAttempts)
+        {
+            // Generate random position within circle using polar coordinates
+            float angle = Random.Range(0f, 2f * Mathf.PI);
+            float distance = Random.Range(0f, radius);
+
+            // Use square root for uniform distribution
+            distance = Mathf.Sqrt(distance / radius) * radius;
+
+            Vector3 candidatePosition = new Vector3(
+                centerPosition.x + distance * Mathf.Cos(angle),
+                centerPosition.y + distance * Mathf.Sin(angle),
+                centerPosition.z
+            );
+
+            // Check if position is far enough from existing positions
+            bool validPosition = true;
+            foreach (Vector3 existingPos in positions)
+            {
+                if (Vector3.Distance(candidatePosition, existingPos) < minDistance)
+                {
+                    validPosition = false;
+                    break;
+                }
+            }
+
+            if (validPosition)
+            {
+                positions.Add(candidatePosition);
+            }
+
+            attempts++;
+        }
+
+        return positions;
+    }
 
     public static Vector2 GetRandomPointInBox(Vector2 lowerLeft, Vector2 upperRight)
     {
