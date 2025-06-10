@@ -121,6 +121,7 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
         BossZerg bossZerg = Instantiate(bossZergPrefab);
         bossZerg.transform.SetParent(CurrentLevel.ZergContainer);
         bossZerg.gameObject.name = "BossZerg";
+        bossZerg.CurrentLevel = CurrentLevel;
         return bossZerg;
     }
 }

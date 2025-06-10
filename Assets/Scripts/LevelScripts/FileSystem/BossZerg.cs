@@ -36,6 +36,7 @@ public class BossZerg : Zerg
     protected new void Start()
     {
         base.Start();
+        _timeSinceLastSmallZergSpawn = smallZergSpawnInterval;
     }
 
     // Update is called once per frame
@@ -49,11 +50,18 @@ public class BossZerg : Zerg
         if (_timeSinceLastSmallZergSpawn >= smallZergSpawnInterval)
         {
             _timeSinceLastSmallZergSpawn = 0f;
-            
-            CurrentLevel.CreateSpawnEvent(ringSpawnEventMany,
+            if (Random.Range(0f, 1f) < 0.5f)
+            {
+                CurrentLevel.CreateSpawnEvent(clusterSpawnEventMany,
                     FileSystemLevelManager.Instance.SmallZergPool,
                     transform.position);
-            
+            }
+            else
+            {
+                CurrentLevel.CreateSpawnEvent(ringSpawnEventMany,
+                    FileSystemLevelManager.Instance.SmallZergPool,
+                    transform.position);
+            }
         }
 
         // spawn big zergs
@@ -61,10 +69,19 @@ public class BossZerg : Zerg
         if (_timeSinceLastbigZergSpawn >= bigZergSpawnInterval)
         {
             _timeSinceLastbigZergSpawn = 0f;
-            
-            CurrentLevel.CreateSpawnEvent(ringSpawnEventLess,
+
+            if (Random.Range(0f, 1f) < 0.5f)
+            {
+                CurrentLevel.CreateSpawnEvent(clusterSpawnEventLess,
                     FileSystemLevelManager.Instance.BigZergPool,
                     transform.position);
+            }
+            else
+            {
+                CurrentLevel.CreateSpawnEvent(ringSpawnEventLess,
+                        FileSystemLevelManager.Instance.BigZergPool,
+                        transform.position);
+            }
         }
 
 

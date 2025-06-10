@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zergSpriteRenderer: {fileID: 1655439287586166998}
-  zergMaxHp: 200
+  zergMaxHp: 500
   zergDamage: 0
   zergMoveSpeed: 0
   zergAttackRange: 0.025
@@ -208,8 +208,8 @@ MonoBehaviour:
   teleportPosUpperRight: {x: 7.5, y: 4.5}
   minTeleportDistance: 2.5
   minDistanceFromCenter: 3.5
-  smallZergSpawnInterval: 5
-  bigZergSpawnInterval: 10
+  smallZergSpawnInterval: 2
+  bigZergSpawnInterval: 15
   clusterSpawnEventMany: {fileID: 8811102552544551414, guid: d01ddc14aa6a49e40b99d70d12ae5ff8, type: 3}
   ringSpawnEventMany: {fileID: 4989470156774353067, guid: 138009f160760c14aba82456d0c76836, type: 3}
   clusterSpawnEventLess: {fileID: 8811102552544551414, guid: 2e4e7c5cf7b91764e80dad27726dba02, type: 3}

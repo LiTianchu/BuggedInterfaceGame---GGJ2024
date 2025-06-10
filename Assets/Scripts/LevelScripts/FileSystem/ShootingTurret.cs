@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class ShootingTurret : TurretFile
     [SerializeField] private float fireRate = 1f;
     [SerializeField] private float range = 5f;
     [SerializeField] private float bulletSpeed = 10f;
+    [SerializeField] private int targetCountPerShot = 1;
 
     [SerializeField] private Transform firePoint;
     [SerializeField] private LayerMask targetLayer;
@@ -42,77 +44,100 @@ public class ShootingTurret : TurretFile
 
     private void Shoot()
     {
-        Zerg target = GetTarget();
+        List<Zerg> targets = GetTargets();
 
-        if (target == null) { return; }
+        if (targets == null || targets.Count == 0) { return; }
 
-        if (hasBlastEffect)
+        // Shoot at each target
+        foreach (Zerg target in targets)
         {
-            FileSystemLevelManager.Instance.BulletSpawner.SpawnBlastingBullet(bulletSprite, blastAnimator, firePoint.position, Quaternion.identity,
-                damage, bulletSpeed, blastRadius, target);
-        }
-        else
-        {
-            FileSystemLevelManager.Instance.BulletSpawner.SpawnNormalBullet(bulletSprite, firePoint.position, Quaternion.identity,
-                damage, bulletSpeed, target);
+            if (hasBlastEffect)
+            {
+                FileSystemLevelManager.Instance.BulletSpawner.SpawnBlastingBullet(
+                    bulletSprite, blastAnimator, firePoint.position, Quaternion.identity,
+                    damage, bulletSpeed, blastRadius, target);
+            }
+            else
+            {
+                FileSystemLevelManager.Instance.BulletSpawner.SpawnNormalBullet(
+                    bulletSprite, firePoint.position, Quaternion.identity,
+                    damage, bulletSpeed, target);
+            }
         }
     }
 
-    private Zerg GetTarget()
+    private List<Zerg> GetTargets()
     {
-        // find the closest target within range
+        // Find all valid targets within range
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, range, targetLayer);
+        List<Zerg> validTargets = new List<Zerg>();
+        
+        // Filter valid targets first
         foreach (Collider2D hitCollider in hitColliders)
         {
-            if (!hitCollider.GetComponent<Zerg>().IsAlive() || !hitCollider.GetComponent<Zerg>().CanBeTargeted)
-            { continue; }
-
-            switch (targetPreference)
+            Zerg zerg = hitCollider.GetComponent<Zerg>();
+            if (zerg != null && zerg.IsAlive() && zerg.CanBeTargeted)
             {
-                case TargetPreferenceEnum.FirstOrDefault:
-                    return hitCollider.GetComponent<Zerg>();
-                case TargetPreferenceEnum.Closest:
-                    float closestDistance = Mathf.Infinity;
-                    Zerg closestTarget = null;
-                    foreach (Collider2D collider in hitColliders)
-                    {
-                        float distance = Vector2.Distance(transform.position, collider.transform.position);
-                        if (distance < closestDistance)
-                        {
-                            closestDistance = distance;
-                            closestTarget = collider.GetComponent<Zerg>();
-                        }
-                    }
-                    return closestTarget;
-                case TargetPreferenceEnum.HighestHealth:
-                    float highestHealth = 0;
-                    Zerg highestHealthTarget = null;
-                    foreach (Collider2D collider in hitColliders)
-                    {
-                        Zerg zerg = collider.GetComponent<Zerg>();
-                        if (zerg.ZergMaxHp > highestHealth)
-                        {
-                            highestHealth = zerg.ZergMaxHp;
-                            highestHealthTarget = zerg;
-                        }
-                    }
-                    return highestHealthTarget;
-                case TargetPreferenceEnum.LowestHealth:
-                    float lowestHealth = Mathf.Infinity;
-                    Zerg lowestHealthTarget = null;
-                    foreach (Collider2D collider in hitColliders)
-                    {
-                        Zerg zerg = collider.GetComponent<Zerg>();
-                        if (zerg.ZergMaxHp < lowestHealth)
-                        {
-                            lowestHealth = zerg.ZergMaxHp;
-                            lowestHealthTarget = zerg;
-                        }
-                    }
-                    return lowestHealthTarget;
+                validTargets.Add(zerg);
             }
         }
-        return null;
+        
+        if (validTargets.Count == 0)
+            return new List<Zerg>();
+
+        List<Zerg> finalTargets = new List<Zerg>();
+
+        switch (targetPreference)
+        {
+            case TargetPreferenceEnum.FirstOrDefault:
+                // Take the first N targets up to targetCountPerShot
+                int count = Mathf.Min(targetCountPerShot, validTargets.Count);
+                for (int i = 0; i < count; i++)
+                {
+                    finalTargets.Add(validTargets[i]);
+                }
+                break;
+
+            case TargetPreferenceEnum.Closest:
+                // Sort by distance and take the closest N targets
+                validTargets.Sort((a, b) => 
+                {
+                    float distanceA = Vector2.Distance(transform.position, a.transform.position);
+                    float distanceB = Vector2.Distance(transform.position, b.transform.position);
+                    return distanceA.CompareTo(distanceB);
+                });
+                
+                count = Mathf.Min(targetCountPerShot, validTargets.Count);
+                for (int i = 0; i < count; i++)
+                {
+                    finalTargets.Add(validTargets[i]);
+                }
+                break;
+
+            case TargetPreferenceEnum.HighestHealth:
+                // Sort by health (descending) and take the N highest health targets
+                validTargets.Sort((a, b) => b.ZergHp.CompareTo(a.ZergHp));
+                
+                count = Mathf.Min(targetCountPerShot, validTargets.Count);
+                for (int i = 0; i < count; i++)
+                {
+                    finalTargets.Add(validTargets[i]);
+                }
+                break;
+
+            case TargetPreferenceEnum.LowestHealth:
+                // Sort by health (ascending) and take the N lowest health targets
+                validTargets.Sort((a, b) => a.ZergHp.CompareTo(b.ZergHp));
+                
+                count = Mathf.Min(targetCountPerShot, validTargets.Count);
+                for (int i = 0; i < count; i++)
+                {
+                    finalTargets.Add(validTargets[i]);
+                }
+                break;
+        }
+
+        return finalTargets;
     }
 
     public override void OnDeploy() { }

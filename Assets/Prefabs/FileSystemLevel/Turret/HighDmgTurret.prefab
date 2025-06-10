@@ -292,9 +292,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turretName: Enhanced Turret
   damage: 10
-  fireRate: 0.7
+  fireRate: 0.5
   range: 3.5
   bulletSpeed: 15
+  targetCountPerShot: 1
   firePoint: {fileID: 4337180234168644272}
   targetLayer:
     serializedVersion: 2

@@ -433,7 +433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretName: Shockwave Turret
-  damage: 3
+  damage: 5
   fireRate: 3
   range: 2
   firePoint: {fileID: 3192217911115843779}

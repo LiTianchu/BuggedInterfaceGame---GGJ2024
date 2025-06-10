@@ -516,9 +516,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turretName: Blast Turret
   damage: 5
-  fireRate: 1.5
-  range: 4
+  fireRate: 1
+  range: 5
   bulletSpeed: 5.5
+  targetCountPerShot: 1
   firePoint: {fileID: 1917775844259617917}
   targetLayer:
     serializedVersion: 2

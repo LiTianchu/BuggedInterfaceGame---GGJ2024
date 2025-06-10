@@ -746,9 +746,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turretName: Normal Turret
   damage: 1
-  fireRate: 0.065
-  range: 6
+  fireRate: 0.1
+  range: 5
   bulletSpeed: 10
+  targetCountPerShot: 3
   firePoint: {fileID: 2059329110390756377}
   targetLayer:
     serializedVersion: 2

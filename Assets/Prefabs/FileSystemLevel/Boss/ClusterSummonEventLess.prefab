@@ -49,4 +49,4 @@ MonoBehaviour:
   spawnDelay: 0.1
   spawnAnimationDuration: 0.3
   spawnCenter: {fileID: 0}
-  numberOfZergs: 6
+  numberOfZergs: 4
