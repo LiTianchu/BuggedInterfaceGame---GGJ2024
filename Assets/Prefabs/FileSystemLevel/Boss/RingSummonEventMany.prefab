@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6164440156650820953}
   - component: {fileID: 4989470156774353067}
   m_Layer: 0
-  m_Name: SmallZergRingSpawnEvent
+  m_Name: RingSummonEventMany
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d463bcd2260af4499c0651bf03fa6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ringRadius: 8
-  spawnPointDistance: 2
+  ringRadius: 2.2
+  spawnPointDistance: 0.7
   spawnDelay: 0.015
   spawnAnimationDuration: 0.3
   spawnCenter: {fileID: 0}

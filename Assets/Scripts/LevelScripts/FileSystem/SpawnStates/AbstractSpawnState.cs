@@ -16,23 +16,23 @@ public abstract class AbstractSpawnState
 
     protected float timeInState = 0f;
 
-    public virtual void Enter(FileSystemLevel level)
+    public virtual void Enter(FileSystemLevelBattle level)
     {
         timeInState = 0f;
         Debug.Log($"Entering spawn state: {stateName}");
     }
 
-    public virtual void Update(FileSystemLevel level)
+    public virtual void Update(FileSystemLevelBattle level)
     {
         timeInState += Time.deltaTime;
     }
 
-    public virtual void Exit(FileSystemLevel level)
+    public virtual void Exit(FileSystemLevelBattle level)
     {
         Debug.Log($"Exiting spawn state: {stateName}");
     }
 
-    public virtual bool ShouldTransition(FileSystemLevel level)
+    public virtual bool ShouldTransition(FileSystemLevelBattle level)
     {
         if (_shouldTransitNow)
         {
@@ -43,7 +43,7 @@ public abstract class AbstractSpawnState
         return duration >= 0 && timeInState >= duration;
     }
 
-    public virtual int GetNextState(FileSystemLevel level)
+    public virtual int GetNextState(FileSystemLevelBattle level)
     {
         return nextStateIndex;
     }

@@ -1,3 +1,5 @@
+using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 [System.Serializable]
 public class ScatterSpawnState : AbstractSpawnState
@@ -5,19 +7,19 @@ public class ScatterSpawnState : AbstractSpawnState
     [SerializeField] private int maxZergCount = 50;
     [SerializeField] private float smallZergSpawnRate = 1.0f;
     [SerializeField] private float bigZergSpawnRate = 5.0f;
-    [SerializeField] private bool transitOnAllZergKilled= true;
+    [SerializeField] private bool transitOnAllZergKilled = true;
 
     private float _smallZergSpawnTimeElapsed;
     private float _bigZergSpawnTimeElapsed;
 
-    public override void Enter(FileSystemLevel level)
+    public override void Enter(FileSystemLevelBattle level)
     {
         base.Enter(level);
         _smallZergSpawnTimeElapsed = smallZergSpawnRate;
         _bigZergSpawnTimeElapsed = bigZergSpawnRate;
     }
 
-    public override void Update(FileSystemLevel level)
+    public override void Update(FileSystemLevelBattle level)
     {
         base.Update(level);
         _smallZergSpawnTimeElapsed += Time.deltaTime;
@@ -37,13 +39,13 @@ public class ScatterSpawnState : AbstractSpawnState
             _bigZergSpawnTimeElapsed = 0.0f;
         }
 
-        if(transitOnAllZergKilled && level.ZergDestroyedCount >= maxZergCount)
+        if (transitOnAllZergKilled && level.ZergDestroyedCount >= maxZergCount)
         {
             TransitNow();
         }
     }
 
-    public void SpawnZerg(FileSystemLevel level, ZergTypeEnum zergType = ZergTypeEnum.Small)
+    public void SpawnZerg(FileSystemLevelBattle level, ZergTypeEnum zergType = ZergTypeEnum.Small)
     {
         GridSystem referenceGridSystem = level.GridSystem;
         // get a random point outside the grid
@@ -80,14 +82,14 @@ public class ClusterSpawnState : AbstractSpawnState
     private float timeSinceLastSpawn = 0f;
     private int spawnCount = 0;
 
-    public override void Enter(FileSystemLevel level)
+    public override void Enter(FileSystemLevelBattle level)
     {
         base.Enter(level);
         timeSinceLastSpawn = 0f;
         spawnCount = 0;
     }
 
-    public override void Update(FileSystemLevel level)
+    public override void Update(FileSystemLevelBattle level)
     {
         base.Update(level);
         timeSinceLastSpawn += Time.deltaTime;
@@ -100,13 +102,15 @@ public class ClusterSpawnState : AbstractSpawnState
         }
     }
 
-    private void SpawnCluster(FileSystemLevel level)
+    private void SpawnCluster(FileSystemLevelBattle level)
     {
         Vector3 spawnPos = GetRandomSpawnPosition(level);
-        level.CreateSpawnEvent(clusterSpawnPrefab, spawnPos);
+        level.CreateSpawnEvent(clusterSpawnPrefab,
+                                FileSystemLevelManager.Instance.SmallZergPool,
+                                spawnPos);
     }
 
-    private Vector3 GetRandomSpawnPosition(FileSystemLevel level)
+    private Vector3 GetRandomSpawnPosition(FileSystemLevelBattle level)
     {
         Vector2 randomCircle = Random.insideUnitCircle * 10f;
         return level.transform.position + new Vector3(randomCircle.x, randomCircle.y, 0);
@@ -122,13 +126,13 @@ public class RingSpawnState : AbstractSpawnState
 
     private float timeSinceLastSpawn = 0f;
 
-    public override void Enter(FileSystemLevel level)
+    public override void Enter(FileSystemLevelBattle level)
     {
         base.Enter(level);
         timeSinceLastSpawn = 0f;
     }
 
-    public override void Update(FileSystemLevel level)
+    public override void Update(FileSystemLevelBattle level)
     {
         base.Update(level);
         timeSinceLastSpawn += Time.deltaTime;
@@ -140,13 +144,15 @@ public class RingSpawnState : AbstractSpawnState
         }
     }
 
-    private void SpawnRing(FileSystemLevel level)
+    private void SpawnRing(FileSystemLevelBattle level)
     {
         Vector3 spawnPos = onlySpawnAtCenter ? new Vector3(0, 0, 0) : GetRandomSpawnPosition(level);
-        level.CreateSpawnEvent(ringSpawnPrefab, spawnPos);
+        level.CreateSpawnEvent(ringSpawnPrefab,
+                                FileSystemLevelManager.Instance.SmallZergPool,
+                                spawnPos);
     }
 
-    private Vector3 GetRandomSpawnPosition(FileSystemLevel level)
+    private Vector3 GetRandomSpawnPosition(FileSystemLevelBattle level)
     {
         Vector2 randomCircle = Random.insideUnitCircle * 8f;
         return level.transform.position + new Vector3(randomCircle.x, randomCircle.y, 0);
@@ -156,7 +162,7 @@ public class RingSpawnState : AbstractSpawnState
 [System.Serializable]
 public class WinState : AbstractSpawnState
 {
-    public override void Enter(FileSystemLevel level)
+    public override void Enter(FileSystemLevelBattle level)
     {
         base.Enter(level);
         level.PublishWin(); // Notify the level manager that the level is won
@@ -175,7 +181,7 @@ public class MixedSpawnState : AbstractSpawnState
     private float timeSinceLastRingSpawn = 0f;
     private float timeSinceLastClusterSpawn = 0f;
 
-    public override void Update(FileSystemLevel level)
+    public override void Update(FileSystemLevelBattle level)
     {
         base.Update(level);
         timeSinceLastRingSpawn += Time.deltaTime;
@@ -195,22 +201,102 @@ public class MixedSpawnState : AbstractSpawnState
         }
     }
 
-    private void SpawnCluster(FileSystemLevel level)
+    private void SpawnCluster(FileSystemLevelBattle level)
     {
         Vector3 spawnPos = GetRandomSpawnPosition(level);
-        level.CreateSpawnEvent(clusterSpawnPrefab, spawnPos);
+        level.CreateSpawnEvent(clusterSpawnPrefab,
+                                FileSystemLevelManager.Instance.SmallZergPool,
+                                spawnPos);
     }
 
-    private void SpawnRing(FileSystemLevel level)
+    private void SpawnRing(FileSystemLevelBattle level)
     {
 
         Vector3 spawnPos = ringOnlySpawnAtCenter ? new Vector3(0, 0, 0) : GetRandomSpawnPosition(level);
-        level.CreateSpawnEvent(ringSpawnPrefab, spawnPos);
+        level.CreateSpawnEvent(ringSpawnPrefab,
+                                FileSystemLevelManager.Instance.SmallZergPool,
+                                spawnPos);
     }
 
-    private Vector3 GetRandomSpawnPosition(FileSystemLevel level)
+    private Vector3 GetRandomSpawnPosition(FileSystemLevelBattle level)
     {
         Vector2 randomCircle = Random.insideUnitCircle * 12f;
         return level.transform.position + new Vector3(randomCircle.x, randomCircle.y, 0);
     }
+}
+
+[System.Serializable]
+public class BossSpawnState : AbstractSpawnState
+{
+    [Header("Boss Spawn Settings")]
+    [SerializeField] private Vector3 bossSpawnPosition;
+    [SerializeField] private float delayBeforeSpawn = 2f;
+    [SerializeField] private float spawnDelay = 2f;
+    [SerializeField] private float delayBeforeMinion = 4f;
+    [SerializeField] private bool transitOnBossDefeated = true;
+
+    [Header("Minion Spawn Settings")]
+
+
+    private float timeSinceStart = 0f;
+    private bool _hasSpawnedBoss = false;
+    private bool _canSpawnMinions = false;
+    private BossZerg _bossZerg;
+
+    public override void Enter(FileSystemLevelBattle level)
+    {
+        base.Enter(level);
+    }
+
+    public override void Update(FileSystemLevelBattle level)
+    {
+        base.Update(level);
+        timeSinceStart += Time.deltaTime;
+
+        if (timeSinceStart >= delayBeforeSpawn && !_hasSpawnedBoss)
+        {
+            SpawnBossAtPosition(level);
+        }
+
+        if (_canSpawnMinions)
+        {
+
+        }
+    }
+
+    private void SpawnBossAtPosition(FileSystemLevelBattle level)
+    {
+        if (_hasSpawnedBoss) return;
+        _hasSpawnedBoss = true;
+        _bossZerg = FileSystemLevelManager.Instance.GetBossZergInstance();
+        _bossZerg.transform.SetPositionAndRotation(bossSpawnPosition, Quaternion.identity);
+        _bossZerg.transform.SetParent(level.ZergContainer);
+
+        _bossZerg.transform.localScale = Vector3.zero;
+        _bossZerg.CanBeTargeted = false;
+        _bossZerg.transform.DOScale(Vector3.one, spawnDelay).OnComplete(() =>
+        {
+            _bossZerg.IsBossReady = true;
+            _bossZerg.CanBeTargeted = true;
+            _bossZerg.OnZergDestroyed += HandleBossDefeated;
+            _bossZerg.Initialize();
+            // After the boss zerg is spawned, wait for a while before transitioning to the next state
+            DOVirtual.DelayedCall(delayBeforeMinion, () =>
+            {
+                _canSpawnMinions = true;
+            });
+        });
+    }
+
+    private void HandleBossDefeated()
+    {
+        _bossZerg.OnZergDestroyed -= HandleBossDefeated;
+        if (transitOnBossDefeated)
+        {
+            Debug.Log("Boss defeated, transitioning to next state.");
+            TransitNow();
+        }
+    }
+    
+
 }

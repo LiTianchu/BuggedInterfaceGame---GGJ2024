@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +12,7 @@ public class FileSystemFile : MonoBehaviour
     [SerializeField] private int fileHp = 10;
     [SerializeField] private Slider hpBar;
     [SerializeField] private bool locked = false;
+    [SerializeField] private bool destroyWhenDied = false;
     private DraggableWorldSpace _draggableWorldSpace;
     public int FileHp { get => fileHp; }
     public bool Locked
@@ -35,11 +38,20 @@ public class FileSystemFile : MonoBehaviour
         hpBar.value = fileHp;
         if (fileHp <= 0)
         {
-            gameObject.SetActive(false);
             OnFileDestroyed?.Invoke();
-            if(_draggableWorldSpace != null)
+            if (_draggableWorldSpace != null)
             {
                 _draggableWorldSpace.UnbindDropArea();
+            }
+
+            if (destroyWhenDied)
+            {
+                FileSystemLevelManager.Instance.CurrentLevel.RemoveFile(this);
+                Destroy(gameObject);
+            }
+            else
+            {
+                gameObject.SetActive(false);
             }
         }
     }

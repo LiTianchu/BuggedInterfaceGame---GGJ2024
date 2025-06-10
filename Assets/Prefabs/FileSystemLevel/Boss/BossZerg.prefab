@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7347088609673857171
+--- !u!1 &5430995332014215012
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5269393365492458466}
-  - component: {fileID: 2776478955026769396}
-  - component: {fileID: 274127360875598023}
-  - component: {fileID: 5054434495503136796}
-  - component: {fileID: 7907550226859135684}
+  - component: {fileID: 6264348114919962699}
+  - component: {fileID: 1655439287586166998}
   m_Layer: 10
-  m_Name: BigZerg
+  m_Name: sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5269393365492458466
+--- !u!4 &6264348114919962699
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7347088609673857171}
+  m_GameObject: {fileID: 5430995332014215012}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 5269393365492458466}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &2776478955026769396
+--- !u!212 &1655439287586166998
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7347088609673857171}
+  m_GameObject: {fileID: 5430995332014215012}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -76,17 +73,52 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1579260087, guid: ba280b8c16fc40c4f8ffbf1fced6530e, type: 3}
+  m_Sprite: {fileID: 1086508444, guid: ba280b8c16fc40c4f8ffbf1fced6530e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.64, y: 0.64}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &7347088609673857171
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5269393365492458466}
+  - component: {fileID: 274127360875598023}
+  - component: {fileID: 5054434495503136796}
+  - component: {fileID: -2782268934421821108}
+  m_Layer: 10
+  m_Name: BossZerg
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5269393365492458466
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7347088609673857171}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6264348114919962699}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &274127360875598023
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -121,7 +153,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.4
+  m_Radius: 1.2
 --- !u!50 &5054434495503136796
 Rigidbody2D:
   serializedVersion: 4
@@ -149,7 +181,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7907550226859135684
+--- !u!114 &-2782268934421821108
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,13 +190,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 7347088609673857171}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d01f9b8a4bdb0f94cb3e6c3ffa2848c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 32b4756aa14445c40959dfdc21dcbc38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zergSpriteRenderer: {fileID: 2776478955026769396}
-  zergMaxHp: 10
-  zergDamage: 5
-  zergMoveSpeed: 2
-  zergAttackRange: 0.6
-  zergAttackRate: 0.58
+  zergSpriteRenderer: {fileID: 1655439287586166998}
+  zergMaxHp: 1000
+  zergDamage: 0
+  zergMoveSpeed: 0
+  zergAttackRange: 0.025
+  zergAttackRate: 0
   refreshTargetInterval: 0.5
+  teleportCooldown: 10
+  teleportDisappearTime: 0.7
+  teleportWaitTime: 0.2
+  teleportAppearTime: 0.7
+  teleportPosLowerLeft: {x: -7.3, y: -1.7}
+  teleportPosUpperRight: {x: 7.5, y: 4.5}
+  minTeleportDistance: 2.5
+  minDistanceFromCenter: 3.5
+  smallZergSpawnIntervalStageA: 2
+  bigZergSpawnIntervalStageA: 15
+  smallZergSpawnIntervalStageB: 1.5
+  bigZergSpawnIntervalStageB: 12
+  stageBHPThresholdFraction: 0.3
+  clusterSpawnEventMany: {fileID: 8811102552544551414, guid: d01ddc14aa6a49e40b99d70d12ae5ff8, type: 3}
+  ringSpawnEventMany: {fileID: 4989470156774353067, guid: 138009f160760c14aba82456d0c76836, type: 3}
+  clusterSpawnEventLess: {fileID: 8811102552544551414, guid: 2e4e7c5cf7b91764e80dad27726dba02, type: 3}
+  ringSpawnEventLess: {fileID: 4989470156774353067, guid: 474c67d0db090d7418c10ed1eda5971b, type: 3}
