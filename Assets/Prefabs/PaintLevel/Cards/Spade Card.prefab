@@ -89,4 +89,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   harmful: 1
-  speed: 250
+  speed: 2.5

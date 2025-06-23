@@ -628,7 +628,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &97989756
 RectTransform:
   m_ObjectHideFlags: 0
@@ -40362,6 +40362,7 @@ GameObject:
   - component: {fileID: 6137101853448195778}
   - component: {fileID: 487309841811137754}
   - component: {fileID: 3920947419519117623}
+  - component: {fileID: 7813671498781804518}
   m_Layer: 5
   m_Name: PaintWindow
   m_TagString: Untagged
@@ -60648,6 +60649,20 @@ RectTransform:
   m_AnchoredPosition: {x: 64, y: 32.125}
   m_SizeDelta: {x: 534.6702, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7813671498781804518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4542477786074171982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e7fa0c73c4c30a4bb80b0abdbfed4c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stickmanPrefab: {fileID: 1572265919626377310, guid: c7dcaa2876cab674e919aef24f78e848, type: 3}
+  mainCanvas: {fileID: 1626518842}
 --- !u!114 &7819777809556818279
 MonoBehaviour:
   m_ObjectHideFlags: 0
