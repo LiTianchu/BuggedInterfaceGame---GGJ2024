@@ -1430,6 +1430,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5924619865828692338, guid: 994482e254e16614ba7e29fc25485a93, type: 3}
   m_PrefabInstance: {fileID: 180193558}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &180649584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 180649585}
+  m_Layer: 5
+  m_Name: EnemyPowerContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &180649585
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180649584}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1626518843}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &190051982
 GameObject:
   m_ObjectHideFlags: 0
@@ -1867,6 +1902,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5924619865828692338, guid: 994482e254e16614ba7e29fc25485a93, type: 3}
   m_PrefabInstance: {fileID: 226508789}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &226804568
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 226804569}
+  m_Layer: 5
+  m_Name: PlayerPowerContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &226804569
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226804568}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1626518843}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &234308334
 GameObject:
   m_ObjectHideFlags: 0
@@ -9204,6 +9274,8 @@ RectTransform:
   - {fileID: 2013324847}
   - {fileID: 1073729214}
   - {fileID: 219753110}
+  - {fileID: 180649585}
+  - {fileID: 226804569}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -9448,7 +9520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3088290747457290286, guid: a36bf000ec6f9ff49ba561a72b11b5eb, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -280
+      value: -279.99997
       objectReference: {fileID: 0}
     - target: {fileID: 3148796499483585238, guid: a36bf000ec6f9ff49ba561a72b11b5eb, type: 3}
       propertyPath: m_SizeDelta.x
@@ -60662,6 +60734,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stickmanPrefab: {fileID: 1572265919626377310, guid: c7dcaa2876cab674e919aef24f78e848, type: 3}
+  enemyPowerContainer: {fileID: 180649585}
+  playerPowerContainer: {fileID: 226804569}
   mainCanvas: {fileID: 1626518842}
 --- !u!114 &7819777809556818279
 MonoBehaviour:

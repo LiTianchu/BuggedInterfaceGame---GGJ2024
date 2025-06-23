@@ -25,10 +25,9 @@ public class Eraser : Heart
     
     public void DeletePlayerPowers()
     {
-        GameObject[] allObjects = FindObjectsOfType<GameObject>();
-
-        foreach (GameObject obj in allObjects)
+        foreach (Transform transform in stickman.PlayerPowerContainer)
         {
+            GameObject obj = transform.gameObject;
             if (obj.scene.IsValid() && IsInstanceOfPrefab(obj, toDeletePlayer))
             {
                 Destroy(obj);
@@ -43,15 +42,15 @@ public class Eraser : Heart
 
     public void DeleteEnemyPowers()
     {
-        GameObject[] allObjects = FindObjectsOfType<GameObject>();
-
-        foreach (GameObject obj in allObjects)
+        foreach (Transform transform in stickman.EnemyPowerContainer)
         {
+            GameObject obj = transform.gameObject;
             if (obj.scene.IsValid() && IsInstanceOfPrefab(obj, toDeleteEnemy))
             {
                 Destroy(obj);
             }
         }
+
     }
     
     bool IsInstanceOfPrefab(GameObject instance, GameObject[] prefabs)

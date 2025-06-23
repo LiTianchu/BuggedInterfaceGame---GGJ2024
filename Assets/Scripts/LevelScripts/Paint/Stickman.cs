@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,16 +17,41 @@ public class Stickman : MonoBehaviour
     private Vector2 minBounds, maxBounds;
     private float halfHeight, halfWidth;
     private Vector2 stickmanSize;
+    private Canvas canvas;
+    private RectTransform enemyPowerContainer;
+    private RectTransform playerPowerContainer;
 
     public int health = 10;
     public float attackInterval = 5.0f; // Time between attacks
     private float attackTimer;
     private bool isImmune = false;
 
+    public Canvas MainCanvas{
+        get { return canvas; }
+    }
+
+    public RectTransform EnemyPowerContainer{
+        get { return enemyPowerContainer; }
+    }
+
+    public RectTransform PlayerPowerContainer{
+        get { return playerPowerContainer; }
+    }
+
+    public event System.Action OnLevelFailed;
+
+
+    public void Initialize(Canvas canvas, RectTransform enemyPowerContainer, RectTransform playerPowerContainer)
+    {
+        this.canvas = canvas;
+        this.enemyPowerContainer = enemyPowerContainer;
+        this.playerPowerContainer = playerPowerContainer;
+    }
+
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
-        Canvas canvas = GetComponentInParent<Canvas>();
+        //Canvas canvas = GetComponentInParent<Canvas>();
 
         if (canvas != null)
         {
@@ -36,6 +62,8 @@ public class Stickman : MonoBehaviour
             // Get the size of the Stickman
             stickmanSize = rectTransform.rect.size;
         }
+
+
 
         attackTimer = attackInterval;
 
@@ -69,7 +97,7 @@ public class Stickman : MonoBehaviour
         if (IsCursorColliding() && !isImmune)
         {
             Debug.Log("Stickman");
-            GameOver();
+            LevelOver();
         }
     }
 
@@ -143,16 +171,22 @@ public class Stickman : MonoBehaviour
             // Create a projectile (brush)
             GameObject projectile = Instantiate(brush, rectTransform.position, Quaternion.identity, transform.parent);
             RectTransform projectileRect = projectile.GetComponent<RectTransform>();
-
+            projectileRect.SetParent(enemyPowerContainer, true); // Set parent to enemyPowerContainer
+            Boolet booletComponent = projectile.GetComponent<Boolet>();
+            if (booletComponent != null)
+            {
+                booletComponent.Initialize(canvas); // Initialize the Boolet with the canvas
+            }
             // Set initial position and direction
             projectileRect.anchoredPosition = rectTransform.anchoredPosition;
             Vector2 cursorPosition = Input.mousePosition;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 rectTransform,
                 cursorPosition,
-                null,
+                canvas.worldCamera,
                 out Vector2 localCursorPosition
             );
+
             Vector2 direction = (localCursorPosition - rectTransform.anchoredPosition).normalized;
 
             // Move the projectile
@@ -167,7 +201,7 @@ public class Stickman : MonoBehaviour
         float lifetime = 4.0f;
         float elapsedTime = 0;
 
-        Canvas canvas = GetComponentInParent<Canvas>();
+        //Canvas canvas = GetComponentInParent<Canvas>();
         Camera camera = null;
         if (canvas.renderMode != RenderMode.ScreenSpaceOverlay)
         {
@@ -183,7 +217,8 @@ public class Stickman : MonoBehaviour
                 camera,
                 out Vector2 localCursorPosition
             );
-
+            
+            if (projectileRect == null) yield break; // Exit if projectileRect is destroyed
             // Homing behavior
             Vector2 desiredDirection = (localCursorPosition - projectileRect.anchoredPosition).normalized;
             direction = Vector2.Lerp(direction, desiredDirection, homingStrength);
@@ -192,7 +227,8 @@ public class Stickman : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
+        
+        if (projectileRect == null) yield break; // Exit if projectileRect is destroyed
         Destroy(projectileRect.gameObject);
     }
 
@@ -214,6 +250,12 @@ public class Stickman : MonoBehaviour
             GameObject warningLine = Instantiate(warningLinePrefab, startPosition, Quaternion.identity, transform.parent);
             RectTransform warningLineRect = warningLine.GetComponent<RectTransform>();
             warningLineRect.anchoredPosition = startPosition;
+            warningLine.transform.SetParent(enemyPowerContainer, true); // Set parent to enemyPowerContainer
+            Boolet booletComponent = warningLine.GetComponent<Boolet>();
+            if (booletComponent != null)
+            {
+                booletComponent.Initialize(canvas); // Initialize the Boolet with the canvas
+            }
 
             // Apply random rotation
             float randomAngle = Random.Range(0f, 360f);
@@ -268,6 +310,13 @@ public class Stickman : MonoBehaviour
             GameObject card = Instantiate(cardPrefab, screenPosition, Quaternion.identity, transform.parent);
             RectTransform cardRect = card.GetComponent<RectTransform>();
             cardRect.anchoredPosition = randomPosition;
+            card.transform.SetParent(enemyPowerContainer, true); // Set parent to bulletContainer
+
+            Boolet booletComponent = card.GetComponent<Boolet>();
+            if (booletComponent != null)
+            {
+                booletComponent.Initialize(canvas); // Initialize the Boolet with the canvas
+            }
 
             elapsedTime += 0.2f;
             yield return new WaitForSeconds(0.2f);
@@ -281,7 +330,7 @@ public class Stickman : MonoBehaviour
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             rectTransform,
             cursorPosition,
-            null,
+            canvas.worldCamera,
             out Vector2 localCursorPosition
         );
 
@@ -297,7 +346,7 @@ public class Stickman : MonoBehaviour
             if (itemPrefabs != null)
             {
                 // Get a random item prefab
-                GameObject heartPrefab = itemPrefabs[Random.Range(0, itemPrefabs.Length)]; 
+                GameObject heartPrefab = itemPrefabs[Random.Range(0, itemPrefabs.Length)];
 
                 // Calculate a random position within the bounds
                 float randomX = Random.Range(minBounds.x + stickmanSize.x / 2, maxBounds.x - stickmanSize.x / 2);
@@ -307,7 +356,14 @@ public class Stickman : MonoBehaviour
                 // Instantiate the heart
                 GameObject heart = Instantiate(heartPrefab, randomPosition, Quaternion.identity, transform.parent);
                 RectTransform heartRect = heart.GetComponent<RectTransform>();
+                heart.transform.SetParent(playerPowerContainer, true); // Set parent to bulletContainer
                 heartRect.anchoredPosition = randomPosition;
+
+                Heart heartComponent = heart.GetComponent<Heart>();
+                if (heartComponent != null)
+                {
+                    heartComponent.Initialize(this); // Initialize the Heart with the Stickman reference
+                }
             }
         }
     }
@@ -357,11 +413,10 @@ public class Stickman : MonoBehaviour
         isImmune = false;
     }
 
-    void GameOver()
+    public void LevelOver()
     {
-        Debug.Log("Game Over!");
-        // Reload the scene or handle game over logic
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        OnLevelFailed?.Invoke(); // Trigger the level failed event
     }
 
     public bool IsImmune()

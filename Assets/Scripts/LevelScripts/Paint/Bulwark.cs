@@ -47,6 +47,12 @@ public class Bulwark : Heart
         RectTransform wallRect = wall.GetComponent<RectTransform>();
         wallRect.sizeDelta = size;
         wallRect.anchoredPosition = position;
+        wall.transform.SetParent(stickman.EnemyPowerContainer, true); // Set parent to enemyPowerContainer
+        Boolet booletComponent = wall.GetComponent<Boolet>();
+        if (booletComponent != null)
+        {
+            booletComponent.Initialize(stickman.MainCanvas); // Initialize the Boolet with the canvas
+        }
         return wall;
     }
 
