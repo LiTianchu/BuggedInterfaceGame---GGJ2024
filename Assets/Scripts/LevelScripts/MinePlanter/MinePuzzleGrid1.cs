@@ -12,7 +12,7 @@ public class MinePuzzleGrid1 : MonoBehaviour,IPointerDownHandler
     [SerializeField] protected AudioClip incrementSound;
     [SerializeField] protected AudioClip decrementSound;
     protected virtual int MIN_NUM => 0;
-    protected virtual int MAX_NUM => 3;
+    protected virtual int MAX_NUM => 8;
     protected TMP_Text _numText;
     public MineplanterLevel3 Mineplanter { get; set; }
     public int X { get; set; }
@@ -36,7 +36,12 @@ public class MinePuzzleGrid1 : MonoBehaviour,IPointerDownHandler
             mineNum--;
             AudioManager.Instance.PlaySFX(decrementSound);
         }
-        mineNum = Mathf.Clamp(mineNum, MIN_NUM, MAX_NUM);
+        //mineNum = Mathf.Clamp(mineNum, MIN_NUM, MAX_NUM);
+        if(mineNum < MIN_NUM){
+            mineNum = MAX_NUM;
+        }else if(mineNum > MAX_NUM){
+            mineNum = MIN_NUM;
+        }
         Mineplanter.CurrentMineNums[X][Y] = mineNum;
         UpdateNumView();
         Mineplanter.ValidateInput(Mineplanter.CurrentMineNums);

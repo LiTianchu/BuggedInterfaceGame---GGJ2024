@@ -8,9 +8,9 @@ public class Heart : MonoBehaviour, IPointerClickHandler
     protected Stickman stickman; // Reference to the Stickman
     public float timeToLive = 5.0f; // Time before the heart disappears
 
-    void Start()
+    public void Initialize(Stickman stickman)
     {
-        stickman = FindObjectOfType<Stickman>();
+        this.stickman = stickman;
     }
 
     void Update()

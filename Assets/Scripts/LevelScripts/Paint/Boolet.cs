@@ -8,7 +8,10 @@ public class Boolet : MonoBehaviour
     protected RectTransform rectTransform;
     protected Stickman stickman;
     public bool harmful = true;
-
+    private Canvas _mainCanvas;
+    public void Initialize(Canvas mainCanvas) {
+        _mainCanvas = mainCanvas;
+    }
     protected virtual void Start()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -31,7 +34,7 @@ public class Boolet : MonoBehaviour
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             rectTransform,
             cursorPosition,
-            null,
+            _mainCanvas.worldCamera, // Use the camera from the main canvas
             out Vector2 localCursorPosition
         );
 
@@ -41,7 +44,8 @@ public class Boolet : MonoBehaviour
     protected virtual void GameOver()
     {
         // Reload the scene or handle game over logic
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        stickman.LevelOver(); // Call the LevelOver method on the Stickman
     }
 
     public void IsHarmful(bool harm)

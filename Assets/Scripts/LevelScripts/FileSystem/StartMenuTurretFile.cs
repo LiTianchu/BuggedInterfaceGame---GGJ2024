@@ -47,15 +47,15 @@ public class StartMenuTurretFile : Draggable
         _deployCooldownMaterialInstance.SetFloat("_Progress", 0.0f);
         deployCDProgressImage.gameObject.SetActive(false);
     }
-    public void Start()
+
+    public void OnFileSystemEntered()
     {
         FileSystemLevelManager.Instance.OnNewFileSystemLevelEntered += HandleNewFileSystemLevelEntered;
     }
 
-    public void OnDestroy()
+    public void OnFileSystemClosed()
     {
         FileSystemLevelManager.Instance.OnNewFileSystemLevelEntered -= HandleNewFileSystemLevelEntered;
-
     }
 
     public void Initialize(StartMenu startMenu)
@@ -164,6 +164,7 @@ public class StartMenuTurretFile : Draggable
     {
         SetAsNotDeployed(false);
     }
+
     private void SetDeployed()
     {
         _isDeployed = true;
