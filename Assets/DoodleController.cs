@@ -20,18 +20,39 @@ public class DoodleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Keyboard.current.aKey.wasPressedThisFrame)
-        { // move left
-            _rb.velocity = new Vector2(-moveSpeed, _rb.velocity.y);
-        }
-        else if (Keyboard.current.dKey.wasPressedThisFrame)
-        { // move right
-            _rb.velocity = new Vector2(moveSpeed, _rb.velocity.y);
-        }
+        // if (Keyboard.current.aKey.wasPressedThisFrame)
+        // { // move left
+        //     MoveLeft();
+        // }
+        // else if (Keyboard.current.dKey.wasPressedThisFrame)
+        // { // move right
+        //     MoveRight();
+        // }
      
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
+    public void MoveLeft()
+    {
+        _rb.velocity = new Vector2(-moveSpeed, _rb.velocity.y);
+    }
+
+    public void MoveRight()
+    {
+        _rb.velocity = new Vector2(moveSpeed, _rb.velocity.y);
+    }
+
+    public void PushLeft(float force)
+    {
+        _rb.AddForce(new Vector2(-force, 0), ForceMode2D.Impulse);
+    }
+
+    public void PushRight(float force)
+    {
+        _rb.AddForce(new Vector2(force, 0), ForceMode2D.Impulse);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
         if (((1 << other.gameObject.layer) & platformLayer) != 0) // check if collided with platform layer
         {
             PlatformEffector2D platformEffector = other.gameObject.GetComponent<PlatformEffector2D>();

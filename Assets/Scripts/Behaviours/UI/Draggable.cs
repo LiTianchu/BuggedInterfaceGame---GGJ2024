@@ -23,7 +23,7 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
     public bool IsDraggable { get => isDraggable; set => isDraggable = value; }
     public event Action OnDragBegin;
     public event Action OnDragEnd;
-    public event Action OnDragUpdate;
+    public event Action<Vector2> OnDragUpdate;
 
     public void Awake()
     {
@@ -43,13 +43,13 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
     public void OnDrag(PointerEventData eventData)
     {
         if (!isDraggable) { return; }
-
+        Vector2 initialAnchorPos = _rectTransform.anchoredPosition;
         _rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
-
+        Vector2 deltaAnchorPos = _rectTransform.anchoredPosition - initialAnchorPos;
 
 
         HandleDrag();
-        OnDragUpdate?.Invoke();
+        OnDragUpdate?.Invoke(deltaAnchorPos);
     }
 
     public void OnEndDrag(PointerEventData eventData)
