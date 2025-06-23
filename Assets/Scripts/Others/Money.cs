@@ -10,8 +10,8 @@ public class Money : GlobalSingleton<Money>
     int stock = 0;
     int price = 240;
 
-    [SerializeField] TextMeshProUGUI amt;
-    [SerializeField] TextMeshProUGUI stk;
+    //[SerializeField] TextMeshProUGUI amt;
+    //[SerializeField] TextMeshProUGUI stk;
     // [SerializeField] GameObject win;
     [SerializeField] GameObject win1;
     
@@ -68,8 +68,8 @@ public class Money : GlobalSingleton<Money>
             timer = 60f;
         }
 
-        amt.text = amount.ToString();
-        stk.text = "$" + stock.ToString();
+       // amt.text = amount.ToString();
+        //stk.text = "$" + stock.ToString();
 
         if (success != null && !success.gameObject.activeSelf) success.text = "";
     }

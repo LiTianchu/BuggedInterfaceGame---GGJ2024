@@ -10,6 +10,7 @@ public class PaintSpawn : MonoBehaviour
     public RectTransform enemyPowerContainer;
     public RectTransform playerPowerContainer;
     public Canvas mainCanvas; // Reference to the main canvas
+    public GameObject desktopGUIOverlay;
 
     private Stickman _spawnedStickman; // Reference to the spawned Stickman
 
@@ -29,6 +30,7 @@ public class PaintSpawn : MonoBehaviour
     void OnEnable()
     {
         SpawnStickman();
+        desktopGUIOverlay.SetActive(true); // Activate the desktop GUI overlay
     }
 
     void OnDisable()
@@ -41,6 +43,7 @@ public class PaintSpawn : MonoBehaviour
             _spawnedStickman.OnLevelFailed -= HandleLevelFailed; // Unsubscribe from the level failed event
             _spawnedStickman = null;
         }
+        desktopGUIOverlay.SetActive(false); // Deactivate the desktop GUI overlay
     }
 
     // Method to spawn the Stickman object
