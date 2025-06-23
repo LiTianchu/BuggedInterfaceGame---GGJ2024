@@ -22,14 +22,14 @@ public class CameraFollower : MonoBehaviour
         if (target == null) return;
 
         // Get the target position
-        Vector3 desiredPosition = target.position;
-        desiredPosition.z = transform.position.z; // Keep the camera's z position
+        Vector3 desiredPosition = target.localPosition;
+        desiredPosition.z = transform.localPosition.z; // Keep the camera's z position
 
         // Clamp the position within the specified bounds
         desiredPosition.x = Mathf.Clamp(desiredPosition.x, minPosition.x, maxPosition.x);
         desiredPosition.y = Mathf.Clamp(desiredPosition.y, minPosition.y, maxPosition.y);
 
       
-        transform.position = desiredPosition;
+        transform.localPosition = desiredPosition;
     }
 }
