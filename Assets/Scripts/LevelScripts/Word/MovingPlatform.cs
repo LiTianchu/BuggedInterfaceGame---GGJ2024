@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
@@ -15,12 +16,14 @@ public class MovingPlatform : MonoBehaviour
 
     [Header("Movement Settings")]
     [SerializeField] private MoveDirection moveDirection = MoveDirection.UpDown; // Default: Up-Down
-    [SerializeField] private float speed = 5f; // Speed of movement
-    [SerializeField] private float distance = 10f; // Distance to move
+    [SerializeField] private float speed = 1f;
+    [SerializeField] private float distance = 1f;
+    [SerializeField] private bool randomizeStartPosition = false; // Randomize the starting position within the distance
 
     private Vector3 _startPosition; // Starting position of the platform
     private bool _movingForward = true; // Tracks the movement direction
     private RectTransform _rectTransform; // Reference to the RectTransform component
+    private float _randomOffset; // Random offset for starting position
 
     void Start()
     {
@@ -34,11 +37,19 @@ public class MovingPlatform : MonoBehaviour
         {
             _startPosition = _rectTransform.anchoredPosition;
         }
+
+        if (randomizeStartPosition)
+        {
+            _randomOffset = Random.Range(0f, 1f);
+        }
     }
 
     void Update()
     {
-        MovePlatform();
+        if (moveDirection != MoveDirection.NotMoving)
+        {
+            MovePlatform();
+        }
     }
 
     private void MovePlatform()
@@ -62,25 +73,21 @@ public class MovingPlatform : MonoBehaviour
         }
 
         // Calculate the new position
-        float displacement = Mathf.PingPong(Time.time * speed, distance);
+        float displacement = Mathf.PingPong(Time.time * speed + _randomOffset, distance);
+
+        displacement -= distance / 2; // shift it to center
+
         Vector3 finalDisplacement = direction * (_movingForward ? displacement : -displacement);
+
 
         if (_rectTransform == null)
         {
-            // For non-UI elements, use transform.position
             transform.position = _startPosition + finalDisplacement;
         }
         else
         {
-            // For UI elements, use RectTransform.anchoredPosition
             _rectTransform.anchoredPosition = _startPosition + finalDisplacement;
         }
-
-        // // Flip movement direction at the extremes (optional for dynamic control)
-        // if (displacement >= distance || displacement <= 0)
-        // {
-        //     _movingForward = !_movingForward;
-        // }
     }
 }
 

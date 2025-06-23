@@ -16,6 +16,12 @@ public class ScramblingText : MonoBehaviour
         {
             textComponent = GetComponent<TextMeshPro>();
         }
+        
+        if (textComponent.text != "")
+        {
+            currentText = textComponent.text;
+        }
+
         SetText(currentText);
     }
 
