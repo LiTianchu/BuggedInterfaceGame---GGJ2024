@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - LevelHubScreen
   - FileSystemScreen
+  - Platform
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - Zerg
   - WindowBoundary
   - WordLevel
-  - 
-  - 
+  - WordLevelPlayer
+  - WordLevelPlatform
   - 
   - 
   - 
