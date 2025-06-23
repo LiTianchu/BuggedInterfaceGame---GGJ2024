@@ -3,7 +3,7 @@ using TMPro;
 
 public class ScramblingText : MonoBehaviour
 {
-    [SerializeField] private TextMeshPro textComponent;
+    [SerializeField] private TMP_Text textComponent;
     [SerializeField] private string characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     [SerializeField] private float scrambleInterval = 0.1f;
 
