@@ -12,6 +12,7 @@ public class Stickman : MonoBehaviour
     public GameObject warningLinePrefab; // Warning line prefab
     public GameObject immunityImagePrefab; // Immunity image prefab
     public GameObject[] cards;
+    public Collectible coinDrop;
 
     private RectTransform rectTransform;
     private Vector2 minBounds, maxBounds;
@@ -21,7 +22,7 @@ public class Stickman : MonoBehaviour
     private RectTransform enemyPowerContainer;
     private RectTransform playerPowerContainer;
 
-    public int health = 10;
+    public int health = 1; // Health of the Stickman
     public float attackInterval = 5.0f; // Time between attacks
     private float attackTimer;
     private bool isImmune = false;
@@ -39,6 +40,7 @@ public class Stickman : MonoBehaviour
     }
 
     public event System.Action OnLevelFailed;
+    public event System.Action OnLevelCompleted;
 
 
     public void Initialize(Canvas canvas, RectTransform enemyPowerContainer, RectTransform playerPowerContainer)
@@ -373,9 +375,26 @@ public class Stickman : MonoBehaviour
         health -= amount;
         if (health <= 0)
         {
-            Debug.Log("KEY GET!");
+            Death();
         }
       
+    }
+
+    public void Death()
+    {
+        //drop coin
+        Collectible coin = Instantiate(coinDrop, canvas.transform);
+        RectTransform coinRect = coin.GetComponent<RectTransform>();
+        coinRect.anchoredPosition = rectTransform.anchoredPosition; // Set the position of the coin to the Stickman's position
+        Rigidbody2D rb = coin.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+
+            rb.AddForce(new Vector2(0, 3f)); // Apply force to the coin
+        }
+
+        OnLevelCompleted?.Invoke(); // Trigger the level completed event
+        gameObject.SetActive(false); // Deactivate the Stickman object
     }
 
     public void SetImmunity(float duration)

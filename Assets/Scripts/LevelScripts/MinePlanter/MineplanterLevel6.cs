@@ -11,42 +11,42 @@ public class MineplanterLevel6: MineplanterLevel3
     protected int progress = 0;
     protected List<List<int>>[] LETTERS =
     {
-        new List<List<int>>()
-        {
-            new List<int>(){0,0,0},
-            new List<int>(){4,0,4},
-            new List<int>(){2,0,2},
-        },
-        new List<List<int>>()
-        {
-            new List<int>(){0,5,0},
-            new List<int>(){0,0,0},
-            new List<int>(){0,5,0},
-        },
-        new List<List<int>>()
-        {
-            new List<int>(){0,0,0},
-            new List<int>(){0,0,0},
-            new List<int>(){0,5,0},
-        },
+        // new List<List<int>>()
+        // {
+        //     new List<int>(){0,0,0},
+        //     new List<int>(){4,0,4},
+        //     new List<int>(){2,0,2},
+        // },
         new List<List<int>>()
         {
             new List<int>(){0,5,0},
             new List<int>(){0,0,0},
             new List<int>(){0,5,0},
         },
-        new List<List<int>>()
-        {
-            new List<int>(){0,4,0},
-            new List<int>(){0,0,3},
-            new List<int>(){0,4,0},
-        },
-        new List<List<int>>()
-        {
-            new List<int>(){0,0,0},
-            new List<int>(){0,0,0},
-            new List<int>(){0,0,0},
-        },
+        // new List<List<int>>()
+        // {
+        //     new List<int>(){0,0,0},
+        //     new List<int>(){0,0,0},
+        //     new List<int>(){0,5,0},
+        // },
+        // new List<List<int>>()
+        // {
+        //     new List<int>(){0,5,0},
+        //     new List<int>(){0,0,0},
+        //     new List<int>(){0,5,0},
+        // },
+        // new List<List<int>>()
+        // {
+        //     new List<int>(){0,4,0},
+        //     new List<int>(){0,0,3},
+        //     new List<int>(){0,4,0},
+        // },
+        // new List<List<int>>()
+        // {
+        //     new List<int>(){0,0,0},
+        //     new List<int>(){0,0,0},
+        //     new List<int>(){0,0,0},
+        // },
     };
 
     public override void Start() {
@@ -69,7 +69,8 @@ public class MineplanterLevel6: MineplanterLevel3
             else
             {
                 levelClearPrompt.SetActive(true);
-                StartCoroutine(GoBackLevel());
+                //StartCoroutine(GoBackLevel());
+                
             }
             Debug.Log("Input matches the MINES list!");
             // Add logic for when the input matches the MINES list
@@ -81,9 +82,9 @@ public class MineplanterLevel6: MineplanterLevel3
         }
     }
 
-    public IEnumerator GoBackLevel()
-    {
-        yield return new WaitForSeconds(5);
-        SceneManager.LoadScene("Level 2");
-    }
+    // public IEnumerator GoBackLevel()
+    // {
+    //     yield return new WaitForSeconds(5);
+    //     SceneManager.LoadScene("Level 2");
+    // }
 }

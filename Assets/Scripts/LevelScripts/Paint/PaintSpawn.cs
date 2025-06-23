@@ -13,6 +13,7 @@ public class PaintSpawn : MonoBehaviour
     public GameObject desktopGUIOverlay;
 
     private Stickman _spawnedStickman; // Reference to the spawned Stickman
+    private bool _levelCompleted = false; // Flag to check if the level is completed
 
     // Start is called before the first frame update
     void Start()
@@ -29,8 +30,11 @@ public class PaintSpawn : MonoBehaviour
     // This method is called when the object becomes enabled and active
     void OnEnable()
     {
-        SpawnStickman();
-        desktopGUIOverlay.SetActive(true); // Activate the desktop GUI overlay
+        if (!_levelCompleted)
+        {
+            SpawnStickman();
+            desktopGUIOverlay.SetActive(true); // Activate the desktop GUI overlay
+        }
     }
 
     void OnDisable()
@@ -41,9 +45,18 @@ public class PaintSpawn : MonoBehaviour
             RemoveSpawnedPlayerPower(); // Remove all spawned objects in the player power container
             Destroy(_spawnedStickman.gameObject);
             _spawnedStickman.OnLevelFailed -= HandleLevelFailed; // Unsubscribe from the level failed event
+            _spawnedStickman.OnLevelCompleted -= HandleLevelCompleted; // Unsubscribe from the level completed event
             _spawnedStickman = null;
         }
         desktopGUIOverlay.SetActive(false); // Deactivate the desktop GUI overlay
+    }
+
+    private void HandleLevelCompleted()
+    {
+        _levelCompleted = true; // Set the level completed flag to true
+        desktopGUIOverlay.SetActive(false); // Deactivate the desktop GUI overlay
+        RemoveSpawnedEnemyPower(); // Remove all spawned objects in the enemy power container
+        RemoveSpawnedPlayerPower(); // Remove all spawned objects in the player power container
     }
 
     // Method to spawn the Stickman object
@@ -56,6 +69,7 @@ public class PaintSpawn : MonoBehaviour
             _spawnedStickman = stickman.GetComponent<Stickman>();
             _spawnedStickman.Initialize(mainCanvas, enemyPowerContainer, playerPowerContainer); // Initialize the Stickman with the main canvas
             _spawnedStickman.OnLevelFailed += HandleLevelFailed; // Subscribe to the level failed event
+            _spawnedStickman.OnLevelCompleted += HandleLevelCompleted; // Subscribe to the level completed event
         }
     }
 
