@@ -30,12 +30,18 @@ public class BossZerg : Zerg
     [SerializeField] private ClusterSpawnEvent clusterSpawnEventLess;
     [SerializeField] private RingSpawnEvent ringSpawnEventLess;
 
+    [Header("Drop Settings")]
+    [SerializeField] private Collectible coinPrefab;
+    [SerializeField] private int coinCount = 10;
+
+
     private float _timeSinceLastTeleport = 0f;
     private float _timeSinceLastSmallZergSpawn = 0f;
     private float _timeSinceLastbigZergSpawn = 0f;
     private float _timeSinceLastLaser = 0f;
     private bool _isTeleporting = false;
     private bool _isBossReady = false;
+
     public bool IsBossReady { get => _isBossReady; set => _isBossReady = value; }
     // Start is called before the first frame update
     protected new void Start()
@@ -147,11 +153,41 @@ public class BossZerg : Zerg
 
     }
 
+    protected override void OnDeath()
+    {
+        Camera camera = Camera.main;
+        // Drop coins on death
+        Vector2 direction = new Vector2(1, 0).normalized; // top right direction
+        Vector2 screenSpaceAnchorPosition = camera.WorldToScreenPoint(transform.position);
+
+        // convert world position to canvas coordinates
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            MainCanvas.GetComponent<RectTransform>(),
+            screenSpaceAnchorPosition,
+            MainCanvas.worldCamera,
+            out Vector2 canvasPosition
+        );
+
+        for (int i = 0; i < coinCount; i++)
+        {
+            float rotationDegree = 180f * ((float)i / coinCount);
+            Quaternion rotation = Quaternion.Euler(0, 0, rotationDegree);
+
+            Collectible coin = Instantiate(coinPrefab, MainCanvas.transform);
+            coin.GetComponent<RectTransform>().anchoredPosition = canvasPosition;
+            Rigidbody2D rb = coin.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.AddForce(rotation * direction * 5f, ForceMode2D.Impulse);
+            }
+        }
+    }
+
     public bool IsInStageB()
     {
         return (float)ZergHp / ZergMaxHp > stageBHPThresholdFraction;
     }
-    
+
     public void SpawnLaserAttack()
     {
         if (!IsInStageB()) { return; }

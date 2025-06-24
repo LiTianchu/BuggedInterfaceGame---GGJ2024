@@ -27,6 +27,7 @@ public class Zerg : MonoBehaviour
     private ObjectPool<Zerg> _pool;
     private bool _canBeTargeted = true;
     private FileSystemLevel _currentLevel;
+     private Canvas _mainCanvas;
 
     public int ZergHp { get => _zergHp; }
     public int ZergDamage { get => zergDamage; }
@@ -35,7 +36,8 @@ public class Zerg : MonoBehaviour
     public float ZergAttackRate { get => zergAttackRate; }
     public int ZergMaxHp { get => zergMaxHp; }
     public bool CanBeTargeted { get => _canBeTargeted; set => _canBeTargeted = value; }
-    public FileSystemLevel CurrentLevel{ get => _currentLevel; set => _currentLevel = value; }
+    public FileSystemLevel CurrentLevel { get => _currentLevel; set => _currentLevel = value; }
+    public Canvas MainCanvas { get => _mainCanvas;}
     public event Action OnZergDestroyed;
 
     protected void Start()
@@ -62,8 +64,9 @@ public class Zerg : MonoBehaviour
         }
     }
 
-    public void Initialize(ObjectPool<Zerg> pool = null)
+    public void Initialize(Canvas mainCanvas, ObjectPool<Zerg> pool = null)
     {
+        _mainCanvas = mainCanvas;
         _pool = pool;
         _zergHp = zergMaxHp;
         zergSpriteRenderer.color = Color.white;
@@ -150,6 +153,8 @@ public class Zerg : MonoBehaviour
                 {
                     Destroy(gameObject);
                 }
+
+                OnDeath();
                 // Debug.Log($"Zerg {gameObject.name} destroyed, {FileSystemLevelManager.Instance.CurrentLevel.ZergDestroyedCount} destroyed in total.");
             });
         }
@@ -174,5 +179,10 @@ public class Zerg : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         zergMoveSpeed = originalSpeed; // resume moving
 
+    }
+
+    protected virtual void OnDeath()
+    {
+        
     }
 }
