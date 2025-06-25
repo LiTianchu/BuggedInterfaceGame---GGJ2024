@@ -35,7 +35,7 @@ public class KeyFile : FileSystemFile
             Debug.Log("Key is locked");
             return;
         }
-        InventoryManager.Instance.AddKey(1);
+        //InventoryManager.Instance.AddKey(1);
         Destroy(gameObject);
     }
 }

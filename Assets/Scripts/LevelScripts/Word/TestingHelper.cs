@@ -9,6 +9,7 @@ public class TestingHelper : MonoBehaviour
     [Header("Turret Testing")]
     [SerializeField] private List<TurretFile> turretFile;
     [SerializeField] private bool unlockAllTurrets = false;
+    [SerializeField] private bool unlockKeyFile = false;
 
 
     private void Start()
@@ -19,6 +20,11 @@ public class TestingHelper : MonoBehaviour
             {
                 InventoryManager.Instance.UpdateTurretFile(file, TurretStateEnum.Unlocked);
             }
+        }
+
+        if(unlockKeyFile)
+        {
+            InventoryManager.Instance.UnlockKeyFile();
         }
 
         //StartCoroutine(TestAlertCoroutine());

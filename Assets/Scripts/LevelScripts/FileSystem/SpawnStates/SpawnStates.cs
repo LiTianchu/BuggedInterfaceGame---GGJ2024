@@ -1,5 +1,7 @@
 using System.Collections;
 using DG.Tweening;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 [System.Serializable]
 public class ScatterSpawnState : AbstractSpawnState
@@ -8,13 +10,14 @@ public class ScatterSpawnState : AbstractSpawnState
     [SerializeField] private float smallZergSpawnRate = 1.0f;
     [SerializeField] private float bigZergSpawnRate = 5.0f;
     [SerializeField] private bool transitOnAllZergKilled = true;
-
+    private FileSystemLevelBattle _level;
     private float _smallZergSpawnTimeElapsed;
     private float _bigZergSpawnTimeElapsed;
 
     public override void Enter(FileSystemLevelBattle level)
     {
         base.Enter(level);
+        _level = level;
         _smallZergSpawnTimeElapsed = smallZergSpawnRate;
         _bigZergSpawnTimeElapsed = bigZergSpawnRate;
     }
@@ -55,11 +58,11 @@ public class ScatterSpawnState : AbstractSpawnState
         {
             case ZergTypeEnum.Small:
                 zerg = FileSystemLevelManager.Instance.SmallZergPool.Get();
-                zerg.Initialize(FileSystemLevelManager.Instance.SmallZergPool);
+                zerg.Initialize(_level.MainCanvas, FileSystemLevelManager.Instance.SmallZergPool);
                 break;
             case ZergTypeEnum.Big:
                 zerg = FileSystemLevelManager.Instance.BigZergPool.Get();
-                zerg.Initialize(FileSystemLevelManager.Instance.BigZergPool);
+                zerg.Initialize(_level.MainCanvas, FileSystemLevelManager.Instance.BigZergPool);
                 break;
         }
 
@@ -235,17 +238,17 @@ public class BossSpawnState : AbstractSpawnState
     [SerializeField] private float delayBeforeMinion = 4f;
     [SerializeField] private bool transitOnBossDefeated = true;
 
-    [Header("Minion Spawn Settings")]
-
 
     private float timeSinceStart = 0f;
     private bool _hasSpawnedBoss = false;
     private bool _canSpawnMinions = false;
     private BossZerg _bossZerg;
+    private FileSystemLevelBattle _level;
 
     public override void Enter(FileSystemLevelBattle level)
     {
         base.Enter(level);
+        _level = level;
     }
 
     public override void Update(FileSystemLevelBattle level)
@@ -279,7 +282,7 @@ public class BossSpawnState : AbstractSpawnState
             _bossZerg.IsBossReady = true;
             _bossZerg.CanBeTargeted = true;
             _bossZerg.OnZergDestroyed += HandleBossDefeated;
-            _bossZerg.Initialize();
+            _bossZerg.Initialize(_level.MainCanvas);
             // After the boss zerg is spawned, wait for a while before transitioning to the next state
             DOVirtual.DelayedCall(delayBeforeMinion, () =>
             {

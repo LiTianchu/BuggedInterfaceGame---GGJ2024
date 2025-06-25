@@ -5,13 +5,16 @@ using UnityEngine;
 
 public class InventoryManager : GlobalSingleton<InventoryManager>
 {
-    private int _keyCount;
+    //private int _keyCount;
     private int _coinCount;
     private Dictionary<TurretFile, TurretStateEnum> _turretFiles = new();
+    private bool _keyFileUnlocked = false;
 
-    public int KeyCount { get { return _keyCount; } }
+   // public int KeyCount { get { return _keyCount; } }
     public int CoinCount { get { return _coinCount; } }
     public Dictionary<TurretFile, TurretStateEnum> TurretFiles { get { return _turretFiles; } }
+
+    public bool KeyFileUnlocked { get { return _keyFileUnlocked; } set { _keyFileUnlocked = value; } }
 
     public event Action<int> OnKeyCountChanged;
     public event Action<int> OnCoinCountChanged;
@@ -19,13 +22,13 @@ public class InventoryManager : GlobalSingleton<InventoryManager>
 
    
 
-    public void AddKey(int amount = 1)
-    {
-        _keyCount += amount;
-        OnKeyCountChanged?.Invoke(_keyCount);
-        Debug.Log("Added key");
-        Debug.Log($"Keys: {_keyCount}");
-    }
+    // public void AddKey(int amount = 1)
+    // {
+    //     _keyCount += amount;
+    //     OnKeyCountChanged?.Invoke(_keyCount);
+    //     Debug.Log("Added key");
+    //     Debug.Log($"Keys: {_keyCount}");
+    // }
 
     public void AddCoin(int amount = 1)
     {
@@ -72,6 +75,11 @@ public class InventoryManager : GlobalSingleton<InventoryManager>
             _turretFiles.Add(turretFile, turretState);
         }
         OnTurretInventoryChanged?.Invoke(_turretFiles);
+    }
+
+    public void UnlockKeyFile()
+    {
+        _keyFileUnlocked = true;
     }
 }
 

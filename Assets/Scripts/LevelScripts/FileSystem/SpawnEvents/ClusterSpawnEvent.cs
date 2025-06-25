@@ -70,7 +70,7 @@ public class ClusterSpawnEvent : AbstractSpawnEvent
         else
         {
             Zerg zerg = ZergPool.Get();
-            zerg.Initialize(ZergPool);
+            zerg.Initialize(CurrentLevel.MainCanvas,ZergPool);
 
             zerg.transform.SetPositionAndRotation(position, Quaternion.identity);
             zerg.transform.SetParent(ZergContainer);

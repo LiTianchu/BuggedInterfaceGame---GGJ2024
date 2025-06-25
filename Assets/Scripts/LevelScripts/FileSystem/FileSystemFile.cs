@@ -27,15 +27,22 @@ public class FileSystemFile : MonoBehaviour
     // Start is called before the first frame update
     protected void Start()
     {
-        hpBar.maxValue = fileHp;
-        hpBar.value = fileHp;
+        if (hpBar != null)
+        {
+            hpBar.maxValue = fileHp;
+            hpBar.value = fileHp;
+        }
         _draggableWorldSpace = GetComponent<DraggableWorldSpace>();
     }
 
     public void TakeDamage(int damage)
     {
         fileHp -= damage;
-        hpBar.value = fileHp;
+        if (hpBar != null)
+        {
+            hpBar.value = fileHp;
+        }
+
         if (fileHp <= 0)
         {
             OnFileDestroyed?.Invoke();

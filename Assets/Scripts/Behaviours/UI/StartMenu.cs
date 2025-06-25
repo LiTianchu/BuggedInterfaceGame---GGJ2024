@@ -17,6 +17,7 @@ public class StartMenu : MonoBehaviour
 
 
     List<StartMenuTurretFile> _turretFiles = new List<StartMenuTurretFile>();
+    private StartMenuKeyFile _keyFile;
 
 
     public List<StartMenuTurretFile> TurretFiles { get { return _turretFiles; } }
@@ -32,7 +33,17 @@ public class StartMenu : MonoBehaviour
             {
                 _turretFiles.Add(turretFile);
                 turretFile.Initialize(this);
+                continue;
             }
+
+            StartMenuKeyFile keyFile = child.GetComponent<StartMenuKeyFile>();
+            if (keyFile != null)
+            {
+                keyFile.Initialize(this);
+                _keyFile = keyFile;
+                continue;
+            }
+
         }
 
         itemGrid.gameObject.SetActive(show);
@@ -83,6 +94,15 @@ public class StartMenu : MonoBehaviour
                 turretFile.gameObject.SetActive(false);
             }
 
+        }
+
+        if (InventoryManager.Instance.KeyFileUnlocked)
+        {
+            _keyFile.gameObject.SetActive(true);
+        }
+        else
+        {
+            _keyFile.gameObject.SetActive(false);
         }
     }
 

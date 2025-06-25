@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.WSA;
@@ -16,6 +17,7 @@ public class FileSystemLevel : MonoBehaviour
     [TitleGroup("Containers")]
     [SerializeField] protected Transform fileContainer;
     [SerializeField] protected Transform zergContainer;
+    [SerializeField] protected Canvas mainCanvas;
 
     protected List<FileSystemFile> _files;
     protected int _zergCount;
@@ -27,6 +29,7 @@ public class FileSystemLevel : MonoBehaviour
     public FileSystemFile CriticalFile { get => criticalFile; }
     public Transform FileContainer { get => fileContainer; }
     public Transform ZergContainer { get => zergContainer; }
+    public Canvas MainCanvas { get => mainCanvas; }
     public bool HasWon { get => _hasWon; }
 
 

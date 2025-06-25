@@ -213,7 +213,10 @@ MonoBehaviour:
   smallZergSpawnIntervalStageB: 1.5
   bigZergSpawnIntervalStageB: 12
   stageBHPThresholdFraction: 0.3
+  laserInterval: 20
   clusterSpawnEventMany: {fileID: 8811102552544551414, guid: d01ddc14aa6a49e40b99d70d12ae5ff8, type: 3}
   ringSpawnEventMany: {fileID: 4989470156774353067, guid: 138009f160760c14aba82456d0c76836, type: 3}
   clusterSpawnEventLess: {fileID: 8811102552544551414, guid: 2e4e7c5cf7b91764e80dad27726dba02, type: 3}
   ringSpawnEventLess: {fileID: 4989470156774353067, guid: 474c67d0db090d7418c10ed1eda5971b, type: 3}
+  coinPrefab: {fileID: 8806702183595031018, guid: 6c3741bb06f5cf845b09bfc9e68f4651, type: 3}
+  coinCount: 10

@@ -64,7 +64,7 @@ public class StorePuzzleWinScreen : MonoBehaviour
         if (_isKey)
         {
             Debug.Log($"Purchased key for {_cost} coins");
-            InventoryManager.Instance.AddKey(1);
+            InventoryManager.Instance.UnlockKeyFile();
         }
         else
         {
