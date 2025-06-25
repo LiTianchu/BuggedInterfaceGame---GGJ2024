@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zergSpriteRenderer: {fileID: 1655439287586166998}
-  zergMaxHp: 9
+  zergMaxHp: 1000
   zergDamage: 0
   zergMoveSpeed: 0
   zergAttackRange: 0.025

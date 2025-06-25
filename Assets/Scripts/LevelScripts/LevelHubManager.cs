@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class LevelHubManager : Singleton<LevelHubManager>
 {
+    [SerializeField] private GameObject desktopGUI;
+    [SerializeField] private GameObject fileSystem;
     [SerializeField] private List<GameObject> levels;
 
     [SerializeField] private List<CrumbleObject> crumbleObjects;
@@ -22,11 +24,11 @@ public class LevelHubManager : Singleton<LevelHubManager>
 
     private void Update()
     {
-        if (!_biosLoaded && InventoryManager.Instance.KeyCount >= 3)
-        {
-            _biosLoaded = true;
-            StartCoroutine(LoadBios());
-        }
+        // if (!_biosLoaded && InventoryManager.Instance.KeyCount >= 3)
+        // {
+        //     _biosLoaded = true;
+        //     StartCoroutine(LoadBios());
+        // }
         // if(Keyboard.current.oKey.wasPressedThisFrame)
         // {
         //     StartCoroutine(LoadBios());
@@ -70,14 +72,31 @@ public class LevelHubManager : Singleton<LevelHubManager>
         }
     }
 
+    public void StartLoadingBios()
+    {
+        if (_biosLoaded)
+        {
+            Debug.LogWarning("BIOS is already loaded.");
+            return;
+        }
+
+        StartCoroutine(LoadBios());
+    }
+
     public IEnumerator LoadBios()
     {
+        _biosLoaded = true;
         OnStartLoadingBios?.Invoke();
+        desktopGUI.SetActive(true);
+        fileSystem.SetActive(false);
 
         foreach (CrumbleObject crumbleObject in crumbleObjects)
         {
-            crumbleObject.Crumble();
-
+            if (crumbleObject != null)
+            {
+                crumbleObject.Crumble();
+            }
+            
             yield return new WaitForSeconds(Random.Range(0.01f, 0.03f));
         }
 

@@ -134,4 +134,4 @@ MonoBehaviour:
   - {fileID: 3238695360924647456, guid: 92ec70d27fd448743ad3124192bc641a, type: 3}
   coinDrop: {fileID: 8806702183595031018, guid: 6c3741bb06f5cf845b09bfc9e68f4651, type: 3}
   health: 1
-  attackInterval: 5
+  attackInterval: 6
