@@ -56,7 +56,18 @@ public class StoreItem : MonoBehaviour
 
     private void CheckIfCanPurchase(int coinCount)
     {
-        purchaseButton.interactable = coinCount >= gamePrice;
+        if (isKey)
+        {
+            bool hasKeyAlreadyUnlocked = InventoryManager.Instance.KeyFileUnlocked;
+            purchaseButton.interactable = !hasKeyAlreadyUnlocked && coinCount >= gamePrice;
+        }
+        else
+        {
+            TurretFile turretFile = award.GetComponent<TurretFile>();
+            bool hasTurretFileAlreadyUnlocked = InventoryManager.Instance.TurretFiles.ContainsKey(turretFile) &&
+                                                InventoryManager.Instance.TurretFiles[turretFile] == TurretStateEnum.Unlocked;
+            purchaseButton.interactable = !hasTurretFileAlreadyUnlocked && coinCount >= gamePrice;
+        }      
     }
 
 }
