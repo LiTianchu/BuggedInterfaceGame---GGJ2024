@@ -59,20 +59,55 @@ public class Change : MonoBehaviour
 
     private IEnumerator ReplaceWithTransition()
     {
+        // Ensure both panels are active for transitions
+        if (deactivated != null) deactivated.SetActive(true);
+        if (activated != null) 
+        {
+            activated.SetActive(true);
+            // Set the incoming panel to invisible state before transition
+            SetInitialInvisibleState(activated);
+        }
+
         // Phase 1: Transition out the current panel
         if (deactivated != null)
         {
-            yield return StartCoroutine(TransitionOut(deactivated));
+            yield return TransitionOut(deactivated);
         }
 
-        // Phase 2: Switch panels
-        if (deactivated != null) deactivated.SetActive(false);
-        if (activated != null) activated.SetActive(true);
-
-        // Phase 3: Transition in the new panel
+        // Phase 2: Transition in the new panel (both are active now)
         if (activated != null)
         {
-            yield return StartCoroutine(TransitionIn(activated));
+            yield return TransitionIn(activated);
+        }
+
+        // Phase 3: Clean up - deactivate the old panel
+        if (deactivated != null) deactivated.SetActive(false);
+    }
+
+    private void SetInitialInvisibleState(GameObject panel)
+    {
+        CanvasGroup canvasGroup = GetOrAddCanvasGroup(panel);
+        
+        switch (transitionType)
+        {
+            case TransitionType.Fade:
+                canvasGroup.alpha = 0f;
+                break;
+                
+            case TransitionType.Scale:
+                panel.transform.localScale = Vector3.zero;
+                break;
+                
+            case TransitionType.Slide:
+                // Move panel off-screen to the right
+                Vector3 currentPos = panel.transform.localPosition;
+                panel.transform.localPosition = new Vector3(currentPos.x + Screen.width, currentPos.y, currentPos.z);
+                break;
+                
+            case TransitionType.FadeAndScale:
+                canvasGroup.alpha = 0f;
+                panel.transform.localScale = Vector3.one * 0.8f;
+                break;
         }
     }
 
@@ -108,34 +143,56 @@ public class Change : MonoBehaviour
     {
         CanvasGroup canvasGroup = GetOrAddCanvasGroup(panel);
         
-        // Set initial states
+        // The initial state is already set by SetInitialInvisibleState()
+        // Now animate to visible state
         switch (transitionType)
         {
             case TransitionType.Fade:
-                canvasGroup.alpha = 0f;
                 yield return canvasGroup.DOFade(1f, transitionDuration).SetEase(easeType).WaitForCompletion();
                 break;
                 
             case TransitionType.Scale:
-                panel.transform.localScale = Vector3.zero;
                 yield return panel.transform.DOScale(1f, transitionDuration).SetEase(easeType).WaitForCompletion();
                 break;
                 
             case TransitionType.Slide:
-                Vector3 targetPos = panel.transform.localPosition;
-                panel.transform.localPosition = new Vector3(targetPos.x + Screen.width, targetPos.y, targetPos.z);
+                // Get the target position (where it should end up)
+                Vector3 targetPos = GetOriginalPosition(panel);
                 yield return panel.transform.DOLocalMove(targetPos, transitionDuration).SetEase(easeType).WaitForCompletion();
                 break;
                 
             case TransitionType.FadeAndScale:
-                canvasGroup.alpha = 0f;
-                panel.transform.localScale = Vector3.one * 0.8f;
-                
                 var sequence = DOTween.Sequence();
                 sequence.Append(canvasGroup.DOFade(1f, transitionDuration).SetEase(easeType));
                 sequence.Join(panel.transform.DOScale(1f, transitionDuration).SetEase(easeType));
                 yield return sequence.WaitForCompletion();
                 break;
+        }
+    }
+
+    // Store original positions for slide transitions
+    private Dictionary<GameObject, Vector3> originalPositions = new Dictionary<GameObject, Vector3>();
+
+    private Vector3 GetOriginalPosition(GameObject panel)
+    {
+        if (!originalPositions.ContainsKey(panel))
+        {
+            // Store the original position when first accessed
+            originalPositions[panel] = panel.transform.localPosition;
+        }
+        return originalPositions[panel];
+    }
+
+    // Call this in Start() or Awake() to store original positions
+    private void Start()
+    {
+        if (activated != null)
+        {
+            originalPositions[activated] = activated.transform.localPosition;
+        }
+        if (deactivated != null)
+        {
+            originalPositions[deactivated] = deactivated.transform.localPosition;
         }
     }
 
