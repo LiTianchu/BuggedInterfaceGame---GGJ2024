@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,6 +33,10 @@ namespace PixelCrushers.DialogueSystem
 
         [Tooltip("Add messages to this panel.")]
         public RectTransform messagePanel;
+        [Tooltip("Add warning prompts to this panel.")]
+        public RectTransform warningPromptPanel;
+        [Tooltip("Prompt spawn area")]
+        public RectTransform promptSpawnArea;
 
         [Tooltip("If non-zero, drop older messages when the number of messages in the history reaches this value.")]
         public int maxMessages = 0;
@@ -127,6 +132,7 @@ namespace PixelCrushers.DialogueSystem
             if (scrollRect == null) Debug.LogWarning("Textline: Assign the dialogue UI's Scroll Rect", this);
             if (contentPanel == null) Debug.LogWarning("Textline: Assign the dialogue UI's Content Panel", this);
             if (messagePanel == null) Debug.LogWarning("Textline: Assign the dialogue UI's Message Panel", this);
+            if (warningPromptPanel == null) Debug.LogWarning("Textline: Assign the dialogue UI's Warning Prompt Panel", this);
         }
 
         public override void OnEnable()
@@ -277,27 +283,49 @@ namespace PixelCrushers.DialogueSystem
         /// </summary>
         protected virtual void AddMessage(Subtitle subtitle)
         {
-            if (subtitle.speakerInfo.characterType == CharacterType.NPC && showDialogueAsNotificationSequence)
-            {
-                ShowNotification(subtitle.formattedText.text);
-            }
-
-            var dialogueActor = GetDialogueActor(subtitle);
+            DialogueActor dialogueActor = GetDialogueActor(subtitle);
             var template = GetTemplate(subtitle, dialogueActor);
             var panel = AcquireSubtitlePanelInstance(template);
             var go = panel.gameObject;
             var text = subtitle.formattedText.text;
             go.name = (text.Length <= 20) ? text : text.Substring(0, Mathf.Min(20, text.Length)) + "...";
             instantiatedMessages.Add(go);
-            go.transform.SetParent(messagePanel.transform, false);
+            if (dialogueActor.actor == "LLM" && showDialogueAsNotificationSequence)
+            {
+                ShowNotification(subtitle.formattedText.text);
+            }
+
+            // check if actor is the villain
+            if (dialogueActor.actor == "Villain")
+            {
+                go.transform.SetParent(warningPromptPanel.transform, false);
+                go.transform.SetAsLastSibling(); // Ensure warning prompts are at the top
+                RectTransform warningPromptRect = go.GetComponent<RectTransform>();
+                if (warningPromptRect != null)
+                {
+                   Vector2 spawnPoint= VectorUtils.GetRandomPointInBox(
+                        promptSpawnArea.rect.min,
+                        promptSpawnArea.rect.max
+                    );
+                    warningPromptRect.anchoredPosition = spawnPoint;
+                }
+                
+            }
+            else if (dialogueActor.actor == "LLM" || dialogueActor.actor == "User")
+            {
+                go.transform.SetParent(messagePanel.transform, false);
+            }
+
             if (panel.addSpeakerName)
             {
                 subtitle.formattedText.text = FormattedText.Parse(string.Format(panel.addSpeakerNameFormat, new object[] { subtitle.speakerInfo.Name, subtitle.formattedText.text })).text;
             }
+
             if (dialogueActor != null && dialogueActor.standardDialogueUISettings.setSubtitleColor)
             {
                 subtitle.formattedText.text = dialogueActor.AdjustSubtitleColor(subtitle);
             }
+
             panel.ShowSubtitle(subtitle);
             continueButton = panel.continueButton;
             if (shouldShowContinueButton && !isLoadingGame)

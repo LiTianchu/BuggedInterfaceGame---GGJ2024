@@ -1135,11 +1135,11 @@ MonoBehaviour:
     - title: Title
       value: Villain Test 1
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: Description
       value: 
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: Actor
       value: 3
       type: 5
@@ -1149,15 +1149,15 @@ MonoBehaviour:
       type: 5
       typeString: CustomFieldType_Actor
     overrideSettings:
-      useOverrides: 0
-      overrideSubtitleSettings: 0
+      useOverrides: 1
+      overrideSubtitleSettings: 1
       showNPCSubtitlesDuringLine: 1
       showNPCSubtitlesWithResponses: 1
       showPCSubtitlesDuringLine: 0
       skipPCSubtitleAfterResponseMenu: 0
       subtitleCharsPerSecond: 30
       minSubtitleSeconds: 2
-      continueButton: 0
+      continueButton: 1
       overrideSequenceSettings: 0
       defaultSequence: 
       defaultPlayerSequence: 
@@ -1254,7 +1254,8 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: Test Test
+        value: "You don\u2019t use interfaces. You float across them like a toddler
+          in floaties. Take them off. Swim or drown."
         type: 0
         typeString: 
       - title: Sequence
@@ -1282,7 +1283,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 189.37589
+        x: 188.66663
         y: 163.37589
         width: 160
         height: 30
@@ -1309,7 +1310,8 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: Test Test Test
+        value: "My first interface design won an award. My last one\u2026 destroyed
+          its users. That is progress."
         type: 0
         typeString: 
       - title: Sequence
@@ -1337,7 +1339,7 @@ MonoBehaviour:
         height: 30
     entryGroups: []
     canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 0.94000006
+    canvasZoom: 0.73000026
   syncInfo:
     syncActors: 0
     syncItems: 0
