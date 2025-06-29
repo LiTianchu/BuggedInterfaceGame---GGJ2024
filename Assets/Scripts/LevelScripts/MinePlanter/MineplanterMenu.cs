@@ -10,18 +10,22 @@ public class MineplanterMenu : MonoBehaviour
 
     public void PlayGame()
     {
-        nextLevel.gameObject.SetActive(true);
-        gameObject.SetActive(false);
+        UIManager.Instance.ShowUI(nextLevel.gameObject);
+        UIManager.Instance.HideUI(gameObject);
+        //xtLevel.gameObject.SetActive(true);
+        //gameObject.SetActive(false);
     }
 
     public void Help()
     {
-        helpPanel.SetActive(true);
+        UIManager.Instance.ShowUI(helpPanel);
+        //helpPanel.SetActive(true);
     }
 
     public void CloseHelp()
     {
-        helpPanel.SetActive(false);
+        UIManager.Instance.HideUI(helpPanel);
+        //helpPanel.SetActive(false);
     }
 
     public void QuitGame()

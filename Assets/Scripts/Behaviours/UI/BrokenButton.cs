@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class BrokenButton : BrokenObject
 {
-    [SerializeField]
-    private MonoBehaviour lockedComponent;
+    //[SerializeField]
+    //private MonoBehaviour lockedComponent;
 
     protected override void Initialize()
     {
@@ -16,6 +16,6 @@ public class BrokenButton : BrokenObject
 
     protected override void HandleBroken()
     {
-        lockedComponent.enabled = true;
+        //lockedComponent.enabled = true;
     }
 }

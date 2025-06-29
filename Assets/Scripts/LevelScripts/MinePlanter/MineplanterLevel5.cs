@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class MineplanterLevel5: MineplanterLevel3
+public class MineplanterLevel5 : MineplanterLevel3
 {
-    public override void Start() {
+    public override void Start()
+    {
         MINES = new()
         {
             new() {1,1,1,0},
@@ -19,7 +20,9 @@ public class MineplanterLevel5: MineplanterLevel3
 
     public override void NextLevel()
     {
-        nextLevel.gameObject.SetActive(true);
-        gameObject.SetActive(false);
+        // nextLevel.gameObject.SetActive(true);
+        // gameObject.SetActive(false);
+        UIManager.Instance.ShowUI(nextLevel.gameObject);
+        UIManager.Instance.HideUI(gameObject,true);
     }
 }

@@ -141,11 +141,13 @@ public class MineplanterLevel1 : MonoBehaviour
         }
         if (level == 1)
         {
-            levelClearPrompt.SetActive(true);
+            UIManager.Instance.ShowUI(levelClearPrompt.gameObject);
+            //levelClearPrompt.SetActive(true);
         }
         else
         {
-            levelClearPrompt1.SetActive(true);
+            UIManager.Instance.ShowUI(levelClearPrompt1.gameObject);
+            //levelClearPrompt1.SetActive(true);
         }
         
         return true;
@@ -197,13 +199,16 @@ public class MineplanterLevel1 : MonoBehaviour
         mines.Clear();
         currentMineNums.Clear();
         neighborMineCounts.Clear();
-        levelClearPrompt.SetActive(false);
+        UIManager.Instance.HideUI(levelClearPrompt.gameObject);
+        //levelClearPrompt.SetActive(false);
         SetupLevel();
     }
 
     public virtual void NextLevel()
     {
-        nextLevel.gameObject.SetActive(true);
-        gameObject.SetActive(false);
+        UIManager.Instance.ShowUI(nextLevel.gameObject);
+        UIManager.Instance.HideUI(gameObject,true);
+        //nextLevel.gameObject.SetActive(true);
+        //gameObject.SetActive(false);
     }
 }

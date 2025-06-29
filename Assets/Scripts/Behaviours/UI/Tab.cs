@@ -24,11 +24,11 @@ public class Tab : MonoBehaviour, IPointerDownHandler
     {
         _img = GetComponent<Image>();
         if (windowOpenedByDefault) {
-            ShowAllWindows();
+            ShowAllWindows(true);
         }
         else
         {
-            HideAllWindows();
+            HideAllWindows(true);
         }
     }
     private void Update()
@@ -48,10 +48,10 @@ public class Tab : MonoBehaviour, IPointerDownHandler
             _img = GetComponent<Image>();   
         }
         if(isToggle){
-            ToggleAllWindows();
+            ToggleAllWindows(false);
         }else
         {
-            ShowAllWindows();
+            ShowAllWindows(false);
         }
         if (windowList[0].activeSelf)
         {
@@ -62,25 +62,25 @@ public class Tab : MonoBehaviour, IPointerDownHandler
         }
     }
 
-    private void ShowAllWindows(){
+    private void ShowAllWindows(bool noTransition = false){
         foreach (GameObject window in windowList)
         {
             if(!window.activeSelf){
-                UIManager.Instance.ShowUI(window);
+                UIManager.Instance.ShowUI(window, noTransition);
             }
             UIManager.Instance.BringToFront(window);
         }
     }
-    private void HideAllWindows(){
+    private void HideAllWindows(bool noTransition = false){
         foreach (GameObject window in windowList)
         {
-            UIManager.Instance.HideUI(window);
+            UIManager.Instance.HideUI(window,noTransition);
         }
     }
-    private void ToggleAllWindows(){
+    private void ToggleAllWindows(bool noTransition = false){
         foreach (GameObject window in windowList)
         {
-            UIManager.Instance.ToggleUI(window);
+            UIManager.Instance.ToggleUI(window,noTransition);
             UIManager.Instance.BringToFront(window);
         }
     }

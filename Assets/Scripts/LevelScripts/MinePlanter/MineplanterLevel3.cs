@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class MineplanterLevel3: MonoBehaviour
+public class MineplanterLevel3 : MonoBehaviour
 {
     [Header("Grids")]
     [SerializeField] protected GridLayoutGroup puzzleGrid;
@@ -73,7 +73,7 @@ public class MineplanterLevel3: MonoBehaviour
         float puzzleCellHeight = (puzzleHeight - PUZZLE_GRID_SPACING * (rows - 1)) / rows;
         float puzzleCellWidth = (puzzleWidth - PUZZLE_GRID_SPACING * (cols - 1)) / cols;
         puzzleGrid.cellSize = new Vector2(puzzleCellWidth, puzzleCellHeight);
-        puzzleGrid.spacing = new Vector2(PUZZLE_GRID_SPACING, PUZZLE_GRID_SPACING);   
+        puzzleGrid.spacing = new Vector2(PUZZLE_GRID_SPACING, PUZZLE_GRID_SPACING);
 
         // Initialize the grids
         for (int i = 0; i < rows; i++)
@@ -90,13 +90,15 @@ public class MineplanterLevel3: MonoBehaviour
                 minePuzzleGrid.X = i;
                 minePuzzleGrid.Y = j;
             }
-        }   
+        }
     }
 
     public virtual void NextLevel()
     {
-        nextLevel.gameObject.SetActive(true);
-        gameObject.SetActive(false);
+        // nextLevel.gameObject.SetActive(true);
+        // gameObject.SetActive(false);
+        UIManager.Instance.ShowUI(nextLevel.gameObject);
+        UIManager.Instance.HideUI(gameObject,true);
     }
 
     // Method to check if inputted numbers match the MINES list
@@ -126,7 +128,8 @@ public class MineplanterLevel3: MonoBehaviour
     {
         if (CheckIfInputMatchesMines(input))
         {
-            levelClearPrompt.SetActive(true);
+            UIManager.Instance.ShowUI(levelClearPrompt.gameObject);
+            //levelClearPrompt.SetActive(true);
             Debug.Log("Input matches the MINES list!");
             // Add logic for when the input matches the MINES list
         }

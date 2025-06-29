@@ -45,29 +45,37 @@ public class StartMenu : MonoBehaviour
             }
 
         }
-
-        itemGrid.gameObject.SetActive(show);
+        if (show)
+        {
+            UIManager.Instance.ShowUI(itemGrid.gameObject, true);
+        }
+        else
+        {
+            UIManager.Instance.HideUI(itemGrid.gameObject, true);
+        }
+   
     }
 
 
     public void ToggleMenu()
     {
         show = !show;
-        itemGrid.gameObject.SetActive(show);
+
         if (show)
         {
-            canvasGroup.alpha = 1;
             canvasGroup.interactable = true;
             canvasGroup.blocksRaycasts = true;
+            UIManager.Instance.ShowUI(itemGrid.gameObject);
 
             CheckTurretFiles();
 
         }
         else
         {
-            canvasGroup.alpha = 0;
+
             canvasGroup.interactable = false;
             canvasGroup.blocksRaycasts = false;
+            UIManager.Instance.HideUI(itemGrid.gameObject);
         }
     }
 
