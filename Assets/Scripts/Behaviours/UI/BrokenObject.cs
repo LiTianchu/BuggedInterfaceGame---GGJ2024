@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(GravityController2D))]
 [RequireComponent(typeof(ShakeAnim))]
-public class BrokenObject : MonoBehaviour, IPointerClickHandler
+public class BrokenObject : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] private float gravityScale = 100f;
     [Range(0, 10)]
@@ -23,6 +23,7 @@ public class BrokenObject : MonoBehaviour, IPointerClickHandler
 
     private GravityController2D _gravityController2D;
     private ShakeAnim _shakeAnim;
+    private IEnumerator _dropCoroutine;
 
     public event System.Action OnBroken;
 
@@ -34,7 +35,7 @@ public class BrokenObject : MonoBehaviour, IPointerClickHandler
         Initialize();
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
         HandleClick();
     }
@@ -45,9 +46,10 @@ public class BrokenObject : MonoBehaviour, IPointerClickHandler
         numOfClicksBeforeDrop--;
         Debug.Log("Clicked once, " + numOfClicksBeforeDrop + " more clicks to go");
 
-        if (numOfClicksBeforeDrop <= 0) //drop the object
+        if (numOfClicksBeforeDrop <= 0 && gameObject.activeSelf && _dropCoroutine==null) //drop the object
         {
-            StartCoroutine(Drop());
+            _dropCoroutine = Drop();
+            StartCoroutine(_dropCoroutine);
         }
         else if (shakeWhenClicked)
         {

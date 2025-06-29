@@ -92,7 +92,8 @@ namespace PixelCrushers.DialogueSystem
         [SerializeField] private bool showDialogueAsNotificationSequence = true;
         [SerializeField] private FadeAfterShowTime notificationUI;
         [SerializeField] private TMP_Text notificationTextLabel;
-
+        [SerializeField] private RectTransform notificationPanel;
+ 
         private List<FadeAfterShowTime> _notificationList = new();
         public static string conversationVariableOverride;
 
@@ -162,7 +163,7 @@ namespace PixelCrushers.DialogueSystem
             DestroyInstantiatedMessages(); // Start with clean slate.
             dialogueActorCache.Clear();
             shouldShowContinueButton = false;
-
+            
             if (headingText != null)
             {
                 var conversation = DialogueManager.masterDatabase.GetConversation(DialogueManager.lastConversationID);
@@ -180,6 +181,7 @@ namespace PixelCrushers.DialogueSystem
         {
             StopAllCoroutines();
             base.Close();
+            
             if (!isLoadingGame) ClearRecords();
             shouldShowContinueButton = false;
         }
@@ -301,12 +303,19 @@ namespace PixelCrushers.DialogueSystem
                 go.transform.SetParent(warningPromptPanel.transform, false);
                 go.transform.SetAsLastSibling(); // Ensure warning prompts are at the top
                 RectTransform warningPromptRect = go.GetComponent<RectTransform>();
+                UITransition warningPromptTransition = go.GetComponent<UITransition>();
+                
+                if (warningPromptTransition != null)
+                {
+                    warningPromptTransition.TransitionIn();
+                }
+
                 if (warningPromptRect != null)
                 {
-                   Vector2 spawnPoint= VectorUtils.GetRandomPointInBox(
-                        promptSpawnArea.rect.min,
-                        promptSpawnArea.rect.max
-                    );
+                    Vector2 spawnPoint = VectorUtils.GetRandomPointInBox(
+                         promptSpawnArea.rect.min,
+                         promptSpawnArea.rect.max
+                     );
                     warningPromptRect.anchoredPosition = spawnPoint;
                 }
                 
@@ -364,7 +373,7 @@ namespace PixelCrushers.DialogueSystem
                 ).SetEase(Ease.OutBack);
             }
 
-            FadeAfterShowTime newNotification = Instantiate(notificationUI, transform);
+            FadeAfterShowTime newNotification = Instantiate(notificationUI, notificationPanel);
 
             newNotification.transform.SetAsFirstSibling(); // prevent blocking the main panel
             TMP_Text txt = Instantiate(notificationTextLabel, newNotification.transform);

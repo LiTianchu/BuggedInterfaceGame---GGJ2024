@@ -45,7 +45,7 @@ public class SoftKeyboard : Singleton<SoftKeyboard>
         _row2Count = row2Keys.Length;
         _row3Count = row3Keys.Length;
         SetupKeyboard();
-        HideKeyboard();
+        HideKeyboard(true);
     }
 
     private void SetupKeyboard()
@@ -114,7 +114,15 @@ public class SoftKeyboard : Singleton<SoftKeyboard>
     private void OnBackspaceClick()
     {
         _targetedInputField.RemoveLastCharacter();
-        hiddenInput = hiddenInput.Substring(0, hiddenInput.Length - 1);
+        if (hiddenInput.Length > 0)
+        {
+            hiddenInput = hiddenInput.Substring(0, hiddenInput.Length - 1);
+        }
+        else
+        {
+            Debug.Log("No characters to remove from hidden input.");
+        }
+        
     }
 
     private void OnKeyClick(string v)
@@ -133,14 +141,16 @@ public class SoftKeyboard : Singleton<SoftKeyboard>
     public void ShowKeyboard(SoftKeyboardInput inputField)
     {
         _targetedInputField = inputField;
-        keyboardFrame.gameObject.SetActive(true);
+        UIManager.Instance.ShowUI(keyboardFrame.gameObject);
+        //keyboardFrame.gameObject.SetActive(true);
         hiddenInput = "";
     }
 
-    public void HideKeyboard()
+    public void HideKeyboard(bool noTransition = false)
     {
         _targetedInputField = null;
-        keyboardFrame.gameObject.SetActive(false);
+        UIManager.Instance.HideUI(keyboardFrame.gameObject,noTransition);
+        //keyboardFrame.gameObject.SetActive(false);
         hiddenInput = "";
     }
 

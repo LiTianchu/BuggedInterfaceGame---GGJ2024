@@ -68,7 +68,8 @@ public class MineplanterLevel6: MineplanterLevel3
             }
             else
             {
-                levelClearPrompt.SetActive(true);
+                UIManager.Instance.ShowUI(levelClearPrompt.gameObject);
+                //levelClearPrompt.SetActive(true);
                 //StartCoroutine(GoBackLevel());
                 
             }
