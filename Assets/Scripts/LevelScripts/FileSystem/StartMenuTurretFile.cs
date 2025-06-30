@@ -37,15 +37,9 @@ public class StartMenuTurretFile : Draggable
     {
         base.Awake();
         turretFileName.text = turretFilePrefab.ToString();
-        _rectTransform = GetComponent<RectTransform>();
         stayInView = false; // deactivate stay in view to use custom logic
-        _image = GetComponent<Image>();
 
-        // create material instance
-        _deployCooldownMaterialInstance = new Material(deployCDProgressImage.material);
-        deployCDProgressImage.material = _deployCooldownMaterialInstance;
-        _deployCooldownMaterialInstance.SetFloat("_Progress", 0.0f);
-        deployCDProgressImage.gameObject.SetActive(false);
+        TryGetDependentComponents();
     }
 
     public void OnFileSystemEntered()
@@ -62,6 +56,28 @@ public class StartMenuTurretFile : Draggable
     {
         _startMenu = startMenu;
         _originalMenuColor = _startMenu.ItemGrid.GetComponent<Image>().color;
+    }
+
+    public void TryGetDependentComponents()
+    {
+        if (_rectTransform == null)
+        {
+            _rectTransform = GetComponent<RectTransform>();
+        }
+
+        if (_image == null)
+        {
+            _image = GetComponent<Image>();
+        }
+        
+        if (_deployCooldownMaterialInstance == null)
+        {
+            // create material instance
+            _deployCooldownMaterialInstance = new Material(deployCDProgressImage.material);
+            deployCDProgressImage.material = _deployCooldownMaterialInstance;
+            _deployCooldownMaterialInstance.SetFloat("_Progress", 0.0f);
+            deployCDProgressImage.gameObject.SetActive(false);
+        }
     }
 
     public void DeployTurret()
@@ -174,10 +190,13 @@ public class StartMenuTurretFile : Draggable
 
     private void SetAsNotDeployed(bool withCooldown = false)
     {
+        TryGetDependentComponents();
+
         if (_originalAnchorPos == new Vector3(999, 999, 999))
         {
             _originalAnchorPos = _rectTransform.anchoredPosition;
         }
+
         _image.color = Color.white;
         _isDeployed = false;
         IsDraggable = true;
@@ -203,7 +222,7 @@ public class StartMenuTurretFile : Draggable
         IsDraggable = false;
         _image.color = usedColor;
         _deployCooldownMaterialInstance.SetFloat("_Progress", 1.0f);
-        
+
         DOTween.Sequence()
             .Append(_deployCooldownMaterialInstance.DOFloat(0f, "_Progress", deployCooldown).SetEase(Ease.Linear))
             .OnComplete(() =>

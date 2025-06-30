@@ -23,11 +23,15 @@ public class Banana : MonoBehaviour
     private float timeSinceLastPress = 0f;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        UITransition transition = GetComponent<UITransition>();
+        if (transition != null)
+        {
+            transition.TransitionIn();
+        }
     }
-
+    
     // Update is called once per frame
     void Update()
     {
