@@ -1129,7 +1129,7 @@ MonoBehaviour:
   transitionOutDuration: 0.2
   transitionType: 3
   easeType: 27
-  scalePivot: {x: 0.5, y: 0.5}
+  scalePivot: {x: 1, y: 0}
   slideInFromPos: {x: -10, y: 0}
   stayPos: {x: 0, y: 0}
   slideOutToPos: {x: 10, y: 0}
@@ -2252,15 +2252,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2750521008412335552, guid: 6c3741bb06f5cf845b09bfc9e68f4651, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2750521008412335552, guid: 6c3741bb06f5cf845b09bfc9e68f4651, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2750521008412335552, guid: 6c3741bb06f5cf845b09bfc9e68f4651, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2750521008412335552, guid: 6c3741bb06f5cf845b09bfc9e68f4651, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -3324,6 +3324,18 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+--- !u!225 &331828525
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331828518}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &345571306
 GameObject:
   m_ObjectHideFlags: 0
@@ -3554,6 +3566,7 @@ GameObject:
   - component: {fileID: 353410954}
   - component: {fileID: 353410958}
   - component: {fileID: 353410959}
+  - component: {fileID: 353410960}
   m_Layer: 5
   m_Name: Villain Message Template
   m_TagString: Untagged
@@ -3749,6 +3762,7 @@ MonoBehaviour:
   breakType: 0
   shakeWhenClicked: 1
   shakeDurationPerClick: 0.3
+  additionalForceWhenBroken: {x: 0, y: 7}
   parentWhenBroken: {fileID: 0}
   onDrop:
     m_PersistentCalls:
@@ -3889,6 +3903,18 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+--- !u!225 &353410960
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353410945}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &356564007
 GameObject:
   m_ObjectHideFlags: 0
@@ -7859,6 +7885,18 @@ MonoBehaviour:
   slideOutToPos: {x: 0, y: -470}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+--- !u!225 &1044225894
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044225881}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1072929692
 GameObject:
   m_ObjectHideFlags: 0
@@ -8343,7 +8381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 120480738665038533, guid: e8d52e189fe6bfb40a138de7e411333a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -46.488754
+      value: -46.47752
       objectReference: {fileID: 0}
     - target: {fileID: 287166619736316978, guid: e8d52e189fe6bfb40a138de7e411333a, type: 3}
       propertyPath: m_AnchorMax.x
@@ -9082,18 +9120,30 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 19196430110401576, guid: e8d52e189fe6bfb40a138de7e411333a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2053465169}
+    - targetCorrespondingSourceObject: {fileID: 19196430110401576, guid: e8d52e189fe6bfb40a138de7e411333a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2053465173}
     - targetCorrespondingSourceObject: {fileID: 7359002121098084669, guid: e8d52e189fe6bfb40a138de7e411333a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1907169762}
     - targetCorrespondingSourceObject: {fileID: 6929882444294825215, guid: e8d52e189fe6bfb40a138de7e411333a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 331828524}
+    - targetCorrespondingSourceObject: {fileID: 6929882444294825215, guid: e8d52e189fe6bfb40a138de7e411333a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 331828525}
     - targetCorrespondingSourceObject: {fileID: 4208673270798356165, guid: e8d52e189fe6bfb40a138de7e411333a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2102964646}
+    - targetCorrespondingSourceObject: {fileID: 4208673270798356165, guid: e8d52e189fe6bfb40a138de7e411333a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2102964647}
     - targetCorrespondingSourceObject: {fileID: 3640459432162552945, guid: e8d52e189fe6bfb40a138de7e411333a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1514239413}
+    - targetCorrespondingSourceObject: {fileID: 3640459432162552945, guid: e8d52e189fe6bfb40a138de7e411333a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1514239414}
   m_SourcePrefab: {fileID: 100100000, guid: e8d52e189fe6bfb40a138de7e411333a, type: 3}
 --- !u!224 &1109428966 stripped
 RectTransform:
@@ -10359,7 +10409,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1375515878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11822,6 +11872,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 532800029573212305, guid: 6ff697e6f97eb4f498c304cc60feefd5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1044225890}
+    - targetCorrespondingSourceObject: {fileID: 532800029573212305, guid: 6ff697e6f97eb4f498c304cc60feefd5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1044225894}
   m_SourcePrefab: {fileID: 100100000, guid: 6ff697e6f97eb4f498c304cc60feefd5, type: 3}
 --- !u!1 &1507704849
 GameObject:
@@ -11929,6 +11982,18 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+--- !u!225 &1514239414
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514239408}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1555891111 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 19196430110401576, guid: e8d52e189fe6bfb40a138de7e411333a, type: 3}
@@ -16259,6 +16324,18 @@ MonoBehaviour:
   slideOutToPos: {x: 720, y: 20}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+--- !u!225 &2053465173
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555891111}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2059408748
 GameObject:
   m_ObjectHideFlags: 0
@@ -16859,6 +16936,18 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+--- !u!225 &2102964647
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564683986}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2109726172
 GameObject:
   m_ObjectHideFlags: 0
@@ -23919,6 +24008,7 @@ MonoBehaviour:
   breakType: 0
   shakeWhenClicked: 1
   shakeDurationPerClick: 1
+  additionalForceWhenBroken: {x: 0, y: 0}
   parentWhenBroken: {fileID: 1626518843}
   onDrop:
     m_PersistentCalls:
@@ -27014,6 +27104,7 @@ MonoBehaviour:
   breakType: 1
   shakeWhenClicked: 1
   shakeDurationPerClick: 1
+  additionalForceWhenBroken: {x: 0, y: 0}
   parentWhenBroken: {fileID: 0}
   onDrop:
     m_PersistentCalls:
