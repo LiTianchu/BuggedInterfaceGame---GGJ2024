@@ -16,6 +16,7 @@ public class BrokenObject : MonoBehaviour, IPointerDownHandler
     [SerializeField] private BreakType breakType;
     [SerializeField] private bool shakeWhenClicked = true;
     [SerializeField] private float shakeDurationPerClick = 0.5f;
+    [SerializeField] private Vector2 additionalForceWhenBroken;
     [SerializeField] private Transform parentWhenBroken;
     [SerializeField] private UnityEvent onDrop;
 
@@ -46,7 +47,7 @@ public class BrokenObject : MonoBehaviour, IPointerDownHandler
         numOfClicksBeforeDrop--;
         Debug.Log("Clicked once, " + numOfClicksBeforeDrop + " more clicks to go");
 
-        if (numOfClicksBeforeDrop <= 0 && gameObject.activeSelf && _dropCoroutine==null) //drop the object
+        if (numOfClicksBeforeDrop <= 0 && gameObject.activeSelf && _dropCoroutine == null) //drop the object
         {
             _dropCoroutine = Drop();
             StartCoroutine(_dropCoroutine);
@@ -72,6 +73,7 @@ public class BrokenObject : MonoBehaviour, IPointerDownHandler
 
         _gravityController2D.Unfreeze();
 
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
 
         switch (breakType)
         {
@@ -82,11 +84,12 @@ public class BrokenObject : MonoBehaviour, IPointerDownHandler
             case BreakType.DetachHinge:
                 _gravityController2D.SetGravity(gravityScale);
                 _gravityController2D.UseGravity();
-                Rigidbody2D rb = GetComponent<Rigidbody2D>();
 
                 rb.GetComponentInChildren<HingeJoint2D>().enabled = false;
                 break;
         }
+
+        rb.AddForce(additionalForceWhenBroken, ForceMode2D.Impulse);
 
         if (parentWhenBroken != null)
         {
