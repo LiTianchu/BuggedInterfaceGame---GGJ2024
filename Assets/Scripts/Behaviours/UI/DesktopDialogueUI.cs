@@ -93,7 +93,7 @@ namespace PixelCrushers.DialogueSystem
         [SerializeField] private FadeAfterShowTime notificationUI;
         [SerializeField] private TMP_Text notificationTextLabel;
         [SerializeField] private RectTransform notificationPanel;
- 
+
         private List<FadeAfterShowTime> _notificationList = new();
         public static string conversationVariableOverride;
 
@@ -163,7 +163,7 @@ namespace PixelCrushers.DialogueSystem
             DestroyInstantiatedMessages(); // Start with clean slate.
             dialogueActorCache.Clear();
             shouldShowContinueButton = false;
-            
+
             if (headingText != null)
             {
                 var conversation = DialogueManager.masterDatabase.GetConversation(DialogueManager.lastConversationID);
@@ -181,7 +181,7 @@ namespace PixelCrushers.DialogueSystem
         {
             StopAllCoroutines();
             base.Close();
-            
+
             if (!isLoadingGame) ClearRecords();
             shouldShowContinueButton = false;
         }
@@ -236,6 +236,12 @@ namespace PixelCrushers.DialogueSystem
             Tools.SetGameObjectActive(pcPreDelaySettings.preDelayIcon, false);
             base.ShowResponses(subtitle, responses, timeout);
             ScrollToBottom(); //--- Now does smooth scroll: StartCoroutine(JumpToBottom());
+            StandardUIMenuPanel responsePanel = conversationUIElements.standardMenuControls.GetPanel(subtitle, responses);
+            UITransition uITransition = responsePanel.GetComponent<UITransition>();
+            if (uITransition != null)
+            {
+                uITransition.TransitionIn();
+            }
         }
 
         protected virtual DialogueActor GetDialogueActor(Subtitle subtitle)
@@ -304,7 +310,7 @@ namespace PixelCrushers.DialogueSystem
                 go.transform.SetAsLastSibling(); // Ensure warning prompts are at the top
                 RectTransform warningPromptRect = go.GetComponent<RectTransform>();
                 UITransition warningPromptTransition = go.GetComponent<UITransition>();
-                
+
                 if (warningPromptTransition != null)
                 {
                     warningPromptTransition.TransitionIn();
@@ -318,11 +324,17 @@ namespace PixelCrushers.DialogueSystem
                      );
                     warningPromptRect.anchoredPosition = spawnPoint;
                 }
-                
+
             }
             else if (dialogueActor.actor == "LLM" || dialogueActor.actor == "User")
             {
                 go.transform.SetParent(messagePanel.transform, false);
+                UITransition warningPromptTransition = go.GetComponent<UITransition>();
+
+                if (warningPromptTransition != null)
+                {
+                    warningPromptTransition.TransitionIn();
+                }
             }
 
             if (panel.addSpeakerName)
@@ -380,8 +392,8 @@ namespace PixelCrushers.DialogueSystem
             txt.text = FormattedText.Parse(message).text;
 
             _notificationList.Add(newNotification);
-
-            newNotification.gameObject.SetActive(true);
+            UIManager.Instance.ShowUI(newNotification.gameObject);
+            //newNotification.gameObject.SetActive(true);
             txt.gameObject.SetActive(true);
 
             newNotification.OnFadeOutCompleted += () =>
