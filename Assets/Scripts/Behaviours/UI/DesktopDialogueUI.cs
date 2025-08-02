@@ -374,27 +374,35 @@ namespace PixelCrushers.DialogueSystem
         {
             if (string.IsNullOrEmpty(message)) { return; }
 
-            foreach (FadeAfterShowTime notification in _notificationList)
+            StartCoroutine(ShowNotificationCoroutine(message));
+        }
+
+        private IEnumerator ShowNotificationCoroutine(string message)
+        {
+            FadeAfterShowTime newNotification = Instantiate(notificationUI, notificationPanel);
+            newNotification.transform.SetAsFirstSibling(); // prevent blocking the main panel
+            TMP_Text txt = Instantiate(notificationTextLabel, newNotification.transform);
+            txt.text = FormattedText.Parse(message).text;
+            UIManager.Instance.ShowUI(newNotification.gameObject);
+            //newNotification.gameObject.SetActive(true);
+            txt.gameObject.SetActive(true);
+            yield return new WaitForEndOfFrame(); // Wait for the next frame to ensure the UI is ready
+           
+            txt.ForceMeshUpdate();
+
+            for (int i = 0; i < _notificationList.Count; i++)
             {
-                RectTransform rect = notification.GetComponent<RectTransform>();
-                float rectHeight = rect.rect.height;
-                float newY = rect.anchoredPosition.y + rectHeight;
+                FadeAfterShowTime notification = _notificationList[i];
+
+                RectTransform newRect = newNotification.GetComponent<RectTransform>();
+                float newNotiHeight = newRect.rect.height;
+                float newY = notification.GetComponent<RectTransform>().anchoredPosition.y + newNotiHeight;
                 notification.GetComponent<RectTransform>().DOAnchorPosY(
                     newY,
                     0.5f
                 ).SetEase(Ease.OutBack);
             }
-
-            FadeAfterShowTime newNotification = Instantiate(notificationUI, notificationPanel);
-
-            newNotification.transform.SetAsFirstSibling(); // prevent blocking the main panel
-            TMP_Text txt = Instantiate(notificationTextLabel, newNotification.transform);
-            txt.text = FormattedText.Parse(message).text;
-
             _notificationList.Add(newNotification);
-            UIManager.Instance.ShowUI(newNotification.gameObject);
-            //newNotification.gameObject.SetActive(true);
-            txt.gameObject.SetActive(true);
 
             newNotification.OnFadeOutCompleted += () =>
             {
