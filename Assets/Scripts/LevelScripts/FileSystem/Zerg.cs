@@ -119,7 +119,7 @@ public class Zerg : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         if (_zergHp <= 0)
         {

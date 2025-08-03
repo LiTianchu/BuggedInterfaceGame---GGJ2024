@@ -799,6 +799,7 @@ GameObject:
   - component: {fileID: 97989757}
   - component: {fileID: 97989762}
   - component: {fileID: 97989763}
+  - component: {fileID: 97989764}
   m_Layer: 5
   m_Name: WordWindow
   m_TagString: Untagged
@@ -962,6 +963,85 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+--- !u!114 &97989764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97989755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c593457cd8105e148906690e1707c592, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: 16
+  delayOneFrame: 0
+  condition:
+    luaConditions: []
+    questConditions: []
+    acceptedTags: []
+    acceptedGameObjects: []
+    luaWizardIndex: -1
+    lastEvaluationValue: 0
+  setQuestState: 1
+  questName: 
+  questState: 0
+  setQuestEntryState: 0
+  questEntryNumber: 1
+  questEntryState: 0
+  setAnotherQuestEntryState: 0
+  anotherQuestEntryNumber: 1
+  anotherQuestEntryState: 0
+  luaCode: 
+  sequence: 
+  sequenceSpeaker: {fileID: 0}
+  sequenceListener: {fileID: 0}
+  waitOneFrameOnStartOrEnable: 1
+  alertMessage: 
+  textTable: {fileID: 0}
+  alertDuration: 0
+  sendMessages: []
+  barkSource: 0
+  barkConversation: 
+  barkEntryID: -1
+  barkEntryTitle: 
+  barkText: 
+  barkTextSequence: 
+  barker: {fileID: 0}
+  barkTarget: {fileID: 0}
+  barkOrder: 0
+  allowBarksDuringConversations: 0
+  skipBarkIfNoValidEntries: 0
+  cacheBarkLines: 0
+  conversation: First Opened Word Level
+  conversationConversant: {fileID: 0}
+  conversationActor: {fileID: 0}
+  startConversationEntryID: -1
+  startConversationEntryTitle: 
+  overrideDialogueUI: {fileID: 0}
+  exclusive: 0
+  replace: 1
+  queue: 0
+  skipIfNoValidEntries: 0
+  preventRestartOnSameFrameEnded: 0
+  stopConversationOnTriggerExit: 0
+  marginToAllowTriggerExit: 0.2
+  stopConversationIfTooFar: 0
+  maxConversationDistance: 5
+  monitorConversationDistanceFrequency: 1
+  showCursorDuringConversation: 0
+  pauseGameDuringConversation: 0
+  setActiveActions: []
+  setEnabledActions: []
+  setAnimatorStateActions: []
+  onExecute:
+    m_PersistentCalls:
+      m_Calls: []
+  useConversationTitlePicker: 1
+  useBarkTitlePicker: 1
+  useQuestNamePicker: 1
+  selectedDatabase: {fileID: 11400000, guid: e1f68c6fcce64614589b0aa56738e210, type: 2}
 --- !u!1 &100537106 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3595671613253059703, guid: e8d52e189fe6bfb40a138de7e411333a, type: 3}
@@ -3628,6 +3708,7 @@ GameObject:
   - component: {fileID: 348976174}
   - component: {fileID: 348976173}
   - component: {fileID: 348976175}
+  - component: {fileID: 348976176}
   m_Layer: 5
   m_Name: LevelClearPrompt
   m_TagString: Untagged
@@ -3715,6 +3796,85 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+--- !u!114 &348976176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348976171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c593457cd8105e148906690e1707c592, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: 16
+  delayOneFrame: 0
+  condition:
+    luaConditions: []
+    questConditions: []
+    acceptedTags: []
+    acceptedGameObjects: []
+    luaWizardIndex: -1
+    lastEvaluationValue: 0
+  setQuestState: 1
+  questName: 
+  questState: 0
+  setQuestEntryState: 0
+  questEntryNumber: 1
+  questEntryState: 0
+  setAnotherQuestEntryState: 0
+  anotherQuestEntryNumber: 1
+  anotherQuestEntryState: 0
+  luaCode: 
+  sequence: 
+  sequenceSpeaker: {fileID: 0}
+  sequenceListener: {fileID: 0}
+  waitOneFrameOnStartOrEnable: 1
+  alertMessage: 
+  textTable: {fileID: 0}
+  alertDuration: 0
+  sendMessages: []
+  barkSource: 0
+  barkConversation: 
+  barkEntryID: -1
+  barkEntryTitle: 
+  barkText: 
+  barkTextSequence: 
+  barker: {fileID: 0}
+  barkTarget: {fileID: 0}
+  barkOrder: 0
+  allowBarksDuringConversations: 0
+  skipBarkIfNoValidEntries: 0
+  cacheBarkLines: 0
+  conversation: Finished Mineplanter Level
+  conversationConversant: {fileID: 0}
+  conversationActor: {fileID: 0}
+  startConversationEntryID: -1
+  startConversationEntryTitle: 
+  overrideDialogueUI: {fileID: 0}
+  exclusive: 0
+  replace: 1
+  queue: 0
+  skipIfNoValidEntries: 0
+  preventRestartOnSameFrameEnded: 0
+  stopConversationOnTriggerExit: 0
+  marginToAllowTriggerExit: 0.2
+  stopConversationIfTooFar: 0
+  maxConversationDistance: 5
+  monitorConversationDistanceFrequency: 1
+  showCursorDuringConversation: 0
+  pauseGameDuringConversation: 0
+  setActiveActions: []
+  setEnabledActions: []
+  setAnimatorStateActions: []
+  onExecute:
+    m_PersistentCalls:
+      m_Calls: []
+  useConversationTitlePicker: 1
+  useBarkTitlePicker: 1
+  useQuestNamePicker: 1
+  selectedDatabase: {fileID: 11400000, guid: e1f68c6fcce64614589b0aa56738e210, type: 2}
 --- !u!1 &353410945
 GameObject:
   m_ObjectHideFlags: 0
@@ -5734,7 +5894,7 @@ MonoBehaviour:
   mainCanvas: {fileID: 1626518842}
   spawnStates:
   - rid: 36828264327282688
-  - rid: 36828373227405312
+  - rid: 320612168288436224
   - rid: 36828264327282689
   currentStateIndex: 0
   references:
@@ -5757,13 +5917,13 @@ MonoBehaviour:
         stateName: Win
         duration: -1
         nextStateIndex: 0
-    - rid: 36828373227405312
+    - rid: 320612168288436224
       type: {class: BossSpawnState, ns: , asm: Assembly-CSharp}
       data:
-        stateName: Boss
-        duration: -1
+        stateName: Default State
+        duration: 10
         nextStateIndex: 2
-        bossSpawnPosition: {x: 0, y: 4, z: 0}
+        bossSpawnPosition: {x: 0, y: 0, z: 0}
         delayBeforeSpawn: 2
         spawnDelay: 2
         delayBeforeMinion: 4
@@ -8535,85 +8695,6 @@ MonoBehaviour:
   slideOutToPos: {x: -445.7, y: 17.5}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
---- !u!114 &1082102713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1082102701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c593457cd8105e148906690e1707c592, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trigger: 16
-  delayOneFrame: 0
-  condition:
-    luaConditions: []
-    questConditions: []
-    acceptedTags: []
-    acceptedGameObjects: []
-    luaWizardIndex: -1
-    lastEvaluationValue: 0
-  setQuestState: 1
-  questName: 
-  questState: 0
-  setQuestEntryState: 0
-  questEntryNumber: 1
-  questEntryState: 0
-  setAnotherQuestEntryState: 0
-  anotherQuestEntryNumber: 1
-  anotherQuestEntryState: 0
-  luaCode: 
-  sequence: 
-  sequenceSpeaker: {fileID: 0}
-  sequenceListener: {fileID: 0}
-  waitOneFrameOnStartOrEnable: 1
-  alertMessage: 
-  textTable: {fileID: 0}
-  alertDuration: 0
-  sendMessages: []
-  barkSource: 0
-  barkConversation: 
-  barkEntryID: -1
-  barkEntryTitle: 
-  barkText: 
-  barkTextSequence: 
-  barker: {fileID: 0}
-  barkTarget: {fileID: 0}
-  barkOrder: 0
-  allowBarksDuringConversations: 0
-  skipBarkIfNoValidEntries: 0
-  cacheBarkLines: 0
-  conversation: First Opened Start Menu When Empty
-  conversationConversant: {fileID: 0}
-  conversationActor: {fileID: 0}
-  startConversationEntryID: -1
-  startConversationEntryTitle: 
-  overrideDialogueUI: {fileID: 0}
-  exclusive: 0
-  replace: 1
-  queue: 0
-  skipIfNoValidEntries: 0
-  preventRestartOnSameFrameEnded: 0
-  stopConversationOnTriggerExit: 0
-  marginToAllowTriggerExit: 0.2
-  stopConversationIfTooFar: 0
-  maxConversationDistance: 5
-  monitorConversationDistanceFrequency: 1
-  showCursorDuringConversation: 0
-  pauseGameDuringConversation: 0
-  setActiveActions: []
-  setEnabledActions: []
-  setAnimatorStateActions: []
-  onExecute:
-    m_PersistentCalls:
-      m_Calls: []
-  useConversationTitlePicker: 1
-  useBarkTitlePicker: 1
-  useQuestNamePicker: 1
-  selectedDatabase: {fileID: 11400000, guid: e1f68c6fcce64614589b0aa56738e210, type: 2}
 --- !u!1 &1088060149
 GameObject:
   m_ObjectHideFlags: 0
@@ -11002,8 +11083,7 @@ MonoBehaviour:
   - {fileID: -4399770004067366755, guid: e0d6a400886674748b4014abb76696ce, type: 3}
   - {fileID: 1885107681468602498, guid: a0023dab64a6e2b46a1bd15dcfe33391, type: 3}
   - {fileID: 2893697297869875386, guid: 3b458bb52b46d7e43a3f6cf14b4270f6, type: 3}
-  - {fileID: 0}
-  unlockAllTurrets: 0
+  unlockAllTurrets: 1
   unlockKeyFile: 0
 --- !u!4 &1375515880
 Transform:
@@ -11737,7 +11817,7 @@ MonoBehaviour:
   startConversationEntryTitle: 
   overrideDialogueUI: {fileID: 0}
   exclusive: 0
-  replace: 0
+  replace: 1
   queue: 0
   skipIfNoValidEntries: 0
   preventRestartOnSameFrameEnded: 0
@@ -13415,9 +13495,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7291782204294391065, guid: a36bf000ec6f9ff49ba561a72b11b5eb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1082102707}
-    - targetCorrespondingSourceObject: {fileID: 7291782204294391065, guid: a36bf000ec6f9ff49ba561a72b11b5eb, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1082102713}
   m_SourcePrefab: {fileID: 100100000, guid: a36bf000ec6f9ff49ba561a72b11b5eb, type: 3}
 --- !u!114 &1642254960 stripped
 MonoBehaviour:
@@ -13841,11 +13918,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1691800524}
   m_CullTransparentMesh: 1
---- !u!1 &1703579883 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3721001821467284387, guid: e4f6c27da9278df4b9d18797e10fabfc, type: 3}
-  m_PrefabInstance: {fileID: 2665975292989088197}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1710089074
 GameObject:
   m_ObjectHideFlags: 0
@@ -32502,6 +32574,7 @@ GameObject:
   - component: {fileID: 3156501787976433437}
   - component: {fileID: 4982361838420045871}
   - component: {fileID: 8839010487334361435}
+  - component: {fileID: 8839010487334361436}
   m_Layer: 5
   m_Name: MineplanterWindow
   m_TagString: Untagged
@@ -40120,6 +40193,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3779515483787474322}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Toggle, UnityEngine.UI
+        m_MethodName: set_isOn
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!114 &3784633015369184714
 MonoBehaviour:
@@ -45418,8 +45503,8 @@ MonoBehaviour:
   password: 
   usernameField: {fileID: 0}
   passwordField: {fileID: 0}
-  deactivated: {fileID: 2111387700620924959}
-  activated: {fileID: 1703579883}
+  deactivated: {fileID: 2453942158432619359}
+  activated: {fileID: 6668714395744680393}
   hasTransition: 1
   transitionDuration: 0.5
   transitionType: 0
@@ -66415,7 +66500,6 @@ GameObject:
   - component: {fileID: 1426026677211552413}
   - component: {fileID: 5887735417149627065}
   - component: {fileID: 7820346792900970300}
-  - component: {fileID: 7820346792900970301}
   m_Layer: 5
   m_Name: MineplanterCanvasThankScreen
   m_TagString: Untagged
@@ -66445,85 +66529,6 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
---- !u!114 &7820346792900970301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7820346792900970299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c593457cd8105e148906690e1707c592, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trigger: 16
-  delayOneFrame: 0
-  condition:
-    luaConditions: []
-    questConditions: []
-    acceptedTags: []
-    acceptedGameObjects: []
-    luaWizardIndex: -1
-    lastEvaluationValue: 0
-  setQuestState: 1
-  questName: 
-  questState: 0
-  setQuestEntryState: 0
-  questEntryNumber: 1
-  questEntryState: 0
-  setAnotherQuestEntryState: 0
-  anotherQuestEntryNumber: 1
-  anotherQuestEntryState: 0
-  luaCode: 
-  sequence: 
-  sequenceSpeaker: {fileID: 0}
-  sequenceListener: {fileID: 0}
-  waitOneFrameOnStartOrEnable: 1
-  alertMessage: 
-  textTable: {fileID: 0}
-  alertDuration: 0
-  sendMessages: []
-  barkSource: 0
-  barkConversation: 
-  barkEntryID: -1
-  barkEntryTitle: 
-  barkText: 
-  barkTextSequence: 
-  barker: {fileID: 0}
-  barkTarget: {fileID: 0}
-  barkOrder: 0
-  allowBarksDuringConversations: 0
-  skipBarkIfNoValidEntries: 0
-  cacheBarkLines: 0
-  conversation: Finished Mineplanter Level
-  conversationConversant: {fileID: 0}
-  conversationActor: {fileID: 0}
-  startConversationEntryID: -1
-  startConversationEntryTitle: 
-  overrideDialogueUI: {fileID: 0}
-  exclusive: 0
-  replace: 1
-  queue: 0
-  skipIfNoValidEntries: 0
-  preventRestartOnSameFrameEnded: 0
-  stopConversationOnTriggerExit: 0
-  marginToAllowTriggerExit: 0.2
-  stopConversationIfTooFar: 0
-  maxConversationDistance: 5
-  monitorConversationDistanceFrequency: 1
-  showCursorDuringConversation: 0
-  pauseGameDuringConversation: 0
-  setActiveActions: []
-  setEnabledActions: []
-  setAnimatorStateActions: []
-  onExecute:
-    m_PersistentCalls:
-      m_Calls: []
-  useConversationTitlePicker: 1
-  useBarkTitlePicker: 1
-  useQuestNamePicker: 1
-  selectedDatabase: {fileID: 11400000, guid: e1f68c6fcce64614589b0aa56738e210, type: 2}
 --- !u!1 &7828154309859991239
 GameObject:
   m_ObjectHideFlags: 0
@@ -72219,6 +72224,85 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+--- !u!114 &8839010487334361436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2566192436945149006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c593457cd8105e148906690e1707c592, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: 16
+  delayOneFrame: 0
+  condition:
+    luaConditions: []
+    questConditions: []
+    acceptedTags: []
+    acceptedGameObjects: []
+    luaWizardIndex: -1
+    lastEvaluationValue: 0
+  setQuestState: 1
+  questName: 
+  questState: 0
+  setQuestEntryState: 0
+  questEntryNumber: 1
+  questEntryState: 0
+  setAnotherQuestEntryState: 0
+  anotherQuestEntryNumber: 1
+  anotherQuestEntryState: 0
+  luaCode: 
+  sequence: 
+  sequenceSpeaker: {fileID: 0}
+  sequenceListener: {fileID: 0}
+  waitOneFrameOnStartOrEnable: 1
+  alertMessage: 
+  textTable: {fileID: 0}
+  alertDuration: 0
+  sendMessages: []
+  barkSource: 0
+  barkConversation: 
+  barkEntryID: -1
+  barkEntryTitle: 
+  barkText: 
+  barkTextSequence: 
+  barker: {fileID: 0}
+  barkTarget: {fileID: 0}
+  barkOrder: 0
+  allowBarksDuringConversations: 0
+  skipBarkIfNoValidEntries: 0
+  cacheBarkLines: 0
+  conversation: First Opened Mineplanter
+  conversationConversant: {fileID: 0}
+  conversationActor: {fileID: 0}
+  startConversationEntryID: -1
+  startConversationEntryTitle: 
+  overrideDialogueUI: {fileID: 0}
+  exclusive: 0
+  replace: 1
+  queue: 0
+  skipIfNoValidEntries: 0
+  preventRestartOnSameFrameEnded: 0
+  stopConversationOnTriggerExit: 0
+  marginToAllowTriggerExit: 0.2
+  stopConversationIfTooFar: 0
+  maxConversationDistance: 5
+  monitorConversationDistanceFrequency: 1
+  showCursorDuringConversation: 0
+  pauseGameDuringConversation: 0
+  setActiveActions: []
+  setEnabledActions: []
+  setAnimatorStateActions: []
+  onExecute:
+    m_PersistentCalls:
+      m_Calls: []
+  useConversationTitlePicker: 1
+  useBarkTitlePicker: 1
+  useQuestNamePicker: 1
+  selectedDatabase: {fileID: 11400000, guid: e1f68c6fcce64614589b0aa56738e210, type: 2}
 --- !u!1 &8852506122024101386
 GameObject:
   m_ObjectHideFlags: 0

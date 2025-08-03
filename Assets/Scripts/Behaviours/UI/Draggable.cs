@@ -76,6 +76,7 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        HandleOnPointerDown();
         if (!isDraggable) { return; }
         if (moveToFrontOnDrag)
         {
@@ -118,4 +119,5 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
     protected virtual void HandleBeginDrag() { }
     protected virtual void HandleEndDrag() { }
     protected virtual void HandleDrag() { }
+    protected virtual void HandleOnPointerDown() { }
 }

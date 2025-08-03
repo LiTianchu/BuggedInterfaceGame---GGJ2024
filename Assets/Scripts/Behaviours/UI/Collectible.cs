@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using PixelCrushers.DialogueSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,7 +14,19 @@ public class Collectible : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        InventoryManager.Instance.AddCoin(coinAmount);
+        if (coinAmount > 0)
+        {
+            DialogueLua.SetVariable("TotalCoinCollected", DialogueLua.GetVariable("TotalCoinCollected").asInt + coinAmount);
+            Debug.Log($"Collected {coinAmount} coins. Total Collected Till Now: {DialogueLua.GetVariable("TotalCoinCollected").asInt}");
+
+            if(DialogueLua.GetVariable("TotalCoinCollected").asInt == 1)
+            {
+                DialogueManager.StopAllConversations(); // replace
+                DialogueManager.StartConversation("First Picked Up Coin");
+            }
+
+            InventoryManager.Instance.AddCoin(coinAmount);
+        }
 
         if (destroyAfterCollect)
         {

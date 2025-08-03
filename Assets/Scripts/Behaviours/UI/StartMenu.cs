@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using PixelCrushers.DialogueSystem;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +19,7 @@ public class StartMenu : MonoBehaviour
 
     List<StartMenuTurretFile> _turretFiles = new List<StartMenuTurretFile>();
     private StartMenuKeyFile _keyFile;
+    private bool _isShownForTheFirstTime = false;
 
 
     public List<StartMenuTurretFile> TurretFiles { get { return _turretFiles; } }
@@ -68,6 +70,12 @@ public class StartMenu : MonoBehaviour
             UIManager.Instance.ShowUI(itemGrid.gameObject);
 
             CheckTurretFiles();
+            if(!_isShownForTheFirstTime)
+            {
+                _isShownForTheFirstTime = true;
+                DialogueManager.StopAllConversations(); // replace
+                DialogueManager.StartConversation("First Opened Start Menu");
+            }
 
         }
         else

@@ -1,4 +1,5 @@
 using System;
+using PixelCrushers.DialogueSystem;
 using UnityEngine;
 
 public class BiosEntranceFile : FileSystemFile
@@ -22,6 +23,14 @@ public class BiosEntranceFile : FileSystemFile
         if (Locked)
         {
             Debug.Log("Key is locked");
+            
+            if (DialogueLua.GetVariable("BiosEntranceLockedDialog").asBool == false)
+            {
+                DialogueLua.SetVariable("BiosEntranceLockedDialog", true);
+                DialogueManager.StopAllConversations(); // replace
+                DialogueManager.StartConversation("Clicked On The Locked BIOS");
+            }
+        
             return;
         }
 

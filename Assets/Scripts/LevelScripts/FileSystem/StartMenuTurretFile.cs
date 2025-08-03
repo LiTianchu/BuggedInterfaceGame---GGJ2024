@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using DG.Tweening;
+using PixelCrushers.DialogueSystem;
 using Sirenix.OdinInspector;
 using TMPro;
 using Unity.VisualScripting;
@@ -179,6 +180,17 @@ public class StartMenuTurretFile : Draggable
     private void HandleNewFileSystemLevelEntered(FileSystemLevel level)
     {
         SetAsNotDeployed(false);
+    }
+
+    protected override void HandleOnPointerDown()
+    {
+        base.HandleOnPointerDown();
+        if (DialogueLua.GetVariable("DragStartMenuIconDialog").asBool == false)
+        {
+            DialogueLua.SetVariable("DragStartMenuIconDialog", true);
+            DialogueManager.StopAllConversations(); // replace
+            DialogueManager.StartConversation("Clicked On Game Icon In Start Menu");
+        }
     }
 
     private void SetDeployed()

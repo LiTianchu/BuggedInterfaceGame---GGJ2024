@@ -1,5 +1,6 @@
 using System.Collections;
 using DG.Tweening;
+using PixelCrushers.DialogueSystem;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -270,6 +271,10 @@ public class BossSpawnState : AbstractSpawnState
     private void SpawnBossAtPosition(FileSystemLevelBattle level)
     {
         if (_hasSpawnedBoss) return;
+
+        DialogueManager.StopAllConversations(); // replace
+        DialogueManager.StartConversation("When Zerg Boss Appeared"); // Start the conversation for boss spawn
+
         _hasSpawnedBoss = true;
         _bossZerg = FileSystemLevelManager.Instance.GetBossZergInstance();
         _bossZerg.transform.SetPositionAndRotation(bossSpawnPosition, Quaternion.identity);

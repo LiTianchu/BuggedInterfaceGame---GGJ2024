@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using DG.Tweening;
+using PixelCrushers.DialogueSystem;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -41,6 +43,15 @@ public class BossZerg : Zerg
     private float _timeSinceLastLaser = 0f;
     private bool _isTeleporting = false;
     private bool _isBossReady = false;
+    private Dictionary<string,bool> _bossHPAnnouncements = new Dictionary<string, bool>
+    {
+        { "75", false },
+        { "50", false },
+        { "25", false },
+        { "10", false }
+    };
+
+
 
     public bool IsBossReady { get => _isBossReady; set => _isBossReady = value; }
     // Start is called before the first frame update
@@ -181,6 +192,53 @@ public class BossZerg : Zerg
                 rb.AddForce(rotation * direction * 5f, ForceMode2D.Impulse);
             }
         }
+    }
+
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+        float hpRatio = (float)ZergHp / ZergMaxHp;
+
+        // dialogue
+        DialogueLua.SetVariable("BossZergHpRatio", hpRatio);
+
+        if (hpRatio <= 0.75 && hpRatio > 0.5)
+        {
+            if (!_bossHPAnnouncements["75"])
+            {
+                _bossHPAnnouncements["75"] = true;
+                DialogueManager.StopAllConversations(); // replace
+                DialogueManager.StartConversation("Zerg Boss HP");
+            }
+        }
+        else if (hpRatio <= 0.5 && hpRatio > 0.25)
+        {
+            if (!_bossHPAnnouncements["50"])
+            {
+                _bossHPAnnouncements["50"] = true;
+                DialogueManager.StopAllConversations(); // replace
+                DialogueManager.StartConversation("Zerg Boss HP");
+            }
+        }
+        else if (hpRatio <= 0.25 && hpRatio > 0.1f)
+        {
+            if (!_bossHPAnnouncements["25"])
+            {
+                _bossHPAnnouncements["25"] = true;
+                DialogueManager.StopAllConversations(); // replace
+                DialogueManager.StartConversation("Zerg Boss HP");
+            }
+        }
+        else if (hpRatio <= 0.1f)
+    {
+            if (!_bossHPAnnouncements["10"])
+            {
+                _bossHPAnnouncements["10"] = true;
+                DialogueManager.StopAllConversations(); // replace
+                DialogueManager.StartConversation("Zerg Boss HP");
+            }
+        }
+        
     }
 
     public bool IsInStageB()
