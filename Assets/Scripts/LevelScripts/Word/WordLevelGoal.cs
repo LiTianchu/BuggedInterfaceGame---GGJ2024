@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PixelCrushers.DialogueSystem;
 
 public class WordLevelGoal : MonoBehaviour
 {
@@ -29,6 +30,9 @@ public class WordLevelGoal : MonoBehaviour
         { // check if the collision is with the doodle
             OnGoalCollected?.Invoke();
             _isCollected = true;
+            DialogueManager.StopAllConversations(); // replace
+            DialogueManager.StartConversation("Finished Word Level");
+            
         }
     }
     

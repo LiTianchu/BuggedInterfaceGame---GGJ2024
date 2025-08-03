@@ -3,6 +3,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using TMPro;
 using Unity.VisualScripting;
@@ -89,6 +90,7 @@ namespace PixelCrushers.DialogueSystem
 
         [Tooltip("When entering these scene(s), don't resume the conversation. Typically used for the start menu (scene 0).")]
         public int[] dontLoadConversationInScenes = new int[] { 0 };
+        [SerializeField] private bool clearMessagesWhenConverationStarts = true;
         [SerializeField] private bool showDialogueAsNotificationSequence = true;
         [SerializeField] private FadeAfterShowTime notificationUI;
         [SerializeField] private TMP_Text notificationTextLabel;
@@ -160,7 +162,12 @@ namespace PixelCrushers.DialogueSystem
         {
             base.Open();
             CheckAssignments();
-            DestroyInstantiatedMessages(); // Start with clean slate.
+            if (clearMessagesWhenConverationStarts)
+            {
+                DestroyInstantiatedMessages(); // Start with clean slate.
+
+            }
+            DestroyTypingMessages(); // Remove any typing messages.
             dialogueActorCache.Clear();
             shouldShowContinueButton = false;
 
@@ -384,11 +391,11 @@ namespace PixelCrushers.DialogueSystem
             TMP_Text txt = Instantiate(notificationTextLabel, newNotification.transform);
             txt.text = FormattedText.Parse(message).text;
             UIManager.Instance.ShowUI(newNotification.gameObject);
-            //newNotification.gameObject.SetActive(true);
             txt.gameObject.SetActive(true);
-            yield return new WaitForEndOfFrame(); // Wait for the next frame to ensure the UI is ready
-           
-            txt.ForceMeshUpdate();
+
+            yield return new WaitForEndOfFrame(); // wait for the next frame to ensure the UI is ready
+
+            txt.ForceMeshUpdate(); // force update the text mesh to ensure correct layout
 
             for (int i = 0; i < _notificationList.Count; i++)
             {
@@ -494,6 +501,28 @@ namespace PixelCrushers.DialogueSystem
                 ReleaseSubtitlePanelInstance(instantiatedMessages[i]);
             }
             instantiatedMessages.Clear();
+        }
+
+        protected virtual void DestroyTypingMessages()
+        {
+            if (instantiatedMessages.Count == 0) { return; }
+
+            GameObject lastMessage = instantiatedMessages.LastOrDefault();
+            if (lastMessage == null)
+            {
+                instantiatedMessages.RemoveAt(instantiatedMessages.Count - 1);
+                return;
+            }
+
+            StandardUISubtitlePanel panel = lastMessage.GetComponent<StandardUISubtitlePanel>();
+
+            TextMeshProTypewriterEffect typewriterEffect = panel.subtitleText.textMeshProUGUI.GetComponent<TextMeshProTypewriterEffect>();
+            if (typewriterEffect != null && typewriterEffect.isPlaying)
+            {
+                ReleaseSubtitlePanelInstance(lastMessage);
+                instantiatedMessages.Remove(lastMessage);
+            }
+
         }
 
         protected virtual bool DontLoadInThisScene()

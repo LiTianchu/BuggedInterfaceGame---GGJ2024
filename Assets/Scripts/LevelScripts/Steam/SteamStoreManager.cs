@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using PixelCrushers.DialogueSystem;
 
 public class SteamStoreManager : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class SteamStoreManager : MonoBehaviour
 
     [Header("Store C TnC Puzzle")]
     [SerializeField] private RectTransform storeCPuzzle;
-    [SerializeField] private List<Toggle> storeCToggleButtons;
+    [SerializeField] private List<UnityEngine.UI.Toggle> storeCToggleButtons;
     [SerializeField] private List<bool> correctAnswersC;
     [SerializeField] private Button continueButtonC;
     [SerializeField] private StorePuzzleWinScreen storeCPuzzleWinScreen;
@@ -36,7 +37,7 @@ public class SteamStoreManager : MonoBehaviour
 
     [Header("Store D Select All Images Puzzle")]
     [SerializeField] private RectTransform storeDPuzzle;
-    [SerializeField] private List<Toggle> storeDToggleButtons;
+    [SerializeField] private List<UnityEngine.UI.Toggle> storeDToggleButtons;
     [SerializeField] private List<bool> correctAnswersD;
     [SerializeField] private Button continueButtonD;
     [SerializeField] private StorePuzzleWinScreen storeDPuzzleWinScreen;
@@ -49,6 +50,10 @@ public class SteamStoreManager : MonoBehaviour
         continueButtonB.onClick.AddListener(CheckBirthday);
         continueButtonC.onClick.AddListener(CheckTnC);
         continueButtonD.onClick.AddListener(CheckSelectAllImages);
+        //DialogueLua.SetQuestField("First Opened Steam Level", "State", QuestState.Success);
+        //Lua.Result result = DialogueLua.GetQuestField("First Opened Steam Level", "State");
+        //Debug.Log("First Opened Steam Level State: " + result.AsString);
+        //DialogueManager.StartConversation("First Opened Steam Level");
     }
 
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using PixelCrushers.DialogueSystem;
 using UnityEngine;
 
 public class PaintSpawn : MonoBehaviour
@@ -55,6 +56,8 @@ public class PaintSpawn : MonoBehaviour
     {
         _levelCompleted = true; // Set the level completed flag to true
         desktopGUIOverlay.SetActive(false); // Deactivate the desktop GUI overlay
+        DialogueManager.StopAllConversations(); // replace
+        DialogueManager.StartConversation("Finished Paint Level"); // Start the conversation for level completion
         RemoveSpawnedEnemyPower(); // Remove all spawned objects in the enemy power container
         RemoveSpawnedPlayerPower(); // Remove all spawned objects in the player power container
     }

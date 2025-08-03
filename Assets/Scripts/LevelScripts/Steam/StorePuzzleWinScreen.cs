@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
+using PixelCrushers.DialogueSystem;
 
 public class StorePuzzleWinScreen : MonoBehaviour
 {
@@ -72,6 +73,13 @@ public class StorePuzzleWinScreen : MonoBehaviour
             InventoryManager.Instance.UpdateTurretFile(_turretFile, TurretStateEnum.Unlocked);
             Debug.Log($"Turret {_turretFile} unlocked");
             successText.text = $"You have downloaded {_turretFile}!";
+
+            DialogueLua.SetVariable("TotalTurretUnlocked", DialogueLua.GetVariable("TotalTurretUnlocked").asInt + 1);
+            if(DialogueLua.GetVariable("TotalTurretUnlocked").asInt == 1)
+            {
+                DialogueManager.StopAllConversations(); // replace
+                DialogueManager.StartConversation("First Obtained Game");
+            }
         }
 
 

@@ -747,7 +747,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turretName: Normal Turret
   damage: 1
-  fireRate: 0.12
+  fireRate: 0.07
   range: 5
   bulletSpeed: 10
   targetCountPerShot: 3

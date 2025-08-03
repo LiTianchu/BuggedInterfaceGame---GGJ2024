@@ -18,11 +18,19 @@ public class TestingHelper : MonoBehaviour
         {
             foreach (TurretFile file in turretFile)
             {
+                Debug.Log($"Purchased {file}");
                 InventoryManager.Instance.UpdateTurretFile(file, TurretStateEnum.Unlocked);
+
+                DialogueLua.SetVariable("TotalTurretUnlocked", DialogueLua.GetVariable("TotalTurretUnlocked").asInt + 1);
+                if (DialogueLua.GetVariable("TotalTurretUnlocked").asInt == 1)
+                {
+                    DialogueManager.StopAllConversations(); // replace
+                    DialogueManager.StartConversation("First Obtained Game");
+                }
             }
         }
 
-        if(unlockKeyFile)
+        if (unlockKeyFile)
         {
             InventoryManager.Instance.UnlockKeyFile();
         }
