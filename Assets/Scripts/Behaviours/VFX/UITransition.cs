@@ -24,6 +24,9 @@ public class UITransition : MonoBehaviour
     private SlideState _slideState = SlideState.None;
     private TransitionState _transitionState = TransitionState.BeforeIn;
     private RectTransform _rectTransform;
+
+    public float TransitionInDuration => transitionInDuration;
+    public float TransitionOutDuration => transitionOutDuration;
     void Start()
     {
         _rectTransform = GetComponent<RectTransform>();
