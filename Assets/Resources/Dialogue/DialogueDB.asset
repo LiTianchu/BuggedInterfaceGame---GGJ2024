@@ -2944,7 +2944,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: EventGuid
-        value: f49abb1f-572a-45b5-b953-dc906dff5d4f
+        value: 
         type: 0
         typeString: 
       conversationID: 3
@@ -2954,7 +2954,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 3
+        originDialogueID: 35
+        destinationConversationID: 3
+        destinationDialogueID: 40
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -3194,9 +3200,62 @@ MonoBehaviour:
         y: 219.52762
         width: 160
         height: 30
+    - id: 40
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 5
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 4
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: Receive the gift
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      - title: EventGuid
+        value: 6b4c657e-775c-46fa-94c3-ca44a72f99ee
+        type: 0
+        typeString: 
+      conversationID: 3
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 350.9437
+        y: 1568.9056
+        width: 160
+        height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 274.66583}
-    canvasZoom: 0.50000143
+    canvasScrollPosition: {x: 101.52429, y: 1168.033}
+    canvasZoom: 1.0700009
   - id: 4
     fields:
     - title: Title
