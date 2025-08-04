@@ -5,8 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : GlobalSingleton<GameManager>
 {
+    private string _username;
+    private Sprite _avatarSprite;
+
     public float TimePassed { get; set; }
     public int Difficulty { get; set; }
+    
+    public string Username
+    {
+        get => _username;
+        set => _username = value;
+    }
+    public Sprite AvatarSprite
+    {
+        get => _avatarSprite;
+        set => _avatarSprite = value;
+    }
 
     public void Start()
     {
