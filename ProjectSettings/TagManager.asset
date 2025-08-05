@@ -8,6 +8,7 @@ TagManager:
   - LevelHubScreen
   - FileSystemScreen
   - Platform
+  - WordLevelGround
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - WordLevelPlatform
   - LockedFile
   - KillZone
-  - 
+  - NotPuzzlePiece
   - 
   - 
   - 

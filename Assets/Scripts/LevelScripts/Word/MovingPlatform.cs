@@ -31,7 +31,7 @@ public class MovingPlatform : MonoBehaviour
         _rectTransform = GetComponent<RectTransform>();
         if (_rectTransform == null)
         {
-            _startPosition = transform.position; // Fallback for non-UI elements
+            _startPosition = transform.localPosition; // Fallback for non-UI elements
         }
         else
         {
@@ -82,7 +82,7 @@ public class MovingPlatform : MonoBehaviour
 
         if (_rectTransform == null)
         {
-            transform.position = _startPosition + finalDisplacement;
+            transform.localPosition = _startPosition + finalDisplacement;
         }
         else
         {

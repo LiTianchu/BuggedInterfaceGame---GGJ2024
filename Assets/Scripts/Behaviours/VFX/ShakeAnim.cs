@@ -38,6 +38,8 @@ public class ShakeAnim : MonoBehaviour
 
     public void PlayOneShot(float duration)
     {
+        transform.localPosition = _originalPos;
+        StopShake();
         StartShake();
         Invoke(nameof(StopShake), duration);
     }
@@ -53,6 +55,5 @@ public class ShakeAnim : MonoBehaviour
     public void StopShake()
     {
         isShaking = false;
-        //transform.localPosition = _originalPos;
     }
 }

@@ -12,6 +12,8 @@ public class PaintSpawn : MonoBehaviour
     public RectTransform playerPowerContainer;
     public Canvas mainCanvas; // Reference to the main canvas
     public GameObject desktopGUIOverlay;
+    public bool spawnImmediately = true; // Flag to determine if the Stickman should spawn immediately
+    public PuzzleSlot puzzleSlot; // Reference to the PuzzleSlot component
 
     private Stickman _spawnedStickman; // Reference to the spawned Stickman
     private bool _levelCompleted = false; // Flag to check if the level is completed
@@ -31,10 +33,9 @@ public class PaintSpawn : MonoBehaviour
     // This method is called when the object becomes enabled and active
     void OnEnable()
     {
-        if (!_levelCompleted)
+        if (!_levelCompleted && spawnImmediately) // Check if the level is not completed and if we should spawn immediately
         {
             SpawnStickman();
-            desktopGUIOverlay.SetActive(true); // Activate the desktop GUI overlay
         }
     }
 
@@ -48,6 +49,7 @@ public class PaintSpawn : MonoBehaviour
             _spawnedStickman.OnLevelFailed -= HandleLevelFailed; // Unsubscribe from the level failed event
             _spawnedStickman.OnLevelCompleted -= HandleLevelCompleted; // Unsubscribe from the level completed event
             _spawnedStickman = null;
+            //puzzleSlot.ReleasePuzzlePiece();
         }
         desktopGUIOverlay.SetActive(false); // Deactivate the desktop GUI overlay
     }
@@ -60,13 +62,17 @@ public class PaintSpawn : MonoBehaviour
         DialogueManager.StartConversation("Finished Paint Level"); // Start the conversation for level completion
         RemoveSpawnedEnemyPower(); // Remove all spawned objects in the enemy power container
         RemoveSpawnedPlayerPower(); // Remove all spawned objects in the player power container
+        RemovePuzzle(); // Remove the puzzle slot
     }
 
     // Method to spawn the Stickman object
-    void SpawnStickman()
+    public void SpawnStickman()
     {
+        
         if (_spawnedStickman == null && stickmanPrefab != null && mainCanvas != null)
         {
+            spawnImmediately = true; // after the first spawn, we can set this to true
+            desktopGUIOverlay.SetActive(true); // Activate the desktop GUI overlay
             GameObject stickman = Instantiate(stickmanPrefab, mainCanvas.transform);
             stickman.transform.localPosition = Vector3.zero; // Adjust position as needed
             _spawnedStickman = stickman.GetComponent<Stickman>();
@@ -90,6 +96,15 @@ public class PaintSpawn : MonoBehaviour
             Destroy(child.gameObject); // Destroy all child objects in the bullet container
         }
     }
+
+    private void RemovePuzzle()
+    {
+        if (puzzleSlot != null)
+        {
+            puzzleSlot.gameObject.SetActive(false); // Deactivate the PuzzleSlot object
+        }
+    }
+
     private void HandleLevelFailed()
     {
         gameObject.SetActive(false); // Deactivate the PaintSpawn object when the level fails

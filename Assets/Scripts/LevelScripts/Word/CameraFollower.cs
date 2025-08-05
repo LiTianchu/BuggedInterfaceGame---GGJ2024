@@ -10,16 +10,26 @@ public class CameraFollower : MonoBehaviour
 
     [Header("Camera Follow Settings")]
     [SerializeField] private Transform target;
+    [SerializeField] private bool following = true;
+
+    public bool Following
+    {
+        get => following;
+        set => following = value;
+    }
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (target == null) return;
+        if (target == null || !following)
+        {
+            return;
+        }
 
         // Get the target position
         Vector3 desiredPosition = target.localPosition;
@@ -29,7 +39,7 @@ public class CameraFollower : MonoBehaviour
         desiredPosition.x = Mathf.Clamp(desiredPosition.x, minPosition.x, maxPosition.x);
         desiredPosition.y = Mathf.Clamp(desiredPosition.y, minPosition.y, maxPosition.y);
 
-      
+
         transform.localPosition = desiredPosition;
     }
 }
