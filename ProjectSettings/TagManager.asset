@@ -8,6 +8,7 @@ TagManager:
   - LevelHubScreen
   - FileSystemScreen
   - Platform
+  - WordLevelGround
   layers:
   - Default
   - TransparentFX
