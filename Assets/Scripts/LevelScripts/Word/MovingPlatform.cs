@@ -23,7 +23,8 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] private bool randomizeStartPosition = false; // Randomize the starting position within the distance
     [SerializeField] private int durability = -1; // -1 means infinite durability, otherwise it will be destroyed after this many hits
     [SerializeField] private LayerMask playerLayerMask; // Layer mask to check for player collision
-
+    [SerializeField] private bool powerJump = false;
+    [SerializeField] private float powerMultiplier = 1.5f; // Multiplier for the force applied to the player
 
     private Vector3 _startPosition; // Starting position of the platform
     private bool _movingForward = true; // Tracks the movement direction
@@ -32,6 +33,9 @@ public class MovingPlatform : MonoBehaviour
     private TMP_Text _text;
     private SpriteRenderer _platformSpriteRenderer;
     private PlatformEffector2D _platformEffector;
+
+    public bool PowerJump { get => powerJump; }
+    public float PowerMultiplier { get => powerMultiplier; }
     void Start()
     {
         // Save the initial position of the platform
@@ -59,6 +63,10 @@ public class MovingPlatform : MonoBehaviour
             _text.color = new Color(116 / 255f, 122 / 255f, 50 / 255f);
             _platformSpriteRenderer.color = new Color(116 / 255f, 122 / 255f, 50 / 255f);
             _text.fontStyle = FontStyles.Strikethrough;
+        }
+
+        if (powerJump)
+        {
 
         }
 
@@ -128,4 +136,4 @@ public class MovingPlatform : MonoBehaviour
     }
 
 }
-    
+

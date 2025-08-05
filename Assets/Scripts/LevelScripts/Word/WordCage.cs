@@ -8,8 +8,10 @@ public class WordCage : MonoBehaviour
     [SerializeField] private int maxHp = 20;
     [SerializeField] private LayerMask worldLevelPlayerLayer;
     [SerializeField] private ShakeAnim shakeAnim;
+    [SerializeField] private Rigidbody2D title;
     [SerializeField] private GameObject cageParts;
     [SerializeField] private List<CagePartBatch> cagePartsBreakableBatches;
+
 
     private EdgeCollider2D _edgeCollider;
     private int _currentHp;
@@ -75,6 +77,8 @@ public class WordCage : MonoBehaviour
             BreakPart(rb);
         }
         _edgeCollider.enabled = false; // Disable the edge collider
+        BreakPart(title);
+
     }
 
     public void BreakPart(Rigidbody2D rb)
