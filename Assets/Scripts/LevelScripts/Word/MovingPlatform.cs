@@ -1,3 +1,5 @@
+using DG.Tweening;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -19,12 +21,17 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] private float speed = 1f;
     [SerializeField] private float distance = 1f;
     [SerializeField] private bool randomizeStartPosition = false; // Randomize the starting position within the distance
+    [SerializeField] private int durability = -1; // -1 means infinite durability, otherwise it will be destroyed after this many hits
+    [SerializeField] private LayerMask playerLayerMask; // Layer mask to check for player collision
+
 
     private Vector3 _startPosition; // Starting position of the platform
     private bool _movingForward = true; // Tracks the movement direction
     private RectTransform _rectTransform; // Reference to the RectTransform component
     private float _randomOffset; // Random offset for starting position
-
+    private TMP_Text _text;
+    private SpriteRenderer _platformSpriteRenderer;
+    private PlatformEffector2D _platformEffector;
     void Start()
     {
         // Save the initial position of the platform
@@ -42,6 +49,19 @@ public class MovingPlatform : MonoBehaviour
         {
             _randomOffset = Random.Range(0f, 1f);
         }
+
+        _text = GetComponentInChildren<TMP_Text>();
+        _platformSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        _platformEffector = GetComponent<PlatformEffector2D>();
+
+        if (durability > 0) // if the platform has durability, change the color and style
+        {
+            _text.color = new Color(116 / 255f, 122 / 255f, 50 / 255f);
+            _platformSpriteRenderer.color = new Color(116 / 255f, 122 / 255f, 50 / 255f);
+            _text.fontStyle = FontStyles.Strikethrough;
+
+        }
+
     }
 
     void Update()
@@ -89,5 +109,23 @@ public class MovingPlatform : MonoBehaviour
             _rectTransform.anchoredPosition = _startPosition + finalDisplacement;
         }
     }
-}
 
+    public void OnPlayerTouchedPlatform()
+    {
+        if (durability > 0)
+        {
+            durability--;
+            if (durability <= 0)
+            {
+                DestroyPlatform();
+            }
+        }
+    }
+
+    private void DestroyPlatform()
+    {
+        transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => Destroy(gameObject));
+    }
+
+}
+    

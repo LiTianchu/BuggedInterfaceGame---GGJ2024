@@ -73,6 +73,11 @@ public class DoodleController : MonoBehaviour
                 if (contactNormal.y > 0.5f)
                 {
                     _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                    MovingPlatform movingPlatform = other.gameObject.GetComponent<MovingPlatform>();
+                    if (movingPlatform != null)
+                    {
+                        movingPlatform.OnPlayerTouchedPlatform();
+                    }
                 }
             }
         }
