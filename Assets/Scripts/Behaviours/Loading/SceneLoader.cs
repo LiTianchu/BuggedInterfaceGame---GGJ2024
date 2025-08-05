@@ -31,4 +31,9 @@ public class SceneLoader : MonoBehaviour
         yield return new WaitForSeconds(fadeDuration);
         SceneManager.LoadSceneAsync(sceneName);
     }
+
+    public void SetSceneName(string name)
+    {
+        sceneName = name;
+    }
 }

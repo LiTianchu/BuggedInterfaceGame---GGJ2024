@@ -894,6 +894,7 @@ MonoBehaviour:
   canvas: {fileID: 1768231960}
   stayInView: 1
   isDraggable: 1
+  moveToFrontOnDrag: 1
   puzzleGridLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1169,6 +1170,7 @@ MonoBehaviour:
   canvas: {fileID: 1768231960}
   stayInView: 1
   isDraggable: 1
+  moveToFrontOnDrag: 1
   puzzleGridLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1405,6 +1407,7 @@ MonoBehaviour:
   canvas: {fileID: 1768231960}
   stayInView: 1
   isDraggable: 1
+  moveToFrontOnDrag: 1
   puzzleGridLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1771,6 +1774,7 @@ MonoBehaviour:
   canvas: {fileID: 1768231960}
   stayInView: 1
   isDraggable: 1
+  moveToFrontOnDrag: 1
   puzzleGridLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -2179,6 +2183,7 @@ MonoBehaviour:
   canvas: {fileID: 1768231960}
   stayInView: 1
   isDraggable: 1
+  moveToFrontOnDrag: 1
   puzzleGridLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -2761,7 +2766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b141a0058860b4699f0e0f95bcf2a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: ClickNext
+  sceneName: WelcomeScreen
   fadeOverlay: {fileID: 1707277188}
   fadeDuration: 1
 --- !u!114 &963194231
@@ -3843,6 +3848,10 @@ MonoBehaviour:
   correctPiece: {fileID: 924237371}
   snapSound: {fileID: 8300000, guid: 8f067718d315c1d46b8fa9972d98147b, type: 3}
   acceptWrongPiece: 0
+  reparant: 0
+  onRightPlaceEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!50 &1134101081
 Rigidbody2D:
   serializedVersion: 4
@@ -5193,6 +5202,7 @@ MonoBehaviour:
   canvas: {fileID: 1768231960}
   stayInView: 1
   isDraggable: 1
+  moveToFrontOnDrag: 1
   puzzleGridLayer:
     serializedVersion: 2
     m_Bits: 64
