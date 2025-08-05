@@ -1,5 +1,7 @@
 using System;
+using System.Threading;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class PuzzleSlot : MonoBehaviour, IDropHandler
@@ -12,6 +14,10 @@ public class PuzzleSlot : MonoBehaviour, IDropHandler
     private AudioClip snapSound;
     [SerializeField]
     private bool acceptWrongPiece = true;
+    [SerializeField]
+    private bool reparant = false;
+    [SerializeField]
+    private UnityEvent onRightPlaceEvent;
 
     private PuzzlePiece _puzzlePiece;
 
@@ -28,8 +34,8 @@ public class PuzzleSlot : MonoBehaviour, IDropHandler
             //snap the puzzle to the grid
             _puzzlePiece = eventData.pointerDrag.GetComponent<PuzzlePiece>();
 
-            if(_puzzlePiece == null){ return; }
-            
+            if (_puzzlePiece == null) { return; }
+
             if (((1 << _puzzlePiece.gameObject.layer) & puzzlePieceLayer.value) == 0)
             {
                 Debug.Log("Object is not on the puzzle piece layer");
@@ -38,11 +44,20 @@ public class PuzzleSlot : MonoBehaviour, IDropHandler
             _puzzlePiece.PuzzleSlot = this;
             _puzzlePiece.GravityController.DisableSimulation();
             _puzzlePiece.GetRectTransform().anchoredPosition = GetComponent<RectTransform>().localPosition;
+
+            if (reparant)
+            {
+                _puzzlePiece.GetRectTransform().SetParent(transform);
+                _puzzlePiece.GetRectTransform().localPosition = Vector3.zero;
+            }
+
+
             if (_puzzlePiece.Equals(correctPiece))
             {
                 Debug.Log("Puzzle piece is in the right place");
 
                 OnPuzzlePieceRight?.Invoke(_puzzlePiece);
+                onRightPlaceEvent?.Invoke();
                 //crumblingPieces.SetRightPlaceFlag(_puzzlePiece, true);
             }
             else
@@ -80,13 +95,23 @@ public class PuzzleSlot : MonoBehaviour, IDropHandler
         OnPuzzlePieceLeave?.Invoke(_puzzlePiece);
         //_puzzlePiece.GravityController.EnableSimulation();
         //_puzzlePiece.PuzzleSlot = null;
-       // _puzzlePiece = null;
+        // _puzzlePiece = null;
         //crumblingPieces.SetRightPlaceFlag(_puzzlePiece, false);
     }
 
     public void SetPuzzlePiece(PuzzlePiece puzzlePiece)
     {
         _puzzlePiece = puzzlePiece;
+    }
+    
+    public void ReleasePuzzlePiece()
+    {
+        if (_puzzlePiece != null)
+        {
+            _puzzlePiece.GravityController.EnableSimulation();
+            _puzzlePiece.PuzzleSlot = null;
+            _puzzlePiece = null;
+        }
     }
 
 
