@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8602530689422873945}
   - component: {fileID: 597002372886718959}
   - component: {fileID: 2157675680657198144}
+  - component: {fileID: 2682482829758574129}
   m_Layer: 5
   m_Name: GlitchWall
   m_TagString: Untagged
@@ -89,3 +90,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   harmful: 1
+--- !u!114 &2682482829758574129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3238695360924647456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3b0e3b4b7142bf4ba3c6315891a3f5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToLive: 10
+  flashThereshold: 0.15
+  baseFlashSpeed: 0.5
+  urgencyMultiplier: 2
+  minAlpha: 0.3
+  maxAlpha: 1

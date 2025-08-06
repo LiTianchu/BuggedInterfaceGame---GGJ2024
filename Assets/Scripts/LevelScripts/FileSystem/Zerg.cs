@@ -46,6 +46,12 @@ public class Zerg : MonoBehaviour
         _timeSinceLastTargetRefresh = refreshTargetInterval;
         zergSpriteRenderer.sortingOrder = 1;
         FileSystemLevelManager.Instance.CurrentLevel.OnFileSystemLayoutChanged += ResetTarget;
+
+        // create material instance to avoid shared state issues
+        if (zergSpriteRenderer.material != null)
+        {
+            zergSpriteRenderer.material = new Material(zergSpriteRenderer.material);
+        }
     }
 
     // Update is called once per frame

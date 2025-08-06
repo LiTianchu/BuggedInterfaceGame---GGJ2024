@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,26 +7,24 @@ using UnityEngine.EventSystems;
 public class Heart : MonoBehaviour, IPointerClickHandler
 {
     protected Stickman stickman; // Reference to the Stickman
-    public float timeToLive = 5.0f; // Time before the heart disappears
+
 
     public void Initialize(Stickman stickman)
     {
         this.stickman = stickman;
+        
     }
 
     void Update()
     {
-        timeToLive -= Time.deltaTime;
         if (IsStickmanColliding())
         {
             StickmanCollides();
             Destroy(gameObject);
         }
-        if (timeToLive <= 0)
-        {
-            Destroy(gameObject);
-        }
     }
+
+ 
 
     protected virtual void StickmanCollides()
     {
@@ -41,7 +40,7 @@ public class Heart : MonoBehaviour, IPointerClickHandler
     {
         if (stickman != null)
         {
-            ItemClicked(); 
+            ItemClicked();
             Destroy(gameObject);
         }
     }
