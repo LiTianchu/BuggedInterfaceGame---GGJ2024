@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using Microsoft.Unity.VisualStudio.Editor;
 using PixelCrushers.DialogueSystem;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PaintSpawn : MonoBehaviour
 {
@@ -12,8 +15,10 @@ public class PaintSpawn : MonoBehaviour
     public RectTransform playerPowerContainer;
     public Canvas mainCanvas; // Reference to the main canvas
     public GameObject desktopGUIOverlay;
+    public GameObject levelFailedOverlay; // Reference to the level failed overlay
     public bool spawnImmediately = true; // Flag to determine if the Stickman should spawn immediately
     public PuzzleSlot puzzleSlot; // Reference to the PuzzleSlot component
+    public Color levelFailedColor = Color.red; // Color to flash when the level fails
 
     private Stickman _spawnedStickman; // Reference to the spawned Stickman
     private bool _levelCompleted = false; // Flag to check if the level is completed
@@ -68,7 +73,7 @@ public class PaintSpawn : MonoBehaviour
     // Method to spawn the Stickman object
     public void SpawnStickman()
     {
-        
+
         if (_spawnedStickman == null && stickmanPrefab != null && mainCanvas != null)
         {
             spawnImmediately = true; // after the first spawn, we can set this to true
@@ -107,6 +112,22 @@ public class PaintSpawn : MonoBehaviour
 
     private void HandleLevelFailed()
     {
-        gameObject.SetActive(false); // Deactivate the PaintSpawn object when the level fails
+        UnityEngine.UI.Image overlayImage = levelFailedOverlay.GetComponent<UnityEngine.UI.Image>();
+        levelFailedOverlay.SetActive(true); // Activate the level failed overlay
+        if (overlayImage != null)
+        {
+            // Flash the image color directly - no material issues
+            DOTween.Sequence()
+                .Append(overlayImage.DOColor(levelFailedColor, 1f)).SetEase(Ease.OutQuad)
+                .Append(overlayImage.DOColor(Color.white, 0.05f))
+                .OnComplete(() =>
+                {
+                    levelFailedOverlay.SetActive(false); // Deactivate the overlay after flashing
+                    gameObject.SetActive(false);
+                });
+        }
+       
     }
+
+    
 }

@@ -72,7 +72,18 @@ public class DoodleController : MonoBehaviour
                 Vector2 contactNormal = other.contacts[0].normal;
                 if (contactNormal.y > 0.5f)
                 {
-                    _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                    MovingPlatform movingPlatform = other.gameObject.GetComponent<MovingPlatform>();
+                    float finalJumpForce = jumpForce;
+                    if (movingPlatform != null)
+                    {
+                        movingPlatform.OnPlayerTouchedPlatform();
+                        if (movingPlatform.PowerJump)
+                        {
+                            finalJumpForce *= movingPlatform.PowerMultiplier; // Apply power multiplier if enabled
+                        }
+                    }
+
+                    _rb.AddForce(Vector2.up * finalJumpForce, ForceMode2D.Impulse);
                 }
             }
         }

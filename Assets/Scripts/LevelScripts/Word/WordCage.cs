@@ -8,8 +8,10 @@ public class WordCage : MonoBehaviour
     [SerializeField] private int maxHp = 20;
     [SerializeField] private LayerMask worldLevelPlayerLayer;
     [SerializeField] private ShakeAnim shakeAnim;
+    [SerializeField] private Rigidbody2D title;
     [SerializeField] private GameObject cageParts;
     [SerializeField] private List<CagePartBatch> cagePartsBreakableBatches;
+
 
     private EdgeCollider2D _edgeCollider;
     private int _currentHp;
@@ -75,6 +77,8 @@ public class WordCage : MonoBehaviour
             BreakPart(rb);
         }
         _edgeCollider.enabled = false; // Disable the edge collider
+        BreakPart(title);
+
     }
 
     public void BreakPart(Rigidbody2D rb)
@@ -82,7 +86,7 @@ public class WordCage : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Dynamic; // Change to dynamic to allow physics interaction
         rb.isKinematic = false; // Ensure the Rigidbody is not kinematic
         rb.AddForce(new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * 5f, ForceMode2D.Impulse);
-        rb.GetComponent<Collider2D>().enabled = false;
+        //rb.GetComponent<Collider2D>().enabled = false;
     }
 
     public void OnCollisionEnter2D(Collision2D collision)

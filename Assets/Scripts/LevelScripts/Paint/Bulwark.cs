@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 public class Bulwark : Heart
 {
     public GameObject wallPrefab; // Wall prefab
-    public float immunityDuration = 5.0f; // Duration of immunity
-    public float wallDuration = 10.0f; // Duration before walls despawn
+    //public float immunityDuration = 5.0f; // Duration of immunity
+    //public float wallDuration = 10.0f; // Duration before walls despawn
 
     protected override void StickmanCollides()
     {
@@ -18,7 +18,7 @@ public class Bulwark : Heart
     {
         if (stickman != null)
         {
-            stickman.SetImmunity(immunityDuration);
+            stickman.SetImmunity();
         }
     }
 
@@ -38,7 +38,7 @@ public class Bulwark : Heart
         // Right wall
         walls.Add(InstantiateWall(new Vector2(maxBounds.x, 0), new Vector2(defaultSize, maxBounds.y * 10)));
 
-        CoroutineManager.Instance.StartPersistentCoroutine(DespawnWalls(walls, wallDuration));
+        //CoroutineManager.Instance.StartPersistentCoroutine(DespawnWalls(walls, wallDuration));
     }
 
     private GameObject InstantiateWall(Vector2 position, Vector2 size)
@@ -56,13 +56,13 @@ public class Bulwark : Heart
         return wall;
     }
 
-    private IEnumerator DespawnWalls(List<GameObject> walls, float duration)
-    {
-        yield return new WaitForSeconds(duration);
+    // private IEnumerator DespawnWalls(List<GameObject> walls, float duration)
+    // {
+    //     yield return new WaitForSeconds(duration);
 
-        foreach (GameObject wall in walls)
-        {
-            Destroy(wall);
-        }
-    }
+    //     foreach (GameObject wall in walls)
+    //     {
+    //         Destroy(wall);
+    //     }
+    // }
 }

@@ -1,18 +1,34 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Stickman : MonoBehaviour
 {
+    [Header("Prefabs")]
     public GameObject brush;
     public GameObject[] itemPrefabs; // Item prefabs
     public GameObject warningLinePrefab; // Warning line prefab
     public GameObject immunityImagePrefab; // Immunity image prefab
     public GameObject[] cards;
     public Collectible coinDrop;
+
+    [Header("Boss Settings")]
+    public float itemSpawnMinInterval = 3f;
+    public float itemSpawnMaxInterval = 7f;
+    public float itemSpawnMinDistance = 100f; // Minimum distance from the Stickman to spawn items
+    public int maxTry = 10;
+    public float movementSpeed = 200f; // Speed of the Stickman movement
+    public float attackInterval = 5.0f; // Time between attacks
+    public float frenzyHpRatioThreshold = 0.3f; // Health ratio threshold for frenzy mode
+    public float frenzyMovementSpeedMultiplier = 1.5f; // Frenzy movement speed multiplier
+    public float frenzyAttackInterval = 4.0f; // Attack interval during frenzy mode
+    public int maxHealth = 5; // Health of the Stickman
+    public int recentSpawnMemory = 5; // recent spawn memory for penalty calculation when selecting random items
+    public float recentSpawnPenalty = 0.5f; // 0: no penalty, 1: full penalty
 
     private RectTransform rectTransform;
     private Vector2 minBounds, maxBounds;
@@ -21,22 +37,33 @@ public class Stickman : MonoBehaviour
     private Canvas canvas;
     private RectTransform enemyPowerContainer;
     private RectTransform playerPowerContainer;
+    private int health;
+    private Image stickmanImage;
+    private List<int> recentlySpawnedItems = new List<int>();
 
-    public int health = 1; // Health of the Stickman
-    public float attackInterval = 5.0f; // Time between attacks
     private float attackTimer;
     private bool isImmune = false;
+    private bool isFrenzy = false;
+    private bool isGameOver = false;
 
-    public Canvas MainCanvas{
+    public Canvas MainCanvas
+    {
         get { return canvas; }
     }
 
-    public RectTransform EnemyPowerContainer{
+    public RectTransform EnemyPowerContainer
+    {
         get { return enemyPowerContainer; }
     }
 
-    public RectTransform PlayerPowerContainer{
+    public RectTransform PlayerPowerContainer
+    {
         get { return playerPowerContainer; }
+    }
+
+    public bool IsGameOver
+    {
+        get { return isGameOver; }
     }
 
     public event System.Action OnLevelFailed;
@@ -65,17 +92,32 @@ public class Stickman : MonoBehaviour
             stickmanSize = rectTransform.rect.size;
         }
 
-
+        health = maxHealth; // Initialize health to max health
 
         attackTimer = attackInterval;
+        stickmanImage = GetComponent<Image>();
 
         // Start the coroutine to spawn hearts
-        StartCoroutine(SpawnHeart());
+        StartCoroutine(SpawnItem());
         StartCoroutine(RicochetEffect());
+        //SetImmunity(1000f);
+
+        // pre-fill the recently spawned items list
+        for (int i = 0; i < recentSpawnMemory; i++)
+        {
+            recentlySpawnedItems.Add(i % itemPrefabs.Length);
+        }
+
+        if (stickmanImage.material != null)
+        {
+            stickmanImage.material = new Material(stickmanImage.material); // Create a new instance of the material to avoid shared state issues
+        }
     }
 
     void Update()
     {
+        if (isGameOver) return; // Skip update if game is over
+
         Vector2 pos = rectTransform.anchoredPosition;
 
         // Adjust boundaries to account for the Stickman's size
@@ -92,7 +134,16 @@ public class Stickman : MonoBehaviour
         if (attackTimer <= 0)
         {
             PerformAttack();
-            attackTimer = attackInterval;
+
+            if (isFrenzy)
+            {
+                attackTimer = frenzyAttackInterval; // Reset attack timer for frenzy mode
+            }
+            else
+            {
+                attackTimer = attackInterval; // Reset attack timer for normal mode
+            }
+            //attackTimer = attackInterval;
         }
 
         // Check for cursor collision
@@ -107,7 +158,7 @@ public class Stickman : MonoBehaviour
     {
         // Example attacks
         int attackType = Random.Range(1, 4);
-        
+
         switch (attackType)
         {
             case 1:
@@ -128,14 +179,23 @@ public class Stickman : MonoBehaviour
     IEnumerator RicochetEffect()
     {
         Vector2 direction = new Vector2(60, 60).normalized;
-        float speed = 500f;
+        float speed = movementSpeed;
+
+        // if (isFrenzy)
+        // {
+        //     speed *= frenzyMovementSpeedMultiplier; // Increase speed in frenzy mode
+        // }
+
         float ricochetDuration = Mathf.Infinity; // Infinite duration
         float elapsedTime = 0;
 
         while (elapsedTime < ricochetDuration)
         {
             Vector2 pos = rectTransform.anchoredPosition;
-            pos += direction * speed * Time.deltaTime;
+            if (!isGameOver)
+            {
+                pos += direction * speed * (isFrenzy ? frenzyMovementSpeedMultiplier : 1) * Time.deltaTime;
+            }
 
             // Check for collision with boundaries and bounce
             if (pos.x < minBounds.x + stickmanSize.x / 2 || pos.x > maxBounds.x - stickmanSize.x / 2)
@@ -198,6 +258,8 @@ public class Stickman : MonoBehaviour
 
     IEnumerator MoveProjectile(RectTransform projectileRect, Vector2 direction)
     {
+        if (isGameOver) yield break; // Exit if game is over
+
         float speed = 200f; // Increased speed
         float homingStrength = 0.1f;
         float lifetime = 4.0f;
@@ -219,17 +281,19 @@ public class Stickman : MonoBehaviour
                 camera,
                 out Vector2 localCursorPosition
             );
-            
+
             if (projectileRect == null) yield break; // Exit if projectileRect is destroyed
             // Homing behavior
             Vector2 desiredDirection = (localCursorPosition - projectileRect.anchoredPosition).normalized;
             direction = Vector2.Lerp(direction, desiredDirection, homingStrength);
-
-            projectileRect.anchoredPosition += direction * speed * Time.deltaTime;
+            if (!isGameOver)
+            {
+                projectileRect.anchoredPosition += direction * speed * Time.deltaTime;
+            }
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        
+
         if (projectileRect == null) yield break; // Exit if projectileRect is destroyed
         Destroy(projectileRect.gameObject);
     }
@@ -272,7 +336,14 @@ public class Stickman : MonoBehaviour
         // Make lines harmful
         foreach (GameObject warningLine in warningLines)
         {
+            if (warningLine == null) continue; // Skip if the warning line was destroyed
+
             warningLine.GetComponent<Boolet>().IsHarmful(true); // Assuming the warning line has an IsHarmful property
+
+            DOTween.Sequence()
+                .Append(warningLine.GetComponent<RectTransform>().DOScale(new Vector3(3f, 3f, 1), 0.15f))
+                .Append(warningLine.GetComponent<RectTransform>().DOScale(Vector3.one, 0.1f));
+
             warningLine.GetComponent<Image>().color = Color.red; // Assuming the warning line has an Image component
         }
 
@@ -287,7 +358,11 @@ public class Stickman : MonoBehaviour
         // Destroy lines
         foreach (GameObject warningLine in warningLines)
         {
-            Destroy(warningLine);
+            if (warningLine == null) continue; // Skip if the warning line was already destroyed
+
+            DOTween.Sequence()
+                .Append(warningLine.GetComponent<RectTransform>().DOScale(Vector3.zero, 0.2f))
+                .OnComplete(() => Destroy(warningLine)); // Destroy after scaling down
         }
     }
 
@@ -339,32 +414,44 @@ public class Stickman : MonoBehaviour
         return rectTransform.rect.Contains(localCursorPosition);
     }
 
-    IEnumerator SpawnHeart()
+    IEnumerator SpawnItem()
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(5.0f, 10.0f)); // Wait for a random time between 5 and 10 seconds
+            yield return new WaitForSeconds(Random.Range(itemSpawnMinInterval, itemSpawnMaxInterval)); // Wait for a random time between 5 and 10 seconds
 
             if (itemPrefabs != null)
             {
                 // Get a random item prefab
-                GameObject heartPrefab = itemPrefabs[Random.Range(0, itemPrefabs.Length)];
+                GameObject itemPrefab = GetWeightedRandomItem(); // the more frequent an item spawned recently, the less likely will get selected
+                int selectedItemIndex = System.Array.IndexOf(itemPrefabs, itemPrefab);
+                Vector2 randomPosition;
 
-                // Calculate a random position within the bounds
-                float randomX = Random.Range(minBounds.x + stickmanSize.x / 2, maxBounds.x - stickmanSize.x / 2);
-                float randomY = Random.Range(minBounds.y + stickmanSize.y / 2, maxBounds.y - stickmanSize.y / 2);
-                Vector2 randomPosition = new Vector2(randomX, randomY);
+                int tries = 0;
+                do
+                { // repeat when the item is too close to stickman
+                    // Calculate a random position within the bounds
+                    float randomX = Random.Range(minBounds.x + stickmanSize.x / 2, maxBounds.x - stickmanSize.x / 2);
+                    float randomY = Random.Range(minBounds.y + stickmanSize.y / 2, maxBounds.y - stickmanSize.y / 2);
+                    randomPosition = new Vector2(randomX, randomY);
+                    tries++;
+                    // Check if the item is too close to the Stickman
+                    if (Vector2.Distance(randomPosition, rectTransform.anchoredPosition) > itemSpawnMinDistance) break; // Adjust the distance threshold as needed
+                } while (tries < maxTry);
 
-                // Instantiate the heart
-                GameObject heart = Instantiate(heartPrefab, randomPosition, Quaternion.identity, transform.parent);
-                RectTransform heartRect = heart.GetComponent<RectTransform>();
-                heart.transform.SetParent(playerPowerContainer, true); // Set parent to bulletContainer
-                heartRect.anchoredPosition = randomPosition;
+                // Instantiate the item
+                GameObject item = Instantiate(itemPrefab, randomPosition, Quaternion.identity, transform.parent);
+                RectTransform itemRect = item.GetComponent<RectTransform>();
+                item.transform.SetParent(playerPowerContainer, true); // Set parent to bulletContainer
+                itemRect.anchoredPosition = randomPosition;
 
-                Heart heartComponent = heart.GetComponent<Heart>();
-                if (heartComponent != null)
+                // Track recent spawned item
+                AddToRecentSpawned(selectedItemIndex); // Add to recent spawned items
+
+                Heart itemComponent = item.GetComponent<Heart>();
+                if (itemComponent != null)
                 {
-                    heartComponent.Initialize(this); // Initialize the Heart with the Stickman reference
+                    itemComponent.Initialize(this); // Initialize the Heart with the Stickman reference
                 }
             }
         }
@@ -373,11 +460,49 @@ public class Stickman : MonoBehaviour
     public void ReduceHealth(int amount)
     {
         health -= amount;
+        health = Mathf.Clamp(health, 0, maxHealth); // Ensure health does not go below 0
+        Debug.Log("Stickman health: " + health);
+        if (amount > 0)
+        {
+            //flash color for damage
+            DOTween.Sequence()
+             .Append(stickmanImage.material.DOColor(Color.red, 0.15f))
+             .Append(stickmanImage.material.DOColor(Color.white, 0.15f))
+             .Append(stickmanImage.material.DOColor(Color.black, 0.01f));
+
+            //shake
+            transform.DOShakePosition(0.1f, 30, 10, 90, false, true);
+        }
+        else if (amount < 0)
+        {
+            //flash color for healing
+            DOTween.Sequence()
+             .Append(stickmanImage.material.DOColor(Color.green, 0.3f))
+             .Append(stickmanImage.material.DOColor(Color.black, 0.01f));
+        }
+        CheckFrenzyMode();
+
         if (health <= 0)
         {
             Death();
         }
-      
+
+    }
+
+    private void CheckFrenzyMode()
+    {
+        if ((float)health / maxHealth <= frenzyHpRatioThreshold)
+        {
+            isFrenzy = true;
+            Debug.Log("Stickman is now in frenzy mode!");
+            GetComponent<Image>().color = Color.red; // Change color to indicate frenzy mode
+        }
+        else
+        {
+            isFrenzy = false;
+            Debug.Log("Stickman is no longer in frenzy mode.");
+            GetComponent<Image>().color = Color.white; // Reset color
+        }
     }
 
     public void Death()
@@ -397,27 +522,35 @@ public class Stickman : MonoBehaviour
         gameObject.SetActive(false); // Deactivate the Stickman object
     }
 
-    public void SetImmunity(float duration)
+    public void SetImmunity()
     {
+        if (isImmune) { DestroyImmunity(); }
+        float duration = immunityImagePrefab.GetComponent<FlashBeforeDisappear>().TimeToLive;
         StartCoroutine(ImmunityCoroutine(duration));
     }
 
     private IEnumerator ImmunityCoroutine(float duration)
     {
         isImmune = true;
-        GameObject immunityImage = Instantiate(immunityImagePrefab, transform.parent);
+        GameObject immunityImage = Instantiate(immunityImagePrefab, canvas.transform); // Use canvas instead of transform.parent
         RectTransform immunityImageRect = immunityImage.GetComponent<RectTransform>();
+
+        // Get the correct camera reference
+        Camera uiCamera = canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera;
 
         float elapsedTime = 0;
         while (elapsedTime < duration)
         {
             Vector2 cursorPosition = Input.mousePosition;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                immunityImageRect.parent as RectTransform,
+                canvas.GetComponent<RectTransform>(), // Use canvas rect instead of parent
                 cursorPosition,
-                null,
+                uiCamera, // Use proper camera reference
                 out Vector2 localCursorPosition
             );
+
+            if (immunityImageRect == null) yield break; // Exit if immunityImageRect is destroyed halfway
+
             immunityImageRect.anchoredPosition = localCursorPosition;
             elapsedTime += Time.deltaTime;
             yield return null;
@@ -426,15 +559,98 @@ public class Stickman : MonoBehaviour
         if (isImmune) DestroyImmunity();
     }
 
-    public void DestroyImmunity() {
+    public void DestroyImmunity()
+    {
         GameObject immunityImage = GameObject.Find("BarrierImage(Clone)");
         Destroy(immunityImage);
         isImmune = false;
     }
 
+    private GameObject GetWeightedRandomItem()
+    {
+        float[] weights = new float[itemPrefabs.Length];
+        for (int i = 0; i < itemPrefabs.Length; i++)
+        {
+            weights[i] = 1.0f;
+
+            int recentCount = CountRecentSpawns(i);
+
+            if (recentCount > 0)
+            {
+                weights[i] -= Mathf.Pow(recentSpawnPenalty, recentCount);
+            }
+        }
+        return SelectWeightedRandom(weights);
+    }
+
+    private int CountRecentSpawns(int itemIndex)
+    {
+        int count = 0;
+        foreach (int recentIndex in recentlySpawnedItems)
+        {
+            if (recentIndex == itemIndex)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private GameObject SelectWeightedRandom(float[] weights)
+    {
+
+        float totalWeight = 0f;
+        for (int i = 0; i < weights.Length; i++)
+        {
+            totalWeight += weights[i];
+
+        }
+
+        string stat = "";
+
+        for (int i = 0; i < recentlySpawnedItems.Count; i++)
+        {
+            stat += $"{itemPrefabs[recentlySpawnedItems[i]].name} ";
+        }
+
+        stat += "\nWeights: \n";
+
+        for (int i = 0; i < weights.Length; i++)
+        {
+            stat += $"{itemPrefabs[i].name}: {weights[i] / totalWeight}% \n";
+        }
+
+        float randomValue = Random.Range(0f, totalWeight);
+        float currentWeight = 0f;
+        for (int i = 0; i < weights.Length; i++)
+        {
+            currentWeight += weights[i];
+            if (randomValue <= currentWeight)
+            {
+                stat += $"Selected item: {itemPrefabs[i].name}";
+                Debug.Log(stat);
+                return itemPrefabs[i];
+            }
+        }
+
+        stat += "Selected item: " + itemPrefabs[0].name + " (default)";
+        Debug.Log(stat);
+        return itemPrefabs[0];
+    }
+
+    private void AddToRecentSpawned(int itemIndex)
+    {
+        recentlySpawnedItems.Add(itemIndex);
+        if (recentlySpawnedItems.Count > recentSpawnMemory)
+        {
+            recentlySpawnedItems.RemoveAt(0); // Remove the oldest item if we exceed the memory limit
+        }
+    }
+
     public void LevelOver()
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        isGameOver = true; // Set game over state
         OnLevelFailed?.Invoke(); // Trigger the level failed event
     }
 

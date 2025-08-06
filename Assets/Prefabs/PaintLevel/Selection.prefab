@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 597002372886718959}
   - component: {fileID: 9030332839087049897}
   - component: {fileID: 768796428396285114}
+  - component: {fileID: -2769070659843714648}
   m_Layer: 5
   m_Name: Selection
   m_TagString: Untagged
@@ -102,6 +103,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b75ae6cb2083f78439e1ed818defd5b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToLive: 5
   wallPrefab: {fileID: 3238695360924647456, guid: 0900e0649bc8ff544842b94131d07ef4, type: 3}
-  immunityDuration: 5
+--- !u!114 &-2769070659843714648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3238695360924647456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3b0e3b4b7142bf4ba3c6315891a3f5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToLive: 5
+  flashThereshold: 0.3
+  baseFlashSpeed: 1
+  urgencyMultiplier: 4
+  minAlpha: 0.3
+  maxAlpha: 1

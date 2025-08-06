@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class ChangingImageColor : MonoBehaviour
 {
-     [SerializeField]
+    [SerializeField]
     private float colorChangingSpeed = 5f;
+    
     private Image _img;
+    private SpriteRenderer _spriteRenderer;
 
     private float h;
     private float s;
@@ -16,18 +18,39 @@ public class ChangingImageColor : MonoBehaviour
     void Start()
     {
         _img = GetComponent<Image>();
-        Color.RGBToHSV(_img.color, out h, out s, out v);
+        if (_img == null)
+        {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        }
+
+        if (_img != null)
+        {
+            Color.RGBToHSV(_img.color, out h, out s, out v);
+        }
+        else if (_spriteRenderer != null)
+        {
+            Color.RGBToHSV(_spriteRenderer.color, out h, out s, out v);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
         h += colorChangingSpeed * Time.deltaTime;
         if (h > 360)
         {
             h = h - 360.0f;
         }
-        _img.color = Color.HSVToRGB(h/360, s, v);
+        if (_img != null)
+        {
+            _img.color = Color.HSVToRGB(h / 360, s, v);
+        }
+        else if (_spriteRenderer != null)
+        {
+            _spriteRenderer.color = Color.HSVToRGB(h / 360, s, v);
+        }
+        
     }
 }
