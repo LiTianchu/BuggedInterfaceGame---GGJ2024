@@ -44,7 +44,7 @@ public class Stickman : MonoBehaviour
     private float attackTimer;
     private bool isImmune = false;
     private bool isFrenzy = false;
-    private bool isGameOver = false;
+    private bool isLevelPaused = false;
 
     public Canvas MainCanvas
     {
@@ -61,9 +61,9 @@ public class Stickman : MonoBehaviour
         get { return playerPowerContainer; }
     }
 
-    public bool IsGameOver
+    public bool IsLevelPaused
     {
-        get { return isGameOver; }
+        get { return isLevelPaused; }
     }
 
     public event System.Action OnLevelFailed;
@@ -116,7 +116,7 @@ public class Stickman : MonoBehaviour
 
     void Update()
     {
-        if (isGameOver) return; // Skip update if game is over
+        if (isLevelPaused) return; // Skip update if game is over
 
         Vector2 pos = rectTransform.anchoredPosition;
 
@@ -192,7 +192,7 @@ public class Stickman : MonoBehaviour
         while (elapsedTime < ricochetDuration)
         {
             Vector2 pos = rectTransform.anchoredPosition;
-            if (!isGameOver)
+            if (!isLevelPaused)
             {
                 pos += direction * speed * (isFrenzy ? frenzyMovementSpeedMultiplier : 1) * Time.deltaTime;
             }
@@ -258,7 +258,7 @@ public class Stickman : MonoBehaviour
 
     IEnumerator MoveProjectile(RectTransform projectileRect, Vector2 direction)
     {
-        if (isGameOver) yield break; // Exit if game is over
+        if (isLevelPaused) yield break; // Exit if game is over
 
         float speed = 200f; // Increased speed
         float homingStrength = 0.1f;
@@ -286,7 +286,7 @@ public class Stickman : MonoBehaviour
             // Homing behavior
             Vector2 desiredDirection = (localCursorPosition - projectileRect.anchoredPosition).normalized;
             direction = Vector2.Lerp(direction, desiredDirection, homingStrength);
-            if (!isGameOver)
+            if (!isLevelPaused)
             {
                 projectileRect.anchoredPosition += direction * speed * Time.deltaTime;
             }
@@ -340,11 +340,12 @@ public class Stickman : MonoBehaviour
 
             warningLine.GetComponent<Boolet>().IsHarmful(true); // Assuming the warning line has an IsHarmful property
 
-            DOTween.Sequence()
-                .Append(warningLine.GetComponent<RectTransform>().DOScale(new Vector3(3f, 3f, 1), 0.15f))
-                .Append(warningLine.GetComponent<RectTransform>().DOScale(Vector3.one, 0.1f));
+            warningLine.GetComponent<Image>().DOColor(Color.red, 0.05f).SetEase(Ease.OutQuad);
 
-            warningLine.GetComponent<Image>().color = Color.red; // Assuming the warning line has an Image component
+            DOTween.Sequence()
+                .Append(warningLine.GetComponent<RectTransform>().DOScale(new Vector3(3f, 3f, 1), 0.05f)).SetEase(Ease.OutBack)
+                .Append(warningLine.GetComponent<RectTransform>().DOScale(Vector3.one, 0.1f)).SetEase(Ease.OutQuad);
+
         }
 
         // Wait for harmful duration
@@ -507,19 +508,29 @@ public class Stickman : MonoBehaviour
 
     public void Death()
     {
-        //drop coin
-        Collectible coin = Instantiate(coinDrop, canvas.transform);
-        RectTransform coinRect = coin.GetComponent<RectTransform>();
-        coinRect.anchoredPosition = rectTransform.anchoredPosition; // Set the position of the coin to the Stickman's position
-        Rigidbody2D rb = coin.GetComponent<Rigidbody2D>();
-        if (rb != null)
+        if (!isLevelPaused)
         {
+            isLevelPaused = true; // Set game over state
+            rectTransform.DOScale(Vector3.zero, 2f).SetEase(Ease.InBack);
+            rectTransform.DOShakePosition(2f, 70, 10, 90, false, true).OnComplete(() =>
+            {
+                Collectible coin = Instantiate(coinDrop, canvas.transform);
+                RectTransform coinRect = coin.GetComponent<RectTransform>();
+                coinRect.anchoredPosition = rectTransform.anchoredPosition; // Set the position of the coin to the Stickman's position
+                Rigidbody2D rb = coin.GetComponent<Rigidbody2D>();
+                if (rb != null)
+                {
 
-            rb.AddForce(new Vector2(0, 3f)); // Apply force to the coin
+                    rb.AddForce(new Vector2(0, 3f)); // Apply force to the coin
+                }
+
+                OnLevelCompleted?.Invoke(); // Trigger the level completed event
+                gameObject.SetActive(false); // Deactivate the Stickman object
+            }
+            ); // Destroy the Stickman after scaling down
+
+
         }
-
-        OnLevelCompleted?.Invoke(); // Trigger the level completed event
-        gameObject.SetActive(false); // Deactivate the Stickman object
     }
 
     public void SetImmunity()
@@ -649,9 +660,12 @@ public class Stickman : MonoBehaviour
 
     public void LevelOver()
     {
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        isGameOver = true; // Set game over state
-        OnLevelFailed?.Invoke(); // Trigger the level failed event
+        if (!isLevelPaused)
+        {
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            isLevelPaused = true; // Set game over state
+            OnLevelFailed?.Invoke(); // Trigger the level failed event
+        }
     }
 
     public bool IsImmune()

@@ -95,6 +95,7 @@ namespace PixelCrushers.DialogueSystem
         [SerializeField] private FadeAfterShowTime notificationUI;
         [SerializeField] private TMP_Text notificationTextLabel;
         [SerializeField] private RectTransform notificationPanel;
+        [SerializeField] private ResponseNotification responseNotificationObject;
 
         private List<FadeAfterShowTime> _notificationList = new();
         public static string conversationVariableOverride;
@@ -225,6 +226,7 @@ namespace PixelCrushers.DialogueSystem
             {
                 ShowResponsesNow(subtitle, responses, timeout);
             }
+
         }
 
         protected IEnumerator ShowResponsesAfterPreDelay(Subtitle subtitle, Response[] responses, float timeout)
@@ -245,6 +247,7 @@ namespace PixelCrushers.DialogueSystem
             ScrollToBottom(); //--- Now does smooth scroll: StartCoroutine(JumpToBottom());
             StandardUIMenuPanel responsePanel = conversationUIElements.standardMenuControls.GetPanel(subtitle, responses);
             UITransition uITransition = responsePanel.GetComponent<UITransition>();
+            responseNotificationObject.ShowAlert();
             if (uITransition != null)
             {
                 uITransition.TransitionIn();

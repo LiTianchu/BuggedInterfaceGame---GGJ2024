@@ -24,7 +24,25 @@ public class FileSystemLevel : MonoBehaviour
     protected Camera _mainCamera;
     protected bool _hasWon = false;
 
-    public List<FileSystemFile> Files { get => _files; }
+    public List<FileSystemFile> Files
+    {
+        get
+        {
+            if (_files == null)
+            {
+                _files = new List<FileSystemFile>();
+                foreach (FileSystemFile file in fileContainer.GetComponentsInChildren<FileSystemFile>())
+                {
+                    _files.Add(file);
+                    if (file is FolderFile folderFile)
+                    {
+                        folderFile.CurrentLevel = this;
+                    }
+                }
+            }
+            return _files;
+        }
+    }
     public GridSystem GridSystem { get => gridSystem; }
     public FileSystemFile CriticalFile { get => criticalFile; }
     public Transform FileContainer { get => fileContainer; }
@@ -70,13 +88,16 @@ public class FileSystemLevel : MonoBehaviour
     {
         _mainCamera = Camera.main;
 
-        _files = new List<FileSystemFile>();
-        foreach (FileSystemFile file in fileContainer.GetComponentsInChildren<FileSystemFile>())
+        if (_files == null)
         {
-            _files.Add(file);
-            if (file is FolderFile folderFile)
+            _files = new List<FileSystemFile>();
+            foreach (FileSystemFile file in fileContainer.GetComponentsInChildren<FileSystemFile>())
             {
-                folderFile.CurrentLevel = this;
+                _files.Add(file);
+                if (file is FolderFile folderFile)
+                {
+                    folderFile.CurrentLevel = this;
+                }
             }
         }
 
@@ -134,7 +155,7 @@ public class FileSystemLevel : MonoBehaviour
         FileSystemLevelManager.Instance.PublishCurrentLevelCleared();
         Debug.Log($"Level {gameObject.name} won!");
     }
-    
-    
+
+
     public virtual void CreateSpawnEvent(AbstractSpawnEvent spawnEvent, ObjectPool<Zerg> zergPool, Vector3 position = default) { }
 }
