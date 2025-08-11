@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -40,7 +42,31 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
 
     public void StartLevel(FileSystemLevel level)
     {
+        StartCoroutine(StartLevelCoroutine(level));
+    }
+
+    private IEnumerator StartLevelCoroutine(FileSystemLevel level)
+    {
+        // Wait for the current level to finish its animations
+        foreach (FileSystemFile file in CurrentLevel.Files)
+        {
+            file.transform.DORotate(new Vector3(0, 0, 180), 0.5f).SetEase(Ease.OutQuad);
+            file.transform.DOScale(0, 0.5f).SetEase(Ease.OutQuad);
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
         CurrentLevel = level;
+
+        foreach (FileSystemFile file in CurrentLevel.Files)
+        {
+            file.transform.rotation = Quaternion.Euler(0, 0, 180);
+            file.transform.localScale = Vector3.zero;
+
+            file.transform.DORotate(new Vector3(0, 0, 0), 0.5f).SetEase(Ease.OutQuad);
+            file.transform.DOScale(1, 0.5f).SetEase(Ease.OutQuad);
+        }
+        yield return new WaitForSeconds(0.5f);
         OnNewFileSystemLevelEntered?.Invoke(CurrentLevel);
     }
 
@@ -115,7 +141,7 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
     {
         Destroy(zerg.gameObject);
     }
-    
+
     public BossZerg GetBossZergInstance()
     {
         BossZerg bossZerg = Instantiate(bossZergPrefab);

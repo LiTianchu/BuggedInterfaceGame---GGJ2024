@@ -9,7 +9,7 @@ public class Card : Boolet
     // Update is called once per frame
     protected override void Update()
     {
-        if(stickman.IsGameOver)
+        if(stickman.IsLevelPaused)
         {
             return; // Skip update if the game is over
         }
