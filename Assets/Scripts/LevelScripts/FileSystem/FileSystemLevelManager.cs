@@ -9,6 +9,8 @@ using UnityEngine.Pool;
 public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
 {
     [SerializeField] private BulletSpawner bulletSpawner;
+    [TitleGroup("UI")]
+    [SerializeField] private Breadcrumb breadcrumb;
     [TitleGroup("Levels")]
     [SerializeField] private FileSystemLevel entryLevel;
     [TitleGroup("Zergs")]
@@ -35,6 +37,8 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
         }
     }
 
+    public Breadcrumb Breadcrumb { get => breadcrumb; }
+
 
     public event Action<FileSystemLevel> OnLevelCleared;
     public event Action<FileSystemLevel> OnNewFileSystemLevelEntered;
@@ -42,6 +46,7 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
 
     public void StartLevel(FileSystemLevel level)
     {
+        Breadcrumb.AddBreadcrumb(level.gameObject.name, level);
         StartCoroutine(StartLevelCoroutine(level));
     }
 
@@ -57,6 +62,7 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
         yield return new WaitForSeconds(0.5f);
 
         CurrentLevel = level;
+
 
         foreach (FileSystemFile file in CurrentLevel.Files)
         {
@@ -75,6 +81,7 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
         if (CurrentLevel == null)
         {
             CurrentLevel = entryLevel; // Default to level1 if no level is set
+            Breadcrumb.AddBreadcrumb(CurrentLevel.gameObject.name, CurrentLevel);
         }
         CreateZergPools();
 
