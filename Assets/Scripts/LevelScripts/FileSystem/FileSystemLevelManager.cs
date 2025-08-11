@@ -46,6 +46,7 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
 
     public void StartLevel(FileSystemLevel level)
     {
+        Breadcrumb.AddBreadcrumb(level.gameObject.name, level);
         StartCoroutine(StartLevelCoroutine(level));
     }
 
@@ -61,7 +62,7 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
         yield return new WaitForSeconds(0.5f);
 
         CurrentLevel = level;
-        Breadcrumb.AddBreadcrumb(level.gameObject.name, level);
+
 
         foreach (FileSystemFile file in CurrentLevel.Files)
         {
@@ -80,6 +81,7 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
         if (CurrentLevel == null)
         {
             CurrentLevel = entryLevel; // Default to level1 if no level is set
+            Breadcrumb.AddBreadcrumb(CurrentLevel.gameObject.name, CurrentLevel);
         }
         CreateZergPools();
 

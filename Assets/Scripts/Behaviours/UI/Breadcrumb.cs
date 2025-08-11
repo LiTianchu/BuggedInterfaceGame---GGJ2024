@@ -12,10 +12,11 @@ public class Breadcrumb : MonoBehaviour
 
     //private Dictionary<Transform, FileSystemLevel> _breadcrumbLinks = new Dictionary<Transform, FileSystemLevel>();
     private List<Button> _breadcrumbButtons = new List<Button>();
+
     public void AddBreadcrumb(string folderName, FileSystemLevel redirectionLevel)
     {
         Button newItem = Instantiate(breadcrumbItemPrefab, breadcrumbContainer);
-        newItem.GetComponentInChildren<TMP_Text>().text = folderName+" > ";
+        newItem.GetComponentInChildren<TMP_Text>().text = folderName + " > ";
         newItem.gameObject.SetActive(true);
         _breadcrumbButtons.Add(newItem);
 
