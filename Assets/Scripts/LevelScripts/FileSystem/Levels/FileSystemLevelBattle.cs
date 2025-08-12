@@ -77,6 +77,27 @@ public class FileSystemLevelBattle : FileSystemLevel
         se.Initialize(this, zergPool, zergContainer);
         se.Spawn();
     }
+
+    public void ResetLevel()
+    {
+        foreach (FileSystemFile file in Files)
+        {
+            file.ResetFile();
+            DraggableWorldSpace draggable = file.GetComponent<DraggableWorldSpace>();
+            if (draggable != null)
+            {
+                draggable.DropObject();
+            }
+        }
+        foreach (Zerg zerg in ActiveZergs)
+        {
+            zerg.ResetTarget();
+            zerg.ReleaseZerg();
+        }
+        ZergCount = 0;
+        ZergDestroyedCount = 0;
+        ResetStateMachine();
+    }
     
     // Debug methods
     [Button("Force Next State")]

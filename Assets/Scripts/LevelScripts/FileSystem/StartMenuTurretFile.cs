@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using PixelCrushers.DialogueSystem;
 using Sirenix.OdinInspector;
@@ -41,6 +42,28 @@ public class StartMenuTurretFile : Draggable
         stayInView = false; // deactivate stay in view to use custom logic
 
         TryGetDependentComponents();
+        InventoryManager.Instance.OnTurretInventoryChanged += CheckUnlockStatus;
+    }
+
+    private void CheckUnlockStatus(Dictionary<TurretFile, TurretStateEnum> dictionary)
+    {
+        if (dictionary.TryGetValue(turretFilePrefab, out TurretStateEnum state))
+        {
+            if (state == TurretStateEnum.Unlocked)
+            {
+                gameObject.SetActive(true);
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
+            
+        }
+    }
+
+    public void OnDestroy()
+    {
+        InventoryManager.Instance.OnTurretInventoryChanged -= CheckUnlockStatus;        
     }
 
     public void OnFileSystemEntered()

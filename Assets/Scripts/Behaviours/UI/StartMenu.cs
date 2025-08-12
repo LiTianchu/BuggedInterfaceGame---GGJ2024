@@ -13,11 +13,11 @@ public class StartMenu : MonoBehaviour
     [Required]
     [SerializeField] private CanvasGroup canvasGroup;
 
-    [Required]
-    [SerializeField] private bool show = false;
+    // [Required]
+    private bool _show = false;
 
 
-    List<StartMenuTurretFile> _turretFiles = new List<StartMenuTurretFile>();
+    List<StartMenuTurretFile> _turretFiles = new();
     private StartMenuKeyFile _keyFile;
     private bool _isShownForTheFirstTime = false;
 
@@ -47,30 +47,30 @@ public class StartMenu : MonoBehaviour
             }
 
         }
-        if (show)
-        {
-            UIManager.Instance.ShowUI(itemGrid.gameObject, true);
-        }
-        else
-        {
-            UIManager.Instance.HideUI(itemGrid.gameObject, true);
-        }
-   
+        // if (show)
+        // {
+        //     UIManager.Instance.ShowUI(itemGrid.gameObject);
+        // }
+        // else
+        // {
+        //     UIManager.Instance.HideUI(itemGrid.gameObject);
+        // }
+        CheckTurretFiles();
+
     }
 
 
     public void ToggleMenu()
     {
-        show = !show;
+        _show = !_show;
 
-        if (show)
+        if (_show)
         {
             canvasGroup.interactable = true;
             canvasGroup.blocksRaycasts = true;
             UIManager.Instance.ShowUI(itemGrid.gameObject);
 
-            CheckTurretFiles();
-            if(!_isShownForTheFirstTime)
+            if (!_isShownForTheFirstTime)
             {
                 _isShownForTheFirstTime = true;
                 DialogueManager.StopAllConversations(); // replace

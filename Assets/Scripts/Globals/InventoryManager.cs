@@ -19,6 +19,7 @@ public class InventoryManager : GlobalSingleton<InventoryManager>
     public event Action<int> OnKeyCountChanged;
     public event Action<int> OnCoinCountChanged;
     public event Action<Dictionary<TurretFile, TurretStateEnum>> OnTurretInventoryChanged;
+    public event Action OnKeyFileUnlocked;
 
    
 
@@ -34,7 +35,7 @@ public class InventoryManager : GlobalSingleton<InventoryManager>
     {
         _coinCount += amount;
         OnCoinCountChanged?.Invoke(_coinCount);
-        Debug.Log("Added coin");    
+        Debug.Log("Added coin");
         Debug.Log($"Coins: {_coinCount}");
     }
 
@@ -80,6 +81,7 @@ public class InventoryManager : GlobalSingleton<InventoryManager>
     public void UnlockKeyFile()
     {
         _keyFileUnlocked = true;
+        OnKeyFileUnlocked?.Invoke();
     }
 }
 

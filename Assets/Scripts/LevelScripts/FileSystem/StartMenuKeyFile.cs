@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,7 +20,19 @@ public class StartMenuKeyFile : Draggable
         _rectTransform = GetComponent<RectTransform>();
         stayInView = false; // deactivate stay in view to use custom logic
         _image = GetComponent<Image>();
+        InventoryManager.Instance.OnKeyFileUnlocked += UnlockKeyFile;
     }
+
+    private void UnlockKeyFile()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void OnDestroy()
+    {
+        InventoryManager.Instance.OnKeyFileUnlocked -= UnlockKeyFile;
+    }
+
 
     public void Initialize(StartMenu startMenu)
     {
