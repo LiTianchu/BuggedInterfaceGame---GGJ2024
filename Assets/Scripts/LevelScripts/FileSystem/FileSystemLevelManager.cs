@@ -15,6 +15,7 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
     [SerializeField] private Zerg smallZergPrefab;
     [SerializeField] private Zerg bigZergPrefab;
     [SerializeField] private BossZerg bossZergPrefab;
+    [SerializeField] private float levelTransitionDuration = 0.5f;
 
     public BulletSpawner BulletSpawner { get => bulletSpawner; }
 
@@ -50,11 +51,11 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
         // Wait for the current level to finish its animations
         foreach (FileSystemFile file in CurrentLevel.Files)
         {
-            file.transform.DORotate(new Vector3(0, 0, 180), 0.5f).SetEase(Ease.OutQuad);
-            file.transform.DOScale(0, 0.5f).SetEase(Ease.OutQuad);
+            file.transform.DORotate(new Vector3(0, 0, 180), levelTransitionDuration).SetEase(Ease.InElastic);
+            file.transform.DOScale(0, levelTransitionDuration).SetEase(Ease.InElastic);
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(levelTransitionDuration);
 
         CurrentLevel = level;
 
@@ -63,10 +64,10 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
             file.transform.rotation = Quaternion.Euler(0, 0, 180);
             file.transform.localScale = Vector3.zero;
 
-            file.transform.DORotate(new Vector3(0, 0, 0), 0.5f).SetEase(Ease.OutQuad);
-            file.transform.DOScale(1, 0.5f).SetEase(Ease.OutQuad);
+            file.transform.DORotate(new Vector3(0, 0, 0), levelTransitionDuration).SetEase(Ease.InOutElastic);
+            file.transform.DOScale(1, levelTransitionDuration).SetEase(Ease.InOutElastic);
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(levelTransitionDuration);
         OnNewFileSystemLevelEntered?.Invoke(CurrentLevel);
     }
 
