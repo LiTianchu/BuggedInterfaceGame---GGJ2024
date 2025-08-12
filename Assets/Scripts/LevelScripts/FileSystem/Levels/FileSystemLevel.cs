@@ -1,10 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Sirenix.OdinInspector;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.WSA;
 
 public class FileSystemLevel : MonoBehaviour
 {
@@ -51,8 +51,8 @@ public class FileSystemLevel : MonoBehaviour
     public bool HasWon { get => _hasWon; }
 
 
-    public event System.Action OnFileSystemLayoutChanged;
-    public event System.Action OnLevelWon;
+    public event Action OnFileSystemLayoutChanged;
+    public event Action OnLevelWon;
 
     public int ZergCount { get => _zergCount; set => _zergCount = value; }
     protected int _zergDestroyedCount = 0;
@@ -83,6 +83,22 @@ public class FileSystemLevel : MonoBehaviour
         }
     }
 
+    public List<Zerg> ActiveZergs
+    {
+        get
+        {
+            List<Zerg> activeZergs = new List<Zerg>();
+            foreach (Zerg zerg in zergContainer.GetComponentsInChildren<Zerg>())
+            {
+                if (zerg.gameObject.activeSelf)
+                {
+                    activeZergs.Add(zerg);
+                }
+            }
+            return activeZergs;
+        }
+    }
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -110,6 +126,11 @@ public class FileSystemLevel : MonoBehaviour
         }
 
         criticalFile.OnFileDestroyed += HandleCriticalFileDestroyed;
+
+        if (this is not FileSystemLevelBattle)
+        {
+            PublishWin();
+        }
     }
 
     // Update is called once per frame
@@ -143,7 +164,7 @@ public class FileSystemLevel : MonoBehaviour
 
     private void HandleCriticalFileDestroyed()
     {
-        FileSystemLevelManager.Instance.CurrentLevel = previousLevel;
+        FileSystemLevelManager.Instance.Breadcrumb.TransitToPreviousLevel(previousLevel);
     }
 
     public void PublishWin()
@@ -156,6 +177,26 @@ public class FileSystemLevel : MonoBehaviour
         Debug.Log($"Level {gameObject.name} won!");
     }
 
+    public void RemoveAllTurretFiles()
+    {
+        List<FileSystemFile> turretFiles = new List<FileSystemFile>();
+        foreach (FileSystemFile file in _files)
+        {
+            if (file.GetComponent<TurretFile>() != null)
+            {
+                turretFiles.Add(file);
+            }
+        }
+
+        foreach (FileSystemFile turretFile in turretFiles)
+        {
+            _files.Remove(turretFile);
+            Destroy(turretFile.gameObject);
+        }
+    }
+
 
     public virtual void CreateSpawnEvent(AbstractSpawnEvent spawnEvent, ObjectPool<Zerg> zergPool, Vector3 position = default) { }
+
+
 }

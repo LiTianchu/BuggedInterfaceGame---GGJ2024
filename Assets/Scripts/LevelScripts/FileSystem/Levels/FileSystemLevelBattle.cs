@@ -77,6 +77,20 @@ public class FileSystemLevelBattle : FileSystemLevel
         se.Initialize(this, zergPool, zergContainer);
         se.Spawn();
     }
+
+    public void ResetLevel()
+    {
+        foreach (FileSystemFile file in Files)
+        {
+            file.ResetFile();
+        }
+        foreach (Zerg zerg in ActiveZergs)
+        {
+            zerg.ResetTarget();
+            zerg.ReleaseZerg();
+        }
+        ResetStateMachine();
+    }
     
     // Debug methods
     [Button("Force Next State")]

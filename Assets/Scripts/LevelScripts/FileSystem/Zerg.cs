@@ -151,15 +151,7 @@ public class Zerg : MonoBehaviour
             {
                 FileSystemLevelManager.Instance.CurrentLevel.ZergDestroyedCount++;
                 OnZergDestroyed?.Invoke();
-                if (_pool != null)
-                {
-                    _pool.Release(this);
-                }
-                else
-                {
-                    Destroy(gameObject);
-                }
-
+                ReleaseZerg();
                 OnDeath();
                 // Debug.Log($"Zerg {gameObject.name} destroyed, {FileSystemLevelManager.Instance.CurrentLevel.ZergDestroyedCount} destroyed in total.");
             });
@@ -187,8 +179,20 @@ public class Zerg : MonoBehaviour
 
     }
 
+    public void ReleaseZerg()
+    {
+        if (_pool != null)
+        {
+            _pool.Release(this);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     protected virtual void OnDeath()
     {
-        
+
     }
 }

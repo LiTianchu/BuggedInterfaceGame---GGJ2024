@@ -42,12 +42,17 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
 
 
     public event Action<FileSystemLevel> OnLevelCleared;
+    public event Action<FileSystemLevel,FileSystemLevel> OnLevelTransit; // old level, new level
     public event Action<FileSystemLevel> OnNewFileSystemLevelEntered;
 
 
     public void StartLevel(FileSystemLevel level)
     {
         Breadcrumb.AddBreadcrumb(level.gameObject.name, level);
+        if (CurrentLevel != level)
+        {
+            OnLevelTransit?.Invoke(CurrentLevel, level);
+        }
         StartCoroutine(StartLevelCoroutine(level));
     }
 
@@ -61,9 +66,12 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
         }
 
         yield return new WaitForSeconds(levelTransitionDuration);
-
+        FileSystemLevel prev = CurrentLevel;
         CurrentLevel = level;
-
+        if(CurrentLevel is FileSystemLevelBattle && !CurrentLevel.HasWon)
+        {
+            ((FileSystemLevelBattle)CurrentLevel).ResetLevel();
+        }
 
         foreach (FileSystemFile file in CurrentLevel.Files)
         {
@@ -75,6 +83,7 @@ public class FileSystemLevelManager : Singleton<FileSystemLevelManager>
         }
         yield return new WaitForSeconds(levelTransitionDuration);
         OnNewFileSystemLevelEntered?.Invoke(CurrentLevel);
+        prev.RemoveAllTurretFiles();
     }
 
     public void Start()

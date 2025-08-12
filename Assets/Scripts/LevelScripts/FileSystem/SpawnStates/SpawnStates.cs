@@ -184,6 +184,12 @@ public class MixedSpawnState : AbstractSpawnState
 
     private float timeSinceLastRingSpawn = 0f;
     private float timeSinceLastClusterSpawn = 0f;
+    public override void Enter(FileSystemLevelBattle level)
+    {
+        base.Enter(level);
+        timeSinceLastRingSpawn = 0f;
+        timeSinceLastClusterSpawn = 0f;
+    }
 
     public override void Update(FileSystemLevelBattle level)
     {
@@ -240,7 +246,7 @@ public class BossSpawnState : AbstractSpawnState
     [SerializeField] private bool transitOnBossDefeated = true;
 
 
-    private float timeSinceStart = 0f;
+    private float _timeSinceStart = 0f;
     private bool _hasSpawnedBoss = false;
     private bool _canSpawnMinions = false;
     private BossZerg _bossZerg;
@@ -250,14 +256,18 @@ public class BossSpawnState : AbstractSpawnState
     {
         base.Enter(level);
         _level = level;
+        _hasSpawnedBoss = false;
+        _timeSinceStart = 0f;
+        _canSpawnMinions = false;
+        _bossZerg = null;
     }
 
     public override void Update(FileSystemLevelBattle level)
     {
         base.Update(level);
-        timeSinceStart += Time.deltaTime;
+        _timeSinceStart += Time.deltaTime;
 
-        if (timeSinceStart >= delayBeforeSpawn && !_hasSpawnedBoss)
+        if (_timeSinceStart >= delayBeforeSpawn && !_hasSpawnedBoss)
         {
             SpawnBossAtPosition(level);
         }

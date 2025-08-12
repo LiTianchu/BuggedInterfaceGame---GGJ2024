@@ -14,7 +14,9 @@ public class FileSystemFile : MonoBehaviour
     [SerializeField] private bool locked = false;
     [SerializeField] private bool destroyWhenDied = false;
     private DraggableWorldSpace _draggableWorldSpace;
+    private int _currFileHp = 10;
     public int FileHp { get => fileHp; }
+    public int CurrFileHp { get => _currFileHp; }
     public bool Locked
     {
         get => locked; set
@@ -27,23 +29,24 @@ public class FileSystemFile : MonoBehaviour
     // Start is called before the first frame update
     protected void Start()
     {
+        _currFileHp = fileHp;
         if (hpBar != null)
         {
-            hpBar.maxValue = fileHp;
-            hpBar.value = fileHp;
+            hpBar.maxValue = _currFileHp;
+            hpBar.value = _currFileHp;
         }
         _draggableWorldSpace = GetComponent<DraggableWorldSpace>();
     }
 
     public void TakeDamage(int damage)
     {
-        fileHp -= damage;
+        _currFileHp -= damage;
         if (hpBar != null)
         {
-            hpBar.value = fileHp;
+            hpBar.value = _currFileHp;
         }
 
-        if (fileHp <= 0)
+        if (_currFileHp <= 0)
         {
             OnFileDestroyed?.Invoke();
             if (_draggableWorldSpace != null)
@@ -68,6 +71,17 @@ public class FileSystemFile : MonoBehaviour
         if (locked) { return; }
         // Override this method to handle file click events
         Debug.Log("File clicked: " + gameObject.name);
+    }
+
+    public void ResetFile()
+    {
+        _currFileHp = fileHp;
+        if (hpBar != null)
+        {
+            hpBar.maxValue = _currFileHp;
+            hpBar.value = _currFileHp;
+        }
+        gameObject.SetActive(true);
     }
 
 }
