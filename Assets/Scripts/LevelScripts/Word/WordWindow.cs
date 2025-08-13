@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using PixelCrushers.DialogueSystem;
 using UnityEngine;
 
 [RequireComponent(typeof(Draggable))]
@@ -92,6 +93,9 @@ public class WordWindow : MonoBehaviour
     {
         if (_levelStarted) { return; }
 
+        DialogueManager.StopAllConversations(); // Stop any ongoing conversations
+        DialogueManager.StartConversation("Started Word Level");
+        
         _levelStarted = true; // Set the level started flag to true
         level.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack); // Move the level to its starting position
     }

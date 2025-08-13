@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using PixelCrushers.DialogueSystem;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -89,6 +90,8 @@ public class LevelHubManager : Singleton<LevelHubManager>
         OnStartLoadingBios?.Invoke();
         desktopGUI.SetActive(true);
         fileSystem.SetActive(false);
+        DialogueManager.StopAllConversations(); // Stop any ongoing conversations
+        DialogueManager.StartConversation("Entering BIOS");
 
         foreach (CrumbleObject crumbleObject in crumbleObjects)
         {
@@ -96,11 +99,11 @@ public class LevelHubManager : Singleton<LevelHubManager>
             {
                 crumbleObject.Crumble();
             }
-            
-            yield return new WaitForSeconds(Random.Range(0.01f, 0.03f));
+
+            yield return new WaitForSeconds(Random.Range(0.15f, 0.3f));
         }
 
-        yield return new WaitForSeconds(1.75f);
+        yield return new WaitForSeconds(2f);
         Debug.Log("Loading BIOS...");
         SceneManager.LoadScene("BIOS", LoadSceneMode.Single);
     }

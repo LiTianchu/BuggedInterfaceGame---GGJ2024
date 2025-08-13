@@ -73,6 +73,12 @@ public class PaintSpawn : MonoBehaviour
     // Method to spawn the Stickman object
     public void SpawnStickman()
     {
+        if (!spawnImmediately)
+        {
+            // show dialogue
+            DialogueManager.StopAllConversations();
+            DialogueManager.StartConversation("First Encountered Paint Boss");    
+        }
 
         if (_spawnedStickman == null && stickmanPrefab != null && mainCanvas != null)
         {
@@ -126,6 +132,10 @@ public class PaintSpawn : MonoBehaviour
                     gameObject.SetActive(false);
                 });
         }
+
+          // show dialogue
+            DialogueManager.StopAllConversations();
+            DialogueManager.StartConversation("Paint Failed");   
        
     }
 
