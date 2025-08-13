@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using PixelCrushers.DialogueSystem;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -165,6 +166,8 @@ public class FileSystemLevel : MonoBehaviour
     private void HandleCriticalFileDestroyed()
     {
         FileSystemLevelManager.Instance.Breadcrumb.TransitToPreviousLevel(previousLevel);
+        DialogueManager.StopAllConversations(); // Stop any ongoing conversations
+        DialogueManager.StartConversation("File System Failed");
     }
 
     public void PublishWin()

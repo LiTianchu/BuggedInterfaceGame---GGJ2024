@@ -192,6 +192,9 @@ public class BossZerg : Zerg
                 rb.AddForce(rotation * direction * 5f, ForceMode2D.Impulse);
             }
         }
+
+        DialogueManager.StopAllConversations(); // Stop any ongoing conversations
+        DialogueManager.StartConversation("File System After Beat Boss");
     }
 
     public override void TakeDamage(int damage)

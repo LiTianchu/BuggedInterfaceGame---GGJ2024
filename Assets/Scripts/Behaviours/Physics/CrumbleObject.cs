@@ -36,7 +36,7 @@ public class CrumbleObject : MonoBehaviour
             _collider.enabled = false;
         }
 
-        transform.DOShakePosition(0.5f, 30f, 40, 90, false, true).OnComplete(() =>
+        transform.DOShakePosition(5f, 30f, 40, 90, false, true).OnComplete(() =>
         {
 
             if (_rb == null)

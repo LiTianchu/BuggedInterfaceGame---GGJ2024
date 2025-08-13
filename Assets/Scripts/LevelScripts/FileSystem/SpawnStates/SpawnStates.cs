@@ -14,6 +14,7 @@ public class ScatterSpawnState : AbstractSpawnState
     private FileSystemLevelBattle _level;
     private float _smallZergSpawnTimeElapsed;
     private float _bigZergSpawnTimeElapsed;
+    private int _zergSpawned;
 
     public override void Enter(FileSystemLevelBattle level)
     {
@@ -21,6 +22,8 @@ public class ScatterSpawnState : AbstractSpawnState
         _level = level;
         _smallZergSpawnTimeElapsed = smallZergSpawnRate;
         _bigZergSpawnTimeElapsed = bigZergSpawnRate;
+        _level.ZergDestroyedCount = 0;
+        _zergSpawned = 0;
     }
 
     public override void Update(FileSystemLevelBattle level)
@@ -30,15 +33,17 @@ public class ScatterSpawnState : AbstractSpawnState
         _bigZergSpawnTimeElapsed += Time.deltaTime;
 
         // spawn small zergs
-        if (_smallZergSpawnTimeElapsed >= smallZergSpawnRate && level.ZergCount < maxZergCount)
+        if (_smallZergSpawnTimeElapsed >= smallZergSpawnRate && _zergSpawned < maxZergCount)
         {
+            _zergSpawned++;
             SpawnZerg(level);
             _smallZergSpawnTimeElapsed = 0.0f;
         }
 
         // spawn big zergs
-        if (_bigZergSpawnTimeElapsed >= bigZergSpawnRate && level.ZergCount < maxZergCount)
+        if (_bigZergSpawnTimeElapsed >= bigZergSpawnRate && _zergSpawned < maxZergCount)
         {
+            _zergSpawned++;
             SpawnZerg(level, ZergTypeEnum.Big);
             _bigZergSpawnTimeElapsed = 0.0f;
         }
@@ -89,7 +94,7 @@ public class ClusterSpawnState : AbstractSpawnState
     public override void Enter(FileSystemLevelBattle level)
     {
         base.Enter(level);
-        timeSinceLastSpawn = 0f;
+        timeSinceLastSpawn = spawnInterval;
         spawnCount = 0;
     }
 
@@ -133,7 +138,7 @@ public class RingSpawnState : AbstractSpawnState
     public override void Enter(FileSystemLevelBattle level)
     {
         base.Enter(level);
-        timeSinceLastSpawn = 0f;
+        timeSinceLastSpawn = spawnInterval;
     }
 
     public override void Update(FileSystemLevelBattle level)
@@ -187,8 +192,8 @@ public class MixedSpawnState : AbstractSpawnState
     public override void Enter(FileSystemLevelBattle level)
     {
         base.Enter(level);
-        timeSinceLastRingSpawn = 0f;
-        timeSinceLastClusterSpawn = 0f;
+        timeSinceLastRingSpawn = ringSpawnInterval;
+        timeSinceLastClusterSpawn = clusterSpawnInterval;
     }
 
     public override void Update(FileSystemLevelBattle level)

@@ -70,7 +70,10 @@ public class FileSystemLevelBattle : FileSystemLevel
     
     public override void CreateSpawnEvent(AbstractSpawnEvent spawnEvent, ObjectPool<Zerg> zergPool, Vector3 position = default)
     {
-        if(_hasWon) { return; }
+        if (_hasWon)
+        {
+            return;
+        }
 
         AbstractSpawnEvent se = Instantiate(spawnEvent, transform);
         se.transform.position = position;
