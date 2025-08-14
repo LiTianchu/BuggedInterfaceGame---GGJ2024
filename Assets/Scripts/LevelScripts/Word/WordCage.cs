@@ -85,7 +85,7 @@ public class WordCage : MonoBehaviour
     {
         rb.bodyType = RigidbodyType2D.Dynamic; // Change to dynamic to allow physics interaction
         rb.isKinematic = false; // Ensure the Rigidbody is not kinematic
-        rb.AddForce(new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * 5f, ForceMode2D.Impulse);
+        rb.AddForce(new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * 2f, ForceMode2D.Impulse);
         //rb.GetComponent<Collider2D>().enabled = false;
     }
 
