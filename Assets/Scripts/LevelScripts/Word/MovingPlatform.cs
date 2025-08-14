@@ -2,6 +2,7 @@ using DG.Tweening;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MovingPlatform : MonoBehaviour
 {
@@ -25,6 +26,9 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] private LayerMask playerLayerMask; // Layer mask to check for player collision
     [SerializeField] private bool powerJump = false;
     [SerializeField] private float powerMultiplier = 1.5f; // Multiplier for the force applied to the player
+    [Header("Events")]
+    [SerializeField] private UnityEvent onPlayerTouchedPlatform; // Event to trigger when the player touches the platform
+    [SerializeField] private int maxNumOfEventTrigger = 1;
 
     private Vector3 _startPosition; // Starting position of the platform
     private bool _movingForward = true; // Tracks the movement direction
@@ -33,6 +37,7 @@ public class MovingPlatform : MonoBehaviour
     private TMP_Text _text;
     private SpriteRenderer _platformSpriteRenderer;
     private PlatformEffector2D _platformEffector;
+    private int _eventTriggerCount = 0; // Counter for the number of times the event has been triggered
 
     public bool PowerJump { get => powerJump; }
     public float PowerMultiplier { get => powerMultiplier; }
@@ -64,12 +69,6 @@ public class MovingPlatform : MonoBehaviour
             _platformSpriteRenderer.color = new Color(116 / 255f, 122 / 255f, 50 / 255f);
             _text.fontStyle = FontStyles.Strikethrough;
         }
-
-        if (powerJump)
-        {
-
-        }
-
     }
 
     void Update()
@@ -127,6 +126,12 @@ public class MovingPlatform : MonoBehaviour
             {
                 DestroyPlatform();
             }
+        }
+
+        if(_eventTriggerCount<maxNumOfEventTrigger)
+        {
+            _eventTriggerCount++;
+            onPlayerTouchedPlatform.Invoke(); // Trigger the event
         }
     }
 

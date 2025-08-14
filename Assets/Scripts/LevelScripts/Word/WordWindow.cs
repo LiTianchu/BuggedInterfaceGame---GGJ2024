@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using PixelCrushers.DialogueSystem;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Draggable))]
 public class WordWindow : MonoBehaviour
@@ -15,6 +17,9 @@ public class WordWindow : MonoBehaviour
     [SerializeField] private GameObject level;
     [SerializeField] private WordLevelGoal wordLevelGoal; // Reference to the WordLevelGoal component
     [SerializeField] private CameraFollower levelCamera; // Reference to the CameraFollower component
+    [SerializeField] private Transform generatedPlatforms;
+    [Header("Events")]
+    [SerializeField] private UnityEvent onStart;
     private Draggable _draggable; // Reference to the Draggable component
     private RectTransform _rectTransform; // Reference to the RectTransform component
     private float _forceMultiplier = 0.05f; // Multiplier for the force applied based on drag delta
@@ -31,6 +36,10 @@ public class WordWindow : MonoBehaviour
         wordLevelGoal.OnGoalCollected += HanleGoalCollected; // Subscribe to the goal collected event
         wordCage.OnCageBroken += HandleCageBroken; // Subscribe to the cage broken event
         doodleController.OnLandOnGround += HandleLevelStart;
+
+
+        onStart?.Invoke(); // Invoke the start event
+
     }
 
 
@@ -95,9 +104,38 @@ public class WordWindow : MonoBehaviour
 
         DialogueManager.StopAllConversations(); // Stop any ongoing conversations
         DialogueManager.StartConversation("Started Word Level");
-        
+
         _levelStarted = true; // Set the level started flag to true
         level.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack); // Move the level to its starting position
+    }
+
+    public void GeneratePlatforms()
+    {
+        generatedPlatforms.gameObject.SetActive(true); // Activate the platforms
+
+        foreach (Transform child in generatedPlatforms)
+        {
+            foreach (Transform platform in child)
+            {
+                SpriteRenderer platformSprite = platform.GetComponentInChildren<SpriteRenderer>();
+                TMP_Text text = platform.GetComponentInChildren<TMP_Text>();
+                Color originalPlatformColor = platformSprite.color;
+                Color originalTextColor = text.color;
+                Color transparentPlatformColor = new Color(originalPlatformColor.r,
+                                                            originalPlatformColor.g,
+                                                            originalPlatformColor.b,
+                                                            0);
+                Color transparentTextColor = new Color(originalTextColor.r,
+                                                        originalTextColor.g,
+                                                        originalTextColor.b,
+                                                        0);
+                platformSprite.color = transparentPlatformColor; // Set the platform color to transparent
+                text.color = transparentTextColor; // Set the text color to transparent
+
+                platformSprite.DOColor(originalPlatformColor, 1.5f).SetEase(Ease.OutQuad);
+                text.DOColor(originalTextColor, 1.5f).SetEase(Ease.OutQuad);
+            }
+        }
     }
 
 }
