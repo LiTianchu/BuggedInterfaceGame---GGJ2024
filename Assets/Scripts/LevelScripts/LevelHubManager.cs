@@ -10,6 +10,7 @@ public class LevelHubManager : Singleton<LevelHubManager>
     [SerializeField] private GameObject desktopGUI;
     [SerializeField] private GameObject fileSystem;
     [SerializeField] private List<GameObject> levels;
+    [SerializeField] private Popup popupLevel;
 
     [SerializeField] private List<CrumbleObject> crumbleObjects;
 
@@ -44,6 +45,18 @@ public class LevelHubManager : Singleton<LevelHubManager>
         // {
         //     StartCoroutine(LoadBios());
         // }
+    }
+
+    public void ShowPopupLevel()
+    {
+        if (popupLevel != null)
+        {
+            popupLevel.ShowPopup();
+        }
+        else
+        {
+            Debug.LogWarning("Popup Level is not assigned.");
+        }
     }
 
     public void ShowLevelHubScreen()
@@ -113,7 +126,7 @@ public class LevelHubManager : Singleton<LevelHubManager>
             yield return new WaitForSeconds(Random.Range(0.15f, 0.3f));
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(6f);
         Debug.Log("Loading BIOS...");
         SceneManager.LoadScene("BIOS", LoadSceneMode.Single);
     }
