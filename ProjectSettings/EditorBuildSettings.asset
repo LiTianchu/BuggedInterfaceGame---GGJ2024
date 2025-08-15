@@ -6,33 +6,36 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Legacy/Prologue.unity
-    guid: 7fff70c5e44062543afc51d8c3310552
-  - enabled: 1
     path: Assets/Scenes/StartMenu.unity
     guid: 4dc4bbc9e026f7f44aaff0394ceeb391
   - enabled: 1
-    path: Assets/Scenes/TestScenes/ClickNext.unity
-    guid: e9b82951f89fa3c498b0864b8ea84c63
-  - enabled: 1
-    path: Assets/Scenes/BIOS.unity
-    guid: 265ecb51f59d9654f90ffca852b45b34
+    path: Assets/Scenes/WelcomeScreen.unity
+    guid: d7625b2159675904f9ebc509f860e2e0
   - enabled: 1
     path: Assets/Scenes/LevelHub.unity
     guid: ad76ba1b496c5da4eb783e56ddbb82b5
+  - enabled: 1
+    path: Assets/Scenes/BIOS.unity
+    guid: 265ecb51f59d9654f90ffca852b45b34
+  - enabled: 0
+    path: Assets/Scenes/Legacy/Prologue.unity
+    guid: 7fff70c5e44062543afc51d8c3310552
+  - enabled: 0
+    path: Assets/Scenes/TestScenes/ClickNext.unity
+    guid: e9b82951f89fa3c498b0864b8ea84c63
   - enabled: 0
     path: Assets/Scenes/Credits.unity
     guid: f7a89d12e7b066e47a9a8b6258c278b7
   - enabled: 0
     path: Assets/Scenes/Tianchu_Test.unity
     guid: a37947f6cce073643b359020bf592e02
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TestScenes/Paint Boss.unity
     guid: de0040c7429048446b439e64f2d78412
   - enabled: 0
     path: Assets/Scenes/Mineplanter/MenuMineplanter.unity
     guid: f69ef560e040ee94d98715860b0162dc
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TestScenes/Mineplanter.unity
     guid: 8bb836434f4acbc4e85e114b6390a0a5
   - enabled: 0
@@ -50,7 +53,4 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Mineplanter/MineplanterLevel6.unity
     guid: d660fdba1d9b52e4ebc215f9a61d4be4
-  - enabled: 1
-    path: Assets/Scenes/WelcomeScreen.unity
-    guid: d7625b2159675904f9ebc509f860e2e0
   m_configObjects: {}

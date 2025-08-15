@@ -48,7 +48,7 @@ public class ScatterSpawnState : AbstractSpawnState
             _bigZergSpawnTimeElapsed = 0.0f;
         }
 
-        if (transitOnAllZergKilled && level.ZergDestroyedCount >= maxZergCount)
+        if (transitOnAllZergKilled && level.ZergAliveCount == 0 && _zergSpawned==maxZergCount)
         {
             TransitNow();
         }

@@ -57,15 +57,9 @@ public class FileSystemLevel : MonoBehaviour
 
     public int ZergCount { get => _zergCount; set => _zergCount = value; }
     protected int _zergDestroyedCount = 0;
-    public virtual int ZergDestroyedCount
-    {
-        get => _zergDestroyedCount;
-        set
-        {
-            _zergDestroyedCount = value;
-
-        }
-    }
+    protected int _zergAliveCount;
+    public virtual int ZergDestroyedCount { get => _zergDestroyedCount; set { _zergDestroyedCount = value; } }
+    public int ZergAliveCount { get => _zergAliveCount; set { _zergAliveCount = value; } }
 
 
     public List<FileSystemFile> ActiveFiles

@@ -1,11 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
-using Microsoft.Unity.VisualStudio.Editor;
 using PixelCrushers.DialogueSystem;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PaintSpawn : MonoBehaviour
 {

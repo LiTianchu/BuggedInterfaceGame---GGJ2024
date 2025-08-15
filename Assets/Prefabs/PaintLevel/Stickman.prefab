@@ -142,6 +142,6 @@ MonoBehaviour:
   frenzyHpRatioThreshold: 0.3
   frenzyMovementSpeedMultiplier: 1.3
   frenzyAttackInterval: 4
-  maxHealth: 1
+  maxHealth: 5
   recentSpawnMemory: 5
   recentSpawnPenalty: 0.75
