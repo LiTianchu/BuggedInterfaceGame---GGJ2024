@@ -13451,13 +13451,14 @@ GameObject:
   - component: {fileID: 1317941368}
   - component: {fileID: 1317941367}
   - component: {fileID: 1317941369}
+  - component: {fileID: 1317941370}
   m_Layer: 5
   m_Name: DesktopGUIOverlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1317941366
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13527,6 +13528,28 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1317941370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317941365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b11b16027e464994da1defbf1793bcdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transitionInDuration: 0.3
+  transitionOutDuration: 0.3
+  transitionType: 0
+  easeType: 6
+  scalePivot: {x: 0.5, y: 0.5}
+  slideInFromPos: {x: -10, y: 0}
+  stayPos: {x: 0, y: 0}
+  slideOutToPos: {x: 10, y: 0}
+  autoEnableBeforeTransitionIn: 1
+  autoDisableAfterTransitionOut: 1
 --- !u!1 &1321918967
 GameObject:
   m_ObjectHideFlags: 0
@@ -23194,6 +23217,43 @@ MonoBehaviour:
         - m_Target: {fileID: 97989762}
           m_TargetAssemblyTypeName: WordWindow, Assembly-CSharp
           m_MethodName: GeneratePlatforms
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - guid: 48865416-7f27-499f-8844-f77417e489b0
+    onExecute:
+      m_PersistentCalls:
+        m_Calls: []
+  - guid: 729e8210-009a-4342-a0e8-47126d667354
+    onExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1557306333}
+          m_TargetAssemblyTypeName: PixelCrushers.DialogueSystem.DialogueSystemTrigger,
+            Assembly-CSharp-firstpass
+          m_MethodName: OnUse
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - guid: 6c096e7c-6311-4cbf-a2b9-1cb4e321daca
+    onExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1317941370}
+          m_TargetAssemblyTypeName: UITransition, Assembly-CSharp
+          m_MethodName: TransitionOut
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -51052,7 +51112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actor: LLM
   persistentDataName: LLM__188678
-  portrait: {fileID: 2800000, guid: 670b6c7179ecbd84892f96175eea5977, type: 3}
+  portrait: {fileID: 0}
   spritePortrait: {fileID: 0}
   audioSource: {fileID: 0}
   barkUISettings:
@@ -66113,7 +66173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actor: User
   persistentDataName: User__188740
-  portrait: {fileID: 2800000, guid: 670b6c7179ecbd84892f96175eea5977, type: 3}
+  portrait: {fileID: 0}
   spritePortrait: {fileID: 0}
   audioSource: {fileID: 0}
   barkUISettings:
@@ -83350,6 +83410,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -11.19
       objectReference: {fileID: 0}
+    - target: {fileID: 623496596232332786, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 761053762707000543, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -88053,7 +88117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actor: Villain
   persistentDataName: Villain__2584
-  portrait: {fileID: 2800000, guid: 670b6c7179ecbd84892f96175eea5977, type: 3}
+  portrait: {fileID: 0}
   spritePortrait: {fileID: 0}
   audioSource: {fileID: 0}
   barkUISettings:

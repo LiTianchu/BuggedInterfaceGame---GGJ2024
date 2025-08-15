@@ -20,6 +20,17 @@ public class LevelHubManager : Singleton<LevelHubManager>
     private void Start()
     {
         _numOfCrumbleObjects = crumbleObjects.Count;
+        Actor user = DialogueManager.masterDatabase.GetActor("User");
+        if (GameManager.Instance.AvatarSprite != null)
+        {
+            user.spritePortrait = GameManager.Instance.AvatarSprite;
+            DialogueLua.SetActorField("User", "Avatar", GameManager.Instance.AvatarSprite);
+        }
+        Debug.Log("User portrait: " + user.spritePortrait.name);
+        foreach (Field f in user.fields)
+        {
+            Debug.Log("User field: " + f.title + " = " + f.value);
+        }
     }
 
     private void Update()
