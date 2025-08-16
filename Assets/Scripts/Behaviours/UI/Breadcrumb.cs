@@ -85,7 +85,6 @@ public class Breadcrumb : MonoBehaviour
         newItem.onClick.AddListener(() =>
         {
             if (FileSystemLevelManager.Instance.CurrentLevel != redirectionLevel
-                    && FileSystemLevelManager.Instance.CurrentLevel is FileSystemLevelBattle
                     && FileSystemLevelManager.Instance.CurrentLevel.HasWon) // prevent navigation when in battle
             {
                 TransitToPreviousLevel(redirectionLevel);

@@ -11,6 +11,7 @@ public class CrumbleObject : MonoBehaviour
     [SerializeField] private bool turnOffCollisionWhenCrumbling = true;
     private Rigidbody2D _rb;
     private Collider2D _collider;
+    private CanvasGroup _canvasGroup;
 
     public event System.Action OnOffScreen;
     void Start()
@@ -21,6 +22,7 @@ public class CrumbleObject : MonoBehaviour
         {
             Crumble();
         }
+        _canvasGroup = GetComponent<CanvasGroup>();
     }
 
 
@@ -30,6 +32,13 @@ public class CrumbleObject : MonoBehaviour
         {
             return;
         }
+
+        if (_canvasGroup != null && _canvasGroup.alpha == 0)
+        {
+            return;
+        }
+
+        
 
         if (turnOffCollisionWhenCrumbling && _collider != null)
         {

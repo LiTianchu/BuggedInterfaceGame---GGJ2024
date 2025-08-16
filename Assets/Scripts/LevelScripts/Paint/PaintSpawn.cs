@@ -1,11 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
-using Microsoft.Unity.VisualStudio.Editor;
 using PixelCrushers.DialogueSystem;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PaintSpawn : MonoBehaviour
 {
@@ -56,13 +51,22 @@ public class PaintSpawn : MonoBehaviour
             _spawnedStickman = null;
             //puzzleSlot.ReleasePuzzlePiece();
         }
-        desktopGUIOverlay.SetActive(false); // Deactivate the desktop GUI overlay
+        if (desktopGUIOverlay.gameObject.activeSelf)
+        {
+            UIManager.Instance.HideUI(desktopGUIOverlay); // Hide the desktop GUI overlay            
+        }
+
+
     }
 
     private void HandleLevelCompleted()
     {
         _levelCompleted = true; // Set the level completed flag to true
-        desktopGUIOverlay.SetActive(false); // Deactivate the desktop GUI overlay
+        if (desktopGUIOverlay.gameObject.activeSelf)
+        {
+            UIManager.Instance.HideUI(desktopGUIOverlay); // Hide the desktop GUI overlay   
+        }
+
         DialogueManager.StopAllConversations(); // replace
         DialogueManager.StartConversation("Finished Paint Level"); // Start the conversation for level completion
         RemoveSpawnedEnemyPower(); // Remove all spawned objects in the enemy power container
@@ -77,13 +81,13 @@ public class PaintSpawn : MonoBehaviour
         {
             // show dialogue
             DialogueManager.StopAllConversations();
-            DialogueManager.StartConversation("First Encountered Paint Boss");    
+            DialogueManager.StartConversation("First Encountered Paint Boss");
         }
 
         if (_spawnedStickman == null && stickmanPrefab != null && mainCanvas != null)
         {
             spawnImmediately = true; // after the first spawn, we can set this to true
-            desktopGUIOverlay.SetActive(true); // Activate the desktop GUI overlay
+            UIManager.Instance.ShowUI(desktopGUIOverlay);
             GameObject stickman = Instantiate(stickmanPrefab, mainCanvas.transform);
             stickman.transform.localPosition = Vector3.zero; // Adjust position as needed
             _spawnedStickman = stickman.GetComponent<Stickman>();
@@ -133,11 +137,11 @@ public class PaintSpawn : MonoBehaviour
                 });
         }
 
-          // show dialogue
-            DialogueManager.StopAllConversations();
-            DialogueManager.StartConversation("Paint Failed");   
-       
+        // show dialogue
+        DialogueManager.StopAllConversations();
+        DialogueManager.StartConversation("Paint Failed");
+
     }
 
-    
+
 }

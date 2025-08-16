@@ -108,10 +108,21 @@ public class UserRegistrationPanel : MonoBehaviour
         Debug.Log($"Avatar sprite set: {_selectedAvatarSprite.name}");
 
         GetComponent<UITransition>().TransitionOut();
+        //Actor userActor = DialogueManager.masterDatabase.GetActor("User");
+        
+        // BUG: Not working as singleton is turned off
+        //userActor.spritePortrait = _selectedAvatarSprite;
 
-      
-        DialogueLua.SetVariable("Username", username); // Save to Lua variable   
-       
+        // BUG: Not working
+        
+
+        // foreach(Field field in userActor.fields)
+        // {
+        //     Debug.Log("User field: " + field.title + " = " + field.value);
+        // }
+
+        DialogueLua.SetVariable("Username", username); // Save to Lua variable
+
         Debug.Log(DialogueLua.GetVariable("UsernameEmptyInputCount").asInt);
         Debug.Log(DialogueLua.GetVariable("Username").asString);
         StartCoroutine(SendMessageAfterDelay("NameEntered", 1f));

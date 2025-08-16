@@ -66,6 +66,7 @@ public class StorePuzzleWinScreen : MonoBehaviour
         {
             Debug.Log($"Purchased key for {_cost} coins");
             InventoryManager.Instance.UnlockKeyFile();
+            LevelHubManager.Instance.ShowPopupLevel();
         }
         else
         {

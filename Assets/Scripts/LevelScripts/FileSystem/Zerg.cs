@@ -8,7 +8,7 @@ using UnityEngine.Pool;
 public class Zerg : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer zergSpriteRenderer;
-    [ShowInInspector, PropertyRange(0, 1000)]
+    [ShowInInspector, PropertyRange(0, 2000)]
     [SerializeField] private int zergMaxHp = 5;
     [ShowInInspector, PropertyRange(0, 100)]
     [SerializeField] private int zergDamage = 1;
@@ -76,6 +76,7 @@ public class Zerg : MonoBehaviour
         _pool = pool;
         _zergHp = zergMaxHp;
         zergSpriteRenderer.color = Color.white;
+        FileSystemLevelManager.Instance.CurrentLevel.ZergAliveCount++;
     }
 
     public void ResetTarget()
@@ -153,6 +154,7 @@ public class Zerg : MonoBehaviour
                 OnZergDestroyed?.Invoke();
                 ReleaseZerg();
                 OnDeath();
+                FileSystemLevelManager.Instance.CurrentLevel.ZergAliveCount--;
                 // Debug.Log($"Zerg {gameObject.name} destroyed, {FileSystemLevelManager.Instance.CurrentLevel.ZergDestroyedCount} destroyed in total.");
             });
         }
@@ -191,8 +193,5 @@ public class Zerg : MonoBehaviour
         }
     }
 
-    protected virtual void OnDeath()
-    {
-
-    }
+    protected virtual void OnDeath(){}
 }

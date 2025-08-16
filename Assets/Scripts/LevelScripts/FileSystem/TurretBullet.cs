@@ -61,7 +61,7 @@ public class TurretBullet : MonoBehaviour
             transform.position += direction * _speed * Time.deltaTime;
             transform.rotation = rotation;
 
-            if (Vector3.Distance(transform.position, _recordedTargetPosition) < 0.1f)
+            if (Vector3.Distance(transform.position, _recordedTargetPosition) < 0.2f)
             {
                 if (_hasBlastingEffect)
                 {

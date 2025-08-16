@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1086508444, guid: ba280b8c16fc40c4f8ffbf1fced6530e, type: 3}
+  m_Sprite: {fileID: 481884476, guid: ba280b8c16fc40c4f8ffbf1fced6530e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -194,13 +194,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zergSpriteRenderer: {fileID: 1655439287586166998}
-  zergMaxHp: 1000
+  zergMaxHp: 2000
   zergDamage: 0
   zergMoveSpeed: 0
   zergAttackRange: 0.025
   zergAttackRate: 0
   refreshTargetInterval: 0.5
-  teleportCooldown: 10
+  teleportCooldown: 9
   teleportDisappearTime: 0.7
   teleportWaitTime: 0.2
   teleportAppearTime: 0.7
@@ -208,10 +208,10 @@ MonoBehaviour:
   teleportPosUpperRight: {x: 7.5, y: 4.5}
   minTeleportDistance: 2.5
   minDistanceFromCenter: 3.5
-  smallZergSpawnIntervalStageA: 2
-  bigZergSpawnIntervalStageA: 15
-  smallZergSpawnIntervalStageB: 1.5
-  bigZergSpawnIntervalStageB: 12
+  smallZergSpawnIntervalStageA: 1.3
+  bigZergSpawnIntervalStageA: 10
+  smallZergSpawnIntervalStageB: 0.75
+  bigZergSpawnIntervalStageB: 7
   stageBHPThresholdFraction: 0.3
   laserInterval: 20
   clusterSpawnEventMany: {fileID: 8811102552544551414, guid: d01ddc14aa6a49e40b99d70d12ae5ff8, type: 3}

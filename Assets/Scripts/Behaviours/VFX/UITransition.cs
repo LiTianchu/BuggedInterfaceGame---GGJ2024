@@ -21,6 +21,7 @@ public class UITransition : MonoBehaviour
     [Header("Other Settings")]
     [SerializeField] private bool autoEnableBeforeTransitionIn = true;
     [SerializeField] private bool autoDisableAfterTransitionOut = true;
+    [SerializeField] private bool setTransparentAfterTransitionOut = false;
     private SlideState _slideState = SlideState.None;
     private TransitionState _transitionState = TransitionState.BeforeIn;
     private RectTransform _rectTransform;
@@ -68,6 +69,17 @@ public class UITransition : MonoBehaviour
         if (autoEnableBeforeTransitionIn)
         {
             _rectTransform.gameObject.SetActive(true);
+            if (setTransparentAfterTransitionOut)
+            {
+                if (_rectTransform.TryGetComponent<CanvasGroup>(out var canvasGroup))
+                {
+                    canvasGroup.alpha = 1;
+                }
+                else
+                {
+                    Debug.LogWarning("CanvasGroup component not found on the GameObject. Cannot set transparency.");
+                }
+            }
         }
         StartCoroutine(TransitionInRoutine());
     }
@@ -204,10 +216,23 @@ public class UITransition : MonoBehaviour
                 break;
         }
 
+        if (setTransparentAfterTransitionOut)
+        {
+            if (_rectTransform.TryGetComponent<CanvasGroup>(out var canvasGroup))
+            {
+                canvasGroup.alpha = 0;
+            }
+            else
+            {
+                Debug.LogWarning("CanvasGroup component not found on the GameObject. Cannot set transparency.");
+            }
+        }
+
         if (autoDisableAfterTransitionOut)
         {
             _rectTransform.gameObject.SetActive(false);
         }
+
 
         _transitionState = TransitionState.AfterOut;
     }

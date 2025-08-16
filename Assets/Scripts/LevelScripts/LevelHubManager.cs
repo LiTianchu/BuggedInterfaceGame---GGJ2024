@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using PixelCrushers.DialogueSystem;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -11,6 +10,8 @@ public class LevelHubManager : Singleton<LevelHubManager>
     [SerializeField] private GameObject desktopGUI;
     [SerializeField] private GameObject fileSystem;
     [SerializeField] private List<GameObject> levels;
+    [SerializeField] private Popup popupLevel;
+    [SerializeField] private SceneLoader biosSceneLoader;
 
     [SerializeField] private List<CrumbleObject> crumbleObjects;
 
@@ -21,6 +22,17 @@ public class LevelHubManager : Singleton<LevelHubManager>
     private void Start()
     {
         _numOfCrumbleObjects = crumbleObjects.Count;
+        Actor user = DialogueManager.masterDatabase.GetActor("User");
+        if (GameManager.Instance.AvatarSprite != null)
+        {
+            user.spritePortrait = GameManager.Instance.AvatarSprite;
+            DialogueLua.SetActorField("User", "Avatar", GameManager.Instance.AvatarSprite);
+        }
+        Debug.Log("User portrait: " + user.spritePortrait.name);
+        foreach (Field f in user.fields)
+        {
+            Debug.Log("User field: " + f.title + " = " + f.value);
+        }
     }
 
     private void Update()
@@ -34,6 +46,18 @@ public class LevelHubManager : Singleton<LevelHubManager>
         // {
         //     StartCoroutine(LoadBios());
         // }
+    }
+
+    public void ShowPopupLevel()
+    {
+        if (popupLevel != null)
+        {
+            popupLevel.ShowPopup();
+        }
+        else
+        {
+            Debug.LogWarning("Popup Level is not assigned.");
+        }
     }
 
     public void ShowLevelHubScreen()
@@ -103,9 +127,9 @@ public class LevelHubManager : Singleton<LevelHubManager>
             yield return new WaitForSeconds(Random.Range(0.15f, 0.3f));
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(6f);
         Debug.Log("Loading BIOS...");
-        SceneManager.LoadScene("BIOS", LoadSceneMode.Single);
+        biosSceneLoader.NextScene();
     }
 
 

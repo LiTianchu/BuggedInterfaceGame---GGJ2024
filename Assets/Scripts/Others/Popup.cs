@@ -17,6 +17,11 @@ public class Popup : MonoBehaviour
 
     void Update()
     {
+        if (time < 0f)
+        { 
+            return; // If time is negative, do not show the popup by timer
+        }
+
         if ((!oneTime || !shown) && !popupPanel.activeInHierarchy)
         {
             timer -= Time.deltaTime;

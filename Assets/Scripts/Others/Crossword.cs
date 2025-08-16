@@ -3,7 +3,8 @@ using UnityEngine;
 using UnityEngine.UI; // For UI Text
 using UnityEngine.SceneManagement; // For Scene Management
 using TMPro;
-using System.Collections; // Uncomment this if using TextMeshPro
+using System.Collections;
+using PixelCrushers.DialogueSystem; // Uncomment this if using TextMeshPro
 
 public class Crossword : MonoBehaviour
 {
@@ -108,6 +109,12 @@ public class Crossword : MonoBehaviour
     private void PuzzleSolved()
     {
         nextbutton.gameObject.SetActive(true);
+         Actor userActor = DialogueManager.masterDatabase.GetActor("User");
+        
+        foreach(Field field in userActor.fields)
+        {
+            Debug.Log("User field: " + field.title + " = " + field.value);
+        }
         // Additional actions on puzzle solved
     }
 

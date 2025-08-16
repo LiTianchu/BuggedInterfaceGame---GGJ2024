@@ -102,10 +102,10 @@ public class Stickman : MonoBehaviour
         StartCoroutine(RicochetEffect());
         //SetImmunity(1000f);
 
-        // pre-fill the recently spawned items list
+        // pre-fill the recently spawned items list with random items to avoid initial bias
         for (int i = 0; i < recentSpawnMemory; i++)
         {
-            recentlySpawnedItems.Add(i % itemPrefabs.Length);
+            recentlySpawnedItems.Add(Random.Range(0, itemPrefabs.Length));
         }
 
         if (stickmanImage.material != null)
@@ -360,7 +360,7 @@ public class Stickman : MonoBehaviour
         foreach (GameObject warningLine in warningLines)
         {
             if (warningLine == null) continue; // Skip if the warning line was already destroyed
-
+            warningLine.GetComponent<Boolet>().IsHarmful(false);
             DOTween.Sequence()
                 .Append(warningLine.GetComponent<RectTransform>().DOScale(Vector3.zero, 0.2f))
                 .OnComplete(() => Destroy(warningLine)); // Destroy after scaling down
@@ -588,7 +588,10 @@ public class Stickman : MonoBehaviour
 
             if (recentCount > 0)
             {
-                weights[i] -= Mathf.Pow(recentSpawnPenalty, recentCount);
+                // Apply penalty: the more recent spawns, the lower the weight
+                weights[i] *= Mathf.Pow(1f - recentSpawnPenalty, recentCount);
+                // Ensure weight doesn't go below a minimum threshold to prevent complete exclusion
+                weights[i] = Mathf.Max(weights[i], 0.01f);
             }
         }
         return SelectWeightedRandom(weights);
