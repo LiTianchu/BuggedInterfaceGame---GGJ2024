@@ -387,6 +387,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!1 &22134072
 GameObject:
   m_ObjectHideFlags: 0
@@ -1210,6 +1211,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!114 &97989764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2083,6 +2085,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!1 &147281879
 GameObject:
   m_ObjectHideFlags: 0
@@ -4216,6 +4219,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!114 &348976176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10854,6 +10858,7 @@ MonoBehaviour:
   - {fileID: 2111387700620924959}
   - {fileID: 480510409258297459}
   popupLevel: {fileID: 1275772332}
+  biosSceneLoader: {fileID: 2102641452}
   crumbleObjects:
   - {fileID: 1073729217}
   - {fileID: 356564012}
@@ -10877,7 +10882,7 @@ MonoBehaviour:
   - {fileID: 648378313535691345}
   - {fileID: 9204268982774670469}
   - {fileID: 5251594325565961790}
-  - {fileID: 2152879435515338992}
+  - {fileID: 5822636295506606942}
   - {fileID: 1248080380}
   - {fileID: 8230838947196391452}
   - {fileID: 1880986515}
@@ -11534,6 +11539,7 @@ MonoBehaviour:
   slideOutToPos: {x: 0, y: -470}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!225 &1044225894
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -12027,6 +12033,7 @@ MonoBehaviour:
   slideOutToPos: {x: -445.7, y: 17.5}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 0
+  setTransparentAfterTransitionOut: 0
 --- !u!1001 &1085889928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13912,6 +13919,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!1 &1297159680
 GameObject:
   m_ObjectHideFlags: 0
@@ -14287,6 +14295,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!1 &1321918967
 GameObject:
   m_ObjectHideFlags: 0
@@ -21447,6 +21456,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!1001 &1882280197
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23257,6 +23267,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!1001 &2013324846
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24464,6 +24475,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!114 &2101902915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24663,7 +24675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b141a0058860b4699f0e0f95bcf2a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Credits
+  sceneName: BIOS
   fadeOverlay: {fileID: 2083222724}
   fadeDuration: 1
 --- !u!114 &2102641453
@@ -30137,6 +30149,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!1 &633597439236583945
 GameObject:
   m_ObjectHideFlags: 0
@@ -39928,17 +39941,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2152879435515338992 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3654553726303198865, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
-  m_PrefabInstance: {fileID: 7848839701923233907}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3773aae6f81074344b77c1be61c4b49f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2153549255600550524
 GameObject:
   m_ObjectHideFlags: 0
@@ -51717,6 +51719,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!114 &3892541130294379766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51840,6 +51843,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!1 &3899437161605266440
 GameObject:
   m_ObjectHideFlags: 0
@@ -56881,6 +56885,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!114 &4621843270615708448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58429,6 +58434,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!114 &4847312290010234994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58979,6 +58985,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!114 &4918432309651223350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59339,6 +59346,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!114 &4950821171443620255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62423,6 +62431,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!50 &5355770119563128516
 Rigidbody2D:
   serializedVersion: 4
@@ -66552,6 +66561,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b11b16027e464994da1defbf1793bcdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5822636295506606942 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2793224826987250342, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
+  m_PrefabInstance: {fileID: 7848839701923233907}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3773aae6f81074344b77c1be61c4b49f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5834470172319135559 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3877197099827406588, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
@@ -67477,6 +67497,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!114 &5928306725419208684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67614,6 +67635,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!1 &5938691855313182673
 GameObject:
   m_ObjectHideFlags: 0
@@ -70941,6 +70963,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!114 &6401898857224487815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75343,6 +75366,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!114 &6910580950830709512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76125,6 +76149,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!114 &6999346546784463749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77188,6 +77213,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!114 &7139179872769645771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78314,6 +78340,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!1 &7311016463107160393
 GameObject:
   m_ObjectHideFlags: 0
@@ -78441,6 +78468,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!1 &7320871959940071410
 GameObject:
   m_ObjectHideFlags: 0
@@ -78999,6 +79027,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!224 &7393146101371419265
 RectTransform:
   m_ObjectHideFlags: 0
@@ -79239,6 +79268,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!114 &7427020720977596067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79759,6 +79789,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!114 &7496914073952067711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80720,6 +80751,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!114 &7651419427904807417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81829,6 +81861,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!114 &7773376260586323391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82360,6 +82393,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!114 &7813671498781804520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82510,6 +82544,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!114 &7820346792900970301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82671,19 +82706,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 330853727681761805, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 522.40436
+      value: 522.4975
       objectReference: {fileID: 0}
     - target: {fileID: 330853727681761805, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 15.76
+      value: 21.01
       objectReference: {fileID: 0}
     - target: {fileID: 330853727681761805, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 805.0796
+      value: 805.22534
       objectReference: {fileID: 0}
     - target: {fileID: 330853727681761805, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -15.88
+      value: -18.505001
       objectReference: {fileID: 0}
     - target: {fileID: 419622686874171568, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchorMax.y
@@ -82695,23 +82730,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 419622686874171568, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 65.63
+      value: 75.01
       objectReference: {fileID: 0}
     - target: {fileID: 419622686874171568, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 18.38
+      value: 21.01
       objectReference: {fileID: 0}
     - target: {fileID: 419622686874171568, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 40.815
+      value: 45.505
       objectReference: {fileID: 0}
     - target: {fileID: 419622686874171568, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -11.19
-      objectReference: {fileID: 0}
-    - target: {fileID: 623496596232332786, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: -12.505
       objectReference: {fileID: 0}
     - target: {fileID: 761053762707000543, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchorMax.y
@@ -82747,19 +82778,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 860875424490321611, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1066.2817
+      value: 1066.474
       objectReference: {fileID: 0}
     - target: {fileID: 860875424490321611, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 31.76
+      value: 37.010002
       objectReference: {fileID: 0}
     - target: {fileID: 860875424490321611, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 533.14087
+      value: 533.237
       objectReference: {fileID: 0}
     - target: {fileID: 860875424490321611, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -15.88
+      value: -18.505001
       objectReference: {fileID: 0}
     - target: {fileID: 1089482562381932372, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchorMax.y
@@ -82771,19 +82802,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1089482562381932372, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 21.473028
+      value: 21.479034
       objectReference: {fileID: 0}
     - target: {fileID: 1089482562381932372, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 15.76
+      value: 21.01
       objectReference: {fileID: 0}
     - target: {fileID: 1089482562381932372, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 533.14087
+      value: 533.237
       objectReference: {fileID: 0}
     - target: {fileID: 1089482562381932372, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -15.88
+      value: -18.505001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1720661304017458723, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
+      propertyPath: m_Alpha
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1807449003383116362, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchorMax.y
@@ -82819,23 +82854,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2014940064410801790, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 522.40436
+      value: 522.4975
       objectReference: {fileID: 0}
     - target: {fileID: 2014940064410801790, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 15.76
+      value: 21.01
       objectReference: {fileID: 0}
     - target: {fileID: 2014940064410801790, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 261.20218
+      value: 261.24875
       objectReference: {fileID: 0}
     - target: {fileID: 2014940064410801790, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -15.88
+      value: -18.505001
       objectReference: {fileID: 0}
     - target: {fileID: 2699007002702722766, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 86.14
+      value: 94.020004
       objectReference: {fileID: 0}
     - target: {fileID: 2867615364905070319, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchorMax.y
@@ -82847,24 +82882,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2867615364905070319, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 104.88
+      value: 134.51001
       objectReference: {fileID: 0}
     - target: {fileID: 2867615364905070319, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 15.76
+      value: 21.01
       objectReference: {fileID: 0}
     - target: {fileID: 2867615364905070319, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 112.44
+      value: 179.255
       objectReference: {fileID: 0}
     - target: {fileID: 2867615364905070319, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -12
       objectReference: {fileID: 0}
-    - target: {fileID: 3084335744652720300, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
-      propertyPath: singleton
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3278256327245579304, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -82888,14 +82919,6 @@ PrefabInstance:
     - target: {fileID: 3278256327245579304, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3462571366094234536, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 3462571366094234536, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 3648370184475482220, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchorMax.y
@@ -82931,7 +82954,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3707992741454306037, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1066.2817
+      value: 1066.474
       objectReference: {fileID: 0}
     - target: {fileID: 3707992741454306037, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.y
@@ -82939,19 +82962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3707992741454306037, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 533.14087
-      objectReference: {fileID: 0}
-    - target: {fileID: 3785990781571011908, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
-      propertyPath: dontDestroyOnLoad
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3785990781571011908, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
-      propertyPath: displaySettings.subtitleSettings.minSubtitleSeconds
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3785990781571011908, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
-      propertyPath: displaySettings.subtitleSettings.subtitleCharsPerSecond
-      value: 30
+      value: 533.237
       objectReference: {fileID: 0}
     - target: {fileID: 3831942999526901109, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: responseNotificationObject
@@ -82987,15 +82998,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4028620867529426586, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1066.2817
+      value: 1066.474
       objectReference: {fileID: 0}
     - target: {fileID: 4028620867529426586, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 31.76
+      value: 37.010002
       objectReference: {fileID: 0}
     - target: {fileID: 4028620867529426586, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 533.14087
+      value: 533.237
       objectReference: {fileID: 0}
     - target: {fileID: 4028620867529426586, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -83119,19 +83130,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5562803090913113953, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1066.2817
+      value: 1066.474
       objectReference: {fileID: 0}
     - target: {fileID: 5562803090913113953, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 22.38
+      value: 25.01
       objectReference: {fileID: 0}
     - target: {fileID: 5562803090913113953, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 533.14087
+      value: 533.237
       objectReference: {fileID: 0}
     - target: {fileID: 5562803090913113953, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -70.950005
+      value: -77.515
       objectReference: {fileID: 0}
     - target: {fileID: 5828840154001390726, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchorMax.y
@@ -83167,7 +83178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5968237097416260626, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 889.40173
+      value: 807.964
       objectReference: {fileID: 0}
     - target: {fileID: 5968237097416260626, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.y
@@ -83175,7 +83186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5968237097416260626, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 613.5809
+      value: 654.492
       objectReference: {fileID: 0}
     - target: {fileID: 5968237097416260626, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -83191,7 +83202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6873221951663080396, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 48
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6873221951663080396, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.y
@@ -83199,7 +83210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6873221951663080396, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 32
+      value: 58
       objectReference: {fileID: 0}
     - target: {fileID: 6873221951663080396, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -83257,10 +83268,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7116608932930960507, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7510924568772463206, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -83295,19 +83302,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7618191367028784738, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1066.2817
+      value: 1066.474
       objectReference: {fileID: 0}
     - target: {fileID: 7618191367028784738, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 55.760002
+      value: 61.010002
       objectReference: {fileID: 0}
     - target: {fileID: 7618191367028784738, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 533.14087
+      value: 533.237
       objectReference: {fileID: 0}
     - target: {fileID: 7618191367028784738, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -31.880001
+      value: -34.505
       objectReference: {fileID: 0}
     - target: {fileID: 7801665879122474135, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_Name
@@ -83323,19 +83330,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7852731866727926930, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 88.88
+      value: 118.51
       objectReference: {fileID: 0}
     - target: {fileID: 7852731866727926930, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 15.76
+      value: 21.01
       objectReference: {fileID: 0}
     - target: {fileID: 7852731866727926930, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 52.44
+      value: 67.255005
       objectReference: {fileID: 0}
     - target: {fileID: 7852731866727926930, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -7.88
+      value: -10.505
       objectReference: {fileID: 0}
     - target: {fileID: 7883460943769904407, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_IsActive
@@ -83345,10 +83352,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 2102641449}
-    - target: {fileID: 7905912109343181766, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
-      propertyPath: m_SortingOrder
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 8563145965469392746, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -83407,15 +83410,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8867572664026098512, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 81.63
+      value: 91.01
       objectReference: {fileID: 0}
     - target: {fileID: 8867572664026098512, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 22.38
+      value: 25.01
       objectReference: {fileID: 0}
     - target: {fileID: 8867572664026098512, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 492.32587
+      value: 487.732
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -83734,6 +83737,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!114 &7892686881498748487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84665,6 +84669,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!114 &8036335001818248948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85899,6 +85904,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!222 &8204892624134899406
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -86052,6 +86058,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!222 &8230838947196391450
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -86920,6 +86927,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!23 &8394745176224475091
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -88009,6 +88017,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!224 &8529826554658018201
 RectTransform:
   m_ObjectHideFlags: 0
@@ -89405,6 +89414,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!114 &8749864389028428312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89839,6 +89849,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!1 &8829304031253805941
 GameObject:
   m_ObjectHideFlags: 0
@@ -89878,6 +89889,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!222 &8829658420316003845
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -89935,6 +89947,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!114 &8839010487334361436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90810,6 +90823,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!222 &8935667053038965662
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -91073,6 +91087,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!224 &8970849370405878856
 RectTransform:
   m_ObjectHideFlags: 0
@@ -92917,6 +92932,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!224 &9204345453745361813
 RectTransform:
   m_ObjectHideFlags: 0

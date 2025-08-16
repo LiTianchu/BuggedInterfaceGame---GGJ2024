@@ -11,6 +11,7 @@ public class LevelHubManager : Singleton<LevelHubManager>
     [SerializeField] private GameObject fileSystem;
     [SerializeField] private List<GameObject> levels;
     [SerializeField] private Popup popupLevel;
+    [SerializeField] private SceneLoader biosSceneLoader;
 
     [SerializeField] private List<CrumbleObject> crumbleObjects;
 
@@ -128,7 +129,7 @@ public class LevelHubManager : Singleton<LevelHubManager>
 
         yield return new WaitForSeconds(6f);
         Debug.Log("Loading BIOS...");
-        SceneManager.LoadScene("BIOS", LoadSceneMode.Single);
+        biosSceneLoader.NextScene();
     }
 
 

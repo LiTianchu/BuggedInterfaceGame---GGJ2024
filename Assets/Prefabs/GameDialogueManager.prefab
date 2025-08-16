@@ -349,8 +349,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 533.14087, y: 0}
-  m_SizeDelta: {x: 1066.2817, y: 0}
+  m_AnchoredPosition: {x: 533.237, y: 0}
+  m_SizeDelta: {x: 1066.474, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &4373991000227824706
 CanvasRenderer:
@@ -520,6 +520,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!225 &9174691215777962817
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -705,6 +706,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!1 &623496596232332786
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,7 +716,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2251469331025503749}
-  - component: {fileID: 3654553726303198865}
   - component: {fileID: 3831942999526901109}
   m_Layer: 5
   m_Name: DesktopDialogueUI
@@ -748,22 +749,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3654553726303198865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 623496596232332786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3773aae6f81074344b77c1be61c4b49f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crumbleForce: 1
-  gravityScale: 2
-  crumbleOnStart: 0
-  turnOffCollisionWhenCrumbling: 1
 --- !u!114 &3831942999526901109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -831,6 +816,7 @@ MonoBehaviour:
   notificationUI: {fileID: 588737669219558342}
   notificationTextLabel: {fileID: 705057380787305869}
   notificationPanel: {fileID: 6394120414968266860}
+  responseNotificationObject: {fileID: 0}
 --- !u!1 &633614929454981045
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,6 +1064,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!1 &1143195740416272078
 GameObject:
   m_ObjectHideFlags: 0
@@ -2006,6 +1993,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!225 &5102758905796901728
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2273,6 +2261,7 @@ MonoBehaviour:
   slideOutToPos: {x: 720, y: 20}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 0
+  setTransparentAfterTransitionOut: 0
 --- !u!225 &7504713963735697884
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2536,6 +2525,7 @@ GameObject:
   - component: {fileID: 148962227330214587}
   - component: {fileID: 1196301361964725354}
   - component: {fileID: 1720661304017458723}
+  - component: {fileID: 2793224826987250342}
   m_Layer: 5
   m_Name: ChatPanel
   m_TagString: Untagged
@@ -2657,6 +2647,7 @@ MonoBehaviour:
   slideOutToPos: {x: 756, y: 20}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 0
+  setTransparentAfterTransitionOut: 1
 --- !u!225 &1720661304017458723
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2669,6 +2660,22 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &2793224826987250342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2935451635593162098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3773aae6f81074344b77c1be61c4b49f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crumbleForce: 1
+  gravityScale: 2
+  crumbleOnStart: 0
+  turnOffCollisionWhenCrumbling: 1
 --- !u!1 &3186247742855248497
 GameObject:
   m_ObjectHideFlags: 0
@@ -4983,7 +4990,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!114 &2362959094388672312
 MonoBehaviour:
@@ -5501,6 +5508,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!225 &3642681371471177059
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -5816,6 +5824,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!1 &5673124917132866908
 GameObject:
   m_ObjectHideFlags: 0
@@ -6292,6 +6301,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!225 &3980895415054253841
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -6344,8 +6354,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 533.14087, y: -24}
-  m_SizeDelta: {x: 1066.2817, y: 0}
+  m_AnchoredPosition: {x: 533.237, y: -24}
+  m_SizeDelta: {x: 1066.474, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &2566127446812294624
 CanvasRenderer:
@@ -6515,6 +6525,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!225 &6404053684001494098
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -6739,6 +6750,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!225 &4768309822036918006
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -7386,6 +7398,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 1
+  setTransparentAfterTransitionOut: 0
 --- !u!225 &2997104831483571382
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -7690,7 +7703,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 700, y: 400}
+  m_SizeDelta: {x: 500, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2699694326087484958
 CanvasRenderer:
@@ -8141,7 +8154,7 @@ MonoBehaviour:
   backButtons:
   - Cancel
   submitButton: Submit
-  singleton: 1
+  singleton: 0
   onUseKeyboard:
     m_PersistentCalls:
       m_Calls: []
@@ -8350,6 +8363,7 @@ MonoBehaviour:
   slideOutToPos: {x: 10, y: 0}
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 0
+  setTransparentAfterTransitionOut: 0
 --- !u!1 &7910592030260198847
 GameObject:
   m_ObjectHideFlags: 0
