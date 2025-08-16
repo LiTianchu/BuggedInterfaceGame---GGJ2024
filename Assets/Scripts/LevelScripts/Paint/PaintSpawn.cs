@@ -1,6 +1,7 @@
 using DG.Tweening;
 using PixelCrushers.DialogueSystem;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PaintSpawn : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class PaintSpawn : MonoBehaviour
     public bool spawnImmediately = true; // Flag to determine if the Stickman should spawn immediately
     public PuzzleSlot puzzleSlot; // Reference to the PuzzleSlot component
     public Color levelFailedColor = Color.red; // Color to flash when the level fails
+    public UnityEvent onBossSpawned;
 
     private Stickman _spawnedStickman; // Reference to the spawned Stickman
     private bool _levelCompleted = false; // Flag to check if the level is completed
@@ -86,6 +88,7 @@ public class PaintSpawn : MonoBehaviour
 
         if (_spawnedStickman == null && stickmanPrefab != null && mainCanvas != null)
         {
+            onBossSpawned?.Invoke(); // Invoke the event if there are subscribers
             spawnImmediately = true; // after the first spawn, we can set this to true
             UIManager.Instance.ShowUI(desktopGUIOverlay);
             GameObject stickman = Instantiate(stickmanPrefab, mainCanvas.transform);

@@ -12034,6 +12034,18 @@ MonoBehaviour:
   autoEnableBeforeTransitionIn: 1
   autoDisableAfterTransitionOut: 0
   setTransparentAfterTransitionOut: 0
+--- !u!225 &1082102713
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082102701}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1085889928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14203,7 +14215,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1317941366
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16512,7 +16524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5079114054975695922, guid: 6ff697e6f97eb4f498c304cc60feefd5, type: 3}
       propertyPath: normalMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5155568888037617388, guid: 6ff697e6f97eb4f498c304cc60feefd5, type: 3}
       propertyPath: m_AnchorMax.y
@@ -18672,6 +18684,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7291782204294391065, guid: a36bf000ec6f9ff49ba561a72b11b5eb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1082102707}
+    - targetCorrespondingSourceObject: {fileID: 7291782204294391065, guid: a36bf000ec6f9ff49ba561a72b11b5eb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1082102713}
   m_SourcePrefab: {fileID: 100100000, guid: a36bf000ec6f9ff49ba561a72b11b5eb, type: 3}
 --- !u!114 &1642254960 stripped
 MonoBehaviour:
@@ -82371,6 +82386,21 @@ MonoBehaviour:
   spawnImmediately: 0
   puzzleSlot: {fileID: 1330635284}
   levelFailedColor: {r: 0.64779866, g: 0.31167665, b: 0.31167665, a: 0.7372549}
+  onBossSpawned:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5822636295506606936}
+        m_TargetAssemblyTypeName: UITransition, Assembly-CSharp
+        m_MethodName: TransitionOut
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7813671498781804519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82744,6 +82774,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -12.505
       objectReference: {fileID: 0}
+    - target: {fileID: 705057380787305869, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 761053762707000543, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -82791,6 +82825,14 @@ PrefabInstance:
     - target: {fileID: 860875424490321611, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -18.505001
+      objectReference: {fileID: 0}
+    - target: {fileID: 926742625688673972, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 926742625688673972, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
+      propertyPath: m_BlocksRaycasts
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1089482562381932372, guid: 10feac8c6af8d6245bc0f2616f7674b9, type: 3}
       propertyPath: m_AnchorMax.y
