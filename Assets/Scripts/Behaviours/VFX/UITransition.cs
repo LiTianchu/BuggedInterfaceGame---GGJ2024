@@ -86,6 +86,12 @@ public class UITransition : MonoBehaviour
 
     public void TransitionOut()
     {
+        if(_transitionState != TransitionState.Stay)
+        {
+            Debug.Log("Cannot transition out when not in the Stay state.");
+            return;
+        }
+
         if (_rectTransform == null)
         {
             _rectTransform = GetComponent<RectTransform>();
